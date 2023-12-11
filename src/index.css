@@ -1,0 +1,36 @@
+/* The global CSS file for our application. Ta styles edw 
+  tha epireazoun ola ta components sto app */
+html,
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  margin: 0; /* removes margins that browsers may apply */
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased; /* improves the rendering of fonts on screens (for browsers like Chrome and Safari) */
+  -moz-osx-font-smoothing: grayscale; /* similar to the above, but specific to Firefox on macOS */
+}
+
+#root {
+  flex: 1;
+}
+
+.main-content {
+  flex: 1; /* This makes sure that the content area expands to fill available space, 
+          pushing the footer down */
+  min-height: 100px;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+/* Edw vazoume global variables opws xrwmata, gia na xrisimopoioume pantou ta idia */
+:root {
+  --light-blue-on-hover: #116dc2;
+  --footer-background-color: #464740;
+}

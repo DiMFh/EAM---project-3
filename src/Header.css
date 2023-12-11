@@ -1,0 +1,44 @@
+/* Header.css */
+.header {
+  display: flex;
+  justify-content: space-between;
+  background-color: #fff; /* White background */
+  align-items: center;
+  color: #000; /* Black text color for the items */
+  padding: 0.2rem 0; /* Padding at the top and bottom of the header */
+  border-bottom: 2px solid #30499e; /* Black border bottom for the underline */
+}
+
+.header-logo {
+  height: 80px;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  flex-grow: 1;
+}
+
+nav a {
+  /* For all the <a> anchor elements inside the <nav> */
+  text-decoration: none;
+  color: inherit; /* Inherits the black color from .header */
+  margin: 0 1rem; /* Space between the links */
+  padding: 0.5rem 0; /* Padding for the clickable area */
+  font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  transition: color 0.3s ease, transform 0.3s ease; /* Smooth transition for color and transform */
+}
+
+nav a:hover {
+  text-decoration: underline; /* Underline on hover for all links */
+  color: var(
+    --light-blue-on-hover
+  ); /* this color is in the :root inside index.css */
+  transform: scale(1.1); /* make them a bit bigger */
+}
+
+/* Ειδικά για το "Είσοδος", για να είναι πάντα υπογραμμισμένο */
+nav a.login {
+  text-decoration: underline; /* Ensures this link is always underlined */
+}
