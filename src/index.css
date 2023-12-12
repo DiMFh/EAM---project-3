@@ -21,7 +21,6 @@ body {
 .main-content {
   flex: 1; /* This makes sure that the content area expands to fill available space, 
           pushing the footer down */
-  min-height: 100px;
 }
 
 code {
