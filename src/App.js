@@ -9,7 +9,7 @@ export default function App() {
       <Header />
       <main className="main-content">
         {/* Edw vazoume olous tous components */}
-        <h1> I would like to thank ChatGPT</h1>
+        <h1> I would like to thank ChatGPT!</h1>
       </main>
       <Footer />
     </div>

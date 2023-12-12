@@ -1,6 +1,6 @@
 // Header.js
 import React from "react";
-import logo from "./images/new_logo_circle.png";
+import logo from "./images/new_logo_fully_transparent.png";
 import "./Header.css";
 
 export default function Header() {
