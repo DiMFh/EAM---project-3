@@ -35,6 +35,26 @@
   color: #61dafb;
 }
 
+.header {
+  position: relative;
+  text-align: left;
+}
+
+.header h1 {
+  position: absolute;
+  color: rgb(53, 55, 56);
+  top: 0;
+  left: 0;
+  margin: 10px;
+  font-size: 1.5rem; /* Updated to use relative unit */
+}
+
+.homepage-img {
+  width: 100%;
+  max-height: 50vh;
+  object-fit: cover; /* Ensures the image covers the entire container */
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
