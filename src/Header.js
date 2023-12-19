@@ -11,10 +11,10 @@ export default function Header() {
       <img src={logo} alt="Logo" className="header-logo" />
       <div>
         <div>
-          {/* Edw vazoume ta navigation items */}
-          {/*<Link to="/">Αρχική</Link>*/}
-          <a href="/sections">Τμήματα</a>
-          <a href="/register">Εγγραφή</a>
+         {/* Here we put the navigation items */}
+          <Link to="/">Αρχική</Link> {/* Home link */}
+          <Link to="/sections">Τμήματα</Link>
+          <Link to="/register">Εγγραφή</Link> {/* Register link */}
           <Link to="/login" className="login">Είσοδος</Link>
         </div>
       </div>
