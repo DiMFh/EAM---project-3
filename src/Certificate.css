@@ -37,3 +37,22 @@
     text-decoration: underline;
     margin: 0; /* Remove default margin to align with the bottom right corner */
 }
+
+.certificate-request,
+.certificate-state,
+.return {
+  text-decoration: none;
+  color: black;
+}
+
+.certificate-request:hover,
+.certificate-state:hover,
+.return:hover {
+  color: purple; /* Change the color on hover if needed */
+}
+
+
+
+.return {
+    color: purple; /* Set the initial color for the "Επιστροφή" button */
+  }

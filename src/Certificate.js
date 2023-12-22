@@ -14,7 +14,9 @@ const Certificate = () => {
       <Breadcrumb/>
       <div className="grey-box">
       <div className="white-box">
-          <Link to="/certificate-request" className="certificate-request" ><h4>Αίτηση Παροχής Πιστοποιητικού</h4></Link>
+          <Link to="/certificate-request" className="certificate-request">
+            <h4>Αίτηση Παροχής Πιστοποιητικού</h4>
+          </Link>
         </div>
         <div className="white-box">
           <Link to="/certificate-state" className="certificate-state" ><h4>Κατάσταση Παροχής Πιστοποιητικών</h4></Link>
