@@ -3,6 +3,7 @@ import React from "react";
 import "./Certificate.css";
 import { Link } from "react-router-dom";
 import Header from "./Header";
+import Breadcrumb from './Breadcrumb';
 
 const Certificate = () => {
   const currentPage = "certificate";
@@ -10,6 +11,7 @@ const Certificate = () => {
   return (
     <div className="certificate">
       <Header currentPage={currentPage} />
+      <Breadcrumb/>
       <div className="grey-box">
       <div className="white-box">
           <Link to="/certificate-request" className="certificate-request" ><h4>Αίτηση Παροχής Πιστοποιητικού</h4></Link>

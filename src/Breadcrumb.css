@@ -1,0 +1,19 @@
+/* YourComponent.css */
+
+.top-left-component {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  align-items: center;
+  margin-top: 5%;
+}
+
+.top-left-component span {
+  margin-right: 5px;
+  font-weight: bold; /* Make all spans bold */
+}
+
+.purple-text {
+  color: purple;
+}
