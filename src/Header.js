@@ -1,6 +1,8 @@
 import React from "react";
 import logo from "./images/new_logo_fully_transparent.png";
 import "./Header.css";
+// import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function Header({ currentPage }) {
   return (
@@ -8,22 +10,23 @@ export default function Header({ currentPage }) {
       <img src={logo} alt="Logo" className="header-logo" />
       <nav>
         {/* Edw vazoume ta navigation items */}
-        {currentPage === "home" && (
+        {(currentPage === "home" || currentPage === "sections" || currentPage === "login" || currentPage === "register") && (
           <>
-            <a href="/">Αρχική</a>
-            <a href="/sections">Τμήματα</a>
-            <a href="/register">Εγγραφή</a>
-            <a href="/login" className="login">
+            <Link to="/">Αρχική</Link>
+            <Link to="/sections">Τμήματα</Link>
+            <Link to="/register">Εγγραφή</Link>
+            <Link to="/login" className="login">
               Είσοδος
-            </a>
+            </Link>
+            <Link to="/certificate">Πιστοποιητικά</Link>
           </>
         )}
-        {currentPage !== "home" && (
+        {currentPage === "certificate" && (
           <>
-            <a href="/">Αρχική</a>
-            <a href="/login" className="login">
-              Είσοδος
-            </a>
+             <Link to="/report">Δηλώσεις</Link>
+             <Link to="/grades">Βαθμολογία</Link>
+             <Link to="/certificate">Πιστοποιητικά</Link>
+             <Link to="/help">Βοήθεια</Link>
           </>
         )}
       </nav>
