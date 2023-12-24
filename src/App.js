@@ -8,29 +8,38 @@ import RegisterForm from './RegisterForm';
 import Home from './Home';
 import Section from './Section';
 
+import { firebaseConfig } from './data/firebase';
+import { initializeApp } from 'firebase/app';
+import { getFirestore } from 'firebase/firestore';
+import 'firebase/database';
+
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+
+const MainLayout = ({ children }) => (
+  <>
+    <Header />
+    <div className="main-content">{children}</div>
+    <Footer />
+  </>
+);
 
 export default function App() {
   return (
     <div className="App">
-      {/* Initialize the React Router */}
       <BrowserRouter>
-        {/* Render the Header component */}
-        <Header />
-        <div className="main-content">
-          {/* Define the routing for different pages */}
-          <Routes>
-            {/* Define a route for the login page */}
-            <Route path="/login" element={<LoginForm />} /> 
-            {/* Define a route for the register page */}  
-            <Route path="/register" element={<RegisterForm />} /> 
-            {/* Define a route for the sections page */}
-            <Route path="/sections" element={<Section/>} /> 
-            {/* Define a route for the home page */}
-            <Route path="/" element={<Home />} />
-          </Routes>
-        </div>
-        {/* Render the Footer component */}
-        <Footer />
+        <Routes>
+          {/* Ξεχωριστή διαχείριση για το "/login" */}
+          <Route path="/login" element={<LoginForm db={db} />} />
+
+          {/* Οι υπόλοιπες διαδρομές με το MainLayout */}
+          <Route path="/" element={<MainLayout><Home /></MainLayout>} />
+          <Route path="/register" element={<MainLayout><RegisterForm db={db} /></MainLayout>} />
+          <Route path="/sections" element={<MainLayout><Section /></MainLayout>} />
+          {/* Προσθέστε άλλες διαδρομές εδώ αν χρειάζεται */}
+        </Routes>
       </BrowserRouter>
     </div>
   );
