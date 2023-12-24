@@ -1,45 +1,73 @@
 import React, { useState } from 'react';
-import users from './data/users.json'; // Import json file
-import "./LoginForm.css";
+import { Link } from "react-router-dom";
+import {doc,getDoc} from 'firebase/firestore'
+
+export default function LoginForm({db}){
+  const [email,setEmail] = useState('');
+  const [password,setPassword] = useState('');
+
+  async function handleLogin (e){
+    e.preventDefault();
+
+    const ref = doc(db,"users",email);
+
+    const res = await getDoc(ref);
+
+    if(res.exists() && res.data().email && res.data().password === password){
+
+      const user_role = res.data().role
+      const user_email = res.data().email
+
+      localStorage.setItem('role',user_pole)
+      localStorage.setItem('email',user_pole)
+      window.location.href = './home'
+      console.l
+
+    }
+  }
+}
+
 
 const LoginForm = () => {
-  const [username, setUsername] = useState(''); //hook for username,password
+  const [email, setEmail] = useState(''); //hook for email,password
   const [password, setPassword] = useState('');
   const [isError, setIsError] = useState(false); // New state for error
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    
-    // Find a user with the entered username and password
-    const user = users.find(u => u.username === username && u.password === password);
-    //if user exist
-    if (user) { //we can add some code here for red letter if not correct
-      console.log('Successful login:', user);
-      setIsError(false); // Reset error state on successful login
-    } else { //if user dont not exist
-      console.log('Incorrect login credentials');
-      setIsError(true); // Set error state on failed login
-      setPassword(''); // Clear password field
-    }
+
+    const auth = getAuth();
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // The user is signed in!
+        // userCredential.user will contain information about the signed in user.
+        console.log('Successful login:', userCredential.user);
+      })
+      .catch((error) => {
+        // An error occurred. Handle it here.
+        setIsError(true);
+        console.error(error);
+      });
   };
 
   return (
     <div className="login-form-container">
+        <Link to="/" className="home-button">Home</Link>
       <form onSubmit={handleSubmit} className="login-form">
         <h1>ΕΛΛΗΝΙΚΗ ΔΗΜΟΚΡΑΤΙΑ</h1>
         <h2>Εθνικόν και Καποδιστριακόν Πανεπιστήμιον Αθηνών</h2>
         <p>ΙΔΡΥΘΕΝ ΤΟ 1837</p>
         <div className={`input-group ${isError ? 'error' : ''}`}>
-          <label htmlFor="username">Username</label>
-          <input
-            type="text"
-            id="username"
-            value={username}
-            onChange={(e) => {
-                setUsername(e.target.value);
-            }}
-            required
-            style={{ color: isError ? 'red' : '' }} 
+        <label htmlFor="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          value={email}
+          onChange={(e) => {
+              setEmail(e.target.value);
+          }}
+          required
+          style={{ color: isError ? 'red' : '' }} 
             />
         </div>
         <div className="input-group">

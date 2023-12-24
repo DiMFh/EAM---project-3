@@ -62,3 +62,22 @@
     background-color: #0056b3;
   }
   
+
+  /* RegisterForm.css */
+.home-button {
+  position: absolute;
+  top: 20px; 
+  left: 20px;
+  background-color: black; 
+  color: white; 
+  padding: 10px 20px;
+  text-decoration: none; 
+  border-radius: 5px;
+  border: none; 
+}
+
+.home-button:hover {
+  background-color: #333; 
+}
+
+  

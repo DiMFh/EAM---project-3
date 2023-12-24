@@ -11,8 +11,45 @@
   top: 0; /* Add this line */
 }
 
+.header nav a.active-link {
+  color: #fff; /* White text */
+  background-color: #f00; /* Red background */
+}
+
+
+.home-link, .sections-link, .register-link, .login-link {
+  color: #fff; /* White text */
+  padding: 10px 20px; /* Padding around the text */
+  margin: 0 10px; /* Margin between the links */
+  text-decoration: none; /* Remove underline */
+  border-radius: 5px; /* Rounded corners */
+}
+
+
+
+.home-link {
+  background-color: #007BFF; /* Blue */
+}
+
+.sections-link {
+  background-color: #0056b3; /* Darker Blue */
+}
+
+.register-link {
+  background-color: #003d73; /* Even Darker Blue */
+}
+
+.login-link {
+  background-color: #002244; /* Darkest Blue */
+}
+
 .header-logo {
   height: 80px;
+}
+
+.active-link {
+  color: #fff; /* White text */
+  background-color: #000; /* Black background */
 }
 
 nav {
@@ -40,7 +77,14 @@ nav a:hover {
   transform: scale(1.1); /* make them a bit bigger */
 }
 
-/* Ειδικά για το "Είσοδος", για να είναι πάντα υπογραμμισμένο */
+nav a.active-link {
+  text-decoration: underline; /* Underline on hover for all links */
+  color: var(
+    --light-blue-on-hover
+  ); /* this color is in the :root inside index.css */
+  transform: scale(1.1); /* make them a bit bigger */
+}
+
 nav a.login {
   text-decoration: underline; /* Ensures this link is always underlined */
 }
