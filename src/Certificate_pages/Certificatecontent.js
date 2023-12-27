@@ -2,7 +2,7 @@ import React from "react";
 import "./Certificate.css";
 import { Link } from "react-router-dom";
 
-import Breadcrumb from './Breadcrumb';
+import Breadcrumb from '../Breadcrumb';
 
 const Certificatecontent = () => {
   return (

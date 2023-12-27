@@ -12,8 +12,8 @@ import Login from "./Login";
 import Register from './Register'; 
 import Home from './Home';
 import Sections from './Sections';
-import Certificate from './Certificate';
-import Certificaterequest from "./Certificaterequest";
+import Certificate from './Certificate_pages/Certificate';
+import Certificaterequest from "./Certificate_pages/Certificaterequest";
 
 const router = createBrowserRouter(
   createRoutesFromElements(

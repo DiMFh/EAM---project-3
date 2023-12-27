@@ -3,7 +3,7 @@ import "./Certificate.css";
 // import Certificaterequest from "./Certificaterequest";
 // import {  Routes, Route } from "react-router-dom";
 // import Certificatecontent from "./Certificatecontent"; // Changed the import name
-import Header from "./Header";
+import Header from "../Header";
 import { NavLink ,  Outlet} from "react-router-dom";
 import Breadcrumb from './Breadcrumb';
 
