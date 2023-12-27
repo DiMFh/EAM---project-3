@@ -8,12 +8,12 @@ import {
   RouterProvider
 } from 'react-router-dom'
 import "./App.css";
-import Login from "./pages/Login";
-import Register from './pages/Register'; 
-import Home from './pages/Home';
-import Sections from './pages/Sections';
-import Certificate from './Certificate_pages/Certificate';
-import Certificaterequest from "./Certificate_pages/Certificaterequest";
+import Login from "./Login";
+import Register from './Register'; 
+import Home from './Home';
+import Sections from './Sections';
+import Certificate from './Certificate';
+import Certificaterequest from "./Certificaterequest";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
