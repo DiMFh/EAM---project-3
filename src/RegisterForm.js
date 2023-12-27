@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import { doc, setDoc } from 'firebase/firestore'
 import { courses } from './Utils/Objects/objects';
 import './RegisterForm.css'
+import Header from './Header';
 
 export default function RegisterForm({db}){
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');  
-
+  const currentPage = "register";
   // Handles the register functionality of the user
   async function handleRegister(e){
     e.preventDefault()
@@ -39,6 +40,7 @@ export default function RegisterForm({db}){
       // Redirect to login route
       window.location.href = '/login'
       console.log("ALL GOOD")
+      alert("Document written to Database");
 
     }catch(e){
       console.log(e)
@@ -47,6 +49,7 @@ export default function RegisterForm({db}){
   }
     return(
       <div className='register'>
+        <Header currentPage={currentPage} />
         <form onSubmit={handleRegister} className='register-container'>
             <h2>Register</h2>
             <div className='register-row'>

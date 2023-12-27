@@ -1,11 +1,26 @@
 // Home.js
 import React from 'react';
+import Header from './Header';
+import headerimg from "./images/EKPA.jpg";
+import InfoCardsContainer from "./InfoCardsContainer";
+import "./App.css";
 
 const Home = () => {
+  const currentPage = "home";
   return (
     <div>
-      <h1>Welcome to the Home Page</h1>
-      <p>This is the home page of the application.</p>
+      <Header currentPage={currentPage} />
+      <main className="main-content">
+        {/* Edw vazoume olous tous components */}
+        <header className="header">
+          <h1>
+            {" "}
+            Γραμματίες Εθνικού και Καποδιστριακού <br></br> Πανεπιστημίου Αθηνών
+          </h1>
+          <img className="homepage-img" src={headerimg} alt="headerimg" />
+        </header>
+        <InfoCardsContainer />
+      </main>
     </div>
   );
 };

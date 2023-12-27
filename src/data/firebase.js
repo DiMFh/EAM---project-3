@@ -1,13 +1,32 @@
-// firebase.js
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-    apiKey: "AIzaSyB2s1r2TZS10o1lTAwoWq59wqiO3Ic5bbo",
-    authDomain: "eam--project-3.firebaseapp.com",
-    projectId: "eam--project-3",
-    storageBucket: "eam--project-3.appspot.com",
-    messagingSenderId: "1024369960713",
-    appId: "1:1024369960713:web:59e2f13c8079813ef155d8",
-    measurementId: "G-KRP7CQ9V0B"
-  };
+  apiKey: "AIzaSyDzoH3UBLZaf1xJa4bzrdXhIq3KPo3amgA",
+
+  authDomain: "prolog-b259a.firebaseapp.com",
+
+  databaseURL: "https://prolog-b259a-default-rtdb.europe-west1.firebasedatabase.app",
+
+  projectId: "prolog-b259a",
+
+  storageBucket: "prolog-b259a.appspot.com",
+
+  messagingSenderId: "510724773307",
+
+  appId: "1:510724773307:web:a88d2aa300c52b085f209e",
+
+  measurementId: "G-Z7S3X70YPH"
+
   
-  export { firebaseConfig };
-  
+
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);

@@ -1,46 +1,57 @@
 import React from "react";
-import Header from "./Header";
+
 import Footer from "./Footer";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import {
+  createBrowserRouter, 
+  createRoutesFromElements,
+  Route, 
+  RouterProvider
+} from 'react-router-dom'
 import "./App.css";
 import LoginForm from "./LoginForm";
 import RegisterForm from './RegisterForm'; 
 import Home from './Home';
-import Section from './Section';
+import Sections from './Sections';
+import Certificate from './Certificate_pages/Certificate';
+import Certificaterequest from "./Certificate_pages/Certificaterequest";
 
-import { firebaseConfig } from './data/firebase';
-import { initializeApp } from 'firebase/app';
+
+
+import './data/firebase';
 import { getFirestore } from 'firebase/firestore';
-import 'firebase/database';
 
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+const db = getFirestore();
 
 
-const MainLayout = ({ children }) => (
-  <>
-    <Header />
-    <div className="main-content">{children}</div>
-    <Footer />
-  </>
-);
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    
+    <Route path ="/"   >
+      <Route index element={<Home />} />
+      <Route path="/sections" element={<Sections />} />
+      <Route path="/register" element={<RegisterForm db={db} />} />
+      <Route path="/login" element={<LoginForm db={db} />} />
+      <Route path="/certificate"  >  
+        <Route index element={<Certificate/>} />
+        <Route path = "certificate-request" element={<Certificaterequest />} />
+      </Route>
+    </Route >
+  )
+)
 
-export default function App() {
+
+
+
+function App() {
+ 
   return (
     <div className="App">
-      <BrowserRouter>
-        <Routes>
-          {/* Ξεχωριστή διαχείριση για το "/login" */}
-          <Route path="/login" element={<LoginForm db={db} />} />
-
-          {/* Οι υπόλοιπες διαδρομές με το MainLayout */}
-          <Route path="/" element={<MainLayout><Home /></MainLayout>} />
-          <Route path="/register" element={<MainLayout><RegisterForm db={db} /></MainLayout>} />
-          <Route path="/sections" element={<MainLayout><Section /></MainLayout>} />
-          {/* Προσθέστε άλλες διαδρομές εδώ αν χρειάζεται */}
-        </Routes>
-      </BrowserRouter>
+      <main className="main-content">
+        <RouterProvider router={router}/>
+      </main>
+      <Footer/>
     </div>
   );
 }
+export default App
