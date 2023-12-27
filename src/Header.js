@@ -1,35 +1,44 @@
 import React from "react";
 import logo from "./images/new_logo_fully_transparent.png";
 import "./Header.css";
-// import { NavLink } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { NavLink ,  Outlet} from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 export default function Header({ currentPage }) {
+  console.log("Current Page:", currentPage);
   return (
+    <div className="App">
     <header className="header">
       <img src={logo} alt="Logo" className="header-logo" />
+      
       <nav>
-        {/* Edw vazoume ta navigation items */}
         {(currentPage === "home" || currentPage === "sections" || currentPage === "login" || currentPage === "register") && (
           <>
-            <Link to="/">Αρχική</Link>
-            <Link to="/sections">Τμήματα</Link>
-            <Link to="/register">Εγγραφή</Link>
-            <Link to="/login" className="login">
+            <NavLink to="/">Αρχική</NavLink>
+            <NavLink to="/sections">Τμήματα</NavLink>
+            <NavLink to="/register">Εγγραφή</NavLink>
+            <NavLink to="/login" className="login">
               Είσοδος
-            </Link>
-            <Link to="/certificate">Πιστοποιητικά</Link>
+            </NavLink>
+            <NavLink to="/certificate">Πιστοποιητικά</NavLink>
           </>
         )}
-        {currentPage === "certificate" && (
+        {(currentPage === "certificate" || currentPage === "certificate-request") && (
           <>
-             <Link to="/report">Δηλώσεις</Link>
-             <Link to="/grades">Βαθμολογία</Link>
-             <Link to="/certificate">Πιστοποιητικά</Link>
-             <Link to="/help">Βοήθεια</Link>
+             <NavLink to="/report">Δηλώσεις</NavLink>
+             <NavLink to="/grades">Βαθμολογία</NavLink>
+             <NavLink to="/certificate">Πιστοποιητικά</NavLink>
+             <NavLink to="/help">Βοήθεια</NavLink>
           </>
         )}
       </nav>
     </header>
+
+      <main>
+          <Outlet/>
+      </main>
+
+      </div>
+
   );
 }
