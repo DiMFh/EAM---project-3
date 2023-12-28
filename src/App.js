@@ -32,10 +32,10 @@ const router = createBrowserRouter(
       <Route path="/sections" element={<Sections />} />
       <Route path="/register" element={<RegisterForm db={db} />} />
       <Route path="/login" element={<LoginForm db={db} />} />
-      <Route path="/certificate"  >  
-        <Route index element={<Certificate/>} />
-        <Route path = "certificate-request" element={<Certificaterequest />} />
-      </Route>
+        <Route path="/certificate"  >  
+          <Route index element={<Certificate/>} />
+          <Route path = "certificate-request" element={<Certificaterequest />} />
+        </Route>
     </Route >
   )
 )
