@@ -1,5 +1,5 @@
 import React from "react";
-// import Header from "./Header";
+
 import Footer from "./Footer";
 import {
   createBrowserRouter, 
@@ -8,12 +8,21 @@ import {
   RouterProvider
 } from 'react-router-dom'
 import "./App.css";
-import Login from "./Login";
-import Register from './Register'; 
+import LoginForm from "./LoginForm";
+import RegisterForm from './RegisterForm'; 
 import Home from './Home';
 import Sections from './Sections';
 import Certificate from './Certificate_pages/Certificate';
 import Certificaterequest from "./Certificate_pages/Certificaterequest";
+import Studentpage from './Studentpage';
+
+
+import './data/firebase';
+import { getFirestore } from 'firebase/firestore';
+
+
+const db = getFirestore();
+
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -21,24 +30,30 @@ const router = createBrowserRouter(
     <Route path ="/"   >
       <Route index element={<Home />} />
       <Route path="/sections" element={<Sections />} />
-      <Route path="/register" element={<Register />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/certificate"  >  
-        <Route index element={<Certificate/>} />
-        <Route path = "certificate-request" element={<Certificaterequest />} />
+      <Route path="/register" element={<RegisterForm db={db} />} />
+      <Route path="/login" element={<LoginForm db={db} />} >
+        <Route path="student-page" element={<Studentpage />} />
       </Route>
+      
+        <Route path="/certificate"  >  
+          <Route index element={<Certificate/>} />
+          <Route path = "certificate-request" element={<Certificaterequest />} />
+        </Route>
     </Route >
   )
 )
 
- function App() {
+
+
+
+function App() {
  
   return (
     <div className="App">
-    <main className="main-content">
-    <RouterProvider router={router}/>
-    </main>
-    <Footer/>
+      <main className="main-content">
+        <RouterProvider router={router}/>
+      </main>
+      <Footer/>
     </div>
   );
 }

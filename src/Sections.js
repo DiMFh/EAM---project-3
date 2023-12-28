@@ -1,12 +1,14 @@
+// Section.js
 import React from 'react';
-import Header from "./Header";
-
+import Header
+ from './Header';
 const Sections = () => {
   const currentPage = "sections";
   return (
     <div>
       <Header currentPage={currentPage} />
-      <h2>This is the sections page </h2>
+      <h1>Welcome to the Section Page</h1>
+      <p>This is the section page of the application.</p>
     </div>
   );
 };

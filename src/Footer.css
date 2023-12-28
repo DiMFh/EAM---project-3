@@ -11,14 +11,16 @@
 
 .footer-item {
   margin: 0 4rem;
-  color: #fff; /* Ensures the text is light-colored*/
+  color: #fff; /* Ensures the text is light-colored, adjust the color as needed */
+  /* Add other styling for the text as needed, like font-size, etc. */
 }
 
 .footer-item a {
   color: var(--light-blue-on-hover); /* Inherits the color from .footer-item */
   text-decoration: none; /* Removes underline from links */
+  /* Add hover effect for links if needed */
 }
 
 .footer-item a:hover {
-  text-decoration: underline; /* Underlines link on hover*/
+  text-decoration: underline; /* Underlines link on hover, optional */
 }
