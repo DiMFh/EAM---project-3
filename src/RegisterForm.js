@@ -28,18 +28,18 @@ export default function RegisterForm({db}){
 
     try{
        // Create a Firebase doc that 'points' to our db and creates a collection "users" with primary key the email of the user
-      const ref_user = doc(db, "users", email)
+      const ref_user = doc(db, "users", email);
       // Then we use setDoc to push the 'user object' to the referenced user
-      const res_user = await setDoc(ref_user, docUser);
+      await setDoc(ref_user, docUser);
 
       // At the same time we push all the courses at the db.
       // We create a 'courses' collection with primary key 'all_courses'
-      const ref_courses = doc(db, "courses", "all_courses")
-      const res_courses = await setDoc(ref_courses, courses);
+      const ref_courses = doc(db, "courses", "all_courses");
+      await setDoc(ref_courses, courses);
 
       // Redirect to login route
-      window.location.href = '/login'
-      console.log("ALL GOOD")
+      window.location.href = '/login';
+      console.log("ALL GOOD");
       alert("Document written to Database");
 
     }catch(e){
