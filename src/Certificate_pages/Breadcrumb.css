@@ -1,0 +1,30 @@
+/* YourComponent.css */
+
+.top-left-component {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  align-items: center;
+  margin-top: 5%;
+}
+
+.top-left-component span {
+  margin-right: 5px;
+  font-weight: bold; /* Make all spans bold */
+}
+
+.purple-text {
+  color: purple;
+}
+
+
+.home-link,
+.home-link:visited,
+.home-link:hover,
+.home-link:active,
+.home-link:focus,
+.home-link:focus-within {
+  color: black; /* Set the text color to black for the home link */
+  text-decoration: none; /* Remove underlines */
+}
