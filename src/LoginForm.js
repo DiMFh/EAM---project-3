@@ -4,9 +4,12 @@ import {doc,getDoc} from 'firebase/firestore';
 import Header from './Header';
 import { NavLink } from "react-router-dom";
 import { Outlet} from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 
-export default function LoginForm({db}){
+
+const LoginForm = ({db, showHeader = true}) =>{
+  const location = useLocation();
   const [email,setEmail] = useState('');
   const [password,setPassword] = useState('');
   const navigate = useNavigate();
@@ -36,50 +39,56 @@ export default function LoginForm({db}){
 
 
   return (
-    
-
     <div className="login-form-container">
-     <Header currentPage={currentPage} /> 
-     
-     <Link to="/" className="home-button">Home</Link>
-     <h1>ΕΛΛΗΝΙΚΗ ΔΗΜΟΚΡΑΤΙΑ</h1>
-      <h2>Εθνικόν και Καποδιστριακόν Πανεπιστήμιον Αθηνών</h2>
-      <p>ΙΔΡΥΘΕΝ ΤΟ 1837</p>
-      <form onSubmit={handleLogin} className='login-container'>
+      
+      
+      {showHeader && <Header currentPage={currentPage} />}
+      {location.pathname === "/login" && (
+      <>
+      
+        <Link to="/" className="home-button">
+          Home
+        </Link>
+        <div>
+          <h1>ΕΛΛΗΝΙΚΗ ΔΗΜΟΚΡΑΤΙΑ</h1>
+          <h2>Εθνικόν και Καποδιστριακόν Πανεπιστήμιον Αθηνών</h2>
+          <p>ΙΔΡΥΘΕΝ ΤΟ 1837</p>
+          <form onSubmit={handleLogin} className="login-container">
             <h2>Login</h2>
-            <div className='login-row'>
-                <label>Email:</label>
-                &nbsp;&nbsp;&nbsp;
-                <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                />
+            <div className="login-row">
+              <label>Email:</label>
+              &nbsp;&nbsp;&nbsp;
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
             </div>
-            <div className='login-row'>
-                <label>Password:</label>
-                &nbsp;&nbsp;&nbsp;
-                <input
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
+            <div className="login-row">
+              <label>Password:</label>
+              &nbsp;&nbsp;&nbsp;
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
             </div>
-            <nav>
+
+            <a href="/register">Create new user</a>
+
+            
+          </form>
+          <nav>
               <NavLink to="student-page" className="student-page">
-              <button type='submit'>Login</button>
+                <button type="submit">Login</button>
               </NavLink>
             </nav>
-            
-            <a href='/register'>Create new user</a>
-        </form>
-    </div>
+        </div>
+        
+      </>
+    )}
+  </div>
+ );
 
-
-
-  )
-
-  
 }
-
-
+export default LoginForm;
