@@ -1,0 +1,86 @@
+.login-container {
+  background-color: #cccaca; 
+  padding: 20px; 
+  border-radius: 8px; 
+  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1); 
+  width: 100%; 
+  max-width: 400px; 
+  margin: auto; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.button{
+  color: #FFF;
+  font-family: 'Nixie One', sans-serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.6px;
+  padding: 10px 20px;
+  background-color: #007bff; /* ή όποιο χρώμα φόντου προτιμάτε */
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%; /* ή ένα συγκεκριμένο πλάτος αν προτιμάτε */
+  max-width: 300px;
+  border-radius: 8px;
+}
+
+.button:hover {
+  background-color: #0056b3; /* ή όποια αλλαγή χρώματος φόντου προτιμάτε κατά τη διάρκεια hover */
+}
+
+.login-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative; /* Προσθήκη για τοποθέτηση του εικονιδίου μέσα στο πεδίο */
+}
+
+.input-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 400px; /* ή το πλάτος που προτιμάτε */
+  position: relative;
+  padding: 10px;
+}
+
+.input-style {
+  flex-grow: 1;
+  padding: 10px;
+  border-radius: 20px;
+  border: 1px solid #4D9AE1;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 400px; 
+}
+
+.input-style:focus {
+  outline: none;
+  border: 1px solid #4D9AE1;
+  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+}
+
+
+.toggle-password {
+  position: absolute;
+  right: -30px; /* Ρυθμίστε την απόσταση από τα δεξιά */
+  cursor: pointer;
+  height: 100%; /* Εξασφαλίζει ότι το εικονίδιο θα έχει το ίδιο ύψος με το input */
+}
+
+
+
+
+
+
+
+
+
+
+
