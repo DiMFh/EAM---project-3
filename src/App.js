@@ -1,12 +1,4 @@
 import React from "react";
-<<<<<<< HEAD
-import Header from "./Header";
-import Footer from "./Footer";
-import headerimg from "./images/EKPA.jpg";
-import InfoCardsContainer from "./InfoCardsContainer";
-import "./App.css";
-=======
->>>>>>> dimi-branch
 
 import Footer from "./Footer";
 import {
@@ -56,19 +48,7 @@ function App() {
   return (
     <div className="App">
       <main className="main-content">
-<<<<<<< HEAD
-        {/* Edw vazoume olous tous components */}
-        <header className="header">
-          <h1>
-            {" "}
-            Γραμματίες Εθνικού και Καποδιστριακού <br></br> Πανεπιστημίου Αθηνών
-          </h1>
-          <img className="homepage-img" src={headerimg} alt="headerimg" />
-        </header>
-        <InfoCardsContainer />
-=======
         <RouterProvider router={router}/>
->>>>>>> dimi-branch
       </main>
       <Footer/>
     </div>

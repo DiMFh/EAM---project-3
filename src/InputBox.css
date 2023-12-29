@@ -1,0 +1,18 @@
+/* Εφαρμόζουμε το στυλ στα συγκεκριμένα input πεδία μέσα στην κλάση .login-container */
+.login-container input[type="email"], 
+.login-container input[type="password"] {
+    background-color: #fff; /* Λευκό φόντο για τα input */
+    border: 1px solid #d3d3d3; /* Γκρι περίγραμμα */
+    border-radius: 5px; /* Στρογγυλεμένες γωνίες */
+    padding: 8px 12px; /* Κατάλληλη εσοχή για το περιεχόμενο */
+    margin-bottom: 10px; /* Κατάλληλο κενό μεταξύ των πεδίων */
+    width: 100%; /* Πλάτος που να ταιριάζει στο πλαίσιο */
+    box-sizing: border-box; /* Το padding και border θα συμπεριληφθούν στο πλάτος */
+}
+
+/* Ενισχύουμε το περίγραμμα όταν το input είναι ενεργό (focus) */
+.login-container input[type="email"]:focus, 
+.login-container input[type="password"]:focus {
+    border-color: #a9a9a9; /* Σκουρότερο γκρι χρώμα */
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1); /* Απαλή σκίαση για να ξεχωρίζει */
+}

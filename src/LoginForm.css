@@ -1,83 +1,86 @@
-/* LoginForm.css */
+.login-container {
+  background-color: #cccaca; 
+  padding: 20px; 
+  border-radius: 8px; 
+  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1); 
+  width: 100%; 
+  max-width: 400px; 
+  margin: auto; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-/* Style for the container that holds the login form */
-.login-form-container {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f5f5f5;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  }
-  
-  /* Style for the form itself */
-  .login-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  /* Style for the header text */
-  h1, h2, p {
-    text-align: center;
-    color: #333;
-  }
-  
-  /* Style for input fields and labels */
-  .input-group {
-    margin: 10px 0;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  
-  label {
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
-  
-  input[type="text"],
-  input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    outline: none;
-  }
-  
-  /* Style for the login button */
-  .login-button {
-    width: 100%;
-    padding: 10px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .login-button:hover {
-    background-color: #0056b3;
-  }
-  
-
-  /* RegisterForm.css */
-.home-button {
-  position: absolute;
-  top: 20px; 
-  left: 20px;
-  background-color: black; 
-  color: white; 
+.button{
+  color: #FFF;
+  font-family: 'Nixie One', sans-serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.6px;
   padding: 10px 20px;
-  text-decoration: none; 
-  border-radius: 5px;
-  border: none; 
+  background-color: #007bff; /* ή όποιο χρώμα φόντου προτιμάτε */
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%; /* ή ένα συγκεκριμένο πλάτος αν προτιμάτε */
+  max-width: 300px;
+  border-radius: 8px;
 }
 
-.home-button:hover {
-  background-color: #333; 
+.button:hover {
+  background-color: #0056b3; /* ή όποια αλλαγή χρώματος φόντου προτιμάτε κατά τη διάρκεια hover */
 }
 
-  
+.login-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative; /* Προσθήκη για τοποθέτηση του εικονιδίου μέσα στο πεδίο */
+}
+
+.input-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 400px; /* ή το πλάτος που προτιμάτε */
+  position: relative;
+  padding: 10px;
+}
+
+.input-style {
+  flex-grow: 1;
+  padding: 10px;
+  border-radius: 20px;
+  border: 1px solid #4D9AE1;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 400px; 
+}
+
+.input-style:focus {
+  outline: none;
+  border: 1px solid #4D9AE1;
+  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+}
+
+
+.toggle-password {
+  position: absolute;
+  right: -30px; /* Ρυθμίστε την απόσταση από τα δεξιά */
+  cursor: pointer;
+  height: 100%; /* Εξασφαλίζει ότι το εικονίδιο θα έχει το ίδιο ύψος με το input */
+}
+
+
+
+
+
+
+
+
+
+
+
