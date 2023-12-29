@@ -1,0 +1,58 @@
+.grey-box {
+    background-color: #cccccc; /* Use your desired shade of grey */
+    padding: 20px; /* Adjust the padding as needed */
+    border-radius: 8px; /* Optional: Add border radius for rounded corners */
+    /* Add any other styles you want for the grey box */
+    max-width: 400px; /* Set the maximum width for the grey box */
+    margin: 0 auto; /* Center the grey box horizontally */
+    margin-top: 5%;
+}
+
+.white-box {
+    background-color: #ffffff; /* White background color */
+    margin-bottom: 5px; /* Adjust the spacing between white boxes */
+    border-radius: 10px;
+    padding: 10px; /* Adjust the padding as needed */
+    border: 1px solid #cccccc; /* Optional: Add a border for separation */
+    /* Add any other styles you want for the white box */
+}
+
+
+.white-box h4 {
+    text-decoration: underline; /* Underline the text */
+    /* Add any other styles for the h4 elements inside white boxes */
+}
+
+
+.blue-text {
+
+    right: 50px; /* Adjust the right property to move it more to the right */
+    margin: 0px; /* Adjust the margin as needed */
+}
+
+
+  
+.blue-text p {
+    color: blue;
+    text-decoration: underline;
+    margin: 0; /* Remove default margin to align with the bottom right corner */
+}
+
+.certificate-request,
+.certificate-state,
+.return {
+  text-decoration: none;
+  color: black;
+}
+
+.certificate-request:hover,
+.certificate-state:hover,
+.return:hover {
+  color: purple; /* Change the color on hover if needed */
+}
+
+
+
+.return {
+    color: purple; /* Set the initial color for the "Επιστροφή" button */
+  }
