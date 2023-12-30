@@ -23,7 +23,7 @@ export default function Header({ currentPage }) {
             {/* <NavLink to="/certificate">Πιστοποιητικά</NavLink> */}
           </>
         )}
-        {(currentPage === "certificate" || currentPage === "certificate-request" || currentPage== "student-page") && (
+        {(currentPage === "certificate" || currentPage === "certificate-request" || currentPage === "student-page") && (
           <>
              <NavLink to="/report">Δηλώσεις</NavLink>
              <NavLink to="/grades">Βαθμολογία</NavLink>
