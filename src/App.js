@@ -14,7 +14,7 @@ import Home from './Home';
 import Sections from './Sections';
 import Certificate from './Certificate_pages/Certificate';
 import Certificaterequest from "./Certificate_pages/Certificaterequest";
-
+import Studentpage from './Studentpage';
 
 
 import './data/firebase';
@@ -31,7 +31,10 @@ const router = createBrowserRouter(
       <Route index element={<Home />} />
       <Route path="/sections" element={<Sections />} />
       <Route path="/register" element={<RegisterForm db={db} />} />
-      <Route path="/login" element={<LoginForm db={db} />} />
+      <Route path="/login" element={<LoginForm db={db} />} >
+        <Route path="student-page" element={<Studentpage />} />
+      </Route>
+      
         <Route path="/certificate"  >  
           <Route index element={<Certificate/>} />
           <Route path = "certificate-request" element={<Certificaterequest />} />
