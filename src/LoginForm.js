@@ -1,47 +1,52 @@
 import React, { useState } from 'react';
-import { useNavigate,Link } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import {doc,getDoc} from 'firebase/firestore';
 import Header from './Header';
 
 import './LoginForm.css';
 
-export default function LoginForm({db}){
+ const LoginForm = ({db }) =>{
   const [email,setEmail] = useState('');
   const [password,setPassword] = useState('');
-
-  
-
-
+  const [emailStyle, setEmailStyle] = useState({});
   const navigate = useNavigate();
+
   const currentPage = "login";
   
-  async function handleLogin (e){
-    e.preventDefault();
+  async function handleLogin(e) {
+  e.preventDefault();
 
-    const ref = doc(db,"users",email);
-
+  try {
+    const ref = doc(db, "users", email);
     const res = await getDoc(ref);
 
-    if(res.exists() && res.data().email === email && res.data().password === password){
-
-      const user_role = res.data().role
-      const user_email = res.data().email
-
-      localStorage.setItem('role',user_role)
-      localStorage.setItem('email',user_email)
-      navigate('/certificate');
-      console.log("Found User:", res.data());
+    if (!res.exists()) {
+      console.log("No such document in the database");
+      // setError('Something is wrong with DB connection');
     } else {
-        console.log("No such document!");
+      console.log('Email from database:', res.data().email);
+      console.log('Password from database:', res.data().password);
 
+      if (res.data().email === email && res.data().password === password) {
+        localStorage.setItem('role', res.data().role);
+        localStorage.setItem('email', res.data().email);
+        navigate('/certificate');
+        console.log("Found User:", res.data());
+      } else {
+        setEmailStyle({ borderColor: 'red' });
+        setPassword('');
+        console.log("Incorrect email or password");
+      }
     }
+  } catch (error) {
+    console.error("Error fetching user data:", error);
+    // Εδώ μπορείτε να χειριστείτε το σφάλμα, π.χ. να εμφανίσετε ένα μήνυμα σφάλματος
   }
+}
 
 
   return (
     <div >
-     <Header currentPage={currentPage} /> 
-     <h1>ΕΛΛΗΝΙΚΗ ΔΗΜΟΚΡΑΤΙΑ</h1>
       <h2>Εθνικόν και Καποδιστριακόν Πανεπιστήμιον Αθηνών</h2>
       <p>Γραμματεία Πληροφορικής και Τηλεπικοινωνιών</p>
       <form onSubmit={handleLogin} className='login-container'>
@@ -60,6 +65,7 @@ export default function LoginForm({db}){
                 placeholder="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                style={emailStyle}
               />
             </div>
           </div>
@@ -89,3 +95,4 @@ export default function LoginForm({db}){
 }
 
 
+export default LoginForm;

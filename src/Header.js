@@ -12,7 +12,7 @@ export default function Header({ currentPage }) {
       <img src={logo} alt="Logo" className="header-logo" />
       
       <nav>
-        {(currentPage === "home" || currentPage === "sections" || currentPage === "login" || currentPage === "register") && (
+        {currentPage === null  && (
           <>
             <NavLink to="/">Αρχική</NavLink>
             <NavLink to="/sections">Τμήματα</NavLink>
@@ -20,10 +20,10 @@ export default function Header({ currentPage }) {
             <NavLink to="/login" className="login">
               Είσοδος
             </NavLink>
-            <NavLink to="/certificate">Πιστοποιητικά</NavLink>
+            {/* <NavLink to="/certificate">Πιστοποιητικά</NavLink> */}
           </>
         )}
-        {(currentPage === "certificate" || currentPage === "certificate-request") && (
+        {(currentPage === "Student") && (
           <>
              <NavLink to="/report">Δηλώσεις</NavLink>
              <NavLink to="/grades">Βαθμολογία</NavLink>

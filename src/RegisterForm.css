@@ -1,41 +1,84 @@
-.registration-page {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    background-color: #f7f7f7;
-  }
+.register-container {
+  background-color: #cccaca;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.register-row {
+  margin-bottom: 15px;
+}
+
+.register-row label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.register-row input[type="email"],
+.register-row input[type="password"],
+.register-row input[type="date"],
+.register-row input[type="text"],
+.register-row input[type="telephone number"],
+.register-row input[type="address"] {
+  width: 100%;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.register-row input[type="email"]:focus,
+.register-row input[type="password"]:focus,
+.register-row input[type="date"]:focus,
+.register-row input[type="text"]:focus,
+.register-row input[type="telephone number"]:focus,
+.register-row input[type="address"]:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+button[type='submit'] {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button[type='submit']:hover {
+  background-color: #0056b3;
+}
+
+a {
+  display: block;
+  margin-top: 20px;
+  text-align: center;
+  color: #007bff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
   
-  .registration-form {
-    width: 100%;
-    max-width: 400px;
-    background: white;
-    padding: 30px; /* or 40px */
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
+.info-div {
+  padding: 20px;
+  background-color: #2d939b;
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.1);
+  border-radius: 5px;
+  margin: 20px auto; /* Κεντράρει το κουτί και προσθέτει απόσταση από το κάτω μέρος */
+  max-width: 400px; /* ή οποιοδήποτε άλλο πλάτος προτιμάτε */
+}
+
+.info-div p {
+    text-decoration: underline;
+    margin: 10px 0;
+}
+
   
-  .registration-form input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-  }
-  
-  .registration-form button {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    border-radius: 4px;
-    background-color: #0f62fe;
-    color: white;
-    cursor: pointer;
-  }
-  
-  .registration-form button:hover {
-    background-color: #0053f0;
-  }
-  
-  /* RegisterForm.css */
