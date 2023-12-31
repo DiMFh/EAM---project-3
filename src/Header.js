@@ -9,15 +9,16 @@ export default function Header({ currentPage }) {
   return (
     <div className="App">
     <header className="header">
-      <img src={logo} alt="Logo" className="header-logo" />
-      
+      <NavLink to="/">
+        <img src={logo} alt="Logo" className="header-logo" />
+      </NavLink>
       <nav>
         {(currentPage === "home" || currentPage === "sections" || currentPage === "login" || currentPage === "register") && (
           <>
-            <NavLink to="/">Αρχική</NavLink>
-            <NavLink to="/sections">Τμήματα</NavLink>
-            <NavLink to="/register">Εγγραφή</NavLink>
-            <NavLink to="/login" className="login">
+            <NavLink to="/" className={({ isActive}) => isActive ? 'active-link' : undefined} >Αρχική</NavLink>
+            <NavLink to="/sections" className={({ isActive}) => isActive ? 'active-link' : undefined} >Τμήματα</NavLink>
+            <NavLink to="/register" className={({ isActive}) => isActive ? 'active-link' : undefined} >Εγγραφή</NavLink>
+            <NavLink to="/login" className={({ isActive}) => isActive ? 'active-link' : "login"}>
               Είσοδος
             </NavLink>
             {/* <NavLink to="/certificate">Πιστοποιητικά</NavLink> */}
@@ -25,10 +26,10 @@ export default function Header({ currentPage }) {
         )}
         {(currentPage === "certificate" || currentPage === "certificate-request" || currentPage === "student-page") && (
           <>
-             <NavLink to="/report">Δηλώσεις</NavLink>
-             <NavLink to="/grades">Βαθμολογία</NavLink>
-             <NavLink to="/certificate">Πιστοποιητικά</NavLink>
-             <NavLink to="/help">Βοήθεια</NavLink>
+             <NavLink to="/report" className={({ isActive}) => isActive ? 'active-link' : undefined} >Δηλώσεις</NavLink>
+             <NavLink to="/grades" className={({ isActive}) => isActive ? 'active-link' : undefined} >Βαθμολογία</NavLink>
+             <NavLink to="/certificate" className={({ isActive}) => isActive ? 'active-link' : undefined} >Πιστοποιητικά</NavLink>
+             <NavLink to="/help" className={({ isActive}) => isActive ? 'active-link' : undefined} >Βοήθεια</NavLink>
           </>
         )}
       </nav>

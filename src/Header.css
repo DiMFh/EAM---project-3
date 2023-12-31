@@ -13,6 +13,12 @@
   height: 80px;
 }
 
+.active-link {
+  color: var( --light-blue-on-hover);
+  font-weight: bold;
+  font-size: 1.1em; /* Increase font size by 10% */
+}
+
 nav {
   display: flex;
   justify-content: center;
