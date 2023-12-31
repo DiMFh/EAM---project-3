@@ -1,0 +1,36 @@
+.stepper-container {
+    max-width: 600px; /* Adjust the maximum width as needed */
+    margin: auto;
+  }
+  
+  .stepper-step {
+    border: 2px solid #007bff; /* Border color for each step */
+    border-radius: 5px; /* Rounded corners for each step */
+    margin-bottom: 20px; /* Spacing between steps */
+  }
+  
+  .stepper-head {
+    background-color: #007bff; /* Background color for the step head */
+    color: #fff; /* Text color for the step head */
+    padding: 10px;
+    border-top-left-radius: 5px; /* Rounded corners for the top-left */
+    border-top-right-radius: 5px; /* Rounded corners for the top-right */
+  }
+  
+  .stepper-content {
+    padding: 20px;
+  }
+  
+  /* Additional styles */
+  button {
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3; /* Darker background color on hover */
+  }
+  
+  .invalid-feedback {
+    color: red; /* Color for invalid feedback */
+  }
+  
