@@ -1,60 +1,67 @@
 import React from "react";
-
+import Header from "./Header";
 import Footer from "./Footer";
 import {
-  createBrowserRouter, 
+  createBrowserRouter,
   createRoutesFromElements,
-  Route, 
-  RouterProvider
-} from 'react-router-dom'
+  Route,
+  RouterProvider,
+} from "react-router-dom";
 import "./App.css";
 import LoginForm from "./LoginForm";
-import RegisterForm from './RegisterForm'; 
-import Home from './Home';
-import Sections from './Sections';
-import Certificate from './Certificate_pages/Certificate';
+import RegisterForm from "./RegisterForm";
+import Home from "./Home";
+import Sections from "./Sections";
+import Certificate from "./Certificate_pages/Certificate";
 import Certificaterequest from "./Certificate_pages/Certificaterequest";
-import Studentpage from './Studentpage';
+import Studentpage from "./Studentpage";
 
-
-import './data/firebase';
-import { getFirestore } from 'firebase/firestore';
-
+import "./data/firebase";
+import { getFirestore } from "firebase/firestore";
+import { UserRoleProvider } from "./UserRoleContext";
+import { Outlet } from "react-router-dom";
 
 const db = getFirestore();
 
-
-const router = createBrowserRouter(
-  createRoutesFromElements(
-    
-    <Route path ="/"   >
-      <Route index element={<Home />} />
-      <Route path="/sections" element={<Sections />} />
-      <Route path="/register" element={<RegisterForm db={db} />} />
-      <Route path="/login" element={<LoginForm db={db} />} >
-        <Route path="student-page" element={<Studentpage />} />
-      </Route>
-      
-        <Route path="/certificate"  >  
-          <Route index element={<Certificate/>} />
-          <Route path = "certificate-request" element={<Certificaterequest />} />
-        </Route>
-    </Route >
-  )
-)
-
-
-
-
 function App() {
- 
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Home />} />
+        <Route path="/sections" element={<Sections />} />
+        <Route path="/register" element={<RegisterForm db={db} />} />
+        <Route path="/login" element={<LoginForm db={db} />}>
+          <Route path="student-page" element={<Studentpage />} />
+        </Route>
+        <Route path="/certificate">
+          <Route index element={<Certificate />} />
+          <Route path="certificate-request" element={<Certificaterequest />} />
+        </Route>
+      </Route>
+    )
+  );
+    
+
+function Layout() { 
+  /* Το Layout είναι ένα wrapper που δείχνει το κεντρικό layout τις εφαρμογής, και παίρνει ως παιδιά (Outlet) όλα τα routes */
   return (
-    <div className="App">
+    <>
+      <div className="App">
+      <Header />
       <main className="main-content">
-        <RouterProvider router={router}/>
+        <Outlet />
       </main>
-      <Footer/>
+      <Footer />
     </div>
+    </>
+  )
+}
+
+  return (
+    <UserRoleProvider>
+      <RouterProvider router={router} />
+    </UserRoleProvider>
   );
 }
-export default App
+
+export default App;
