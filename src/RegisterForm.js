@@ -105,7 +105,7 @@ export default function RegisterForm({db}){
                 <input
                     type="date"
                     value={date}
-                    onChange={(e) => setRole(e.target.value)}
+                    onChange={(e) => setDate(e.target.value)}
                 />
             </div>
             <div className='register-row'>
@@ -114,7 +114,7 @@ export default function RegisterForm({db}){
                 <input
                     type="text"
                     value={role}
-                    onChange={(e) => setDate(e.target.value)}
+                    onChange={(e) => setRole(e.target.value)}
                 />
             </div>
             <div className='register-row'>
