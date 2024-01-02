@@ -15,6 +15,7 @@ import Sections from "./Sections";
 import Certificate from "./Certificate_pages/Certificate";
 import Certificaterequest from "./Certificate_pages/Certificaterequest";
 import Studentpage from "./Studentpage";
+import Professorpage from "./Professorpage";
 
 import "./data/firebase";
 import { getFirestore } from "firebase/firestore";
@@ -32,6 +33,7 @@ function App() {
         <Route path="/register" element={<RegisterForm db={db} />} />
         <Route path="/login" element={<LoginForm db={db} />}/>
         <Route path="/student-page" element={<Studentpage />} />
+        <Route path="/professor-page" element={<Professorpage />} />
         <Route path="/certificate">
           <Route index element={<Certificate />} />
           <Route path="certificate-request" element={<Certificaterequest />} />

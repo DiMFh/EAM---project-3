@@ -19,13 +19,13 @@
   font-size: 1.1em; /* Increase font size by 10% */
 }
 
-nav {
+.header nav {
   display: flex;
   justify-content: center;
   flex-grow: 1;
 }
 
-nav a {
+.header nav a {
   /* For all the <a> anchor elements inside the <nav> */
   text-decoration: none;
   color: inherit; /* Inherits the black color from .header */
@@ -36,7 +36,7 @@ nav a {
   transition: color 0.3s ease, transform 0.3s ease; /* Smooth transition for color and transform */
 }
 
-nav a:hover {
+.header nav a:hover {
   text-decoration: underline; /* Underline on hover for all links */
   color: var(
     --light-blue-on-hover
@@ -45,6 +45,25 @@ nav a:hover {
 }
 
 /* Ειδικά για το "Είσοδος", για να είναι πάντα υπογραμμισμένο */
-nav a.login {
+.header nav a.login {
   text-decoration: underline; /* Ensures this link is always underlined */
+}
+
+.header .logout-button {
+  text-decoration: none;
+  color: inherit; 
+  margin: 0 1rem; 
+  padding: 0.5rem 0; 
+  font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  transition: color 0.3s ease, transform 0.3s ease; 
+} 
+
+/* If you want to style the button on hover to match NavLink components */
+.header .logout-button:hover {
+  text-decoration: underline; /* Underline on hover for all links */
+  color: var(
+    --light-blue-on-hover
+  ); /* this color is in the :root inside index.css */
+  transform: scale(1.1); /* make them a bit bigger */
 }
