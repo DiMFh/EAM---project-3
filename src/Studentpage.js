@@ -1,20 +1,11 @@
 import { Outlet} from "react-router-dom";
-import Header from "./Header";
-import LoginForm from './LoginForm';
 import React from 'react';
 
 const Studentpage = () => {
-    const currentPage = "student-page";
     return ( 
         <div className="student-page">
-            
-
-
-            
-            {/* <LoginForm showHeader={false}> */}
-            <Header currentPage={currentPage} />
+            <h2> Welcome to the student page</h2>
             {/* Rest of the child component content */}
-             {/* </LoginForm>   */}
              <main>
                 <Outlet/>
             </main>

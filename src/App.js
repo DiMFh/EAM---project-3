@@ -30,9 +30,9 @@ function App() {
         <Route index element={<Home />} />
         <Route path="/sections" element={<Sections />} />
         <Route path="/register" element={<RegisterForm db={db} />} />
-        <Route path="/login" element={<LoginForm db={db} />}>
-          <Route path="student-page" element={<Studentpage />} />
-        </Route>
+        <Route path="/login" element={<LoginForm db={db} />}/>
+        <Route path="/student-page" element={<Studentpage />} />
+        {/* </Route> */}
         <Route path="/certificate">
           <Route index element={<Certificate />} />
           <Route path="certificate-request" element={<Certificaterequest />} />
