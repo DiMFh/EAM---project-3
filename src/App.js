@@ -14,6 +14,7 @@ import Home from "./Home";
 import Sections from "./Sections";
 import Certificate from "./Certificate_pages/Certificate";
 import Certificaterequest from "./Certificate_pages/Certificaterequest";
+import Certificatestate from "./Certificate_pages/Certificatestate";
 import Studentpage from "./Studentpage";
 import Professorpage from "./Professorpage";
 
@@ -37,6 +38,7 @@ function App() {
         <Route path="/certificate">
           <Route index element={<Certificate />} />
           <Route path="certificate-request" element={<Certificaterequest />} />
+          <Route path="certificate-state" element={<Certificatestate />} />
         </Route>
       </Route>
     )

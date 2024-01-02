@@ -25,7 +25,7 @@ export default function Certificate({ current }) {
           </NavLink>
         </div>
         <div className="blue-text">
-          <NavLink to="/" className="return">
+          <NavLink to="/student-page" className="return">
             <h4>Επιστροφή</h4>
           </NavLink>
         </div>
