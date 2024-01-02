@@ -1,11 +1,18 @@
 import React from "react";
 import logo from "./images/new_logo_fully_transparent.png";
 import "./Header.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useUserRole } from "./UserRoleContext";
 
 export default function Header() {
-  const { userRole } = useUserRole();
+  const { userRole, setUserRole } = useUserRole();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("role"); // clear the role from local storage
+    setUserRole("public");          // update the role in the context 
+    navigate("/");                  // redirect to the home page
+  };
 
   return (
     <header className="header">
@@ -38,6 +45,9 @@ export default function Header() {
           </>
         )}
       </nav>
+      {userRole !== 'public' && (
+        <NavLink to="/" className="logout-button" onClick={handleLogout}>Αποσύνδεση</NavLink>
+      )}
       
     </header>
   );

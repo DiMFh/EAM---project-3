@@ -14,23 +14,32 @@ const LoginForm = ({ db }) => {
 
   async function handleLogin(e) {
     e.preventDefault();
-
+  
     try {
       const ref = doc(db, "users", email);
       const res = await getDoc(ref);
-
+  
       if (!res.exists()) {
         console.log("No such document in the database");
       } else {
         console.log('Email from database:', res.data().email);
         console.log('Password from database:', res.data().password);
-
+  
         if (res.data().email === email && res.data().password === password) {
-          localStorage.setItem('role', res.data().role);
+          const userRole = res.data().role;
+          localStorage.setItem('role', userRole);
           localStorage.setItem('email', res.data().email);
-          setUserRole(res.data().role); // Update the userRole in the context
-          // setUserRole("student");
-          navigate('/student-page');
+          setUserRole(userRole); // Update the userRole in the context
+  
+          // Redirect user based on their role
+          if (userRole === 'student') {
+            navigate('/student-page');
+          } else if (userRole === 'professor') {
+            navigate('/professor-page');
+          } else {
+            navigate('/'); // Default redirect if role is not recognized
+          }
+  
           console.log("Found User:", res.data());
         } else {
           setEmailStyle({ borderColor: 'red' });
