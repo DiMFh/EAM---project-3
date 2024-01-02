@@ -1,5 +1,4 @@
 import React from 'react';
-import Header from "../Header";
 import { Outlet } from "react-router-dom";
 import "./Certificaterequest.css"
 import Dropdown from './Dropdown';
@@ -9,7 +8,6 @@ export default function Certificaterequest()  {
   const currentPage = "certificate-request";
   return (
     <div className="certificate-request">
-      <Header currentPage={currentPage} />
       <div className="label">
     <p className="div">
       <span className="text-wrapper">Αρχική σελίδα&nbsp;&nbsp; &gt;&gt; Πιστοποιητικά&nbsp;&nbsp;&gt;&gt; </span>
