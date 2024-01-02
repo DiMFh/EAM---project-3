@@ -86,7 +86,7 @@ const LoginForm = ({ db }) => {
         </div>
       </form>
       <nav>
-        <NavLink to="student-page" className="student-page">
+        <NavLink to="/student-page" className="student-page">
           <button type="submit">Login</button>
         </NavLink>
       </nav>
