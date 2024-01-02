@@ -35,6 +35,9 @@ export default function Certificate({ current }) {
   );
 }
 
+
+
+
 // ParentComponent.js
 // import React from 'react';
 // import DefaultHeader from './DefaultHeader';
