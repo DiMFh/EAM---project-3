@@ -1,5 +1,6 @@
 import React from "react";
 import logo from "./images/new_logo_fully_transparent.png";
+import profileIcon  from "./icons/user.png";
 import "./Header.css";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useUserRole } from "./UserRoleContext";
@@ -14,11 +15,26 @@ export default function Header() {
     navigate("/");                  // redirect to the home page
   };
 
+  const handleLogoClick  = () => {
+    if (userRole === 'student') {
+      navigate("/student-page");
+    } else if (userRole === 'professor') {
+      navigate("/professor-page");
+    } else {
+      navigate("/");
+    }                
+  };
+
   return (
     <header className="header">
-      <NavLink to="/">
-        <img src={logo} alt="Logo" className="header-logo" />
-      </NavLink>
+      <img src={logo} alt="Logo" className="header-logo" onClick={handleLogoClick } style={{cursor: 'pointer'}} />
+  
+      {userRole === 'student' || userRole === 'professor' ? (
+        <NavLink to="profile" className={({ isActive }) => isActive ? "active-link" : undefined}>
+          <img src={profileIcon} alt="Profile" className="profile-icon" />
+        </NavLink>
+      ) : null}   
+
       <nav>
         {userRole === 'public' && (
           <>
