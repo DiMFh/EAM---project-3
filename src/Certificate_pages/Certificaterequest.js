@@ -97,6 +97,11 @@ export default function Certificaterequest()  {
               
 
        </div>
+
+       <Link to="/certificate" className="certificate">
+          <span className="cancel"> Ακύρωση </span>
+         </Link>
+       {/* <div className="cancel">Ακύρωση</div> */}
        { /* <div class="progress-bar">
             <div class="step">
               <span class="circle active">1</span>
