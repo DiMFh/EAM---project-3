@@ -17,6 +17,20 @@
   font-weight: bold;
 }
 
+.register-row select {
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+  color: #333;
+}
+
+.register-row select:focus {
+  border-color: #80bdff;
+  outline: none;
+  box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+
 .register-row input[type="email"],
 .register-row input[type="password"],
 .register-row input[type="date"],

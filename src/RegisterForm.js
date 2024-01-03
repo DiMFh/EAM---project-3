@@ -109,13 +109,15 @@ export default function RegisterForm({db}){
                 />
             </div>
             <div className='register-row'>
-                <label>Ρόλος*</label>
-                &nbsp;&nbsp;&nbsp;
-                <input
-                    type="text"
-                    value={role}
-                    onChange={(e) => setRole(e.target.value)}
-                />
+              <label>Ρόλος*</label>
+              &nbsp;&nbsp;&nbsp;
+              <select
+                  value={role}
+                  onChange={(e) => setRole(e.target.value)}
+              >
+                  <option value="professor">Professor</option>
+                  <option value="student">Student</option>
+              </select>
             </div>
             <div className='register-row'>
                 <label>Τηλέφωνο*</label>
