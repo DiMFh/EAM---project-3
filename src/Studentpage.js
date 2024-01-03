@@ -5,7 +5,6 @@ const Studentpage = () => {
     return ( 
         <div className="student-page">
             <h2> Welcome to the student page</h2>
-            {/* Rest of the child component content */}
              <main>
                 <Outlet/>
             </main>

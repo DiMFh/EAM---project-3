@@ -1,8 +1,5 @@
 import React from "react";
 import "./Certificate.css";
-// import Certificaterequest from "./Certificaterequest";
-// import {  Routes, Route } from "react-router-dom";
-// import Certificatecontent from "./Certificatecontent"; // Changed the import name
 import { NavLink ,  Outlet} from "react-router-dom";
 import Breadcrumb from './Breadcrumb';
 
@@ -34,38 +31,3 @@ export default function Certificate({ current }) {
     </div>
   );
 }
-
-
-
-
-// ParentComponent.js
-// import React from 'react';
-// import DefaultHeader from './DefaultHeader';
-
-// const ParentComponent = ({ children, showHeader = true }) => {
-//   return (
-//     <div>
-//       {showHeader && <DefaultHeader />}
-//       {children}
-//     </div>
-//   );
-// };
-
-// export default ParentComponent;
-
-
-// // ChildComponent.js
-// import React from 'react';
-// import ParentComponent from './ParentComponent';
-// import CustomHeader from './CustomHeader';
-
-// const ChildComponent = () => {
-//   return (
-//     <ParentComponent showHeader={false}>
-//       <CustomHeader />
-//       {/* Rest of the child component content */}
-//     </ParentComponent>
-//   );
-// };
-
-// export default ChildComponent;

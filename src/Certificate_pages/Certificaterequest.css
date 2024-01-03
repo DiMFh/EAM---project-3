@@ -9,7 +9,7 @@
   
   .box .rectangle {
     background-color: #f3f3f3;
-    border: 2px solid black; /* Add a black border */
+    border: 2px solid black; 
     border-radius: 30px;
     height: 471px;
     left: 0;
@@ -35,20 +35,77 @@
     top: 0;
     width: 200px;
     margin-top: 0.9%;
-    margin-left: 2%;
+    margin-left: 9%;
     /* Add any other styles you need */
   }
     
-  .div-wrapper {
+  .box .rectangle3 {
+    background-color: white;
+    border: 2px solid black; /* Add a black border */
+    border-radius: 30px;
+    height: 130px;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 200px;
+    margin-top: 0.9%;
+    margin-left: 26%;
+    /* Add any other styles you need */
+  }
+
+  .box .rectangle4 {
+    background-color: white;
+    border: 2px solid black; /* Add a black border */
+    border-radius: 30px;
+    height: 130px;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 200px;
+    margin-top: 0.9%;
+    margin-left: 43%;
+    /* Add any other styles you need */
+  }
+
+
+  .box .rectangle5 {
+    background-color: white;
+    border: 2px solid black; /* Add a black border */
+    border-radius: 30px;
+    height: 130px;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 200px;
+    margin-top: 0.9%;
+    margin-left: 60%;
+    /* Add any other styles you need */
+  }
+
+  .box .rectangle6 {
+    background-color: white;
+    border: 2px solid black; /* Add a black border */
+    border-radius: 30px;
+    height: 130px;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 200px;
+    margin-top: 0.9%;
+    margin-left: 77%;
+    /* Add any other styles you need */
+  }
+  .choose-request {
     display: inline-block;
     padding: 10px;
     border: 2px solid black;
     border-radius: 10px;
     background-color: white;
+    margin-top: 2%;
     
   }
   
-  .text-wrapper-9 {
+  .text-wrapper {
     /* Add your specific styles for the text here */
     font-size: 16px;
     font-weight: bold;
@@ -116,43 +173,6 @@
     display: block;
   }
 
-  .label {
-    height: 36px;
-    width: 654px;
-  }
-  
-  .label .div {
-    color: transparent;
-    font-family: "Inter-Regular", Helvetica;
-    font-size: 16px;
-    font-weight: 400;
-    left: 0;
-    letter-spacing: 0;
-    line-height: normal;
-    position: fixed;
-    top: 0;
-    width: 654px;
-    margin-top: 6%;
-
-  }
-  
-  .label .text-wrapper {
-    color: #000000;
-    font-weight: bold; 
-  }
-  
-  .label .span {
-    color: #9127c3;
-    font-weight: bold; 
-  }
-  
-  .label .text-wrapper-2 {
-    color: transparent;
-    font-family: "Inter-Regular", Helvetica;
-    font-size: 16px;
-    font-weight: 400;
-    letter-spacing: 0;
-  }
 
 
   .box .group-wrapper {
@@ -184,7 +204,7 @@
     font-family: "Inter-Regular",Helvetica;
     font-size: 30px;
     font-weight: 400;
-    left: 20px;
+    left: -4%;
     letter-spacing: 0;
     line-height: normal;
     position: absolute;
@@ -194,6 +214,40 @@
     
   }
 
+  .breadcrumb {
+    /* position: fixed;
+    top: 5;
+    left: 0;
+    margin: 10px; /* Optional: Add margin for better spacing */
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: flex;
+    align-items: center;
+    margin-top: 5%;
+  }
+
+  .breadcrumb a {
+    text-decoration: none; /* Remove underline */
+    color: black; /* Use the default color (usually black) */
+    
+  }
+
+  .breadcrumb a:hover {
+    color: blue; /* Use the default color on hover */
+  }
+  
+  .previous-page {
+    font-weight:bold;
+  }
+
+  .home-page{
+    font-weight: bold;
+  }
+
+  .certificatereq {
+    font-weight: bold;
+  }
 
 
   .progress-bar {

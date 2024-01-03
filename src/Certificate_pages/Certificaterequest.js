@@ -2,48 +2,99 @@ import React from 'react';
 import { Outlet } from "react-router-dom";
 import "./Certificaterequest.css"
 import Dropdown from './Dropdown';
-import Progressbar from "./Progressbar"
+import { Link } from "react-router-dom";
 
 export default function Certificaterequest()  {
-  const currentPage = "certificate-request";
   return (
     <div className="certificate-request">
-      <div className="label">
-    <p className="div">
-      <span className="text-wrapper">Αρχική σελίδα&nbsp;&nbsp; &gt;&gt; Πιστοποιητικά&nbsp;&nbsp;&gt;&gt; </span>
-      <span className="span">Αίτηση Παροχής Πιστοποιητικού</span>
-      <span className="text-wrapper-2">&gt;ιστοποιητικά</span>
-    </p>
-    </div>
-    <div className="div-wrapper">
-          <div className="text-wrapper-9">Επιλογή Αίτησης Πιστοποιητικού</div>
-        </div>
+      <div className="breadcrumb">
+        <Link to="/student-page" className="student-page">
+          <span className="home-page">Αρχική &gt; </span>
+         </Link>
+         <Link to="/certificate" className="certificate">
+          <span className="previous-page">&gt; Πιστοποιητικά &gt;&gt;</span>
+         </Link>
+         <Link to="/certificate/certificate-request" className="certificatreq">
+         <span className="certificaterequest" style={{ color: 'purple', fontWeight: 'bold', textDecoration: 'underline' }}>
+            Αίτηση Παροχής Πιστοποιητικού
+         </span>
+         </Link>
+      </div>
+      <div className="choose-request">
+          <div className="text-wrapper">Επιλογή Αίτησης Πιστοποιητικού</div>
+      </div>
                  
-       <div className="box">
+       <div className="box"> {/*ειναι όλο το γκρι με τα στοιχεία μέσα και το css του ειναι για να μετακινείτια πιο δεξιά αριστερά κλπ*/ }
       <div className="rectangle" />
       <div className="group-wrapper">
-              <div className="group-4">
               <div class="rectangle2">
-              {/* <div className="up-arrow">
-                <div className="arrow-container">
-                  <div className="arrow-up"></div>
-                </div>
-                </div> */}
-                <button class="dropdown-btn"><Dropdown/></button>
-                
+              <button class="dropdown-btn"><Dropdown/></button>
                 <div class="dropdown-content">
-                  {/* <!-- Your dropdown content goes here --> */}
-                 
                   <a href="#">Option 1</a>
                   <a href="#">Option 2</a>
                   <a href="#">Option 3</a>
                 </div>
-              </div>
+
                 <div className="overlap-group-4">
                   <div className="text-wrapper-12">Φοιτητικής ιδιότητας</div>
                   {/* <img className="vector-2" alt="Vector" src="vector-5-2.svg" /> */}
                 </div>
               </div>
+
+              <div class="rectangle3">
+              <button class="dropdown-btn"><Dropdown/></button>
+                <div class="dropdown-content">
+                  <a href="#">Option 1</a>
+                  <a href="#">Option 2</a>
+                  <a href="#">Option 3</a>
+                </div>
+
+                <div className="overlap-group-4">
+                  <div className="text-wrapper-12">Φορολογικής χρήσης</div>
+                </div>
+              </div>
+
+              <div class="rectangle4">
+              <button class="dropdown-btn"><Dropdown/></button>
+                <div class="dropdown-content">
+                  <a href="#">Option 1</a>
+                  <a href="#">Option 2</a>
+                  <a href="#">Option 3</a>
+                </div>
+
+                <div className="overlap-group-4">
+                  <div className="text-wrapper-12">Αναλυτικής Βαθμολογίας</div>
+                </div>
+              </div>
+
+
+              <div class="rectangle5">
+              <button class="dropdown-btn"><Dropdown/></button>
+                <div class="dropdown-content">
+                  <a href="#">Option 1</a>
+                  <a href="#">Option 2</a>
+                  <a href="#">Option 3</a>
+                </div>
+
+                <div className="overlap-group-4">
+                  <div className="text-wrapper-12">Στρατολογικής Χρήσης (Συνοπτικό)</div>
+                </div>
+              </div>
+
+              <div class="rectangle6">
+              <button class="dropdown-btn"><Dropdown/></button>
+                <div class="dropdown-content">
+                  <a href="#">Option 1</a>
+                  <a href="#">Option 2</a>
+                  <a href="#">Option 3</a>
+                </div>
+
+                <div className="overlap-group-4">
+                  <div className="text-wrapper-12">Στρατολογικής Χρήσης (Αναλυτικό)</div>
+                </div>
+              </div>
+                
+              
 
        </div>
        { /* <div class="progress-bar">
