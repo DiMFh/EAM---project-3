@@ -62,76 +62,126 @@ export default function Certificaterequest()  {
                   {/* <img className="vector-2" alt="Vector" src="vector-5-2.svg" /> */}
                 </div>
                 <div class="dropdown-center">
-                 <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                 <button class="btn btn-secondary dropdown-toggle color-button" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                    Περισσότερα 
                  </button>
                  <ul class="dropdown-menu">
                   
                  <div class="info-container">
                   <h6>Πληροφορίες :</h6>
-                  <div class="the_text blue-box">
+                  <div class="the_text ">
                     <p>
                       Το πιστοποιητικό αυτό επιβεβαιώνει την φοιτητική ιδιότητα ενός φοιτητή και αποδεικνύει ότι ο φοιτητής είναι εγγεγραμμένος στο τμήμα.
                     </p>
                   </div>
                 </div>
+                  <div class="blue-box">
                    <li><a class="dropdown-item" href="#">Επιλογή</a></li>
+                   </div>
                  </ul>
               </div>
 
               </div>
 
               <div class="rectangle3">
-              <button class="dropdown-btn"><Dropdown/></button>
-                <div class="dropdown-content">
-                  <a href="#">Option 1</a>
-                  <a href="#">Option 2</a>
-                  <a href="#">Option 3</a>
-                </div>
-
                 <div className="overlap-group-4">
                   <div className="text-wrapper-12">Φορολογικής χρήσης</div>
                 </div>
+                <div class="dropdown-center">
+                 <button class="btn btn-secondary dropdown-toggle color-button" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                   Περισσότερα 
+                 </button>
+                 <ul class="dropdown-menu">
+                  
+                 <div class="info-container">
+                  <h6>Πληροφορίες :</h6>
+                  <div class="the_text ">
+                    <p>
+                      Το πιστοποιητικό αυτό επιβεβαιώνει την φοιτητική ιδιότητα ενός φοιτητή και αποδεικνύει ότι ο φοιτητής είναι εγγεγραμμένος στο τμήμα.
+                    </p>
+                  </div>
+                </div>
+                  <div class="blue-box">
+                   <li><a class="dropdown-item" href="#">Επιλογή</a></li>
+                   </div>
+                 </ul>
+              </div>
               </div>
 
               <div class="rectangle4">
-              <button class="dropdown-btn"><Dropdown/></button>
-                <div class="dropdown-content">
-                  <a href="#">Option 1</a>
-                  <a href="#">Option 2</a>
-                  <a href="#">Option 3</a>
-                </div>
-
                 <div className="overlap-group-4">
                   <div className="text-wrapper-12">Αναλυτικής Βαθμολογίας</div>
                 </div>
+                <div class="dropdown-center">
+                 <button class="btn btn-secondary dropdown-toggle color-button" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                   Περισσότερα 
+                 </button>
+                 <ul class="dropdown-menu">
+                  
+                 <div class="info-container">
+                  <h6>Πληροφορίες :</h6>
+                  <div class="the_text ">
+                    <p>
+                      Το πιστοποιητικό αυτό επιβεβαιώνει την φοιτητική ιδιότητα ενός φοιτητή και αποδεικνύει ότι ο φοιτητής είναι εγγεγραμμένος στο τμήμα.
+                    </p>
+                  </div>
+                </div>
+                  <div class="blue-box">
+                   <li><a class="dropdown-item" href="#">Επιλογή</a></li>
+                   </div>
+                 </ul>
+              </div>
               </div>
 
 
               <div class="rectangle5">
-              <button class="dropdown-btn"><Dropdown/></button>
-                <div class="dropdown-content">
-                  <a href="#">Option 1</a>
-                  <a href="#">Option 2</a>
-                  <a href="#">Option 3</a>
-                </div>
-
                 <div className="overlap-group-4">
-                  <div className="text-wrapper-12">Στρατολογικής Χρήσης (Συνοπτικό)</div>
+                  <div className="text-wrapper-12">Στρατολογικής Χρήσης(Συν.)</div>
                 </div>
+                <div class="dropdown-center">
+                 <button class="btn btn-secondary dropdown-toggle color-button" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                   Περισσότερα 
+                 </button>
+                 <ul class="dropdown-menu">
+                  
+                 <div class="info-container">
+                  <h6>Πληροφορίες :</h6>
+                  <div class="the_text ">
+                    <p>
+                      Το πιστοποιητικό αυτό επιβεβαιώνει την φοιτητική ιδιότητα ενός φοιτητή και αποδεικνύει ότι ο φοιτητής είναι εγγεγραμμένος στο τμήμα.
+                    </p>
+                  </div>
+                </div>
+                  <div class="blue-box">
+                   <li><a class="dropdown-item" href="#">Επιλογή</a></li>
+                   </div>
+                 </ul>
+              </div>
               </div>
 
               <div class="rectangle6">
-              <button class="dropdown-btn"><Dropdown/></button>
-                <div class="dropdown-content">
-                  <a href="#">Option 1</a>
-                  <a href="#">Option 2</a>
-                  <a href="#">Option 3</a>
-                </div>
-
                 <div className="overlap-group-4">
-                  <div className="text-wrapper-12">Στρατολογικής Χρήσης (Αναλυτικό)</div>
+                  <div className="text-wrapper-12">Στρατολογικής Χρήσης(Αναλ.)</div>
                 </div>
+                <div class="dropdown-center">
+                 <button class="btn btn-secondary dropdown-toggle color-button" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                   Περισσότερα 
+                 </button>
+                 <ul class="dropdown-menu">
+                  
+                 <div class="info-container">
+                  <h6>Πληροφορίες :</h6>
+                  <div class="the_text ">
+                    <p>
+                      Το πιστοποιητικό αυτό επιβεβαιώνει την φοιτητική ιδιότητα ενός φοιτητή και αποδεικνύει ότι ο φοιτητής είναι εγγεγραμμένος στο τμήμα.
+                    </p>
+                  </div>
+                </div>
+                  <div class="blue-box">
+                   <li><a class="dropdown-item" href="#">Επιλογή</a></li>
+                   </div>
+                 </ul>
+              </div>
               </div>
                 
               
@@ -139,7 +189,9 @@ export default function Certificaterequest()  {
        </div>
 
        <Link to="/certificate" className="certificate">
-          <span className="cancel"> Ακύρωση </span>
+          <div class="small-box">
+            <span className="cancel"> Ακύρωση </span>
+          </div>
          </Link>
        {/* <div className="cancel">Ακύρωση</div> */}
        { /* <div class="progress-bar">
