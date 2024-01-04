@@ -42,7 +42,7 @@ const ProfilePage = ({ db }) => {
                         <p className="profile-detail"><label>Ημερομηνία Γέννησης:</label> {userData.date}</p>
                         <p className="profile-detail"><label>Ρόλος:</label> {userData.role}</p>
                     
-                        {userData.role === 'student' && (
+                        {/* {userData.role === 'student' && (
                             <div>
                                 <h2>Μαθήματα και Βαθμοί:</h2>
                                 <ul className="courses-list">
@@ -51,7 +51,7 @@ const ProfilePage = ({ db }) => {
                                     ))}
                                 </ul>
                             </div>
-                        )}
+                        )} */}
                     </div>
                  )}
             </div>
