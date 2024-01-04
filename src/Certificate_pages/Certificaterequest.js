@@ -1,10 +1,33 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Outlet } from "react-router-dom";
 import "./Certificaterequest.css"
 import Dropdown from './Dropdown';
 import { Link } from "react-router-dom";
+// import Dropdown2 from './Dropdown2';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 export default function Certificaterequest()  {
+
+  useEffect(() => {
+    const dropdownButton = document.getElementById('dropdownMenuButton');
+
+    if (dropdownButton) {
+      const handleDropdownClick = () => {
+        const dropdownMenu = dropdownButton.nextElementSibling;
+        dropdownMenu.classList.toggle('show');
+      };
+
+      dropdownButton.addEventListener('click', handleDropdownClick);
+
+      // Cleanup event listener on component unmount
+      return () => {
+        dropdownButton.removeEventListener('click', handleDropdownClick);
+      };
+    }
+  }, []); 
+
+
+
   return (
     <div className="certificate-request">
       <div className="breadcrumb">
@@ -28,17 +51,34 @@ export default function Certificaterequest()  {
       <div className="rectangle" />
       <div className="group-wrapper">
               <div class="rectangle2">
-              <button class="dropdown-btn"><Dropdown/></button>
+              {/* <button class="dropdown-btn"><Dropdown/></button>
                 <div class="dropdown-content">
                   <a href="#">Option 1</a>
                   <a href="#">Option 2</a>
                   <a href="#">Option 3</a>
-                </div>
-
+                </div> */}
                 <div className="overlap-group-4">
                   <div className="text-wrapper-12">Φοιτητικής ιδιότητας</div>
                   {/* <img className="vector-2" alt="Vector" src="vector-5-2.svg" /> */}
                 </div>
+                <div class="dropdown-center">
+                 <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                   Περισσότερα 
+                 </button>
+                 <ul class="dropdown-menu">
+                  
+                 <div class="info-container">
+                  <h6>Πληροφορίες :</h6>
+                  <div class="the_text blue-box">
+                    <p>
+                      Το πιστοποιητικό αυτό επιβεβαιώνει την φοιτητική ιδιότητα ενός φοιτητή και αποδεικνύει ότι ο φοιτητής είναι εγγεγραμμένος στο τμήμα.
+                    </p>
+                  </div>
+                </div>
+                   <li><a class="dropdown-item" href="#">Επιλογή</a></li>
+                 </ul>
+              </div>
+
               </div>
 
               <div class="rectangle3">

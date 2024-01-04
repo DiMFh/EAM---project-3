@@ -1,3 +1,5 @@
+@import "~bootstrap/dist/css/bootstrap.min.css";
+
 .box {
     height: 471px;
     width: 1414px;
@@ -29,7 +31,8 @@
     background-color: white;
     border: 2px solid black; /* Add a black border */
     border-radius: 30px;
-    height: 130px;
+
+    height: 150px;
     left: 0;
     position: fixed;
     top: 0;
@@ -333,3 +336,29 @@
     color: red;
   }
   
+
+  .dropdown-center {
+    position: relative; /* Make sure the parent has a position value other than static */
+    margin-top: -44px; /* Adjust the value as needed to move it up */
+    
+  }
+
+  .the_text {
+    background-color: white;
+    border: 1px solid black;
+    padding: 1px;
+    border-radius: 20px;
+    color: black;
+  }
+
+  .info-container {
+    border: 1px solid black;
+    background-color: #dddddd;
+    border-radius: 20px;
+    padding: 5px;
+  }
+  
+  .dropdown-menu {
+    border: 2px solid black;
+    padding: 5px;
+  }
