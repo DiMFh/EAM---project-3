@@ -30,10 +30,14 @@ export default function Header() {
       <img src={logo} alt="Logo" className="header-logo" onClick={handleLogoClick } style={{cursor: 'pointer'}} />
   
       {userRole === 'student' || userRole === 'professor' ? (
-        <NavLink to="profile" className={({ isActive }) => isActive ? "active-link" : undefined}>
+        <NavLink 
+          to={userRole === 'student' ? "/student-page/profile" : "/professor-page/profile"} 
+          className={({ isActive }) => isActive ? "active-link" : undefined}
+        >
           <img src={profileIcon} alt="Profile" className="profile-icon" />
         </NavLink>
-      ) : null}   
+      ) : null}
+
 
       <nav>
         {userRole === 'public' && (
@@ -46,17 +50,17 @@ export default function Header() {
         )}
         {userRole === 'student' && (
           <>
-            <NavLink to="/report" className={({ isActive }) => isActive ? "active-link" : undefined}>Δηλώσεις</NavLink>
-            <NavLink to="/grades" className={({ isActive }) => isActive ? "active-link" : undefined}>Βαθμολογία</NavLink>
-            <NavLink to="/certificate" className={({ isActive }) => isActive ? "active-link" : undefined}>Πιστοποιητικά</NavLink>
-            <NavLink to="/help" className={({ isActive }) => isActive ? "active-link" : undefined}>Βοήθεια</NavLink>
+            <NavLink to="/student-page/report" className={({ isActive }) => isActive ? "active-link" : undefined}>Δηλώσεις</NavLink>
+            <NavLink to="/student-page/grades" className={({ isActive }) => isActive ? "active-link" : undefined}>Βαθμολογία</NavLink>
+            <NavLink to="/student-page/certificate" className={({ isActive }) => isActive ? "active-link" : undefined}>Πιστοποιητικά</NavLink>
+            <NavLink to="/student-page/help" className={({ isActive }) => isActive ? "active-link" : undefined}>Βοήθεια</NavLink>
           </>
         )}
         {userRole === 'professor' && (
           <>
             {/* Example links */}
-            <NavLink to="/course-management" className={({ isActive }) => isActive ? "active-link" : undefined}>Course Management</NavLink>
-            <NavLink to="/student-grades" className={({ isActive }) => isActive ? "active-link" : undefined}>Student Grades</NavLink>
+            <NavLink to="/professor-page/course-management" className={({ isActive }) => isActive ? "active-link" : undefined}>Course Management</NavLink>
+            <NavLink to="/professor-page/student-grades" className={({ isActive }) => isActive ? "active-link" : undefined}>Student Grades</NavLink>
             {/* ... other links ... */}
           </>
         )}

@@ -12,14 +12,17 @@ import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
 import Home from "./Home";
 import Sections from "./Sections";
-import Certificate from "./Certificate_pages/Certificate";
-import Certificaterequest from "./Certificate_pages/Certificaterequest";
-import Certificatestate from "./Certificate_pages/Certificatestate";
-import Studentpage from "./Studentpage";
-import Professorpage from "./Professorpage";
-import ProfilePage from "./Profile";
-import GradesPage from "./Certificate_pages/Grades";
-
+//student pages
+import Studentpage from "./Student_pages/Studentpage";
+import Certificate from "./Student_pages/Certificate";
+import Certificaterequest from "./Student_pages/Certificaterequest";
+import Certificatestate from "./Student_pages/Certificatestate";
+import ProfilePage from "./Student_pages/Profile";
+import GradesPage from "./Student_pages/Grades";
+//professor pages
+import Professorpage from "./Proffesor_pages/Professorpage";
+import ProfilePage1 from "./Proffesor_pages/Profile";
+//firebase
 import "./data/firebase";
 import { getFirestore } from "firebase/firestore";
 import { UserRoleProvider } from "./UserRoleContext";
@@ -35,15 +38,31 @@ function App() {
         <Route path="/sections" element={<Sections />} />
         <Route path="/register" element={<RegisterForm db={db} />} />
         <Route path="/login" element={<LoginForm db={db} />}/>
-        <Route path="/student-page" element={<Studentpage />} />
-        <Route path="/professor-page" element={<Professorpage />} />
-        <Route path="/profile" element={<ProfilePage db={db} />} />
-        <Route path="grades" element={<GradesPage db={db} />} />
-        <Route path="/certificate">
+        {/* <Route path="/student-page" element={<Studentpage />} /> */}
+        
+        {/* <Route path="/profile" element={<ProfilePage db={db} />} /> */}
+        {/* <Route path="grades" element={<GradesPage db={db} />} /> */}
+        {/* <Route path="/certificate">
           <Route index element={<Certificate />} />
           <Route path="certificate-request" element={<Certificaterequest />} />
           <Route path="certificate-state" element={<Certificatestate />} />
-          
+        </Route> */}
+
+        <Route path="/student-page">
+          <Route index element={<Studentpage />} />
+          <Route path="certificate">
+            <Route index element={<Certificate />} />
+            <Route path="certificate-request" element={<Certificaterequest />} />
+            <Route path="certificate-state" element={<Certificatestate />} />
+          </Route>
+          <Route path="profile" element={<ProfilePage db={db} />} />
+          <Route path="grades" element={<GradesPage db={db} />} />
+        </Route>
+
+        {/* <Route path="/professor-page" element={<Professorpage />} /> */}
+        <Route path="/professor-page">
+          <Route index element={<Professorpage />} />
+          <Route path="profile" element={<ProfilePage1 db={db} />} />
         </Route>
       </Route>
     )
