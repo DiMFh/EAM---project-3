@@ -20,8 +20,9 @@ import Certificatestate from "./Student_pages/Certificatestate";
 import ProfilePage from "./Student_pages/Profile";
 import GradesPage from "./Student_pages/Grades";
 //professor pages
-import Professorpage from "./Professorpage";
-
+import Professorpage from "./Proffesor_pages/Professorpage";
+import ProfilePage1 from "./Proffesor_pages/Profile";
+//firebase
 import "./data/firebase";
 import { getFirestore } from "firebase/firestore";
 import { UserRoleProvider } from "./UserRoleContext";
@@ -38,7 +39,7 @@ function App() {
         <Route path="/register" element={<RegisterForm db={db} />} />
         <Route path="/login" element={<LoginForm db={db} />}/>
         {/* <Route path="/student-page" element={<Studentpage />} /> */}
-        <Route path="/professor-page" element={<Professorpage />} />
+        
         {/* <Route path="/profile" element={<ProfilePage db={db} />} /> */}
         {/* <Route path="grades" element={<GradesPage db={db} />} /> */}
         {/* <Route path="/certificate">
@@ -54,8 +55,14 @@ function App() {
             <Route path="certificate-request" element={<Certificaterequest />} />
             <Route path="certificate-state" element={<Certificatestate />} />
           </Route>
-          <Route path="/profile" element={<ProfilePage db={db} />} />
+          <Route path="profile" element={<ProfilePage db={db} />} />
           <Route path="grades" element={<GradesPage db={db} />} />
+        </Route>
+
+        {/* <Route path="/professor-page" element={<Professorpage />} /> */}
+        <Route path="/professor-page">
+          <Route index element={<Professorpage />} />
+          <Route path="profile" element={<ProfilePage1 db={db} />} />
         </Route>
       </Route>
     )

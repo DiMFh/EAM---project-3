@@ -3,8 +3,7 @@ import "./Certificate.css";
 import { NavLink ,  Outlet} from "react-router-dom";
 import Breadcrumb from './Breadcrumb';
 
-export default function Certificate({ current }) {
-  const currentPage = "certificate";
+export default function Certificate() {
   return (
     <div className="certificate">
       <Breadcrumb />
