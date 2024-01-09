@@ -14,6 +14,8 @@ import Home from "./Home";
 import Sections from "./Sections";
 //student pages
 import Studentpage from "./Student_pages/Studentpage";
+import Declarations from "./Student_pages/Declarations/Declarations";
+import NewDeclaration from "./Student_pages/Declarations/NewDeclaration";
 import Certificate from "./Student_pages/Certificate";
 import Certificaterequest from "./Student_pages/Certificaterequest";
 import Certificatestate from "./Student_pages/Certificatestate";
@@ -37,9 +39,9 @@ function App() {
         <Route index element={<Home />} />
         <Route path="/sections" element={<Sections />} />
         <Route path="/register" element={<RegisterForm db={db} />} />
-        <Route path="/login" element={<LoginForm db={db} />}/>
+        <Route path="/login" element={<LoginForm db={db} />} />
         {/* <Route path="/student-page" element={<Studentpage />} /> */}
-        
+
         {/* <Route path="/profile" element={<ProfilePage db={db} />} /> */}
         {/* <Route path="grades" element={<GradesPage db={db} />} /> */}
         {/* <Route path="/certificate">
@@ -50,9 +52,14 @@ function App() {
 
         <Route path="/student-page">
           <Route index element={<Studentpage />} />
+          <Route path="declarations" element={<Declarations />} />
+          <Route path="new-declaration" element={<NewDeclaration />} />
           <Route path="certificate">
             <Route index element={<Certificate />} />
-            <Route path="certificate-request" element={<Certificaterequest />} />
+            <Route
+              path="certificate-request"
+              element={<Certificaterequest />}
+            />
             <Route path="certificate-state" element={<Certificatestate />} />
           </Route>
           <Route path="profile" element={<ProfilePage db={db} />} />
@@ -67,22 +74,21 @@ function App() {
       </Route>
     )
   );
-    
 
-function Layout() { 
-  /* Το Layout είναι ένα wrapper που δείχνει το κεντρικό layout τις εφαρμογής, και παίρνει ως παιδιά (Outlet) όλα τα routes */
-  return (
-    <>
-      <div className="App">
-      <Header />
-      <main className="main-content">
-        <Outlet />
-      </main>
-      <Footer />
-    </div>
-    </>
-  )
-}
+  function Layout() {
+    /* Το Layout είναι ένα wrapper που δείχνει το κεντρικό layout τις εφαρμογής, και παίρνει ως παιδιά (Outlet) όλα τα routes */
+    return (
+      <>
+        <div className="App">
+          <Header />
+          <main className="main-content">
+            <Outlet />
+          </main>
+          <Footer />
+        </div>
+      </>
+    );
+  }
 
   return (
     <UserRoleProvider>
