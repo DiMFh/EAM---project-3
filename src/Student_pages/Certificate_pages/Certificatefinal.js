@@ -17,7 +17,7 @@ export default function Certificatefinal({ current }) {
       <img src={image2} alt="Certificate Success" style={{ width: '30%'  }} />
       <h5 className="success-message">Η αίτηση ολοκληρώθηκε με επιτυχία!</h5>
       <button className="button">
-            <Link to="/certificate" style={{ textDecoration: 'none', color: 'black' }}>
+            <Link to="/student-page/certificate" style={{ textDecoration: 'none', color: 'black' }}>
               Επιστροφή Στην Αρχική
             </Link>
         </button>

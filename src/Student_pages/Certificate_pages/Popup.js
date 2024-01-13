@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 import Loading from './Spinner';
 import Certificatefinal from "./Certificatefinal";
 
-
 function MyModal({ showModal, handleCloseModal }) {
   const navigate = useNavigate(); // Use useNavigate instead of useHistory
   const [loading, setLoading] = useState(false);
@@ -22,8 +21,8 @@ function MyModal({ showModal, handleCloseModal }) {
       // Close the modal
       handleCloseModal();
 
-      // Navigate to another page
-      navigate('/certificate/certificate-final');
+    console.log('Navigating to certificate-final...');
+    navigate('certificate-final');
     }, 1000); // Use navigate instead of history.push
   };
 

@@ -16,10 +16,10 @@ import Sections from "./Sections";
 import Studentpage from "./Student_pages/Studentpage";
 import Declarations from "./Student_pages/Declarations/Declarations";
 import NewDeclaration from "./Student_pages/Declarations/NewDeclaration";
-import Certificate from "./Student_pages/Certificate";
-import Certificaterequest from "./Student_pages/Certificaterequest";
-import Certificatestate from "./Student_pages/Certificatestate";
-import Certificatefinal from "./Certificate_pages/Certificatefinal";
+import Certificate from "./Student_pages/Certificate_pages/Certificate";
+import Certificaterequest from "./Student_pages/Certificate_pages/Certificaterequest";
+import Certificatestate from "./Student_pages/Certificate_pages/Certificatestate";
+import Certificatefinal from "./Student_pages/Certificate_pages/Certificatefinal";
 import ProfilePage from "./Student_pages/Profile";
 import GradesPage from "./Student_pages/Grades";
 //professor pages
@@ -57,11 +57,12 @@ function App() {
           <Route path="new-declaration" element={<NewDeclaration />} />
           <Route path="certificate">
             <Route index element={<Certificate />} />
-            <Route path="certificate-final" element={<Certificatefinal />} />
+            
             <Route
               path="certificate-request"
               element={<Certificaterequest />}
             />
+            <Route path="/student-page/certificate/certificate-request/certificate-final" element={<Certificatefinal />} />
             <Route path="certificate-state" element={<Certificatestate />} />
           </Route>
           <Route path="profile" element={<ProfilePage db={db} />} />
