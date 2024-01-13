@@ -1,13 +1,33 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Outlet } from "react-router-dom";
 import "./Certificaterequest.css"
-import Dropdown from './Dropdown';
 import { Link } from "react-router-dom";
-// import Dropdown2 from './Dropdown2';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import ProgressBar from 'react-bootstrap/ProgressBar';
+import Button from 'react-bootstrap/Button';
+import MyModal from './Popup'
 
 export default function Certificaterequest()  {
+  const [showModal1, setShowModal1] = useState(false);
+  const [showModal2, setShowModal2] = useState(false);
+  const [showModal3, setShowModal3] = useState(false);
+  const [showModal4, setShowModal4] = useState(false);
+  const [showModal5, setShowModal5] = useState(false);
 
+  const handleCloseModal1 = () => setShowModal1(false);
+  const handleShowModal1 = () => setShowModal1(true);
+
+  const handleCloseModal2 = () => setShowModal2(false);
+  const handleShowModal2 = () => setShowModal2(true);
+
+  const handleCloseModal3 = () => setShowModal3(false);
+  const handleShowModal3 = () => setShowModal3(true);
+
+  const handleCloseModal4 = () => setShowModal4(false);
+  const handleShowModal4 = () => setShowModal4(true);
+
+  const handleCloseModal5 = () => setShowModal5(false);
+  const handleShowModal5 = () => setShowModal5(true);
   useEffect(() => {
     const dropdownButton = document.getElementById('dropdownMenuButton');
 
@@ -27,7 +47,7 @@ export default function Certificaterequest()  {
   }, []); 
 
 
-
+  
   return (
     <div className="certificate-request">
       <div className="breadcrumb">
@@ -43,10 +63,11 @@ export default function Certificaterequest()  {
          </span>
          </Link>
       </div>
-      <div className="choose-request">
+      {/* <div className="choose-request">
           <div className="text-wrapper">Επιλογή Αίτησης Πιστοποιητικού</div>
-      </div>
-                 
+      </div> */}
+    
+                      
        <div className="box"> {/*ειναι όλο το γκρι με τα στοιχεία μέσα και το css του ειναι για να μετακινείτια πιο δεξιά αριστερά κλπ*/ }
       <div className="rectangle" />
       <div className="group-wrapper">
@@ -76,8 +97,14 @@ export default function Certificaterequest()  {
                   </div>
                 </div>
                   <div class="blue-box">
-                   <li><a class="dropdown-item" href="#">Επιλογή</a></li>
+                   <li>
+                   <Button variant="primary" onClick={handleShowModal1}>
+                    Επιλογή
+                    </Button>
+                    {/* <a class="dropdown-item" href="#">Επιλογή</a> */}
+                    </li>
                    </div>
+                   <MyModal showModal={showModal1} handleCloseModal={handleCloseModal1} />
                  </ul>
               </div>
 
@@ -102,8 +129,14 @@ export default function Certificaterequest()  {
                   </div>
                 </div>
                   <div class="blue-box">
-                   <li><a class="dropdown-item" href="#">Επιλογή</a></li>
+                   <li>
+                   <Button variant="primary" onClick={handleShowModal2}>
+                    Επιλογή
+                    </Button>
+                    {/* <a class="dropdown-item" href="#">Επιλογή</a> */}
+                    </li>
                    </div>
+                   <MyModal showModal={showModal2} handleCloseModal={handleCloseModal2} />
                  </ul>
               </div>
               </div>
@@ -127,8 +160,14 @@ export default function Certificaterequest()  {
                   </div>
                 </div>
                   <div class="blue-box">
-                   <li><a class="dropdown-item" href="#">Επιλογή</a></li>
+                   <li>
+                   <Button variant="primary" onClick={handleShowModal3}>
+                    Επιλογή
+                    </Button>
+                    {/* <a class="dropdown-item" href="#">Επιλογή</a> */}
+                    </li>
                    </div>
+                   <MyModal showModal={showModal3} handleCloseModal={handleCloseModal3} />
                  </ul>
               </div>
               </div>
@@ -153,8 +192,14 @@ export default function Certificaterequest()  {
                   </div>
                 </div>
                   <div class="blue-box">
-                   <li><a class="dropdown-item" href="#">Επιλογή</a></li>
+                   <li>
+                   <Button variant="primary" onClick={handleShowModal4}>
+                    Επιλογή
+                    </Button>
+                    {/* <a class="dropdown-item" href="#">Επιλογή</a> */}
+                    </li>
                    </div>
+                   <MyModal showModal={showModal4} handleCloseModal={handleCloseModal4} />
                  </ul>
               </div>
               </div>
@@ -178,8 +223,14 @@ export default function Certificaterequest()  {
                   </div>
                 </div>
                   <div class="blue-box">
-                   <li><a class="dropdown-item" href="#">Επιλογή</a></li>
+                   <li>
+                   <Button variant="primary" onClick={handleShowModal5}>
+                    Επιλογή
+                    </Button>
+                    {/* <a class="dropdown-item" href="#">Επιλογή</a> */}
+                    </li>
                    </div>
+                   <MyModal showModal={showModal5} handleCloseModal={handleCloseModal5} />
                  </ul>
               </div>
               </div>
@@ -193,6 +244,7 @@ export default function Certificaterequest()  {
             <span className="cancel"> Ακύρωση </span>
           </div>
          </Link>
+         
        {/* <div className="cancel">Ακύρωση</div> */}
        { /* <div class="progress-bar">
             <div class="step">
@@ -211,10 +263,12 @@ export default function Certificaterequest()  {
           {/* <Progressbar/> */}
 
       </div> 
-
+      
       
       <Outlet/>
 
     </div>
   );
+    
+
 };

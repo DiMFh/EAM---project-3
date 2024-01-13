@@ -1,63 +1,34 @@
-import React from 'react';
-import './Progressbar.css'; // Import the CSS file
+// import React from 'react';
+// import './Progressbar.css';
 
-function YourComponent() {
-  return (
-    <div className="stepper-container">
-      {/* Steps */}
-      <ul className="stepper" id="stepper-form-example" data-mdb-stepper-linear="true">
-        <form className="needs-validation stepper-form">
-          {/* First step */}
-          <li className="stepper-step stepper-active">
-            <div className="stepper-head">
-              <span className="stepper-head-icon">1</span>
-              <span className="stepper-head-text">step1</span>
-            </div>
-            <div className="stepper-content py-3">
-              {/* Your form inputs for step 1 */}
-            </div>
-          </li>
-          {/* First step */}
+// // const ProgressBar = ({ valueNow, valueMin, valueMax }) => {
+// //   return (
+// //     <div className="progress">
+// //       <div
+// //         className="progress-bar"
+// //         role="progressbar"
+// //         aria-valuenow={valueNow}
+// //         aria-valuemin={valueMin}
+// //         aria-valuemax={valueMax}
+// //         style={{ width: `${valueNow}%` }}
+// //       >
+// //         {valueNow}%
+// //       </div>
+// //     </div>
+// //   );
+// // };
 
-          {/* Second step */}
-          <li className="stepper-step">
-            <div className="stepper-head">
-              <span className="stepper-head-icon">2</span>
-              <span className="stepper-head-text">step2</span>
-            </div>
-            <div className="stepper-content py-3">
-              {/* Your form inputs for step 2 */}
-            </div>
-          </li>
-          {/* Second step */}
+// // export default ProgressBar;
+// function AnimatedExample() {
+//   return <ProgressBar animated now={45} />;
+// }
 
-          {/* Third step */}
-          <li className="stepper-step">
-            <div className="stepper-head">
-              <span className="stepper-head-icon">3</span>
-              <span className="stepper-head-text">step3</span>
-            </div>
-            <div className="stepper-content py-3">
-              {/* Your form inputs for step 3 */}
-            </div>
-          </li>
-          {/* Third step */}
-        </form>
-      </ul>
-      {/* Steps */}
+// export default AnimatedExample;
+import ProgressBar from 'react-bootstrap/ProgressBar';
 
-      {/* Buttons */}
-      <div className="d-flex justify-content-center px-3">
-        <button id="form-example-prev-step" className="btn btn-primary w-100 me-2">
-          Previous step
-        </button>
-        <button id="form-example-next-step" className="btn btn-primary w-100">
-          Next step
-        </button>
-      </div>
-      {/* Buttons */}
-    </div>
-  );
+function CustomProgressBar() {
+  const now = 60;
+  return <ProgressBar now={now} label={`${now}%`} visuallyHidden />;
 }
 
-export default YourComponent;
+export default CustomProgressBar;

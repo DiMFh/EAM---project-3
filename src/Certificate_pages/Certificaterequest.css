@@ -419,3 +419,19 @@
   text-decoration: none; /* Remove underline on hover */
 }
 
+
+
+.progress {
+  height: 20px; /* Set the height of the progress bar */
+  border-radius: 4px; /* Add some border-radius for a rounded look */
+  overflow: hidden; /* Ensure that the progress bar doesn't overflow its container */
+}
+
+.progress-bar {
+  background-color: #4caf50; /* Set the background color of the progress bar */
+  color: #fff; /* Set the text color to white */
+  text-align: center; /* Center the text inside the progress bar */
+  line-height: 20px; /* Match the line height to the height of the progress bar */
+  transition: width 0.3s ease; /* Add a smooth transition for the width changes */
+  margin-top:5%;
+}
