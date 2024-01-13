@@ -2,12 +2,15 @@ import React from "react";
 import "./Certificate.css";
 import { NavLink ,  Outlet} from "react-router-dom";
 import Breadcrumb from './Breadcrumb';
+// import AnimatedExample from './AnimatedExample';
 
 export default function Certificate({ current }) {
   const currentPage = "certificate";
   return (
     <div className="certificate">
       <Breadcrumb />
+      {/* <AnimatedExample /> */}
+      
       <div className="grey-box">
         <div className="white-box">
           <nav>
