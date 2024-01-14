@@ -1,21 +1,36 @@
 /* Declarations.css */
 
+.breadcrumb {
+  --bs-breadcrumb-divider: "/";
+  --bs-breadcrumb-item-padding-x: 0.4rem;
+}
+
 .declarations {
   margin-top: 100px;
 }
+.main {
+  margin-top: 100px;
+}
 
-.declarations-options-container {
+.new-declaration-button {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* A subtle shadow */
-  background-color: #fff; /* White background */
-  max-width: 500px; /* Maximum width */
-  margin: auto; /* Center the container */
+  justify-content: space-between;
+  /* width: 80%; */
+  /* padding: 20px 30px; */
+  border: 1px solid #14111100;
+  background-color: #f7f7f7;
+  color: #333;
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+  outline: none;
+  transition: transform 0.3s ease, color 0.3s ease-in-out;
+}
+
+.new-declaration-button:hover {
+  color: var(--light-blue-on-hover);
+  transform: scale(1.1);
 }
 
 .declarations-options-button {
@@ -34,43 +49,4 @@
   cursor: pointer;
   outline: none;
   transition: background-color 0.3s ease-in-out;
-}
-
-.declarations-options-button:hover {
-  background-color: #e0e0e0; /* Darker background on mouse-over */
-}
-
-.declarations-options-secondary {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 80%;
-  margin-top: 20px;
-  padding: 5px;
-  /* border: 1px solid #ccc; */
-  border-radius: 10px;
-  background-color: #fff; /* White background */
-  max-width: 500px; /* Maximum width */
-  margin: auto; /* Center the container */
-}
-
-.declarations-options-secondary-button {
-  width: 90%;
-  padding: 15px 30px;
-  margin: 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 25px; /* Rounded corners */
-  background-color: #f7f7f7;
-  color: #333;
-  font-size: 0.8rem;
-  font-weight: bold;
-  cursor: pointer;
-  outline: none;
-  transition: background-color 0.3s ease-in-out;
-}
-
-.arrow-icon {
-  width: 2em;
-  margin-left: 1em;
 }

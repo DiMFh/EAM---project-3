@@ -2,91 +2,83 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import "./Declarations.css";
-import arrowDown from "../../icons/down_arrow_icon.svg";
-import arrowUp from "../../icons/up_arrow_icon.svg";
+import { Breadcrumb, Container, Card, Accordion, Table } from "react-bootstrap";
+import { useAccordionButton } from "react-bootstrap";
 
 const Declarations = () => {
-  const [newDeclarationOpen, setnewDeclarationOpen] = useState(false);
-  const [currSemesterOpen, setcurrSemesterOpen] = useState(false);
-  const [historyOpen, sethistoryOpen] = useState(false);
   const navigate = useNavigate();
 
-  const handleNewDeclarationClick = () => {
-    setnewDeclarationOpen(!newDeclarationOpen);
-    navigate("../new-declaration");
-  };
+  function CustomToggle({ children, eventKey }) {
+    const decoratedOnClick = useAccordionButton(eventKey, () => {
+      navigate("../new-declaration");
+    });
 
-  const handleCurrSemesterClick = () => {
-    setcurrSemesterOpen(!currSemesterOpen);
-  };
-
-  const handleHistoryClick = () => {
-    sethistoryOpen(!historyOpen);
-  };
-
+    return (
+      <button
+        type="button"
+        className="new-declaration-button"
+        onClick={decoratedOnClick}
+      >
+        {children}
+      </button>
+    );
+  }
   return (
-    <div className="declarations">
-      <div className="declarations-options-container">
-        <button
-          className="declarations-options-button"
-          onClick={handleNewDeclarationClick}
-        >
-          Νέα Δήλωση
-        </button>
-        {newDeclarationOpen && <p>Πάμε για δήλωση</p>}
-        <button
-          className="declarations-options-button"
-          onClick={handleCurrSemesterClick}
-        >
-          Δηλώσεις τρέχουσας περιόδου
-          <img
-            src={currSemesterOpen ? arrowUp : arrowDown}
-            alt={currSemesterOpen ? "Close" : "Close"}
-            className="arrow-icon"
-          ></img>
-        </button>
-        {currSemesterOpen && (
-          <div className="declarations-options-secondary">
-            <button className="declarations-options-secondary-button">
-              Δήλωση 1
-            </button>
-            <button className="declarations-options-secondary-button">
-              Δήλωση 2
-            </button>
-            <button className="declarations-options-secondary-button">
-              Δήλωση 3
-            </button>
-          </div>
-        )}
-        <button
-          className="declarations-options-button"
-          onClick={handleHistoryClick}
-        >
-          Ιστορικό δηλώσεων
-          <img
-            src={historyOpen ? arrowUp : arrowDown}
-            alt={historyOpen ? "Close" : "Close"}
-            className="arrow-icon"
-          ></img>
-        </button>
-        {historyOpen && (
-          <div className="declarations-options-secondary">
-            <button className="declarations-options-secondary-button">
-              Δήλωση 1
-            </button>
-            <button className="declarations-options-secondary-button">
-              Δήλωση 2
-            </button>
-            <button className="declarations-options-secondary-button">
-              Δήλωση 3
-            </button>
-            <button className="declarations-options-secondary-button">
-              Δήλωση 4
-            </button>
-          </div>
-        )}
+    <>
+      <Breadcrumb>
+        <Breadcrumb.Item href="./">Αρχική</Breadcrumb.Item>
+        <Breadcrumb.Item active>Δηλώσεις</Breadcrumb.Item>
+      </Breadcrumb>
+      <div className="main">
+        <Container>
+          <Accordion defaultActiveKey="0">
+            <Card>
+              <Card.Header>
+                <CustomToggle eventKey="0" className="new-declaration-button">
+                  Νέα Δήλωση
+                </CustomToggle>
+              </Card.Header>
+            </Card>
+            <Accordion.Item eventKey="1">
+              <Accordion.Header>Δηλώσεις τρέχουσας περιόδου</Accordion.Header>
+              <Accordion.Body>
+                <Table className="table table-hover">
+                  <tbody>
+                    <tr>
+                      <td> Δήλωση 1</td>
+                    </tr>
+                    <tr>
+                      <td> Δήλωση 2</td>
+                    </tr>
+                    <tr>
+                      <td> Δήλωση 3</td>
+                    </tr>
+                  </tbody>
+                </Table>
+              </Accordion.Body>
+            </Accordion.Item>
+            <Accordion.Item eventKey="2">
+              <Accordion.Header>Ιστορικό δηλώσεων</Accordion.Header>
+              <Accordion.Body>
+                <Table className="table table-hover">
+                  <tbody>
+                    <tr>
+                      <td> Δήλωση 1</td>
+                    </tr>
+                    <tr>
+                      <td> Δήλωση 2</td>
+                    </tr>
+                    <tr>
+                      <td> Δήλωση 3</td>
+                    </tr>
+                  </tbody>
+                </Table>
+              </Accordion.Body>
+            </Accordion.Item>
+          </Accordion>
+        </Container>
       </div>
-    </div>
+    </>
   );
 };
 
