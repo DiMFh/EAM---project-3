@@ -14,7 +14,7 @@
 }
 
 .active-link {
-  color: var( --light-blue-on-hover);
+  color: var(--light-blue-on-hover);
   font-weight: bold;
   font-size: 1.1em; /* Increase font size by 10% */
 }
@@ -51,13 +51,13 @@
 
 .header .logout-button {
   text-decoration: none;
-  color: inherit; 
-  margin: 0 1rem; 
-  padding: 0.5rem 0; 
+  color: inherit;
+  margin: 0 1rem;
+  padding: 0.5rem 0;
   font-weight: bold;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-  transition: color 0.3s ease, transform 0.3s ease; 
-} 
+  transition: color 0.3s ease, transform 0.3s ease;
+}
 
 /* If you want to style the button on hover to match NavLink components */
 .header .logout-button:hover {
@@ -67,7 +67,6 @@
   ); /* this color is in the :root inside index.css */
   transform: scale(1.1); /* make them a bit bigger */
 }
-
 
 .profile-icon {
   width: 40px; /* ή μπορείτε να το αφαιρέσετε αν θέλετε να καθορίζεται το μέγεθος από το padding */
