@@ -1,5 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
 import { getAnalytics } from "firebase/analytics";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -11,7 +12,8 @@ const firebaseConfig = {
 
   authDomain: "prolog-b259a.firebaseapp.com",
 
-  databaseURL: "https://prolog-b259a-default-rtdb.europe-west1.firebasedatabase.app",
+  databaseURL:
+    "https://prolog-b259a-default-rtdb.europe-west1.firebasedatabase.app",
 
   projectId: "prolog-b259a",
 
@@ -21,12 +23,12 @@ const firebaseConfig = {
 
   appId: "1:510724773307:web:a88d2aa300c52b085f209e",
 
-  measurementId: "G-Z7S3X70YPH"
-
-  
-
+  measurementId: "G-Z7S3X70YPH",
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 const analytics = getAnalytics(app);
+
+export { db };
