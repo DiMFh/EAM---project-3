@@ -4,7 +4,6 @@ import Button from 'react-bootstrap/Button';
 import image from './image.png';
 import { useNavigate } from 'react-router-dom';
 import Loading from './Spinner';
-import Certificatefinal from "./Certificatefinal";
 
 function MyModal({ showModal, handleCloseModal }) {
   const navigate = useNavigate(); // Use useNavigate instead of useHistory

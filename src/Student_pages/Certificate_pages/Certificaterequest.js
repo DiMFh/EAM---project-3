@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 import "./Certificaterequest.css"
 import { Link } from "react-router-dom";
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-import ProgressBar from 'react-bootstrap/ProgressBar';
+import CustomProgressBar from './Progressbar';
 import Button from 'react-bootstrap/Button';
 import MyModal from './Popup'
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
@@ -57,7 +57,10 @@ export default function Certificaterequest()  {
         <Breadcrumb.Item href="/student-page/certificate/">Πιστοποιητικά</Breadcrumb.Item>
         <Breadcrumb.Item active>Αίτηση Παροχής Πιστοποιητικού</Breadcrumb.Item>
       </Breadcrumb>
-                    
+
+      <CustomProgressBar animated now={80} />
+
+
        <div className="box"> {/*ειναι όλο το γκρι με τα στοιχεία μέσα και το css του ειναι για να μετακινείτια πιο δεξιά αριστερά κλπ*/ }
       <div className="rectangle" />
       <div className="group-wrapper">
@@ -74,7 +77,7 @@ export default function Certificaterequest()  {
                 </div>
                 <div class="dropdown-center">
                  <button class="btn btn-secondary dropdown-toggle color-button" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                   Περισσότερα 
+                   Επιλογή 
                  </button>
                  <ul class="dropdown-menu">
                   
@@ -106,7 +109,7 @@ export default function Certificaterequest()  {
                 </div>
                 <div class="dropdown-center">
                  <button class="btn btn-secondary dropdown-toggle color-button" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                   Περισσότερα 
+                   Επιλογή
                  </button>
                  <ul class="dropdown-menu">
                   
@@ -137,7 +140,7 @@ export default function Certificaterequest()  {
                 </div>
                 <div class="dropdown-center">
                  <button class="btn btn-secondary dropdown-toggle color-button" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                   Περισσότερα 
+                   Επιλογή
                  </button>
                  <ul class="dropdown-menu">
                   
@@ -169,7 +172,7 @@ export default function Certificaterequest()  {
                 </div>
                 <div class="dropdown-center">
                  <button class="btn btn-secondary dropdown-toggle color-button" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                   Περισσότερα 
+                   Επιλογή 
                  </button>
                  <ul class="dropdown-menu">
                   
@@ -200,7 +203,7 @@ export default function Certificaterequest()  {
                 </div>
                 <div class="dropdown-center">
                  <button class="btn btn-secondary dropdown-toggle color-button" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                   Περισσότερα 
+                   Επιλογή
                  </button>
                  <ul class="dropdown-menu">
                   
