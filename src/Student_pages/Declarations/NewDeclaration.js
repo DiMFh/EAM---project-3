@@ -1,6 +1,8 @@
 /* NewDeclaration.js */
 import "./NewDeclaration.css";
 import { useState, useEffect } from "react";
+import { collection, getDocs, doc, getDoc } from "firebase/firestore";
+import { db } from "../../data/firebase";
 import {
   Container,
   Row,
@@ -13,82 +15,45 @@ import {
 } from "react-bootstrap";
 
 const NewDeclaration = () => {
-  // put some example courses
-  const [courses, setCourses] = useState([
-    {
-      id: "1",
-      name: "Γραμμική Άλγεβρα",
-      code: "K03",
-      ects: "6",
-      type: "Υποχρεωτικό (ΥΜ)",
-      semester: "1ο",
-    },
-    {
-      id: "2",
-      name: "Εισαγωγή στον Προγραμματισμό",
-      code: "K04",
-      ects: "7",
-      type: "Υποχρεωτικό (ΥΜ)",
-      semester: "1ο",
-    },
-    {
-      id: "3",
-      name: "Αρχιτεκτονική Υπολογιστών Ι",
-      code: "K14",
-      ects: "7",
-      type: "Υποχρεωτικό (ΥΜ)",
-      semester: "2ο",
-    },
-    {
-      id: "4",
-      name: "Εφαρμοσμένα Μαθηματικά",
-      code: "K20β",
-      ects: "6",
-      type: "Προαιρετικό (ΠΜ)",
-      semester: "2ο",
-    },
-    {
-      id: "5",
-      name: "Αντικειμενοστραφής Προγραμματισμός",
-      code: "K10",
-      ects: "8",
-      type: "Υποχρεωτικό (ΥΜ)",
-      semester: "3ο",
-    },
-    {
-      id: "6",
-      name: "Πιθανότητες και Στατιστική",
-      code: "K13",
-      ects: "6",
-      type: "Υποχρεωτικό (ΥΜ)",
-      semester: "3ο",
-    },
-    {
-      id: "7",
-      name: "Αλγόριθμοι και Πολυπλοκότητα",
-      code: "K17",
-      ects: "8",
-      type: "Υποχρεωτικό (ΥΜ)",
-      semester: "4ο",
-    },
-    {
-      id: "8",
-      name: "Δίκτυα Επικοινωνιών Ι",
-      code: "K16",
-      ects: "6",
-      type: "Υποχρεωτικό (ΥΜ)",
-      semester: "4ο",
-    },
-  ]);
+  // get the courses from the database
+  const [coursesDB, setCoursesDB] = useState([]);
+  useEffect(() => {
+    async function getCourses() {
+      try {
+        const allCoursesDocRef = doc(db, "courses", "all_courses");
+        const allCoursesDoc = await getDoc(allCoursesDocRef);
 
-  // Group courses by semester
-  const coursesBySemester = courses.reduce((acc, course) => {
-    if (!acc[course.semester]) {
-      acc[course.semester] = [];
+        if (allCoursesDoc.exists()) {
+          // The 'all_courses' document contains all the courses
+          const coursesData = allCoursesDoc.data();
+          setCoursesDB(coursesData);
+        } else {
+          console.log("No such document!");
+        }
+      } catch (error) {
+        console.log("Error getting the course: ", error);
+      }
     }
-    acc[course.semester].push(course);
-    return acc;
-  }, {});
+    getCourses();
+  }, []);
+
+  // group courses by semester after they are fetched from the database
+  const [coursesBySemester, setCoursesBySemester] = useState({});
+  useEffect(() => {
+    console.log("CoursesDB: ", coursesDB);
+
+    if (typeof coursesDB === "object" && coursesDB !== null) {
+      const groupedCourses = Object.values(coursesDB).reduce((acc, course) => {
+        const semester = course.semester || "Unknown";
+        if (!acc[semester]) {
+          acc[semester] = [];
+        }
+        acc[semester].push(course);
+        return acc;
+      }, {});
+      setCoursesBySemester(groupedCourses);
+    }
+  }, [coursesDB]);
 
   // handle the course selection
   const [selectedCourses, setselectedCourses] = useState([]);
@@ -171,7 +136,7 @@ const NewDeclaration = () => {
                                 <td className="table-course-name">
                                   {course.name}
                                 </td>
-                                <td>{course.code}</td>
+                                <td>{course.id}</td>
                                 <td>{course.ects} ECTS</td>
                                 <td>{course.type}</td>
                               </tr>
