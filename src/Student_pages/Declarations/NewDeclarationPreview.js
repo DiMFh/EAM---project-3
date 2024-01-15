@@ -1,52 +1,105 @@
 /* NewDeclarationPreview.js */
 import "./NewDeclarationPreview.css";
-import { Breadcrumb } from "react-bootstrap";
+import image from "../../images/warning.png";
+import { useState } from "react";
+import {
+  Container,
+  Col,
+  Row,
+  Button,
+  Modal,
+  ListGroup,
+  Table,
+} from "react-bootstrap";
 
 const NewDeclarationPreview = ({
   selectedCourses,
   goBackToSelection,
   goToFinish,
 }) => {
+  const [showModal, setShowModal] = useState(false);
+  const handleCloseModal = () => setShowModal(false);
+  const handleShowModal = () => setShowModal(true);
+
   return (
-    <div className="new-declaration-preview">
-      <div className="new-declaration-preview-box">
-        <h5 className="new-declaration-preview-message">
-          Η αίτηση ολοκληρώθηκε με επιτυχία!
-        </h5>
-        <h6 className="new-declaration-preview-submessage">
-          Παρακάτω μπορείς να δεις τις επιλεγμένες σου δηλώσεις.
-        </h6>
-        <div className="new-declaration-preview-table">
-          <table>
-            <thead>
+    <div className="newdeclaration-preview">
+      <Container>
+        {/* buttons section */}
+        <Row className="mb-2" md={3}>
+          <Col sm={"auto"}></Col>
+          <Col md={7}>
+            <Button
+              variant="outline-dark"
+              className="float-end"
+              onClick={goBackToSelection}
+            >
+              Επεξεργασία
+            </Button>
+          </Col>
+          <Col md={1}>
+            <Button variant="success" onClick={handleShowModal}>
+              Επόμενο
+            </Button>
+          </Col>
+        </Row>
+        {/* selected courses section */}
+        <ListGroup>
+          <ListGroup.Item as="li" variant="primary">
+            <strong>Επιλεγμένα μαθήματα</strong>
+          </ListGroup.Item>
+        </ListGroup>
+        <Table className="table table-hover">
+          <tbody>
+            {selectedCourses.map((course, index) => (
               <tr>
-                <th>Κωδικός</th>
-                <th>Όνομα</th>
-                <th>Εξάμηνο</th>
-                <th>Τύπος</th>
-                <th>Περιγραφή</th>
+                <td>{index + 1}. </td>
+                <td style={{ textAlign: "left" }}>{course.name}</td>
+                <td>Εξάμηνο {course.semester}</td>
               </tr>
-            </thead>
-            <tbody>
-              {selectedCourses.map((course) => (
-                <tr key={course.id}>
-                  <td>{course.id}</td>
-                  <td>{course.name}</td>
-                  <td>{course.semester}</td>
-                  <td>{course.type}</td>
-                  <td>{course.description}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <button className="button" onClick={goBackToSelection}>
-          Πίσω ρε μαλάκα
-        </button>
-        <button className="button" onClick={goToFinish}>
-          Υποβολή
-        </button>
-      </div>
+            ))}
+          </tbody>
+        </Table>
+      </Container>
+      <Modal
+        show={showModal}
+        onHide={handleCloseModal}
+        backdrop="static"
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Η Δήλωση είναι σχεδόν έτοιμη</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div className="row">
+            <div className="col-md-4">
+              <img
+                src={image}
+                alt="Certificate Example"
+                style={{
+                  width: "60%",
+                  marginLeft: "40px",
+                  marginBlockStart: "10px",
+                }}
+              />
+            </div>
+            <div className="col-md-8">
+              <p>
+                Επιλέγοντας Υποβολή, μία αίτηση δήλωσης θα αποσταλεί στην
+                Γραμματεία. Προηγούμενες δηλώσεις της τρέχουσας περιόδου δεν θα
+                ληφθούν υπ όψη.
+              </p>
+            </div>
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseModal}>
+            Ακύρωση
+          </Button>
+          <Button variant="success" onClick={goToFinish}>
+            Ολοκλήρωση
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };
