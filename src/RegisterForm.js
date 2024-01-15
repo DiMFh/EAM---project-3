@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { doc, setDoc,getDoc } from 'firebase/firestore'
 import { Form, Button,  Container, Row, Col, Alert } from 'react-bootstrap';
 import { courses } from './Utils/Objects/objects';
-//import './RegisterForm.css'
+import './RegisterPage.css'
 
 export default function RegisterForm({db}){
 
@@ -38,7 +38,11 @@ export default function RegisterForm({db}){
         date: date,
         courses: [
           {
-            name: "Επικοινωνία Ανθρώπου Μηχανής",
+            id: "ΥΣ08",
+            grade: 10
+          },
+          {
+            id: "Κ16",
             grade: 10
           }
         ]
@@ -76,82 +80,84 @@ export default function RegisterForm({db}){
 
 
   return (
-    <Container style={{ backgroundColor: '#123456', color: '#a9a9a9' }}>
-        <Alert variant='info'>
-            <p style={{ fontWeight: 'bold' }}>Ότι έχει * είναι υποχρεωτικό να συμπληρωθεί.</p>
-            <p>Παρακαλώ συμπληρώστε τα στοιχεία σας.</p>
-        </Alert>
-        <Form onSubmit={handleRegister} >
-            <Form.Group as={Row} className='mb-3' controlId="formPlaintextEmail">
-                <Form.Label column sm="2">
-                    Ηλεκτρονική Διεύθυνση*
-                </Form.Label>
-                <Col sm="3">
-                    <Form.Control type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-                </Col>
-            </Form.Group>
-            <Form.Group as={Row} className='mb-3' controlId="formPlaintextPassword">
-      <Form.Label column sm="2">
-          Κωδικός*
-      </Form.Label>
-      <Col sm="3">
-          <Form.Control type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-      </Col>
-  </Form.Group>
+    <div className="mainpage">
+        <Container >
+            <Alert>
+                <p style={{ fontWeight: 'bold' }}>Ότι έχει * είναι υποχρεωτικό να συμπληρωθεί.</p>
+                <p>Παρακαλώ συμπληρώστε τα στοιχεία σας.</p>
+            </Alert>
+            <Form onSubmit={handleRegister} >
+                <Form.Group as={Row} className='mb-3' controlId="formPlaintextEmail">
+                    <Form.Label column sm="2">
+                        Ηλεκτρονική Διεύθυνση*
+                    </Form.Label>
+                    <Col sm="3">
+                        <Form.Control type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                    </Col>
+                </Form.Group>
+                <Form.Group as={Row} className='mb-3' controlId="formPlaintextPassword">
+            <Form.Label column sm="2">
+                Κωδικός*
+            </Form.Label>
+            <Col sm="3">
+                <Form.Control type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+            </Col>
+        </Form.Group>
 
-  <Form.Group as={Row} className='mb-3' controlId="formPlaintextConfirmPassword">
-      <Form.Label column sm="2">
-          Επιβεβαίωση Κωδικού*
-      </Form.Label>
-      <Col sm="3">
-          <Form.Control type="password" placeholder="Confirm Password" value={conpassword} onChange={(e) => setConPassword(e.target.value)} />
-      </Col>
-  </Form.Group>
+        <Form.Group as={Row} className='mb-3' controlId="formPlaintextConfirmPassword">
+            <Form.Label column sm="2">
+                Επιβεβαίωση Κωδικού*
+            </Form.Label>
+            <Col sm="3">
+                <Form.Control type="password" placeholder="Confirm Password" value={conpassword} onChange={(e) => setConPassword(e.target.value)} />
+            </Col>
+        </Form.Group>
 
-  <Form.Group as={Row} className='mb-3' controlId="formPlaintextDate">
-      <Form.Label column sm="2">
-          Ημερομηνία Γέννησης*
-      </Form.Label>
-      <Col sm="3">
-          <Form.Control type="date" value={date} onChange={(e) => setDate(e.target.value)} />
-      </Col>
-  </Form.Group>
+        <Form.Group as={Row} className='mb-3' controlId="formPlaintextDate">
+            <Form.Label column sm="2">
+                Ημερομηνία Γέννησης*
+            </Form.Label>
+            <Col sm="3">
+                <Form.Control type="date" value={date} onChange={(e) => setDate(e.target.value)} />
+            </Col>
+        </Form.Group>
 
-  <Form.Group as={Row} className='mb-3' controlId="formPlaintextRole">
-      <Form.Label column sm="2">
-          Ρόλος*
-      </Form.Label>
-      <Col sm="3">
-          <Form.Control as="select" value={role} onChange={(e) => setRole(e.target.value)}>
-              <option value="professor">Professor</option>
-              <option value="student">Student</option>
-          </Form.Control>
-      </Col>
-  </Form.Group>
+        <Form.Group as={Row} className='mb-3' controlId="formPlaintextRole">
+            <Form.Label column sm="2">
+                Ρόλος*
+            </Form.Label>
+            <Col sm="3">
+                <Form.Control as="select" value={role} onChange={(e) => setRole(e.target.value)}>
+                    <option value="professor">Professor</option>
+                    <option value="student">Student</option>
+                </Form.Control>
+            </Col>
+        </Form.Group>
 
-  <Form.Group as={Row} className='mb-3' controlId="formPlaintextPhone">
-      <Form.Label column sm="2">
-          Τηλέφωνο*
-      </Form.Label>
-      <Col sm="3">
-          <Form.Control type="tel" placeholder="Telephone Number" value={telephone} onChange={(e) => setTelephone(e.target.value)} />
-      </Col>
-  </Form.Group>
+        <Form.Group as={Row} className='mb-3' controlId="formPlaintextPhone">
+            <Form.Label column sm="2">
+                Τηλέφωνο*
+            </Form.Label>
+            <Col sm="3">
+                <Form.Control type="tel" placeholder="Telephone Number" value={telephone} onChange={(e) => setTelephone(e.target.value)} />
+            </Col>
+        </Form.Group>
 
-  <Form.Group as={Row} className='mb-3' controlId="formPlaintextAddress">
-      <Form.Label column sm="2">
-          Διεύθυνση
-      </Form.Label>
-      <Col sm="3">
-          <Form.Control type="text" placeholder="Address" value={address} onChange={(e) => setAddress(e.target.value)} />
-      </Col>
-  </Form.Group>
+        <Form.Group as={Row} className='mb-3' controlId="formPlaintextAddress">
+            <Form.Label column sm="2">
+                Διεύθυνση
+            </Form.Label>
+            <Col sm="3">
+                <Form.Control type="text" placeholder="Address" value={address} onChange={(e) => setAddress(e.target.value)} />
+            </Col>
+        </Form.Group>
 
-  <Button variant="primary" type="submit">
-      Register
-  </Button>
-  <a href='/login' className='mt-3 d-block'>Already have an Account?</a>
-  </Form>
-  </Container>
+        <Button variant="primary" type="submit">
+            Εγγραφή
+        </Button>
+        <a href='/login' className='mt-3 d-block'>Έχετε Ήδη Λογαριασμό;</a>
+        </Form>
+        </Container>
+    </div>
   );
 }

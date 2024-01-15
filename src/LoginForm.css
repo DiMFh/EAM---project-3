@@ -73,3 +73,7 @@
   cursor: pointer;
   height: 100%; /* Εξασφαλίζει ότι το εικονίδιο θα έχει το ίδιο ύψος με το input */
 }
+
+.mainpage{
+  margin-top: 20px;
+}
