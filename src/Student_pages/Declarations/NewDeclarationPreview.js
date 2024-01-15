@@ -2,14 +2,13 @@
 import "./NewDeclarationPreview.css";
 import { Breadcrumb } from "react-bootstrap";
 
-const NewDeclarationPreview = ({ selectedCourses, goBackToSelection }) => {
+const NewDeclarationPreview = ({
+  selectedCourses,
+  goBackToSelection,
+  goToFinish,
+}) => {
   return (
     <div className="new-declaration-preview">
-      <Breadcrumb>
-        <Breadcrumb.Item href="./">Αρχική</Breadcrumb.Item>
-        <Breadcrumb.Item href="./declarations">Δηλώσεις</Breadcrumb.Item>
-        <Breadcrumb.Item active>Νέα Δήλωση</Breadcrumb.Item>
-      </Breadcrumb>
       <div className="new-declaration-preview-box">
         <h5 className="new-declaration-preview-message">
           Η αίτηση ολοκληρώθηκε με επιτυχία!
@@ -43,6 +42,9 @@ const NewDeclarationPreview = ({ selectedCourses, goBackToSelection }) => {
         </div>
         <button className="button" onClick={goBackToSelection}>
           Πίσω ρε μαλάκα
+        </button>
+        <button className="button" onClick={goToFinish}>
+          Υποβολή
         </button>
       </div>
     </div>
