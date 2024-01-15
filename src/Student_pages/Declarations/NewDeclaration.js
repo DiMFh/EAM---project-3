@@ -15,12 +15,6 @@ import {
   Button,
   Spinner,
 } from "react-bootstrap";
-import Box from "@mui/material/Box";
-// import the Container component from Material UI as ContainerMUI
-import ContainerMUI from "@mui/material/Container";
-import Stepper from "@mui/material/Stepper";
-import Step from "@mui/material/Step";
-import StepLabel from "@mui/material/StepLabel";
 import DeclarationsStepper from "./DeclarationsStepper";
 import NewDeclarationPreview from "./NewDeclarationPreview";
 import NewDeclarationFinish from "./NewDeclarationFinish";
