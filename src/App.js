@@ -57,12 +57,15 @@ function App() {
           <Route path="new-declaration" element={<NewDeclaration />} />
           <Route path="certificate">
             <Route index element={<Certificate />} />
-            
+
             <Route
               path="certificate-request"
               element={<Certificaterequest />}
             />
-            <Route path="/student-page/certificate/certificate-request/certificate-final" element={<Certificatefinal />} />
+            <Route
+              path="/student-page/certificate/certificate-request/certificate-final"
+              element={<Certificatefinal />}
+            />
             <Route path="certificate-state" element={<Certificatestate />} />
           </Route>
           <Route path="profile" element={<ProfilePage db={db} />} />
