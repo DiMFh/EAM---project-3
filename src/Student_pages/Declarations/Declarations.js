@@ -23,6 +23,7 @@ const Declarations = () => {
       </button>
     );
   }
+
   return (
     <>
       <Breadcrumb>
@@ -31,7 +32,7 @@ const Declarations = () => {
       </Breadcrumb>
       <div className="main">
         <Container>
-          <Accordion defaultActiveKey="0">
+          <Accordion>
             <Card>
               <Card.Header>
                 <CustomToggle eventKey="0" className="new-declaration-button">

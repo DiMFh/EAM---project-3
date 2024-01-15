@@ -34,20 +34,6 @@ export default function Header() {
         onClick={handleLogoClick}
         style={{ cursor: "pointer" }}
       />
-
-      {userRole === "student" || userRole === "professor" ? (
-        <NavLink
-          to={
-            userRole === "student"
-              ? "/student-page/profile"
-              : "/professor-page/profile"
-          }
-          className={({ isActive }) => (isActive ? "active-link" : undefined)}
-        >
-          <img src={profileIcon} alt="Profile" className="profile-icon" />
-        </NavLink>
-      ) : null}
-
       <nav>
         {userRole === "public" && (
           <>
@@ -142,6 +128,18 @@ export default function Header() {
           </>
         )}
       </nav>
+      {userRole === "student" || userRole === "professor" ? (
+        <NavLink
+          to={
+            userRole === "student"
+              ? "/student-page/profile"
+              : "/professor-page/profile"
+          }
+          className={({ isActive }) => (isActive ? "active-link" : undefined)}
+        >
+          <img src={profileIcon} alt="Profile" className="profile-icon" />
+        </NavLink>
+      ) : null}
       {userRole !== "public" && (
         <NavLink to="/" className="logout-button" onClick={handleLogout}>
           Αποσύνδεση

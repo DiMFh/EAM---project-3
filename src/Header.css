@@ -7,7 +7,6 @@
   color: #000; /* Black text color for the items */
   padding: 0.1rem 0; /* Padding at the top and bottom of the header */
   border-bottom: 2px solid #30499e; /* Black border bottom for the underline */
-  margin-bottom: 20px;
 }
 
 .header-logo {
