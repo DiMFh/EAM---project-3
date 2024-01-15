@@ -1,16 +1,20 @@
 import React from "react";
 import "./Certificate.css";
 import { NavLink ,  Outlet} from "react-router-dom";
-import Breadcrumb from './Breadcrumb';
+// import Breadcrumb from './Breadcrumb';
 // import AnimatedExample from './AnimatedExample';
+import Breadcrumb from 'react-bootstrap/Breadcrumb';
 
 export default function Certificate({ current }) {
   const currentPage = "certificate";
   return (
     <div className="certificate">
-      <Breadcrumb />
+      {/* <Breadcrumb /> */}
       {/* <AnimatedExample /> */}
-      
+      <Breadcrumb>
+        <Breadcrumb.Item href="/student-page">Αρχική</Breadcrumb.Item>
+        <Breadcrumb.Item active>Πιστοποιητικά</Breadcrumb.Item>
+      </Breadcrumb>
       <div className="grey-box">
         <div className="white-box">
           <nav>

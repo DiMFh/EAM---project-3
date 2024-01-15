@@ -6,6 +6,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import Button from 'react-bootstrap/Button';
 import MyModal from './Popup'
+import Breadcrumb from 'react-bootstrap/Breadcrumb';
 
 export default function Certificaterequest()  {
   const [showModal1, setShowModal1] = useState(false);
@@ -50,24 +51,13 @@ export default function Certificaterequest()  {
   
   return (
     <div className="certificate-request">
-      <div className="breadcrumb">
-        <Link to="/student-page" className="student-page">
-          <span className="home-page">Αρχική &gt; </span>
-         </Link>
-         <Link to="/certificate" className="certificate">
-          <span className="previous-page">&gt; Πιστοποιητικά &gt;&gt;</span>
-         </Link>
-         <Link to="/certificate/certificate-request" className="certificatreq">
-         <span className="certificaterequest" style={{ color: 'purple', fontWeight: 'bold', textDecoration: 'underline' }}>
-            Αίτηση Παροχής Πιστοποιητικού
-         </span>
-         </Link>
-      </div>
-      {/* <div className="choose-request">
-          <div className="text-wrapper">Επιλογή Αίτησης Πιστοποιητικού</div>
-      </div> */}
-    
-                      
+
+      <Breadcrumb>
+        <Breadcrumb.Item href="/student-page">Αρχική</Breadcrumb.Item>
+        <Breadcrumb.Item href="/student-page/certificate/">Πιστοποιητικά</Breadcrumb.Item>
+        <Breadcrumb.Item active>Αίτηση Παροχής Πιστοποιητικού</Breadcrumb.Item>
+      </Breadcrumb>
+                    
        <div className="box"> {/*ειναι όλο το γκρι με τα στοιχεία μέσα και το css του ειναι για να μετακινείτια πιο δεξιά αριστερά κλπ*/ }
       <div className="rectangle" />
       <div className="group-wrapper">
