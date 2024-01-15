@@ -1,7 +1,6 @@
 /* NewDeclaration.js */
 import "./NewDeclaration.css";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../data/firebase";
 import {
@@ -16,11 +15,30 @@ import {
   Button,
   Spinner,
 } from "react-bootstrap";
+import Box from "@mui/material/Box";
+// import the Container component from Material UI as ContainerMUI
+import ContainerMUI from "@mui/material/Container";
+import Stepper from "@mui/material/Stepper";
+import Step from "@mui/material/Step";
+import StepLabel from "@mui/material/StepLabel";
+import DeclarationsStepper from "./DeclarationsStepper";
 import NewDeclarationPreview from "./NewDeclarationPreview";
+import NewDeclarationFinish from "./NewDeclarationFinish";
 
 const NewDeclaration = () => {
-  const [selectedCourses, setselectedCourses] = useState([]);
-  const [showPreview, setShowPreview] = useState(false);
+  const [selectedCourses, setselectedCourses] = useState([]); // To update the selected courses
+  const [showPreview, setShowPreview] = useState(false); // To render the preview component
+  const [showFinish, setShowFinish] = useState(false); // To render the last compoment
+  const [activeStep, setActiveStep] = useState(0); // For the stepper
+
+  // ***stepper functionality
+  const nextStep = () => {
+    if (activeStep < 2) setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  };
+  const prevStep = () => {
+    if (activeStep > 0) setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  };
+
   //  ***clear the selected courses from the local storage when the component is mounted for the first time
   useEffect(() => {
     localStorage.removeItem("selectedCourses");
@@ -92,6 +110,7 @@ const NewDeclaration = () => {
   const [isLoading, setLoading] = useState(false);
   const goToPreview = () => {
     setShowPreview(true);
+    nextStep();
   };
   const goBackToSelection = () => {
     const storedCourses = JSON.parse(localStorage.getItem("selectedCourses"));
@@ -99,7 +118,14 @@ const NewDeclaration = () => {
       setselectedCourses(storedCourses);
     }
     setShowPreview(false);
+    prevStep();
   };
+  const goToFinish = () => {
+    setShowFinish(true);
+    nextStep();
+    nextStep();
+  };
+
   useEffect(() => {
     function simulateNetworkRequest() {
       return new Promise((resolve) => setTimeout(resolve, 1000));
@@ -114,20 +140,21 @@ const NewDeclaration = () => {
     }
   }, [isLoading]);
   const handleClick = () => {
-    // Store the selected courses in the local storage
+    // Store the selected courses in the local storage, before going to the preview
     localStorage.setItem("selectedCourses", JSON.stringify(selectedCourses));
     setLoading(true);
   };
 
   return (
     <>
+      <Breadcrumb>
+        <Breadcrumb.Item href="./">Αρχική</Breadcrumb.Item>
+        <Breadcrumb.Item href="./declarations">Δηλώσεις</Breadcrumb.Item>
+        <Breadcrumb.Item active>Νέα Δήλωση</Breadcrumb.Item>
+      </Breadcrumb>
+      <DeclarationsStepper activeStep={activeStep} />
       {!showPreview ? (
         <div className="newdeclarations">
-          <Breadcrumb>
-            <Breadcrumb.Item href="./">Αρχική</Breadcrumb.Item>
-            <Breadcrumb.Item href="./declarations">Δηλώσεις</Breadcrumb.Item>
-            <Breadcrumb.Item active>Νέα Δήλωση</Breadcrumb.Item>
-          </Breadcrumb>
           <Container>
             {/* Search-Επιστροφή-Επόμενο */}
             <Row className="mb-2" md={3}>
@@ -196,7 +223,7 @@ const NewDeclaration = () => {
                                     <td>
                                       <Form.Check
                                         aria-label="select"
-                                        // set the checkbox to checked if the course is already selected
+                                        // set the checkbox to checked if the course is already selected (for when the user goes back to the selection)
                                         checked={selectedCourses.some(
                                           (selectedCourse) =>
                                             selectedCourse.id === course.id
@@ -231,11 +258,14 @@ const NewDeclaration = () => {
             </Accordion>
           </Container>
         </div>
-      ) : (
+      ) : !showFinish ? (
         <NewDeclarationPreview
           selectedCourses={selectedCourses}
           goBackToSelection={goBackToSelection}
+          goToFinish={goToFinish}
         />
+      ) : (
+        <NewDeclarationFinish />
       )}
     </>
   );
