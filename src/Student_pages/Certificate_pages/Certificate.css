@@ -56,3 +56,50 @@
 .return {
     color: purple; /* Set the initial color for the "Επιστροφή" button */
   }
+
+  .certificate {
+    margin-top: 100px;
+  }
+  
+  .new-certificate-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* width: 80%; */
+    /* padding: 20px 30px; */
+    border: 1px solid #14111100;
+    background-color: #f7f7f700;
+    color: #333;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    outline: none;
+    transition: transform 0.3s ease, color 0.3s ease-in-out;
+  }
+  
+  .new-certificate-button:hover {
+    color: var(--light-blue-on-hover);
+    transform: scale(1.1);
+  }
+  
+  .certificate-options-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 80%;
+    padding: 15px 30px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 25px; /* Rounded corners */
+    background-color: #f7f7f7;
+    color: #333;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+
+
+

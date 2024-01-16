@@ -55,18 +55,16 @@ function App() {
           <Route index element={<Studentpage />} />
           <Route path="declarations" element={<Declarations />} />
           <Route path="new-declaration" element={<NewDeclaration />} />
+          <Route path="certificate-request" element={<Certificaterequest />} />
+          <Route path="certificate" element={<Certificate />} />
           <Route path="certificate">
-            <Route index element={<Certificate />} />
 
-            <Route
-              path="certificate-request"
-              element={<Certificaterequest />}
-            />
+            <Route index element={<Certificate />} />
             <Route
               path="/student-page/certificate/certificate-request/certificate-final"
               element={<Certificatefinal />}
             />
-            <Route path="certificate-state" element={<Certificatestate />} />
+          <Route path="certificate-state" element={<Certificatestate />} />
           </Route>
           <Route path="profile" element={<ProfilePage db={db} />} />
           <Route path="grades" element={<GradesPage db={db} />} />
