@@ -1,6 +1,7 @@
 /* NewDeclaration.js */
 import "./NewDeclaration.css";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../data/firebase";
 import {
@@ -14,6 +15,8 @@ import {
   Breadcrumb,
   Button,
   Spinner,
+  Alert,
+  Fade,
 } from "react-bootstrap";
 import DeclarationsStepper from "./DeclarationsStepper";
 import NewDeclarationPreview from "./NewDeclarationPreview";
@@ -24,10 +27,12 @@ const NewDeclaration = () => {
   const [showPreview, setShowPreview] = useState(false); // To render the preview component
   const [showFinish, setShowFinish] = useState(false); // To render the last compoment
   const [activeStep, setActiveStep] = useState(0); // For the stepper
+  const maxSelectedCourses = 7; // The maximum number of courses that can be selected
+  const navigate = useNavigate();
 
   // ***stepper functionality
   const nextStep = () => {
-    if (activeStep < 2) setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    if (activeStep < 3) setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
   const prevStep = () => {
     if (activeStep > 0) setActiveStep((prevActiveStep) => prevActiveStep - 1);
@@ -106,6 +111,9 @@ const NewDeclaration = () => {
     setShowPreview(true);
     nextStep();
   };
+  const handleBack = () => {
+    navigate("../declarations");
+  };
   const goBackToSelection = () => {
     const storedCourses = JSON.parse(localStorage.getItem("selectedCourses"));
     if (storedCourses) {
@@ -117,6 +125,9 @@ const NewDeclaration = () => {
   const goToFinish = () => {
     setShowFinish(true);
     nextStep();
+  };
+  const lastStepCompleted = () => {
+    // called by the last component, to complete the stepper
     nextStep();
   };
 
@@ -165,7 +176,11 @@ const NewDeclaration = () => {
                 </Form>
               </Col>
               <Col md={7}>
-                <Button variant="outline-dark" className="float-end">
+                <Button
+                  variant="outline-dark"
+                  className="float-end"
+                  onClick={handleBack}
+                >
                   Πίσω
                 </Button>
               </Col>
@@ -175,7 +190,11 @@ const NewDeclaration = () => {
                 <Button
                   variant="success"
                   className="float-end"
-                  disabled={isLoading || selectedCourses.length === 0} // if it is loading or there are no selected courses, disable the button
+                  disabled={
+                    isLoading ||
+                    selectedCourses.length === 0 ||
+                    selectedCourses.length > maxSelectedCourses
+                  } // if it is loading or there are no selected courses, disable the button
                   onClick={!isLoading ? handleClick : null}
                 >
                   {/* if it is loading, return a spinner */}
@@ -190,59 +209,89 @@ const NewDeclaration = () => {
 
             {/* Table part */}
             <Accordion defaultActiveKey="0">
+              {/* Σύνολο μαθημάτων */}
+              <Table className="table table-hover">
+                <tbody>
+                  <tr>
+                    <td style={{ textAlign: "left", width: "15%" }}>
+                      <strong>Σύνολο Μαθημάτων:</strong>
+                    </td>
+                    <td style={{ textAlign: "left" }}>
+                      {selectedCourses.length} / {maxSelectedCourses}
+                    </td>
+                  </tr>
+                </tbody>
+              </Table>
+              {/* Προειδοποίηση αν ξεπεράσει το όριο */}
+              <Fade in={selectedCourses.length > 7}>
+                <Alert show={selectedCourses.length > 7} variant="danger">
+                  <Alert.Heading>
+                    Έχετε επιλέξει {selectedCourses.length} μαθήματα, ενώ το
+                    όριο του τρέχοντος εξαμήνου σας είναι {maxSelectedCourses}.
+                  </Alert.Heading>
+                  <p>
+                    Επιλέξτε μέχρι και {maxSelectedCourses} μαθήματα για να
+                    συνεχίσετε.
+                  </p>
+                </Alert>
+              </Fade>
               <Accordion.Item eventKey="0">
                 <Accordion.Header>Προπτυχιακά</Accordion.Header>
                 <Accordion.Body>
-                  <Accordion alwaysOpen>
-                    {Object.entries(coursesBySemester).map(
-                      ([semester, courses], index) => (
-                        <Accordion.Item eventKey={index.toString()}>
-                          <Accordion.Header>
-                            Εξάμηνο {semester}
-                          </Accordion.Header>
-                          <Accordion.Body>
-                            <Table className="table table-hover">
-                              <thead>
-                                <tr className="table-head">
-                                  <th scope="col">Επιλογή</th>
-                                  <th scope="col">Όνομα</th>
-                                  <th scope="col">Κωδικός</th>
-                                  <th scope="col">Βαρύτητα</th>
-                                  <th scope="col">Τύπος</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                {courses.map((course) => (
-                                  <tr key={course.id} className="table-row">
-                                    <td>
-                                      <Form.Check
-                                        aria-label="select"
-                                        // set the checkbox to checked if the course is already selected (for when the user goes back to the selection)
-                                        checked={selectedCourses.some(
-                                          (selectedCourse) =>
-                                            selectedCourse.id === course.id
-                                        )}
-                                        onChange={() =>
-                                          handleCourseSelection(course)
-                                        }
-                                        isValid
-                                      />
-                                    </td>
-                                    <td className="table-course-name">
-                                      {course.name}
-                                    </td>
-                                    <td>{course.id}</td>
-                                    <td>{course.ects} ECTS</td>
-                                    <td>{course.type}</td>
+                  {coursesBySemester.length === 0 ? (
+                    <Spinner animation="border" role="status" />
+                  ) : (
+                    <Accordion alwaysOpen>
+                      {Object.entries(coursesBySemester).map(
+                        ([semester, courses], index) => (
+                          <Accordion.Item eventKey={index.toString()}>
+                            <Accordion.Header>
+                              Εξάμηνο {semester}
+                            </Accordion.Header>
+                            <Accordion.Body>
+                              <Table className="table table-hover">
+                                <thead>
+                                  <tr className="table-head">
+                                    <th scope="col">Επιλογή</th>
+                                    <th scope="col">Όνομα</th>
+                                    <th scope="col">Κωδικός</th>
+                                    <th scope="col">Βαρύτητα</th>
+                                    <th scope="col">Τύπος</th>
                                   </tr>
-                                ))}
-                              </tbody>
-                            </Table>
-                          </Accordion.Body>
-                        </Accordion.Item>
-                      )
-                    )}
-                  </Accordion>
+                                </thead>
+                                <tbody>
+                                  {courses.map((course) => (
+                                    <tr key={course.id} className="table-row">
+                                      <td>
+                                        <Form.Check
+                                          aria-label="select"
+                                          // set the checkbox to checked if the course is already selected (for when the user goes back to the selection)
+                                          checked={selectedCourses.some(
+                                            (selectedCourse) =>
+                                              selectedCourse.id === course.id
+                                          )}
+                                          onChange={() =>
+                                            handleCourseSelection(course)
+                                          }
+                                          isValid
+                                        />
+                                      </td>
+                                      <td className="table-course-name">
+                                        {course.name}
+                                      </td>
+                                      <td>{course.id}</td>
+                                      <td>{course.ects} ECTS</td>
+                                      <td>{course.type}</td>
+                                    </tr>
+                                  ))}
+                                </tbody>
+                              </Table>
+                            </Accordion.Body>
+                          </Accordion.Item>
+                        )
+                      )}
+                    </Accordion>
+                  )}
                 </Accordion.Body>
               </Accordion.Item>
               <Accordion.Item eventKey="1">
@@ -257,9 +306,13 @@ const NewDeclaration = () => {
           selectedCourses={selectedCourses}
           goBackToSelection={goBackToSelection}
           goToFinish={goToFinish}
+          maxCourses={maxSelectedCourses}
         />
       ) : (
-        <NewDeclarationFinish />
+        <NewDeclarationFinish
+          lastStepCompleted={lastStepCompleted}
+          selectedCourses={selectedCourses}
+        />
       )}
     </>
   );

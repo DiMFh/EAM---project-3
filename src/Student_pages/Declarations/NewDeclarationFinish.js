@@ -1,38 +1,109 @@
 /* NewDeclarationFinish.js */
 import "./NewDeclarationFinish.css";
 import { useState, useEffect } from "react";
-import { Container, Row, Col, Button, Spinner } from "react-bootstrap";
+import { doc, getDoc, updateDoc, arrayUnion } from "firebase/firestore";
+import { db } from "../../data/firebase";
+import {
+  Container,
+  Row,
+  Col,
+  Button,
+  ButtonGroup,
+  DropdownButton,
+  Dropdown,
+  Spinner,
+} from "react-bootstrap";
 
-const NewDeclarationFinish = () => {
+const NewDeclarationFinish = ({ lastStepCompleted, selectedCourses }) => {
   const [loading, setLoading] = useState(true);
-  // simulate a delay when the component is mounted for the first time
+  const [printing, setPrinting] = useState(false);
+
+  // update the user's document in Firestore
   useEffect(() => {
+    // simulate a delay when the component is mounted for the first time
     setTimeout(() => {
       setLoading(false);
-    }, 1000);
+      lastStepCompleted();
+    }, 1500);
     setLoading(true);
+
+    // get the user's email
+    const userEmail = localStorage.getItem("email");
+    if (userEmail) {
+      // get the user's document
+      const userDoc = doc(db, "users", userEmail);
+      // update the user's document
+      getDoc(userDoc).then((docSnap) => {
+        if (docSnap.exists()) {
+          const userData = docSnap.data();
+          const newDeclaration = {
+            id: userData.declarations ? userData.declarations.length + 1 : 0,
+            date: new Date().toLocaleDateString(),
+            time: new Date().toLocaleTimeString(),
+            courses: selectedCourses,
+            period: "2023-2024 Χειμερινό",
+          };
+          updateDoc(userDoc, {
+            declarations: arrayUnion(newDeclaration),
+          });
+        } else {
+          console.log("No user data found in Firestore");
+        }
+      });
+    }
   }, []);
+
+  // simulate a delay when the "print" button is clicked
+  const handlePrint = () => {
+    setPrinting(true);
+    setTimeout(() => {
+      setPrinting(false);
+    }, 1500);
+  };
   return (
     <div className="newdeclaration-finish">
       <Container>
-        <Row>
-          <Col>
-            <Button variant="success" className="float-end">
-              Εκτύπωση
-            </Button>
-          </Col>
-        </Row>
         {loading ? (
           <>
             <Spinner animation="border" role="status">
               <span className="visually-hidden">Loading...</span>
             </Spinner>
-            <h3> Αποστολή στην Γραμματεία...</h3>
+            <h3> Αποστολή...</h3>
           </>
         ) : (
-          <h2 className="new-declaration-finish-message">
-            Η αίτηση ολοκληρώθηκε με επιτυχία!
-          </h2>
+          <Container>
+            <h2 className="new-declaration-finish-message">
+              Η Δήλωση ολοκληρώθηκε!
+            </h2>
+            <ButtonGroup className="mb-2">
+              <Button href="/" variant="secondary" className="float-end">
+                Αρχική
+              </Button>
+              <Button
+                href="declarations"
+                variant="secondary"
+                className="float-end"
+              >
+                Δηλώσεις
+              </Button>
+              <Button className="float-end" onClick={handlePrint}>
+                {printing ? (
+                  <Spinner animation="border" role="status" size="sm" />
+                ) : (
+                  "Εκτύπωση"
+                )}
+              </Button>
+              <DropdownButton
+                as={ButtonGroup}
+                title="Λήψη"
+                id="bg-nested-dropdown"
+              >
+                <Dropdown.Item></Dropdown.Item>
+                <Dropdown.Item>.pdf</Dropdown.Item>
+                <Dropdown.Item>.xls</Dropdown.Item>
+              </DropdownButton>
+            </ButtonGroup>
+          </Container>
         )}
       </Container>
     </div>

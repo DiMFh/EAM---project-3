@@ -1,12 +1,55 @@
 /* Declarations.js */
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { doc, getDoc, updateDoc, arrayUnion } from "firebase/firestore";
+import { db } from "../../data/firebase";
 import { useNavigate } from "react-router";
 import "./Declarations.css";
-import { Breadcrumb, Container, Card, Accordion, Table } from "react-bootstrap";
+import {
+  Breadcrumb,
+  Container,
+  Card,
+  Accordion,
+  Table,
+  Button,
+} from "react-bootstrap";
 import { useAccordionButton } from "react-bootstrap";
 
 const Declarations = () => {
   const navigate = useNavigate();
+  const [savedDeclarations, setSavedDeclarations] = useState([]);
+
+  useEffect(() => {
+    const userEmail = localStorage.getItem("email");
+    if (userEmail) {
+      const userDoc = doc(db, "users", userEmail);
+      getDoc(userDoc).then((docSnap) => {
+        if (docSnap.exists()) {
+          const userData = docSnap.data();
+          setSavedDeclarations(userData.declarations || []);
+        } else {
+          console.log("No user data found in Firestore");
+        }
+      });
+    }
+  }, []);
+
+  // group the declarations by period
+  const [declarationsByPeriod, setDeclarationsByPeriod] = useState({});
+  useEffect(() => {
+    const grouped = groupDeclarationsByPeriod(savedDeclarations);
+    setDeclarationsByPeriod(grouped);
+  }, [savedDeclarations]);
+
+  function groupDeclarationsByPeriod(declarations) {
+    return declarations.reduce((acc, declaration) => {
+      const period = declaration.period;
+      if (!acc[period]) {
+        acc[period] = [];
+      }
+      acc[period].push(declaration);
+      return acc;
+    }, {});
+  }
 
   function CustomToggle({ children, eventKey }) {
     const decoratedOnClick = useAccordionButton(eventKey, () => {
@@ -32,7 +75,7 @@ const Declarations = () => {
       </Breadcrumb>
       <div className="main">
         <Container>
-          <Accordion>
+          <Accordion defaultActiveKey="0">
             <Card>
               <Card.Header>
                 <CustomToggle eventKey="0" className="new-declaration-button">
@@ -40,40 +83,44 @@ const Declarations = () => {
                 </CustomToggle>
               </Card.Header>
             </Card>
-            <Accordion.Item eventKey="1">
-              <Accordion.Header>Δηλώσεις τρέχουσας περιόδου</Accordion.Header>
+            <Accordion.Item eventKey={"0"}>
+              <Accordion.Header>Ιστορικό Δηλώσεων</Accordion.Header>
               <Accordion.Body>
-                <Table className="table table-hover">
-                  <tbody>
-                    <tr>
-                      <td> Δήλωση 1</td>
-                    </tr>
-                    <tr>
-                      <td> Δήλωση 2</td>
-                    </tr>
-                    <tr>
-                      <td> Δήλωση 3</td>
-                    </tr>
-                  </tbody>
-                </Table>
-              </Accordion.Body>
-            </Accordion.Item>
-            <Accordion.Item eventKey="2">
-              <Accordion.Header>Ιστορικό δηλώσεων</Accordion.Header>
-              <Accordion.Body>
-                <Table className="table table-hover">
-                  <tbody>
-                    <tr>
-                      <td> Δήλωση 1</td>
-                    </tr>
-                    <tr>
-                      <td> Δήλωση 2</td>
-                    </tr>
-                    <tr>
-                      <td> Δήλωση 3</td>
-                    </tr>
-                  </tbody>
-                </Table>
+                <Accordion>
+                  {Object.entries(declarationsByPeriod).map(
+                    ([period, declarations], index) => (
+                      <Accordion.Item eventKey={index.toString()}>
+                        <Accordion.Header>{period}</Accordion.Header>
+                        <Accordion.Body>
+                          <Table className="table table-hover">
+                            <thead>
+                              <tr>
+                                <th>Δήλωση</th>
+                                <th>Μαθήματα</th>
+                                <th></th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {declarations.map((declaration, idx) => (
+                                <tr key={idx}>
+                                  <td>
+                                    {declaration.date} {declaration.time}
+                                  </td>
+                                  <td>{declaration.courses.length}</td>
+                                  <td>
+                                    <Button variant="outline-secondary">
+                                      Προβολή
+                                    </Button>
+                                  </td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </Table>
+                        </Accordion.Body>
+                      </Accordion.Item>
+                    )
+                  )}
+                </Accordion>
               </Accordion.Body>
             </Accordion.Item>
           </Accordion>
