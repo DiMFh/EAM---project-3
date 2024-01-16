@@ -16,6 +16,7 @@ const NewDeclarationPreview = ({
   selectedCourses,
   goBackToSelection,
   goToFinish,
+  maxCourses,
 }) => {
   const [showModal, setShowModal] = useState(false);
   const handleCloseModal = () => setShowModal(false);
@@ -59,6 +60,40 @@ const NewDeclarationPreview = ({
             ))}
           </tbody>
         </Table>
+        <ListGroup>
+          <ListGroup.Item as="li">
+            <Table className="table table-hover">
+              <tbody>
+                <tr>
+                  <td style={{ textAlign: "left", width: "15%" }}>
+                    <strong>Περίοδος:</strong>
+                  </td>
+                  <td style={{ textAlign: "left" }}>2023/2024 Χειμερινό</td>
+                </tr>
+                <tr>
+                  <td style={{ textAlign: "left", width: "15%" }}>
+                    <strong>Τρέχον εξάμηνο:</strong>
+                  </td>
+                  <td style={{ textAlign: "left" }}>5ο</td>
+                </tr>
+                <tr>
+                  <td style={{ textAlign: "left", width: "15%" }}>
+                    <strong>Σύνολο Μαθημάτων:</strong>
+                  </td>
+                  <td style={{ textAlign: "left" }}>
+                    {selectedCourses.length}
+                  </td>
+                </tr>
+                <tr>
+                  <td style={{ textAlign: "left", width: "15%" }}>
+                    <strong>Μέγιστο όριο</strong>
+                  </td>
+                  <td style={{ textAlign: "left" }}>{maxCourses}</td>
+                </tr>
+              </tbody>
+            </Table>
+          </ListGroup.Item>
+        </ListGroup>
       </Container>
       <Modal
         show={showModal}
