@@ -62,7 +62,7 @@ const NewDeclarationFinish = ({ lastStepCompleted, selectedCourses }) => {
   };
   return (
     <div className="newdeclaration-finish">
-      <Container>
+      <Container fluid>
         {loading ? (
           <>
             <Spinner animation="border" role="status">
@@ -71,7 +71,7 @@ const NewDeclarationFinish = ({ lastStepCompleted, selectedCourses }) => {
             <h3> Αποστολή...</h3>
           </>
         ) : (
-          <Container>
+          <Container fluid>
             <h2 className="new-declaration-finish-message">
               Η Δήλωση ολοκληρώθηκε!
             </h2>

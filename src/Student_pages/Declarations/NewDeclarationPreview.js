@@ -128,7 +128,7 @@ const NewDeclarationPreview = ({
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleCloseModal}>
-            Ακύρωση
+            Πίσω
           </Button>
           <Button variant="success" onClick={goToFinish}>
             Ολοκλήρωση

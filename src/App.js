@@ -24,6 +24,7 @@ import ProfilePage from "./Student_pages/Profile";
 import GradesPage from "./Student_pages/Grades";
 //professor pages
 import Professorpage from "./Proffesor_pages/Professorpage";
+import StudentGrades from "./Proffesor_pages/StudentGrades";
 import ProfilePage1 from "./Proffesor_pages/Profile";
 //firebase
 import "./data/firebase";
@@ -73,6 +74,7 @@ function App() {
         {/* <Route path="/professor-page" element={<Professorpage />} /> */}
         <Route path="/professor-page">
           <Route index element={<Professorpage />} />
+          <Route path="student-grades" element={<StudentGrades />} />
           <Route path="profile" element={<ProfilePage1 db={db} />} />
         </Route>
       </Route>
