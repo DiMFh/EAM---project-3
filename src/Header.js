@@ -114,7 +114,7 @@ export default function Header() {
                 isActive ? "active-link" : undefined
               }
             >
-              Course Management
+              Διαχείριση Μαθημάτων
             </NavLink>
             <NavLink
               to="/professor-page/student-grades"
@@ -122,7 +122,7 @@ export default function Header() {
                 isActive ? "active-link" : undefined
               }
             >
-              Student Grades
+              Βαθμολόγια
             </NavLink>
             {/* ... other links ... */}
           </>

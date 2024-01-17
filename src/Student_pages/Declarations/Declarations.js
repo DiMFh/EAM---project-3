@@ -1,22 +1,33 @@
 /* Declarations.js */
 import { useState, useEffect } from "react";
-import { doc, getDoc, updateDoc, arrayUnion } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../data/firebase";
 import { useNavigate } from "react-router";
 import "./Declarations.css";
 import {
   Breadcrumb,
   Container,
+  Row,
+  Col,
   Card,
   Accordion,
   Table,
   Button,
+  Offcanvas,
 } from "react-bootstrap";
 import { useAccordionButton } from "react-bootstrap";
 
 const Declarations = () => {
   const navigate = useNavigate();
   const [savedDeclarations, setSavedDeclarations] = useState([]);
+  const [showCanvas, setShowCanvas] = useState(false);
+  const [currentDeclaration, setCurrentDeclaration] = useState(""); // for the offcanvas
+
+  const handleShowCanvas = (declaration) => {
+    setCurrentDeclaration(declaration);
+    setShowCanvas(true);
+  };
+  const handleCloseCanvas = () => setShowCanvas(false);
 
   useEffect(() => {
     const userEmail = localStorage.getItem("email");
@@ -108,9 +119,27 @@ const Declarations = () => {
                                   </td>
                                   <td>{declaration.courses.length}</td>
                                   <td>
-                                    <Button variant="outline-secondary">
+                                    <Button variant="outline-secondary" onClick={() => handleShowCanvas(declaration)}>
                                       Προβολή
                                     </Button>
+                                    <Offcanvas show={showCanvas} onHide={handleCloseCanvas} placement="end" backdrop={false}>
+                                      <Offcanvas.Header closeButton>
+                                        <Offcanvas.Title>{currentDeclaration.date} {currentDeclaration.time}</Offcanvas.Title>
+                                        </Offcanvas.Header>
+                                          <Offcanvas.Body>
+                                          <Row>
+                                            <Col>
+                                              <h5>Μαθήματα</h5>
+                                              {currentDeclaration && Object.entries(currentDeclaration.courses).map(([key, course]) => {
+                                                return (
+                                                  <p>{course.name} ({course.semester} Εξ.)</p>
+                                                );
+
+                                              })}
+                                            </Col>
+                                          </Row>
+                                          </Offcanvas.Body>
+                                        </Offcanvas>
                                   </td>
                                 </tr>
                               ))}
