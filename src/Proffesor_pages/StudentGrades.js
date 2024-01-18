@@ -22,22 +22,9 @@ function StudentGrades() {
       id: "ΥΣ09",
       name: "Διαδραστικά Συστήματα",
       semester: "1ο",
-      students: "12",
-    },
-    3: {
-      id: "K08",
-      name: "Εισαγωγή στον Προγραμματισμό",
-      semester: "1ο",
-      students: "14",
-    },
-    4: {
-      id: "K17",
-      name: "Αλγόριθμοι και Πολυπλοκότητα",
-      semester: "4ο",
       students: "14",
     },
   };
-
 
   const [newGrades, setNewGrades] = useState(false); // when the 'new grades' is clicked
   const [selectedCourse, setSelectedCourse] = useState(null); // the course that the user selected to add grades
@@ -46,10 +33,9 @@ function StudentGrades() {
     setNewGrades(true);
   };
 
-
-    const handleBacktoStart = () => {
-        setNewGrades(false);
-    }
+  const handleBacktoStart = () => {
+    setNewGrades(false);
+  };
 
   return (
     <>
@@ -110,7 +96,10 @@ function StudentGrades() {
           </div>
         </>
       ) : (
-        <StudentGradesNew course={selectedCourse} handleBacktoStart={handleBacktoStart}/>
+        <StudentGradesNew
+          course={selectedCourse}
+          handleBacktoStart={handleBacktoStart}
+        />
       )}
     </>
   );
