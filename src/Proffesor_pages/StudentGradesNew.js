@@ -30,7 +30,6 @@ function StudentGradesNew({ course, handleBacktoStart }) {
   const [validated, setValidated] = useState(false);
   const handleSubmit = (event) => {
     event.preventDefault();
-    const form = event.currentTarget;
     let isValid = true;
     Object.entries(grades).forEach(([studentId, grade]) => {
       if (!isValidGrade(grade)) {
@@ -52,7 +51,7 @@ function StudentGradesNew({ course, handleBacktoStart }) {
   const isValidGrade = (grade) => {
     const value = parseFloat(grade);
     // return value >= 0 && value <= 20;
-    return !isNaN(value) && value >= 0 && value <= 20;
+    return !isNaN(value) && value >= 0 && value <= 10;
   };
 
   return (

@@ -61,7 +61,7 @@ function StudentGrades() {
           </Breadcrumb>
           <div className="student-grades-main">
             <Container>
-              <Accordion defaultActiveKey="0">
+              <Accordion defaultActiveKey="0" alwaysOpen>
                 <Accordion.Item eventKey={"0"} disabled="true">
                   <Accordion.Header>
                     Χειμερινό Εξάμηνο 2023-2024
