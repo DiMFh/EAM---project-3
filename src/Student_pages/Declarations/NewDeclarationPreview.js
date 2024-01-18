@@ -39,7 +39,7 @@ const NewDeclarationPreview = ({
           </Col>
           <Col md={1}>
             <Button variant="success" onClick={handleShowModal}>
-              Επόμενο
+              Υποβολή
             </Button>
           </Col>
         </Row>
