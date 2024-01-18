@@ -9,7 +9,7 @@ import {
 } from "react-router-dom";
 import "./App.css";
 import LoginForm from "./LoginForm";
-import RegisterForm from "./RegisterForm";
+import RegisterForm from "./RegisterForm1";
 import Home from "./Home";
 import Sections from "./Sections";
 //student pages
