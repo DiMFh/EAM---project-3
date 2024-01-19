@@ -14,42 +14,44 @@ import {
   Spinner,
 } from "react-bootstrap";
 
-const NewCertificateFinish = ({ lastStepCompleted, selectedCourses }) => {
+const NewCertificateFinish = ({ selectedcertificate }) => {
   const [loading, setLoading] = useState(true);
   const [printing, setPrinting] = useState(false);
-
+  console.log('Rendering NewCertificateFinish');
   // update the user's document in Firestore
   useEffect(() => {
-    // simulate a delay when the component is mounted for the first time
-    setTimeout(() => {
-      setLoading(false);
-      lastStepCompleted();
-    }, 1500);
     setLoading(true);
-
-    // get the user's email
+    
     const userEmail = localStorage.getItem("email");
     if (userEmail) {
-      // get the user's document
       const userDoc = doc(db, "users", userEmail);
-      // update the user's document
       getDoc(userDoc).then((docSnap) => {
         if (docSnap.exists()) {
-          const userData = docSnap.data();
-          const newDeclaration = {
-            id: userData.declarations ? userData.declarations.length + 1 : 0,
-            date: new Date().toLocaleDateString(),
-            time: new Date().toLocaleTimeString(),
-            courses: selectedCourses,
-            period: "2023-2024 Χειμερινό",
+          const certificateNames = {
+            "student_status": "Φοιτητικής Ιδιότητας",
+            "detailed_grades": "Αναλυτικής βαθμολογίας",
+            "military_use_brief": "Στρατολογικής Χρήσης (Συνοπτικό)",
+            "military_use_detailed": "Στρατολογικής Χρήσης Αναλυτικό",
+            "tax_use": "Φορολογικής Χρήσης"
+          };
+          const selectedCertificateId = localStorage.getItem('selectedCertificateId');
+          const certificateObject = {
+            name: certificateNames[selectedCertificateId],
+            dateRequested: new Date().toISOString(),
           };
           updateDoc(userDoc, {
-            declarations: arrayUnion(newDeclaration),
+            certificates: arrayUnion(certificateObject),
+          }).then(() => {
+            setLoading(false);
           });
         } else {
           console.log("No user data found in Firestore");
+          setLoading(false);
         }
       });
+    } else {
+      console.log("No user data found in Firestore");
+      setLoading(false);
     }
   }, []);
 

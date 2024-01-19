@@ -685,15 +685,14 @@ const Certificaterequest = () => {
         </div>
       ) : !showFinish ? (
         <NewCertificatePreview
-          selectedCourses={selectedCourses}
+          selectedCourses={selectedCertificateId}
           goBackToSelection={goBackToSelection}
           goToFinish={goToFinish}
           maxCourses={maxSelectedCourses}
         />
       ) : (
         <NewCertificateFinish
-          lastStepCompleted={lastStepCompleted}
-          selectedCourses={selectedCourses}
+          selectedCourses={selectedCertificateId}
         />
       )}
     </>
