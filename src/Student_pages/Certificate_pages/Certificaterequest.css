@@ -1,5 +1,5 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
-
+/* 
 .box {
   height: 471px;
   width: 1414px;
@@ -7,29 +7,13 @@
   top: 58%;
   left: 50%;
   transform: translate(-50%, -50%);
-}
+} */
 
-.box .rectangle {
-  background-color: #f3f3f3;
-  border: 2px solid black;
-  border-radius: 30px;
-  height: 471px;
-  left: 0;
-  position: fixed;
-  top: 0;
-  width: 1414px;
-  /* Add any other styles you need */
 
-  /* Uncomment and adjust the margin properties if needed */
-  /*
-    margin-top: 10%;
-    margin-left: 5%;
-    */
-}
 
-.box .rectangle2 {
+/* .box .rectangle2 {
   background-color: white;
-  border: 2px solid black; /* Add a black border */
+  border: 2px solid black; /* Add a black border 
   border-radius: 30px;
 
   height: 140px;
@@ -39,12 +23,12 @@
   width: 200px;
   margin-top: 0.9%;
   margin-left: 9%;
-  /* Add any other styles you need */
-}
+  /* Add any other styles you need 
+} */
 
-.box .rectangle3 {
+/* .box .rectangle3 {
   background-color: white;
-  border: 2px solid black; /* Add a black border */
+  border: 2px solid black; /* Add a black border 
   border-radius: 30px;
 
   height: 140px;
@@ -54,12 +38,12 @@
   width: 200px;
   margin-top: 0.9%;
   margin-left: 26%;
-  /* Add any other styles you need */
-}
+  /* Add any other styles you need 
+} */
 
-.box .rectangle4 {
+/* .box .rectangle4 {
   background-color: white;
-  border: 2px solid black; /* Add a black border */
+  border: 2px solid black; /* Add a black border 
   border-radius: 30px;
 
   height: 140px;
@@ -69,12 +53,12 @@
   width: 200px;
   margin-top: 0.9%;
   margin-left: 43%;
-  /* Add any other styles you need */
-}
+  /* Add any other styles you need 
+} */
 
-.box .rectangle5 {
+/* .box .rectangle5 {
   background-color: white;
-  border: 2px solid black; /* Add a black border */
+  border: 2px solid black; /* Add a black border 
   border-radius: 30px;
 
   height: 140px;
@@ -84,12 +68,12 @@
   width: 200px;
   margin-top: 0.9%;
   margin-left: 60%;
-  /* Add any other styles you need */
-}
+  /* Add any other styles you need 
+} */
 
-.box .rectangle6 {
+/* .box .rectangle6 {
   background-color: white;
-  border: 2px solid black; /* Add a black border */
+  border: 2px solid black; /* Add a black border 
   border-radius: 30px;
 
   height: 140px;
@@ -99,62 +83,62 @@
   width: 200px;
   margin-top: 0.9%;
   margin-left: 77%;
-  /* Add any other styles you need */
-}
-.choose-request {
+  /* Add any other styles you need 
+} */
+/* .choose-request {
   display: inline-block;
   padding: 10px;
   border: 2px solid black;
   border-radius: 10px;
   background-color: white;
   margin-top: 2%;
-}
+} */
 
-.text-wrapper {
-  /* Add your specific styles for the text here */
+/* .text-wrapper {
+  /* Add your specific styles for the text here 
   font-size: 16px;
   font-weight: bold;
-  color: black; /*να μην γινεται μωβ*/
-  /* Add any other styles you need for the text */
-}
+  color: black; /*να μην γινεται μωβ
+  /* Add any other styles you need for the text 
+} */
 
-.up-arrow {
+/* .up-arrow {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 20px; /* Adjust the height as needed */
+  height: 20px; /* Adjust the height as needed 
 
-  /* margin-top: %; */
-}
+  /* margin-top: %; 
+} */
 
-.arrow-container {
+/* .arrow-container {
   width: 0;
   height: 0;
   border-left: 20px solid transparent;
   border-right: 20px solid transparent;
-  border-top: 30px solid black; /* Change the color and size as needed */
-}
+  border-top: 30px solid black; /* Change the color and size as needed 
+} */
 
-.cancel {
+/* .cancel {
   position: absolute;
   bottom: 0;
   right: 0;
   margin-right: 1%;
   color: red;
-}
+} */
 
-.dropdown-btn {
+/* .dropdown-btn {
   background-color: white;
   border-radius: 30px;
-  height: 30px; /* Set your desired button height */
+  height: 30px; /* Set your desired button height 
   width: 20%;
   cursor: pointer;
   border: none;
   outline: none;
   margin-top: 50%;
-}
+} */
 
-.dropdown-content {
+/* .dropdown-content {
   display: none;
   position: absolute;
   top: 100%;
@@ -174,10 +158,10 @@
 
 .dropdown-content a:hover {
   background-color: #f1f1f1;
-}
+} */
 
 /* Show dropdown content when button is hovered */
-.dropdown-btn:hover + .dropdown-content {
+/* .dropdown-btn:hover + .dropdown-content {
   display: block;
 }
 
@@ -187,9 +171,9 @@
   position: absolute;
   top: 0;
   width: 250px;
-}
+} */
 
-.box .group-4 {
+/* .box .group-4 {
   height: 126px;
   width: 252px;
 }
@@ -199,9 +183,9 @@
   height: 126px;
   position: relatives;
   width: 250px;
-}
+} */
 
-.box .text-wrapper-12 {
+/* .box .text-wrapper-12 {
   color: black;
   font-family: "Inter-Regular", Helvetica;
   font-size: 30px;
@@ -227,20 +211,20 @@
 }
 
 .breadcrumb a {
-  text-decoration: none; /* Remove underline */
-  color: black; /* Use the default color (usually black) */
+  text-decoration: none; /* Remove underline 
+  color: black; /* Use the default color (usually black) 
 }
 
-.breadcrumb a:hover {
+/* .breadcrumb a:hover {
   color: var(--light-blue-on-hover);
   text-decoration: underline;
 }
 
 .previous-page {
   font-weight: bold;
-}
+} */
 
-.home-page {
+/* .home-page {
   font-weight: bold;
 }
 
@@ -293,9 +277,9 @@
 .step.active + .step::after,
 .step.active::after {
   background: blue;
-}
+}  */
 
-.step:not(:last-child)::before {
+/* .step:not(:last-child)::before {
   content: "";
   position: absolute;
   top: 50%;
@@ -307,21 +291,23 @@
   background: white;
   border-radius: 50%;
   z-index: 1;
-}
+} */
 
+/*
 .step.active + .step::before,
 .step.active::before {
   border-color: blue;
 }
 
+/*
 .small-box {
-  position: fixed; /* Use fixed position for it to be fixed on the viewport */
+  position: fixed; /* Use fixed position for it to be fixed on the viewport 
   bottom: 0;
   right: 0;
-  width: 90px; /* Set the width as per your design */
-  height: 30px; /* Set the height as per your design */
-  background-color: #f0f0f0; /* Set the background color as per your design */
-  border-radius: 10px; /* Set the border radius for rounded corners */
+  width: 90px; /* Set the width as per your design 
+  height: 30px; /* Set the height as per your design 
+  background-color: #f0f0f0; /* Set the background color as per your design 
+  border-radius: 10px; /* Set the border radius for rounded corners 
   display: flex;
   align-items: center;
   justify-content: center;
@@ -330,19 +316,20 @@
   border: 1px solid black;
 }
 
+/*
 .cancel {
   position: absolute;
   margin-right: 10px;
   margin-bottom: 5px;
   color: red;
 }
-
+/*
 .dropdown-center {
-  position: relative; /* Make sure the parent has a position value other than static */
-  margin-top: -44px; /* Adjust the value as needed to move it up */
+  position: relative; /* Make sure the parent has a position value other than static 
+  margin-top: -44px; /* Adjust the value as needed to move it up 
 }
 
-.the_text {
+/* .the_text {
   background-color: white;
   border: 1px solid black;
   padding: 1px;
@@ -355,62 +342,84 @@
   background-color: #dddddd;
   border-radius: 20px;
   padding: 5px;
-}
+} */
 
-.dropdown-menu {
+/* .dropdown-menu {
   border: 2px solid black;
   padding: 5px;
-}
+} */
 
-.color-button {
+/* .color-button {
   background-color: #2795c0;
   color: white;
-}
+} */
 
+/*
 .color-button:hover,
 .color-button:active {
-  background-color: #2795c0; /* Change this to the desired color on hover */
+  background-color: #2795c0; /* Change this to the desired color on hover 
   color: white;
 }
 
-.btn.color-button,
+/* .btn.color-button,
 .btn.color-button:hover,
 .btn.color-button:active {
   background-color: #2795c0; /* Change this to the desired color on hover */
-  color: white; /* Change this to the desired text color on hover */
-}
+  /*color: white; /* Change this to the desired text color on hover 
+} */
 
-.blue-box {
+/*.blue-box {
   border: 2px solid black;
   background-color: #2795c0;
-  padding: 10px; /* Adjust the padding as needed */
-  color: white; /* Text color, change as needed */
-  display: inline-block; /* Ensure the box only takes up as much width as necessary */
-  border-radius: 5px; /* Add rounded corners if desired */
-  width: 180px; /* Adjust the width as needed */
-}
-
+  padding: 10px; /* Adjust the padding as needed 
+  color: white; /* Text color, change as needed 
+  display: inline-block; /* Ensure the box only takes up as much width as necessary 
+  border-radius: 5px; /* Add rounded corners if desired 
+  width: 180px; /* Adjust the width as needed 
+}*/
+/*
 .blue-box a {
-  color: white; /* Set the link text color */
-  text-decoration: none; /* Remove underline from the link */
+  color: white; /* Set the link text color 
+  text-decoration: none; /* Remove underline from the link 
 }
 
 .blue-box a:hover {
   color: #2795c0;
-  text-decoration: none; /* Remove underline on hover */
+  text-decoration: none; /* Remove underline on hover 
 }
 
 .progress {
-  height: 20px; /* Set the height of the progress bar */
-  border-radius: 4px; /* Add some border-radius for a rounded look */
-  overflow: hidden; /* Ensure that the progress bar doesn't overflow its container */
+  height: 20px; /* Set the height of the progress bar 
+  border-radius: 4px; /* Add some border-radius for a rounded look 
+  overflow: hidden; /* Ensure that the progress bar doesn't overflow its container 
 }
 
 .progress-bar {
-  background-color: #4caf50; /* Set the background color of the progress bar */
-  color: #fff; /* Set the text color to white */
-  text-align: center; /* Center the text inside the progress bar */
-  line-height: 20px; /* Match the line height to the height of the progress bar */
-  transition: width 0.3s ease; /* Add a smooth transition for the width changes */
+  background-color: #4caf50; /* Set the background color of the progress bar 
+  color: #fff; /* Set the text color to white 
+  text-align: center; /* Center the text inside the progress bar 
+  line-height: 20px; /* Match the line height to the height of the progress bar 
+  transition: width 0.3s ease; /* Add a smooth transition for the width changes 
   margin-top: 5%;
+}*/
+
+/* NewDeclaration.css */
+.newdeclarations {
+  margin-top: 10px;
+}
+.table-head {
+  border-bottom: 1px solid #6384c0;
+}
+
+.table-row {
+  border-bottom: 1px solid #6384c08c;
+}
+
+.table-course-name {
+  text-align: left;
+}
+
+.text-center{
+  text-align: center;
+  font-weight: bold;
 }
