@@ -11,7 +11,7 @@ import {
   ListGroup,
   Form,
 } from "react-bootstrap";
-function StudentGradesPreview({ course, students }) {
+function StudentGradesPreview({ course, students, handleBack, handleNextStep }) {
   const [showNames, setShowNames] = useState(false);
   const handleShowNames = () => setShowNames(!showNames);
 
@@ -25,20 +25,23 @@ function StudentGradesPreview({ course, students }) {
   };
 
   const [goToFinish, setGoToFinish] = useState(false);
-  const handleGoToFinish = () => setGoToFinish(true);
+  const handleGoToFinish = () => {
+    setGoToFinish(true);
+    handleNextStep();
+  }
 
   return (
     <>
       {goToFinish ? (
-        <StudentGradesFinish />
+        <StudentGradesFinish lastStepCompleted={handleNextStep} grades={students} course={course} />
       ) : (
         <Container>
           {/* buttons section */}
           <Row className="mb-2" md={3}>
             <Col sm={"auto"}></Col>
             <Col md={7}>
-              <Button variant="outline-dark" className="float-end">
-                Πίσω
+              <Button variant="outline-dark" className="float-end" onClick={handleBack}>
+                Επεξεργασία
               </Button>
             </Col>
             <Col md={1}>

@@ -1,6 +1,8 @@
 /* StudentGradesFinish.js */
 import "./StudentGrades.css";
 import { useState, useEffect } from "react";
+import { doc, getDoc, updateDoc, arrayUnion } from "firebase/firestore";
+import { db } from "../data/firebase";
 import {
   Container,
   Button,
@@ -10,7 +12,7 @@ import {
   Spinner,
 } from "react-bootstrap";
 
-function StudentGradesFinish() {
+function StudentGradesFinish({ lastStepCompleted, grades, course }) {
   const [loading, setLoading] = useState(true);
   const [printing, setPrinting] = useState(false);
 
@@ -18,9 +20,35 @@ function StudentGradesFinish() {
     // simulate a dilay when the component is mounted for the first time
     setTimeout(() => {
       setLoading(false);
-      // lastStepCompleted(); // gia ton spinner
+      lastStepCompleted(); // gia ton spinner
     }, 1500);
     setLoading(true);
+
+    // get the user's email
+    const userEmail = localStorage.getItem("email");
+    if (userEmail) {
+      // get the user's document
+      const userDoc = doc(db, "users", userEmail);
+      // update the user's document
+      getDoc(userDoc).then((docSnap) => {
+        if (docSnap.exists()) {
+          const userData = docSnap.data();
+          const newGrades = {
+            id: userData.studentGrades ? userData.studentGrades.length + 1 : 0,
+            date: new Date().toLocaleDateString(),
+            time: new Date().toLocaleTimeString(),
+            course: course,
+            grades: grades,
+            period: "2023-2024 Χειμερινό",
+          };
+          updateDoc(userDoc, {
+            studentGrades: arrayUnion(newGrades),
+          });
+        } else {
+          console.log("No user data found in Firestore");
+        }
+      });
+    }
   }, []);
 
   // simulate a delay when the "print" button is clicked
