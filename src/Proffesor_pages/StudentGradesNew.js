@@ -4,7 +4,7 @@ import StudentGradesPreview from "./StudentGradesPreview";
 import StudentGradesStepper from "./StudentGradesStepper";
 import { students12 } from "../Proffesor_pages/students12";
 import { students14 } from "../Proffesor_pages/students14";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   Container,
   Row,
@@ -15,6 +15,8 @@ import {
   ListGroup,
   Form,
   Stack,
+  OverlayTrigger,
+  Tooltip,
 } from "react-bootstrap";
 
 function StudentGradesNew({ course, handleBacktoStart }) {
@@ -109,6 +111,7 @@ function StudentGradesNew({ course, handleBacktoStart }) {
       <Breadcrumb>
         <Breadcrumb.Item href="./">Αρχική</Breadcrumb.Item>
         <Breadcrumb.Item href="./student-grades">Βαθμολόγια</Breadcrumb.Item>
+        <Breadcrumb.Item href="./student-grades-new">Επιλογή Μαθήματος</Breadcrumb.Item>
         <Breadcrumb.Item active>Νέo Βαθμολόγιο</Breadcrumb.Item>
       </Breadcrumb>
       <StudentGradesStepper activeStep={activeStep} />
@@ -130,14 +133,29 @@ function StudentGradesNew({ course, handleBacktoStart }) {
                 </Button>
               </Col>
               <Col md={1}>
-                <Button
+                { allValid ? (
+                  <Button
                   type="submit"
                   variant="success"
-                  disabled={!allValid}
                   onClick={handleGoPreview}
                 >
                   Επόμενο
                 </Button>
+                ) : (
+                  <OverlayTrigger overlay={<Tooltip id="tooltip-disabled">Ελέγξτε τους βαθμούς πριν προχωρήσετε</Tooltip>}>
+                  <span className="d-inline-block">
+                  <Button
+                  variant="success"
+                  disabled={true}
+                  style={{ pointerEvents: 'none'}}
+                >
+                  Επόμενο
+                </Button>
+                  </span>
+                </OverlayTrigger>
+                )}
+                
+                
               </Col>
               <Col></Col>
             </Row>

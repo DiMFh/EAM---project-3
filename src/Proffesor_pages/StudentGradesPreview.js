@@ -41,7 +41,7 @@ function StudentGradesPreview({ course, students, handleBack, handleNextStep }) 
             <Col sm={"auto"}></Col>
             <Col md={7}>
               <Button variant="outline-dark" className="float-end" onClick={handleBack}>
-                Πίσω
+                Επεξεργασία
               </Button>
             </Col>
             <Col md={1}>
