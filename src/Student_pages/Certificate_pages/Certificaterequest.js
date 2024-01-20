@@ -692,6 +692,7 @@ const Certificaterequest = () => {
         />
       ) : (
         <NewCertificateFinish
+          lastStepCompleted={lastStepCompleted}
           selectedCourses={selectedCertificateId}
         />
       )}

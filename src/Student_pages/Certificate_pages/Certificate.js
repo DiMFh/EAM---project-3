@@ -1,5 +1,4 @@
 import "./Certificate.css";
-import { NavLink ,  Outlet} from "react-router-dom";
 import { Breadcrumb, Container, Card, Accordion, Table } from "react-bootstrap";
 import { useNavigate } from "react-router";
 import { useAccordionButton } from "react-bootstrap";
@@ -67,6 +66,7 @@ useEffect(() => {
                   <tr>
                     <th>Name</th>
                     <th>Date</th>
+                    <th>Time</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -74,6 +74,7 @@ useEffect(() => {
                     <tr key={index}>
                       <td>{certificate.name}</td>
                       <td>{certificate.date}</td>
+                      <td>{certificate.time}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -87,31 +88,5 @@ useEffect(() => {
 
       </div>
     </>
-    // <div className="certificate">
-    //   <Breadcrumb>
-    //     <Breadcrumb.Item href="/student-page">Αρχική</Breadcrumb.Item>
-    //     <Breadcrumb.Item active>Πιστοποιητικά</Breadcrumb.Item>
-    //   </Breadcrumb>
-      /* <div className="grey-box">
-        <div className="white-box">
-          <nav>
-            <NavLink to="certificate-request" className="certificate-request">
-              <h4>Αίτηση Παροχής Πιστοποιητικού</h4>
-            </NavLink>
-          </nav>
-        </div>
-        <div className="white-box">
-          <NavLink to="certificate-state" className="certificate-state">
-            <h4>Κατάσταση Παροχής Πιστοποιητικών</h4>
-          </NavLink>
-        </div>
-        <div className="blue-text">
-          <NavLink to="/student-page" className="return">
-            <h4>Επιστροφή</h4>
-          </NavLink>
-        </div>
-      </div> */
-      /* <Outlet /> */
- 
   );
 }
