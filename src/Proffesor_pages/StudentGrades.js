@@ -1,106 +1,263 @@
 /* StudentGrades.js */
 import "./StudentGrades.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../data/firebase";
 import {
   Breadcrumb,
   Container,
+  Row,
+  Col,
+  Card,
   Accordion,
   Table,
+  ButtonGroup,
   Button,
+  Offcanvas,
+  Spinner,
 } from "react-bootstrap";
-import StudentGradesNew from "./StudentGradesNew";
+import {
+  calculateAverageGrade,
+  calculateMaxGrade,
+  calculateMedianGrade,
+  calculateMinGrade,
+  calculatePassPercentage,
+} from "./HelperFunctions";
+import { useAccordionButton } from "react-bootstrap";
 
 function StudentGrades() {
-  const mycourses = {
-    1: {
-      id: "ΥΣ08",
-      name: "Επικοινωνία Ανθρώπου Μηχανής",
-      semester: "1ο",
-      students: "12",
-    },
-    2: {
-      id: "ΥΣ09",
-      name: "Διαδραστικά Συστήματα",
-      semester: "1ο",
-      students: "14",
-    },
-  };
+  const navigate = useNavigate();
+  const [savedGrades, setSavedGrades] = useState([]);
+  const [showCanvas, setShowCanvas] = useState(false);
+  const [currentGrades, setCurrentGrades] = useState(""); // for the offcanvas
+  const [printing, setPrinting] = useState(false); // for the 'print' button
 
-  const [newGrades, setNewGrades] = useState(false); // when the 'new grades' is clicked
-  const [selectedCourse, setSelectedCourse] = useState(null); // the course that the user selected to add grades
-  const handleNewGrades = (course) => {
-    setSelectedCourse(course);
-    setNewGrades(true);
+  const handleShowCanvas = (grades) => {
+    setCurrentGrades(grades);
+    setShowCanvas(true);
   };
+  const handleCloseCanvas = () => setShowCanvas(false);
 
-  const handleBacktoStart = () => {
-    setNewGrades(false);
+  useEffect(() => {
+    const userEmail = localStorage.getItem("email");
+    if (userEmail) {
+      const userDoc = doc(db, "users", userEmail);
+      getDoc(userDoc).then((docSnap) => {
+        if (docSnap.exists()) {
+          const userData = docSnap.data();
+          setSavedGrades(userData.studentGrades || []);
+        } else {
+          console.log("No user data found in Firestore");
+        }
+      });
+    }
+  }, []);
+
+  // group the studentGrades by period
+  const [gradesByPeriod, setGradesByPeriod] = useState({});
+  useEffect(() => {
+    const grouped = groupGradesByPeriod(savedGrades);
+    setGradesByPeriod(grouped);
+  }, [savedGrades]);
+
+  function groupGradesByPeriod(grades) {
+    return grades.reduce((acc, grade) => {
+      const period = grade.period;
+      if (!acc[period]) {
+        acc[period] = [];
+      }
+      acc[period].push(grade);
+      return acc;
+    }, {});
+  }
+
+  function CustomToggle({ children, eventKey }) {
+    const decoratedOnClick = useAccordionButton(eventKey, () => {
+      navigate("../student-grades-create");
+    });
+
+    return (
+      <button
+        type="button"
+        className="create-grades-button"
+        onClick={decoratedOnClick}
+      >
+        {children}
+      </button>
+    );
+  }
+
+  // simulate a delay when the "print" button is clicked
+  const handlePrint = () => {
+    setPrinting(true);
+    setTimeout(() => {
+      setPrinting(false);
+    }, 1500);
   };
 
   return (
     <>
-      {!newGrades ? (
-        <>
-          <Breadcrumb>
-            <Breadcrumb.Item href="./">Αρχική</Breadcrumb.Item>
-            <Breadcrumb.Item active>Βαθμολόγια</Breadcrumb.Item>
-          </Breadcrumb>
-          <div className="student-grades-main">
-            <Container>
-              <Accordion defaultActiveKey="0" alwaysOpen>
-                <Accordion.Item eventKey={"0"} disabled="true">
-                  <Accordion.Header>
-                    Χειμερινό Εξάμηνο 2023-2024
-                  </Accordion.Header>
-                  <Accordion.Body>
-                    <Table className="table table-hover">
-                      <thead>
-                        <tr className="table-head">
-                          <th className="narrow-column">Μάθημα</th>
-                          <th>Κωδικός</th>
-                          <th>Εξάμηνο</th>
-                          <th>Εγγεγραμμένοι</th>
-                          <th></th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {Object.entries(mycourses).map(([key, course]) => {
-                          return (
-                            <tr className="table-row">
-                              <td style={{ textAlign: "left", width: "25%" }}>
-                                {course.name}
-                              </td>
-                              <td>{course.id}</td>
-                              <td>{course.semester}</td>
-                              <td>{course.students}</td>
-                              <td>
-                                <Button
-                                  variant="outline-success"
-                                  onClick={() => handleNewGrades(course)}
-                                >
-                                  Νέο βαθμολόγιο
-                                </Button>
-                              </td>
-                            </tr>
-                          );
-                        })}
-                      </tbody>
-                    </Table>
-                  </Accordion.Body>
-                </Accordion.Item>
-                <Accordion.Item eventKey={"1"} disabled>
-                  <Accordion.Header>Εαρινό Εξάμηνο 2023-2024</Accordion.Header>
-                </Accordion.Item>
-              </Accordion>
-            </Container>
-          </div>
-        </>
-      ) : (
-        <StudentGradesNew
-          course={selectedCourse}
-          handleBacktoStart={handleBacktoStart}
-        />
-      )}
+      <Breadcrumb>
+        <Breadcrumb.Item href="./">Αρχική</Breadcrumb.Item>
+        <Breadcrumb.Item active>Βαθμολόγια</Breadcrumb.Item>
+      </Breadcrumb>
+      <div className="main">
+        <Container>
+          <Accordion defaultActiveKey="0">
+            <Card>
+              <Card.Header>
+                <CustomToggle eventKey="0" className="create-grades-button">
+                  Επιλογή Μαθήματος
+                </CustomToggle>
+              </Card.Header>
+            </Card>
+            <Accordion.Item eventKey={"0"}>
+              <Accordion.Header>Ιστορικό Βαθμολογιών</Accordion.Header>
+              <Accordion.Body>
+                <Accordion>
+                  {Object.entries(gradesByPeriod).map(
+                    ([period, grades], index) => (
+                      <Accordion.Item eventKey={index.toString()}>
+                        <Accordion.Header>{period}</Accordion.Header>
+                        <Accordion.Body>
+                          <Table className="table table-hover">
+                            <thead>
+                              <tr>
+                                <th>Δήλωση</th>
+                                <th>Μάθημα</th>
+                                <th>Έλαβαν βαθμό</th>
+                                <th></th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {grades.map((grade, idx) => (
+                                <tr key={idx}>
+                                  <td>
+                                    {grade.date} {grade.time}
+                                  </td>
+                                  <td>{grade.course.name}</td>
+
+                                  <td>{grade.grades.length}</td>
+                                  <td>
+                                    <ButtonGroup className="mb-2">
+                                      <Button
+                                        variant="outline-secondary"
+                                        onClick={handlePrint}
+                                      >
+                                        {printing ? (
+                                          <Spinner
+                                            animation="border"
+                                            role="status"
+                                            size="sm"
+                                          />
+                                        ) : (
+                                          "Εκτύπωση"
+                                        )}
+                                      </Button>
+                                      <Button
+                                        variant="outline-success"
+                                        onClick={() => handleShowCanvas(grade)}
+                                      >
+                                        Προβολή
+                                      </Button>
+                                      <Offcanvas
+                                        show={showCanvas}
+                                        onHide={handleCloseCanvas}
+                                        placement="end"
+                                        backdrop={false}
+                                      >
+                                        <Offcanvas.Header closeButton>
+                                          <Offcanvas.Title>
+                                            {currentGrades.date}{" "}
+                                            {currentGrades.time}
+                                          </Offcanvas.Title>
+                                        </Offcanvas.Header>
+                                        <Offcanvas.Body>
+                                          <h5>{grade.course.name}</h5>
+                                          <Row>
+                                            <Col>
+                                              <strong>Αριθμός Μητρώου</strong>
+                                            </Col>
+                                            <Col>
+                                              <strong>Βαθμός</strong>
+                                            </Col>
+                                          </Row>
+                                          {currentGrades &&
+                                            Object.entries(
+                                              currentGrades.grades
+                                            ).map(([key, grade]) => {
+                                              return (
+                                                <>
+                                                  <Row>
+                                                    <Col>{grade.id}</Col>
+                                                    <Col>{grade.grade}</Col>
+                                                  </Row>
+                                                </>
+                                              );
+                                            })}
+                                          {currentGrades && (
+                                            <>
+                                              <Row>
+                                                {" "}
+                                                <p></p>
+                                              </Row>
+                                              <Row>
+                                                {" "}
+                                                Ποσοστό Επιτυχίας:{" "}
+                                                {calculatePassPercentage(
+                                                  currentGrades.grades
+                                                ).toFixed(2)}
+                                                %
+                                              </Row>
+                                              <Row>
+                                                {" "}
+                                                Μέσος όρος :{" "}
+                                                {calculateAverageGrade(
+                                                  currentGrades.grades
+                                                ).toFixed(2)}
+                                              </Row>
+                                              <Row>
+                                                {" "}
+                                                Διάμεσος :{" "}
+                                                {calculateMedianGrade(
+                                                  currentGrades.grades
+                                                ).toFixed(2)}
+                                              </Row>
+                                              <Row>
+                                                {" "}
+                                                Μέγιστος :{" "}
+                                                {calculateMaxGrade(
+                                                  currentGrades.grades
+                                                )}
+                                              </Row>
+                                              <Row>
+                                                {" "}
+                                                Ελάχιστος :{" "}
+                                                {calculateMinGrade(
+                                                  currentGrades.grades
+                                                )}
+                                              </Row>
+                                            </>
+                                          )}
+                                        </Offcanvas.Body>
+                                      </Offcanvas>
+                                    </ButtonGroup>
+                                  </td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </Table>
+                        </Accordion.Body>
+                      </Accordion.Item>
+                    )
+                  )}
+                </Accordion>
+              </Accordion.Body>
+            </Accordion.Item>
+          </Accordion>
+        </Container>
+      </div>
     </>
   );
 }

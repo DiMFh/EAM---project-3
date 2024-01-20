@@ -1,9 +1,10 @@
 /* StudentGradesNew.js */
 import "./StudentGrades.css";
 import StudentGradesPreview from "./StudentGradesPreview";
+import StudentGradesStepper from "./StudentGradesStepper";
 import { students12 } from "../Proffesor_pages/students12";
 import { students14 } from "../Proffesor_pages/students14";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   Container,
   Row,
@@ -14,10 +15,21 @@ import {
   ListGroup,
   Form,
   Stack,
+  OverlayTrigger,
+  Tooltip,
 } from "react-bootstrap";
 
 function StudentGradesNew({ course, handleBacktoStart }) {
   const students = course.students === "12" ? students12 : students14;
+  const [activeStep, setActiveStep] = useState(0); // For the stepper
+  // ***stepper functionality
+  const nextStep = () => {
+    if (activeStep < 3) setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  };
+  const prevStep = () => {
+    if (activeStep > 0) setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  };
+
 
   // ***keep track of the grades
   const [grades, setGrades] = useState({});
@@ -83,20 +95,31 @@ function StudentGradesNew({ course, handleBacktoStart }) {
 
     setStudentsWithGrades(mergedStudentsWithGrades);
     setGoPreview(true);
+    nextStep();
   };
+
+  // ***handle the 'back' button from the preview
+  const handleBackfromPreview = () => {
+    setGoPreview(false);
+    setValidated(false);
+    setAllValid(false);
+    prevStep();
+  }
 
   return (
     <>
       <Breadcrumb>
         <Breadcrumb.Item href="./">Αρχική</Breadcrumb.Item>
         <Breadcrumb.Item href="./student-grades">Βαθμολόγια</Breadcrumb.Item>
+        <Breadcrumb.Item href="./student-grades-new">Επιλογή Μαθήματος</Breadcrumb.Item>
         <Breadcrumb.Item active>Νέo Βαθμολόγιο</Breadcrumb.Item>
       </Breadcrumb>
+      <StudentGradesStepper activeStep={activeStep} />
       <div className="student-grades-main">
         {goPreview ? (
-          <StudentGradesPreview course={course} students={studentsWithGrades} />
+          <StudentGradesPreview course={course} students={studentsWithGrades} handleBack={handleBackfromPreview} handleNextStep={nextStep} />
         ) : (
-          <Container>
+          <Container sm={{ mt: 10}}>
             {/* buttons section */}
             <Row className="mb-2" md={3}>
               <Col sm={"auto"}></Col>
@@ -110,14 +133,29 @@ function StudentGradesNew({ course, handleBacktoStart }) {
                 </Button>
               </Col>
               <Col md={1}>
-                <Button
+                { allValid ? (
+                  <Button
                   type="submit"
                   variant="success"
-                  disabled={!allValid}
                   onClick={handleGoPreview}
                 >
                   Επόμενο
                 </Button>
+                ) : (
+                  <OverlayTrigger overlay={<Tooltip id="tooltip-disabled">Ελέγξτε τους βαθμούς πριν προχωρήσετε</Tooltip>}>
+                  <span className="d-inline-block">
+                  <Button
+                  variant="success"
+                  disabled={true}
+                  style={{ pointerEvents: 'none'}}
+                >
+                  Επόμενο
+                </Button>
+                  </span>
+                </OverlayTrigger>
+                )}
+                
+                
               </Col>
               <Col></Col>
             </Row>
