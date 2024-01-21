@@ -374,4 +374,5 @@ export default function RegisterForm({ db }) {
         </div>
         )}
     </Formik>
-
+  );
+}
