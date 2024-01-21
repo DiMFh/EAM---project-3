@@ -5,6 +5,9 @@ import { useAccordionButton } from "react-bootstrap";
 import React, { useState, useEffect } from 'react';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from "../../data/firebase";
+import print from './print.png';
+import download from './download.png';
+import preview from './preview.png';
 
 
 export default function Certificate({ current }) {
@@ -67,6 +70,7 @@ useEffect(() => {
                     <th>Name</th>
                     <th>Date</th>
                     <th>Time</th>
+                    <th>Actions</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -75,6 +79,11 @@ useEffect(() => {
                       <td>{certificate.name}</td>
                       <td>{certificate.date}</td>
                       <td>{certificate.time}</td>
+                      <td>
+                      <img src={preview} alt="Preview" style={{cursor: "pointer", marginRight: "10px"}} />
+                      <img src={download} alt="Download" style={{cursor: "pointer", marginRight: "10px"}} />
+                       <img src={print} alt="Print" style={{cursor: "pointer"}} />
+                      </td>
                     </tr>
                   ))}
                 </tbody>

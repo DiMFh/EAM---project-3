@@ -75,7 +75,7 @@ const NewCertificateFinish = ({lastStepCompleted, selectedcertificate }) => {
             "student_status": "Φοιτητικής Ιδιότητας",
             "detailed_grades": "Αναλυτικής βαθμολογίας",
             "military_use_brief": "Στρατολογικής Χρήσης (Συνοπτικό)",
-            "military_use_detailed": "Στρατολογικής Χρήσης Αναλυτικό",
+            "military_use_detailed": "Στρατολογικής Χρήσης (Αναλυτικό)",
             "tax_use": "Φορολογικής Χρήσης"
           };
           const selectedCertificateId = localStorage.getItem('selectedCertificateId');

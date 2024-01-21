@@ -26,7 +26,7 @@ const NewCertificatePreview = ({
     "student_status": "Φοιτητικής Ιδιότητας",
     "detailed_grades": "Αναλυτικής βαθμολογίας",
     "military_use_brief": "Στρατολογικής Χρήσης (Συνοπτικό)",
-    "military_use_detailed": "Στρατολογικής Χρήσης Αναλυτικό",
+    "military_use_detailed": "Στρατολογικής Χρήσης (Αναλυτικό)",
     "tax_use": "Φορολογικής Χρήσης"
   };
   const selectedCertificateId = localStorage.getItem('selectedCertificateId');
@@ -96,7 +96,7 @@ const NewCertificatePreview = ({
             <div className="col-md-8">
               <p>
                 Επιλέγοντας Υποβολή, η αίτηση πιστοποιητικού θα αποσταλεί στην
-                Γραμματεία. Προηγούμενες .
+                Γραμματεία. Εάν πατήσετε Ολοκλήρωση, δεν θα έχετε την δυνατότητα να την ακυρώσετε. 
               </p>
             </div>
           </div>
