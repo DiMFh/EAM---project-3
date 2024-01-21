@@ -1,5 +1,25 @@
+//npm install mdb-react-ui-kit
+
+
 import React, { useState, useEffect } from 'react';
 import { doc, getDoc } from 'firebase/firestore';
+import {
+  MDBCol,
+  MDBContainer,
+  MDBRow,
+  MDBCard,
+  MDBCardText,
+  MDBCardBody,
+  MDBCardImage,
+  MDBBtn,
+  MDBBreadcrumb,
+  MDBBreadcrumbItem,
+  MDBProgress,
+  MDBProgressBar,
+  MDBIcon,
+  MDBListGroup,
+  MDBListGroupItem
+} from 'mdb-react-ui-kit';
 import './Profile.css';
 
 const ProfilePage = ({ db }) => {
@@ -28,34 +48,47 @@ const ProfilePage = ({ db }) => {
     }, [db, userEmail]);
 
     return (
-        <div>
-            <h1>Ο λογαριασμος σας:</h1> 
-            <div className="container">
-                <div>
-                    <h2>Στοιχεία Χρήστη:</h2>
-                </div>
-                {userData && (
-                    <div>
-                        <p className="profile-detail"><label>Email:</label> {userData.email}</p>
-                        <p className="profile-detail"><label>Τηλέφωνο:</label> {userData.telephone}</p>
-                        <p className="profile-detail"><label>Διεύθυνση:</label> {userData.address}</p>
-                        <p className="profile-detail"><label>Ημερομηνία Γέννησης:</label> {userData.date}</p>
-                        <p className="profile-detail"><label>Ρόλος:</label> {userData.role}</p>
+      <section style={{ backgroundColor: '#eee' }}>
+        {userData && (
+          <MDBContainer className="py-5">
+            <MDBRow>
+              <MDBCol lg="4">
+                <MDBCard className="mb-4">
+                  <MDBCardBody className="text-center">
+                    <MDBCardImage
+                      src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
+                      alt="avatar"
+                      className="rounded-circle"
+                      style={{ width: '150px' }}
+                      fluid />
                     
-                        {/* {userData.role === 'student' && (
-                            <div>
-                                <h2>Μαθήματα και Βαθμοί:</h2>
-                                <ul className="courses-list">
-                                    {userData.courses.map((course, index) => (
-                                        <li key={index}><span className="course-name">{course.name}:</span> {course.grade}</li>
-                                    ))}
-                                </ul>
-                            </div>
-                        )} */}
+                    <div className="d-flex justify-content-center mb-2">
+                      <MDBCol lg="4">
+                        <p className="text-muted mb-1"><strong>Email: </strong> {userData.email}</p>
+                        <p className="text-muted mb-1"><strong>Ρόλος: </strong> {userData.role}</p>
+                      </MDBCol>  
                     </div>
-                 )}
-            </div>
-        </div>
+                  </MDBCardBody>
+                </MDBCard>
+              </MDBCol>
+              <MDBCol lg="8">
+                <MDBCard className="mb-4">
+                  <MDBCardBody>
+                    <MDBRow>
+                      <MDBCol sm="3">
+                        <MDBCardText>Όνομα</MDBCardText>
+                      </MDBCol>
+                      <MDBCol sm="9">
+                        <MDBCardText className="text-muted">{userData.firstname}</MDBCardText>
+                      </MDBCol>
+                    </MDBRow>
+                  </MDBCardBody>
+                </MDBCard>
+              </MDBCol>   
+            </MDBRow>  
+          </MDBContainer>
+        )}
+      </section>
     );
 
 };
