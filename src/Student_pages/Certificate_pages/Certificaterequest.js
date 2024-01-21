@@ -499,26 +499,6 @@ const Certificaterequest = () => {
 
             {/* Table part */}
             <Accordion defaultActiveKey="none">
-              
-             
-               {/* caution */}
-              {/* Προειδοποίηση αν ξεπεράσει το όριο */}
-              <Fade in={selectedCourses.length > 7}>
-                <Alert show={selectedCourses.length > 7} variant="danger">
-                  <Alert.Heading>
-                    Έχετε επιλέξει {selectedCourses.length} μαθήματα, ενώ το
-                    όριο του τρέχοντος εξαμήνου σας είναι {maxSelectedCourses}.
-                  </Alert.Heading>
-                  <p>
-                    Επιλέξτε μέχρι και {maxSelectedCourses} μαθήματα για να
-                    συνεχίσετε.
-                  </p>
-                </Alert>
-              </Fade>
-              {/* caution */}
-
-
-
               {/* certificate */}
               <Accordion.Item eventKey="0">
                 <Accordion.Header>Φοιτητικής Ιδιότητας</Accordion.Header>
@@ -559,7 +539,7 @@ const Certificaterequest = () => {
                 <Accordion.Header>Φορολογικής χρήσης</Accordion.Header>
                 <Accordion.Body>
                 <Accordion > 
-                  <p>Ενα δυο τρια τεσσερα</p>
+                  <p>To πιστοποιητικό αυτό επιβεβαιώνει την φοίτηση του φοιτητή στην σχολή.</p>
                             <Table className="table table-hover">
                                 <tbody>
                                       <td>
@@ -591,7 +571,7 @@ const Certificaterequest = () => {
               <Accordion.Item eventKey="2">
                 <Accordion.Header>Αναλυτικής Βαθμολογίας</Accordion.Header>
                 <Accordion.Body> <Accordion > 
-                <p>Ενα δυο τρια τεσσερα</p>
+                <p>Το πιστοποιητικό αυτό διαθέτει τους βαθμούς όλων των περασμένων μαθημάτων του φοιτητή. </p>
                             <Table className="table table-hover">
                                 <tbody>
                                       <td>
@@ -621,7 +601,7 @@ const Certificaterequest = () => {
                 <Accordion.Item eventKey="3">
                 <Accordion.Header>Στρατολογικής Χρήσης (Συνοπτικό)</Accordion.Header>
                 <Accordion.Body><Accordion >
-                <p>Ενα δυο τρια τεσσερα</p> 
+                <p>Το πιστοποιητικό αυτό διατίθεται ως βεβαίωση φοίτησης για στρατολογική χρήση (συνοπτικό).</p> 
                             <Table className="table table-hover">
                                 <tbody>
                                       <td>
@@ -651,7 +631,7 @@ const Certificaterequest = () => {
                 <Accordion.Item eventKey="4">
                 <Accordion.Header>Στρατολογικής Χρήσης (Αναλυτικό)</Accordion.Header>
                 <Accordion.Body><Accordion > 
-                <p>Ενα δυο τρια τεσσερα</p>
+                <p>Το πιστοποιητικό αυτό διατίθεται ως βεβαίωση φοίτησης για στρατολογική χρήση (αναλυτικό).</p>
                             <Table className="table table-hover">
                                 <tbody>
                                       <td>
