@@ -1,253 +1,377 @@
-import React, { useState } from "react";
-import { doc, setDoc, getDoc } from "firebase/firestore";
-import { Form, Button, Container, Row, Col, Alert } from "react-bootstrap";
-import { courses } from "./Utils/Objects/objects";
-import "./RegisterPage.css";
+//import React, { useState } from 'react';
+//npm install yup 
+//npm install formik
+//npm install date-fns
+//gia na doulepsei kante auta ta 3np installs
+
+import Button from 'react-bootstrap/Button';
+import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
+import * as formik from 'formik';
+import * as yup from 'yup';
+import { doc, setDoc,  } from "firebase/firestore";
+import { differenceInYears } from 'date-fns';
+
+
 
 export default function RegisterForm({ db }) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [conpassword, setConPassword] = useState("");
-  const [role, setRole] = useState("");
-  const [telephone, setTelephone] = useState("");
-  const [address, setAddress] = useState("");
-  const [date, setDate] = useState("");
-  // Handles the register functionality of the user
-  async function handleRegister(e) {
-    e.preventDefault();
 
-    if (!email || !password || !conpassword || !role || !telephone) {
-      alert("Please fill all the required fields.");
-      return; // Διακοπή της συνάρτησης εάν κάποιο απαιτούμενο πεδίο είναι κενό
-    }
+  const { Formik } = formik;
+  const phoneRegExp = /^\d{10}$/;
 
-    // Έλεγχος για ταιριάζοντα κωδικούς
-    if (password !== conpassword) {
-      alert("Passwords do not match.");
-      return;
-    }
-    // This object represents the user's form that it will be saved in our database.
-    const docUser = {
-      email: email,
-      password: password,
-      role: role,
-      telephone: telephone,
-      address: address,
-      date: date,
-      courses: [
-        {
-          id: "ΥΣ08",
-          grade: 10,
-        },
-        {
-          id: "Κ16",
-          grade: 10,
-        },
-      ],
-      declarations: [
-        {
-          date: "3/3/2024",
-          id: 0,
-          period: "2022-2023 Εαρινό",
-          time: "2:52:19 PM",
-          courses: [
-            {
-              id: "K17",
-              name: "Αλγόριθμοι και Πολυπλοκότητα",
-              description: "Αλγόριθμοι αλγόριθμοι αλγόριθμοι",
-              professor: "Βασίλειος Παπαδόπουλος",
-              semester: "4ο",
-              ects: "8",
-              type: "Υποχρεωτικό (ΥΜ)",
-            },
-            {
-              id: "K16",
-              name: "Δίκτυα Επικοινωνιών Ι",
-              description: "Εισαγωγή στον προγραμματισμό με βάση τη λογική",
-              professor: "Ιωάννα Κοντογιάννη",
-              semester: "4ο",
-              ects: "6",
-              type: "Υποχρεωτικό (ΥΜ)",
-            },
-            {
-              id: "K13",
-              name: "Πιθανότητες και Στατιστική",
-              description:
-                "Μελέτη σημάτων και συστημάτων στην επικοινωνία και τον έλεγχο",
-              professor: "Αλέξανδρος Μιχαηλίδης",
-              semester: "3ο",
-              ects: "6",
-              type: "Υποχρεωτικό (ΥΜ)",
-            },
-            {
-              id: "K10",
-              name: "Αντικειμενοστραφής Προγραμματισμός",
-              description: "Οργάνωση κώδικα με χρήση αντικειμένων και κλάσεων",
-              professor: "Δημήτριος Κυριακίδης",
-              semester: "3ο",
-              ects: "8",
-              type: "Υποχρεωτικό (ΥΜ)",
-            },
-          ],
-        },
-      ],
-    };
+  const schema = yup.object().shape({
+    firstname: yup.string()
+      .required('Το όνομα είναι υποχρεωτικό'),
 
+    lastname: yup.string()
+      .required('Το επώνυμο είναι υποχρεωτικό'),
+
+    email: yup.string()
+      .email('Πρέπει να είναι έγκυρη διεύθυνση email')
+      .required('Το email είναι υποχρεωτικό'),
+    password: yup.string()
+      .required('Απαιτείται κωδικός πρόσβασης')
+      .min(3, 'Ο κωδικός πρόσβασης πρέπει να έχει τουλάχιστον 3 χαρακτήρες'),
+    confirmPassword: yup.string()
+      .required('Απαιτείται επιβεβαίωση κωδικού πρόσβασης')
+      .oneOf([yup.ref('password'), null], 'Οι κωδικοί πρόσβασης πρέπει να ταιριάζουν'),
+    birthdate: yup.date()
+      .required('Απαιτείται η ημερομηνία γέννησης')
+      .test(
+        'age-check',
+        'Πρέπει να είστε άνω των 17 ετών',
+          value => differenceInYears(new Date(), new Date(value)) >= 17
+    ),
+    role: yup.string()
+      .required('Η επιλογή ρόλου είναι υποχρεωτική')
+      .oneOf(['professor', 'student'], 'Επιλέξτε έγκυρο ρόλο: Καθηγητής ή Φοιτητής'),
+    Codephone: yup.string(),
+    phone: yup.string()
+      .matches(phoneRegExp, 'Μη έγκυρος Ελληνικός αριθμός τηλεφώνου'),
+    address: yup.string(),
+    city: yup.string(),
+    zip: yup.string(),
+    courses: yup.array().of(
+      yup.object().shape({
+        id: yup.string(),
+        grade: yup.string(),
+      })
+    ),
+    declarations: yup.array().of(
+      yup.object().shape({
+        courses: yup.array().of(
+          yup.object().shape({
+            description: yup.string(),
+            ects: yup.string(),
+            id: yup.string(),
+            name: yup.string(),
+            professor: yup.string(),
+            semester: yup.string(),
+            type: yup.string(),
+          })
+        ),
+        date: yup.string(),
+        id: yup.number(),
+        period: yup.string(),
+        time: yup.string(),
+      })
+    ),
+  
+    certificates: yup.array().of(
+      yup.object().shape({
+        dateRequest: yup.date().nullable().default(null),
+        name: yup.string(),
+      })
+    ),
+    // }).test('test-name', 'test message', values => {
+    //   console.log('Validation values:', values);
+    
+  });
+
+  
+  const saveToDatabase = async (values) => {
+    console.log("Values to save:", values); // Εκτύπωση των τιμών που θα αποθηκευτούν
     try {
-      // Create a Firebase doc that 'points' to our db and creates a collection "users" with primary key the email of the user
-      const ref_user = doc(db, "users", email);
-      // Then we use setDoc to push the 'user object' to the referenced user
-      await setDoc(ref_user, docUser);
+      const ref_user = doc(db, "users", values.email);
+      console.log("Reference to user document:", ref_user); // Εκτύπωση της αναφοράς στο έγγραφο του χρήστη
+      await setDoc(ref_user, values); 
 
-      // At the same time we push all the courses at the db.
-      // We create a 'courses' collection with primary key 'all_courses'
-      const ref_courses = doc(db, "courses", "all_courses");
+      console.log("Data saved successfully"); // Εκτύπωση μηνύματος επιτυχίας
 
-      // Έλεγχος αν το έγγραφο μαθημάτων υπάρχει
-      const docSnap = await getDoc(ref_courses);
-
-      // Αν το έγγραφο δεν υπάρχει, τότε προσθήκη του
-      if (!docSnap.exists()) {
-        await setDoc(ref_courses, courses);
-      }
-
-      // Redirect to login route
-      window.location.href = "/login";
-      console.log("ALL GOOD");
+      window.location.href = '/login';
       alert("Document written to Database");
-    } catch (e) {
-      console.log(e);
+    } catch (error) {
+      console.error('Error saving data', error);
     }
-  }
+  };
 
   return (
-    <div className="mainpage">
-      <Container>
-        <Alert>
-          <p style={{ fontWeight: "bold" }}>
-            Ότι έχει * είναι υποχρεωτικό να συμπληρωθεί.
-          </p>
-          <p>Παρακαλώ συμπληρώστε τα στοιχεία σας.</p>
-        </Alert>
-        <Form onSubmit={handleRegister}>
-          <Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
-            <Form.Label column sm="2">
-              Ηλεκτρονική Διεύθυνση*
-            </Form.Label>
-            <Col sm="3">
-              <Form.Control
-                type="email"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </Col>
-          </Form.Group>
-          <Form.Group
-            as={Row}
-            className="mb-3"
-            controlId="formPlaintextPassword"
-          >
-            <Form.Label column sm="2">
-              Κωδικός*
-            </Form.Label>
-            <Col sm="3">
-              <Form.Control
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </Col>
-          </Form.Group>
+    <Formik
+      validationSchema={schema}
+      onSubmit={(values, actions) => {
+        console.log("Form submitted"); // Προσθήκη αυτής της γραμμής
+        console.log("Submitting values:", values);
+        saveToDatabase(values);
+        actions.setSubmitting(false);
+      }}
+      initialValues={{
+        email: '',
+        password: '',
+        confirmPassword: '',
+        firstname: '',
+        lastname: '',
+        birthdate: '',
+        role: '',
+        phone: '',
+        Codephone: '',
+        city: '',
+        address: '',
+        zip: '',
+        courses: [{ id: 'ΥΣ08', grade: '10'}, { id: 'Κ16', grade: '10'}],
+        declarations: [
+          {
+            courses: [
+              {
+                description: "Το καλύτερο μάθημα του κόσμου...",
+                ects: "6",
+                id: "ΥΣ08",
+                name: "Επικοιωνία Ανθρώπου Μηχανής",
+                professor: "Μαρία Ρούσσου",
+                semester: "1ο",
+                type: "Υποχρεωτικό (ΥΜ)"
+              },
+              {
+                description: "Να πάρετε το μεταπτυχιακό του τμήματος να μάθετε περισσότερα",
+                ects: "6",
+                id: "ΥΣ09",
+                name: "Διαδραστικά Συστήματα",
+                professor: "Μαρία Ρούσσου",
+                semester: "1ο",
+                type: "Υποχρεωτικό (ΥΜ)"
+              },
+              {
+                description: "Εισαγωγή στις έννοιες του Προγραματισμού και την γλώσσα C",
+                ects: "7",
+                id: "Κ08",
+                name: "Εισαγωγή στον Προγραμματισμό",
+                professor: "Γεώργιος Σταματόπουλος",
+                semester: "1ο",
+                type: "Υποχρεωτικό (ΥΜ)"
+              }
+            ],
+            date: "5/1/2023",
+            id: 0,
+            period: "2022-2023 Χειμερινό",
+            time: "7:53:37 μ.μ."
+          }
+        ],
+      ceritificates: [{dateRequest: '2024-01-19T11:23:26.263Z',name:'Αναλυτικής βαθμολογίας' }],
+      }}
+    >
+      {({ handleSubmit, handleChange, values, touched, errors }) => (
+        <div style={{ marginTop: '20px', marginRight: '30px', marginLeft: '30px' }}> 
+          <h1>Συμπληρώστε την Αίτηση Εγγραφής</h1>
+          <div style={{
+              display: 'flex', // Ενεργοποίηση flexbox
+              justifyContent: 'center', // Κεντράρισμα στον οριζόντιο άξονα
+              alignItems: 'center', // Κεντράρισμα στον κάθετο άξονα, αν χρειάζεται
+              marginTop: '20px',
+              marginRight: '30px',
+              marginLeft: '100px'
+            }}>       
+           <Form noValidate onSubmit={handleSubmit}>
+            <Row className="mb-3">
+            <Form.Group as={Col} md="3" controlId="validationFormik01">
+                <Form.Label>Email</Form.Label>
+                <Form.Control
+                  type="email"
+                  placeholder="mail@mail.com"
+                  name="email"
+                  value={values.email}
+                  onChange={handleChange}
+                  isInvalid={!!errors.email}
+                />
+                <Form.Control.Feedback type="invalid">{errors.email}</Form.Control.Feedback>
+              </Form.Group>
+              <Form.Group as={Col} md="3" controlId="validationFormik02">
+                <Form.Label>Κωδικός</Form.Label>
+                <Form.Control
+                  type="password"
+                  // placeholder="Password"
+                  name="password"
+                  value={values.password}
+                  onChange={handleChange}
+                  isInvalid={!!errors.password}
+                />
+                <Form.Control.Feedback type="invalid">
+                  {errors.password}
+                </Form.Control.Feedback>
+              </Form.Group>
+              <Form.Group as={Col} md="3" controlId="validationFormik03">
+                <Form.Label>Επιβεβαίωση Κωδ.</Form.Label>
+                <Form.Control
+                  type="password"
+                  //placeholder="Confirm Password"
+                  name="confirmPassword"
+                  value={values.confirmPassword}
+                  onChange={handleChange}
+                  isInvalid={!!errors.confirmPassword}
+                />
+                <Form.Control.Feedback type="invalid">
+                  {errors.password}
+                </Form.Control.Feedback>
+              </Form.Group>
+              </Row>
+              <Row className="mb-3">
+              <Form.Group as={Col} md="3" controlId="validationFormik04">
+                <Form.Label>Όνομα</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="firstname"
+                  // placeholder="Firstname"
+                  value={values.firstname}
+                  onChange={handleChange}
+                  isValid={touched.firstname && !errors.firstname}
+                  isInvalid={!!errors.firstname}
+                />
+                <Form.Control.Feedback type="invalid">{errors.firstname}</Form.Control.Feedback>
+              </Form.Group>
+              <Form.Group as={Col} md="3" controlId="validationFormik05">
+                <Form.Label>Επίθετο</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="lastname"
+                  // placeholder="Lastname"
+                  value={values.lastname}
+                  onChange={handleChange}
+                  isValid={touched.lastname && !errors.lastname}
+                  isInvalid={!!errors.lastname}
+                />
+                <Form.Control.Feedback type="invalid">{errors.lastname}</Form.Control.Feedback>
+              </Form.Group>
+              <Form.Group as={Col} md="4" controlId="validationFormik06">
+                <Form.Label>Ημερομηνία Γέννησης</Form.Label>
+                <Form.Control
+                  type="date"
+                  name="birthdate"
+                  placeholder="Birthdate"
+                  value={values.birthdate}
+                  onChange={handleChange}
+                  isValid={touched.birthdate && !errors.birthdate}
+                  isInvalid={!!errors.birthdate}
+                />
+                <Form.Control.Feedback type="invalid">{errors.birthdate}</Form.Control.Feedback>
+              </Form.Group>
+              </Row>
+              <Row className="mb-3">
+                  <Form.Group as={Col} md="5" controlId="validationFormik07">
+                    <Form.Label>Ρόλος</Form.Label>
+                    <Form.Control
+                      as="select"
+                      name="role"
+                      value={values.role}
+                      onChange={handleChange}
+                      isValid={touched.role && !errors.role}
+                      isInvalid={!!errors.role}
+                    >
+                      <option value="">Επιλέξτε...</option>
+                      <option value="professor">Καθηγητής</option>
+                      <option value="student">Φοιτητής</option>
+                    </Form.Control>
+                    <Form.Control.Feedback type="invalid">
+                      {errors.role}
+                    </Form.Control.Feedback>
+                  </Form.Group>
+                  <Form.Group as={Col} md="7" controlId="validationFormik08">
+                    <Form.Label>Αριθμός Τηλεφώνου</Form.Label>
+                      <Row>
+                        <Col md="5">
+                          <Form.Control
+                            as="select"
+                            name="Codephone"
+                            onChange={handleChange}
+                            value={values.Codephone}
+                          >
+                            <option value="">Επιλέξτε...</option>
+                            <option value="+30">Ελλάδα(+30)</option>
+                            <option value="+1">ΗΠΑ (+1)</option>
+                            {/* Προσθέστε εδώ άλλους κωδικούς χώρας */}
+                          </Form.Control>
+                        </Col>
+                        <Col md="7">
+                          <Form.Control
+                            type="text"
+                            name="phone"
+                            placeholder="Τηλέφωνο"
+                            value={values.phone}
+                            onChange={handleChange}
+                            // isValid={touched.phone && !errors.phone}
+                            isInvalid={!!errors.phone}
+                          />
+                          <Form.Control.Feedback type="invalid">
+                            {errors.phone}
+                          </Form.Control.Feedback>
+                        </Col>
+                      </Row>
+                    </Form.Group>
 
-          <Form.Group
-            as={Row}
-            className="mb-3"
-            controlId="formPlaintextConfirmPassword"
-          >
-            <Form.Label column sm="2">
-              Επιβεβαίωση Κωδικού*
-            </Form.Label>
-            <Col sm="3">
-              <Form.Control
-                type="password"
-                placeholder="Confirm Password"
-                value={conpassword}
-                onChange={(e) => setConPassword(e.target.value)}
-              />
-            </Col>
-          </Form.Group>
 
-          <Form.Group as={Row} className="mb-3" controlId="formPlaintextDate">
-            <Form.Label column sm="2">
-              Ημερομηνία Γέννησης*
-            </Form.Label>
-            <Col sm="3">
-              <Form.Control
-                type="date"
-                value={date}
-                onChange={(e) => setDate(e.target.value)}
-              />
-            </Col>
-          </Form.Group>
+                </Row>
+                <Row className="mb-3">
+                  <Form.Group as={Col} md="4" controlId="validationFormik07">
+                    <Form.Label>Πόλη</Form.Label>
+                    <Form.Control
+                      type="text"
+                      // placeholder="City"
+                      name="city"
+                      value={values.city}
+                      onChange={handleChange}
+                      isInvalid={!!errors.city}
+                    />
 
-          <Form.Group as={Row} className="mb-3" controlId="formPlaintextRole">
-            <Form.Label column sm="2">
-              Ρόλος*
-            </Form.Label>
-            <Col sm="3">
-              <Form.Control
-                as="select"
-                value={role}
-                onChange={(e) => setRole(e.target.value)}
-              >
-                <option value="professor">Professor</option>
-                <option value="student">Student</option>
-              </Form.Control>
-            </Col>
-          </Form.Group>
+                <Form.Control.Feedback type="invalid">
+                  {errors.city}
+                </Form.Control.Feedback>
+              </Form.Group>
+              <Form.Group as={Col} md="4" controlId="validationFormik08">
+                <Form.Label>Διεύθυνση</Form.Label>
+                <Form.Control
+                  type="text"
+                  // placeholder="State"
+                  name="address"
+                  value={values.address}
+                  onChange={handleChange}
+                  isInvalid={!!errors.address}
+                />
+                <Form.Control.Feedback type="invalid">
+                  {errors.address}
+                </Form.Control.Feedback>
+              </Form.Group>
+              <Form.Group as={Col} md="4" controlId="validationFormik09">
+                <Form.Label>Ταχυδρομικός Κώδικας</Form.Label>
+                <Form.Control
+                  type="text"
+                  // placeholder="Zip"
+                  name="zip"
+                  value={values.zip}
+                  onChange={handleChange}
+                  isInvalid={!!errors.zip}
+                />
 
-          <Form.Group as={Row} className="mb-3" controlId="formPlaintextPhone">
-            <Form.Label column sm="2">
-              Τηλέφωνο*
-            </Form.Label>
-            <Col sm="3">
-              <Form.Control
-                type="tel"
-                placeholder="Telephone Number"
-                value={telephone}
-                onChange={(e) => setTelephone(e.target.value)}
-              />
-            </Col>
-          </Form.Group>
+                <Form.Control.Feedback type="invalid">
+                  {errors.zip}
+                </Form.Control.Feedback>
+              </Form.Group>
+              
+            </Row>
+            <Row className="mb-3">
 
-          <Form.Group
-            as={Row}
-            className="mb-3"
-            controlId="formPlaintextAddress"
-          >
-            <Form.Label column sm="2">
-              Διεύθυνση
-            </Form.Label>
-            <Col sm="3">
-              <Form.Control
-                type="text"
-                placeholder="Address"
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
-              />
-            </Col>
-          </Form.Group>
+            </Row>
+            <Button type="submit">Υποβολή Εγγραφής</Button>
+          </Form>
+          </div>
+        </div>
+        )}
+    </Formik>
 
-          <Button variant="primary" type="submit">
-            Εγγραφή
-          </Button>
-          <a href="/login" className="mt-3 d-block">
-            Έχετε Ήδη Λογαριασμό;
-          </a>
-        </Form>
-      </Container>
-    </div>
-  );
-}
