@@ -31,7 +31,7 @@ function StudentGrades() {
   const [savedGrades, setSavedGrades] = useState([]);
   const [showCanvas, setShowCanvas] = useState(false);
   const [currentGrades, setCurrentGrades] = useState(""); // for the offcanvas
-  const [printing, setPrinting] = useState(false); // for the 'print' button
+  const [printing, setPrinting] = useState({}); // for the 'print' button
 
   const handleShowCanvas = (grades) => {
     setCurrentGrades(grades);
@@ -89,10 +89,10 @@ function StudentGrades() {
   }
 
   // simulate a delay when the "print" button is clicked
-  const handlePrint = () => {
-    setPrinting(true);
+  const handlePrint = (uniqueID) => {
+    setPrinting((prev) => ({ ...prev, [uniqueID]: true }));
     setTimeout(() => {
-      setPrinting(false);
+      setPrinting((prev) => ({ ...prev, [uniqueID]: false }));
     }, 1500);
   };
 
@@ -143,9 +143,9 @@ function StudentGrades() {
                                     <ButtonGroup className="mb-2">
                                       <Button
                                         variant="outline-secondary"
-                                        onClick={handlePrint}
+                                        onClick={() => handlePrint(grade.id)}
                                       >
-                                        {printing ? (
+                                        {printing[grade.id] ? (
                                           <Spinner
                                             animation="border"
                                             role="status"
