@@ -9,6 +9,15 @@
   border-bottom: 2px solid #30499e; /* Black border bottom for the underline */
 }
 
+.segment-1 {
+  width: 20%;
+}
+
+.segment-3 {
+  display: flex;
+  width: 20%;
+}
+
 .header-logo {
   height: 80px;
 }
@@ -69,17 +78,40 @@
 }
 
 .profile-icon {
-  width: 40px; /* ή μπορείτε να το αφαιρέσετε αν θέλετε να καθορίζεται το μέγεθος από το padding */
-  height: 40px; /* ίδιο όπως παραπάνω */
-  padding: 10px; /* προσθέστε padding για να δημιουργήσετε χώρο γύρω από το εικονίδιο */
-  background-color: #2795c0; /* ένα στάνταρ μπλε χρώμα */
-  border: none; /* αφαιρέστε το περίγραμμα αν υπάρχει */
-  border-radius: 50%; /* για να το κάνετε στρογγυλό */
-  cursor: pointer; /* για να εμφανίζεται το χέρι όταν περάσει πάνω ο κέρσορας */
-  display: inline-flex; /* για να επιτρέψετε το στοιχείο να προβάλει ως inline αλλά να επιτρέψετε flex ιδιότητες */
-  align-items: center; /* κεντράρετε το εικονίδιο κατακόρυφα μέσα στο κουμπί */
-  justify-content: center; /* κεντράρετε το εικονίδιο οριζόντια μέσα στο κουμπί */
-  margin-left: 10px; /* όπως έχετε ορίσει ήδη */
-  text-decoration: none; /* αφαιρέστε την υπογράμμιση από τους συνδέσμους αν είναι αναγκαίο */
-  color: white; /* το χρώμα του κειμένου μέσα στο κουμπί */
+  width: 40px;
+  height: 40px;
+  padding: 10px;
+  background-color: #2795c0;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+  text-decoration: none;
+  color: white;
+}
+
+.custom-collapse {
+  background-color: #ffffff00; /* transparent */
+}
+
+.custom-dropdown-disabled {
+  background-color: #ffffff00; /* transparent */
+  color: #999999; /* Light gray font color for disabled dropdown */
+}
+.custom-dropdown {
+  border-color: #30499e;
+}
+.custom-dropdown .dropdown-item {
+  background-color: #ffffff00; /* transparent */
+  font-size: smaller;
+}
+
+.custom-dropdown .dropdown-item:hover {
+  background-color: #ffffff00; /* transparent */
+}
+.custom-dropdown .disabled {
+  color: #999999; /* Light gray font color for disabled dropdown */
 }
