@@ -1,7 +1,8 @@
 /* NewDeclarationPreview.js */
-import "./NewDeclarationPreview.css";
+import "./NewCertificatePreview.css";
 import image from "../../images/warning.png";
 import { useState } from "react";
+import { useEffect } from 'react';
 import {
   Container,
   Col,
@@ -12,7 +13,7 @@ import {
   Table,
 } from "react-bootstrap";
 
-const NewDeclarationPreview = ({
+const NewCertificatePreview = ({
   selectedCourses,
   goBackToSelection,
   goToFinish,
@@ -21,6 +22,15 @@ const NewDeclarationPreview = ({
   const [showModal, setShowModal] = useState(false);
   const handleCloseModal = () => setShowModal(false);
   const handleShowModal = () => setShowModal(true);
+  const certificateNames = {
+    "student_status": "Φοιτητικής Ιδιότητας",
+    "detailed_grades": "Αναλυτικής βαθμολογίας",
+    "military_use_brief": "Στρατολογικής Χρήσης (Συνοπτικό)",
+    "military_use_detailed": "Στρατολογικής Χρήσης (Αναλυτικό)",
+    "tax_use": "Φορολογικής Χρήσης"
+  };
+  const selectedCertificateId = localStorage.getItem('selectedCertificateId');
+  
 
   return (
     <div className="newdeclaration-preview">
@@ -39,60 +49,26 @@ const NewDeclarationPreview = ({
           </Col>
           <Col md={1}>
             <Button variant="success" onClick={handleShowModal}>
-              Υποβολή
+              Επόμενο
             </Button>
           </Col>
         </Row>
         {/* selected courses section */}
         <ListGroup>
           <ListGroup.Item as="li" variant="primary">
-            <strong>Επιλεγμένα μαθήματα</strong>
+            <strong>Επιλεγμένo Πιστοποιητικό</strong>
           </ListGroup.Item>
         </ListGroup>
         <Table className="table table-hover">
-          <tbody>
-            {selectedCourses.map((course, index) => (
-              <tr>
-                <td>{index + 1}. </td>
-                <td style={{ textAlign: "left" }}>{course.name}</td>
-                <td>Εξάμηνο {course.semester}</td>
-              </tr>
-            ))}
-          </tbody>
-        </Table>
+         <tbody>
+         <tr>
+          
+          <td style={{ textAlign: "left" }}>{certificateNames[selectedCertificateId]}</td>
+          </tr>
+        </tbody>
+      </Table>
         <ListGroup>
-          <ListGroup.Item as="li">
-            <Table className="table table-hover">
-              <tbody>
-                <tr>
-                  <td style={{ textAlign: "left", width: "15%" }}>
-                    <strong>Περίοδος:</strong>
-                  </td>
-                  <td style={{ textAlign: "left" }}>2023/2024 Χειμερινό</td>
-                </tr>
-                <tr>
-                  <td style={{ textAlign: "left", width: "15%" }}>
-                    <strong>Τρέχον εξάμηνο:</strong>
-                  </td>
-                  <td style={{ textAlign: "left" }}>5ο</td>
-                </tr>
-                <tr>
-                  <td style={{ textAlign: "left", width: "15%" }}>
-                    <strong>Σύνολο Μαθημάτων:</strong>
-                  </td>
-                  <td style={{ textAlign: "left" }}>
-                    {selectedCourses.length}
-                  </td>
-                </tr>
-                <tr>
-                  <td style={{ textAlign: "left", width: "15%" }}>
-                    <strong>Μέγιστο όριο</strong>
-                  </td>
-                  <td style={{ textAlign: "left" }}>{maxCourses}</td>
-                </tr>
-              </tbody>
-            </Table>
-          </ListGroup.Item>
+          
         </ListGroup>
       </Container>
       <Modal
@@ -102,7 +78,7 @@ const NewDeclarationPreview = ({
         centered
       >
         <Modal.Header closeButton>
-          <Modal.Title>Η Δήλωση είναι σχεδόν έτοιμη</Modal.Title>
+          <Modal.Title>Η Αίτηση είναι σχεδόν έτοιμη</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div className="row">
@@ -119,16 +95,15 @@ const NewDeclarationPreview = ({
             </div>
             <div className="col-md-8">
               <p>
-                Επιλέγοντας Υποβολή, μία αίτηση δήλωσης θα αποσταλεί στην
-                Γραμματεία. Προηγούμενες δηλώσεις της τρέχουσας περιόδου δεν θα
-                ληφθούν υπ όψη.
+                Επιλέγοντας Υποβολή, η αίτηση πιστοποιητικού θα αποσταλεί στην
+                Γραμματεία. Εάν πατήσετε Ολοκλήρωση, δεν θα έχετε την δυνατότητα να την ακυρώσετε. 
               </p>
             </div>
           </div>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleCloseModal}>
-            Πίσω
+            Ακύρωση
           </Button>
           <Button variant="success" onClick={goToFinish}>
             Ολοκλήρωση
@@ -138,4 +113,4 @@ const NewDeclarationPreview = ({
     </div>
   );
 };
-export default NewDeclarationPreview;
+export default NewCertificatePreview;

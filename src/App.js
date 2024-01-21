@@ -18,12 +18,14 @@ import Declarations from "./Student_pages/Declarations/Declarations";
 import NewDeclaration from "./Student_pages/Declarations/NewDeclaration";
 import Certificate from "./Student_pages/Certificate_pages/Certificate";
 import Certificaterequest from "./Student_pages/Certificate_pages/Certificaterequest";
-import Certificatestate from "./Student_pages/Certificate_pages/Certificatestate";
-import Certificatefinal from "./Student_pages/Certificate_pages/Certificatefinal";
+// import Certificatestate from "./Student_pages/Certificate_pages/Certificatestate";
+// import Certificatefinal from "./Student_pages/Certificate_pages/Certificatefinal";
 import ProfilePage from "./Student_pages/Profile";
 import GradesPage from "./Student_pages/Grades";
 //professor pages
 import Professorpage from "./Proffesor_pages/Professorpage";
+import StudentGrades from "./Proffesor_pages/StudentGrades";
+import StudentGradesCreate from "./Proffesor_pages/StudentGradesCreate";
 import ProfilePage1 from "./Proffesor_pages/Profile";
 //firebase
 import "./data/firebase";
@@ -60,11 +62,11 @@ function App() {
           <Route path="certificate">
 
             <Route index element={<Certificate />} />
-            <Route
+            {/* <Route
               path="/student-page/certificate/certificate-request/certificate-final"
               element={<Certificatefinal />}
-            />
-          <Route path="certificate-state" element={<Certificatestate />} />
+            /> */}
+          {/* <Route path="certificate-state" element={<Certificatestate />} /> */}
           </Route>
           <Route path="profile" element={<ProfilePage db={db} />} />
           <Route path="grades" element={<GradesPage db={db} />} />
@@ -73,6 +75,8 @@ function App() {
         {/* <Route path="/professor-page" element={<Professorpage />} /> */}
         <Route path="/professor-page">
           <Route index element={<Professorpage />} />
+          <Route path="student-grades" element={<StudentGrades />} />
+          <Route path="student-grades-create" element={<StudentGradesCreate />} />
           <Route path="profile" element={<ProfilePage1 db={db} />} />
         </Route>
       </Route>

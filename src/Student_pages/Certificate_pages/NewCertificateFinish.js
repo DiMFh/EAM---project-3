@@ -1,10 +1,12 @@
 /* NewDeclarationFinish.js */
-import "./NewDeclarationFinish.css";
+import "./NewCertificateFinish.css";
 import { useState, useEffect } from "react";
 import { doc, getDoc, updateDoc, arrayUnion } from "firebase/firestore";
 import { db } from "../../data/firebase";
 import {
   Container,
+  Row,
+  Col,
   Button,
   ButtonGroup,
   DropdownButton,
@@ -12,11 +14,47 @@ import {
   Spinner,
 } from "react-bootstrap";
 
-const NewDeclarationFinish = ({ lastStepCompleted, selectedCourses }) => {
+const NewCertificateFinish = ({lastStepCompleted, selectedcertificate }) => {
   const [loading, setLoading] = useState(true);
   const [printing, setPrinting] = useState(false);
-
+  console.log('Rendering NewCertificateFinish');
   // update the user's document in Firestore
+  // useEffect(() => {
+  //   setLoading(true);
+    
+  //   const userEmail = localStorage.getItem("email");
+  //   if (userEmail) {
+  //     const userDoc = doc(db, "users", userEmail);
+  //     getDoc(userDoc).then((docSnap) => {
+  //       if (docSnap.exists()) {
+  //         const certificateNames = {
+  //           "student_status": "Φοιτητικής Ιδιότητας",
+  //           "detailed_grades": "Αναλυτικής βαθμολογίας",
+  //           "military_use_brief": "Στρατολογικής Χρήσης (Συνοπτικό)",
+  //           "military_use_detailed": "Στρατολογικής Χρήσης Αναλυτικό",
+  //           "tax_use": "Φορολογικής Χρήσης"
+  //         };
+  //         const selectedCertificateId = localStorage.getItem('selectedCertificateId');
+  //         const certificateObject = {
+  //           name: certificateNames[selectedCertificateId],
+  //           dateRequested: new Date().toISOString(),
+  //         };
+  //         updateDoc(userDoc, {
+  //           certificates: arrayUnion(certificateObject),
+  //         }).then(() => {
+  //           setLoading(false);
+  //         });
+  //       } else {
+  //         console.log("No user data found in Firestore");
+  //         setLoading(false);
+  //       }
+  //     });
+  //   } else {
+  //     console.log("No user data found in Firestore");
+  //     setLoading(false);
+  //     lastStepCompleted();
+  //   }
+  // }, []);
   useEffect(() => {
     // simulate a delay when the component is mounted for the first time
     setTimeout(() => {
@@ -33,16 +71,24 @@ const NewDeclarationFinish = ({ lastStepCompleted, selectedCourses }) => {
       // update the user's document
       getDoc(userDoc).then((docSnap) => {
         if (docSnap.exists()) {
-          const userData = docSnap.data();
-          const newDeclaration = {
-            id: userData.declarations ? userData.declarations.length + 1 : 0,
+          const certificateNames = {
+            "student_status": "Φοιτητικής Ιδιότητας",
+            "detailed_grades": "Αναλυτικής βαθμολογίας",
+            "military_use_brief": "Στρατολογικής Χρήσης (Συνοπτικό)",
+            "military_use_detailed": "Στρατολογικής Χρήσης (Αναλυτικό)",
+            "tax_use": "Φορολογικής Χρήσης"
+          };
+          const selectedCertificateId = localStorage.getItem('selectedCertificateId');
+          const certificateObject = {
+            // id: userData.declarations ? userData.declarations.length + 1 : 0,
+            name: certificateNames[selectedCertificateId],
             date: new Date().toLocaleDateString(),
             time: new Date().toLocaleTimeString(),
-            courses: selectedCourses,
+            // courses: selectedCourses,
             period: "2023-2024 Χειμερινό",
           };
           updateDoc(userDoc, {
-            declarations: arrayUnion(newDeclaration),
+            certificates: arrayUnion(certificateObject),
           });
         } else {
           console.log("No user data found in Firestore");
@@ -50,6 +96,8 @@ const NewDeclarationFinish = ({ lastStepCompleted, selectedCourses }) => {
       });
     }
   }, []);
+
+
 
   // simulate a delay when the "print" button is clicked
   const handlePrint = () => {
@@ -71,18 +119,18 @@ const NewDeclarationFinish = ({ lastStepCompleted, selectedCourses }) => {
         ) : (
           <Container fluid>
             <h2 className="new-declaration-finish-message">
-              Υπεβλήθη επιτυχώς!
+              Η Δήλωση ολοκληρώθηκε!
             </h2>
             <ButtonGroup className="mb-2">
               <Button href="/" variant="secondary" className="float-end">
                 Αρχική
               </Button>
               <Button
-                href="declarations"
+                href="certificate"
                 variant="secondary"
                 className="float-end"
               >
-                Δηλώσεις
+                Πιστοποιητικά
               </Button>
               <Button className="float-end" onClick={handlePrint}>
                 {printing ? (
@@ -107,4 +155,4 @@ const NewDeclarationFinish = ({ lastStepCompleted, selectedCourses }) => {
     </div>
   );
 };
-export default NewDeclarationFinish;
+export default NewCertificateFinish;
