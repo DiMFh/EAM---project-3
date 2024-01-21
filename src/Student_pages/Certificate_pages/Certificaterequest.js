@@ -503,24 +503,24 @@ const Certificaterequest = () => {
               <Accordion.Item eventKey="0">
                 <Accordion.Header>Φοιτητικής Ιδιότητας</Accordion.Header>
                 <Accordion.Body>
-                <p>Ενα δυο τρια τεσσερα</p>
+                <p><strong>Περιγραφή:</strong> Το πιστοποιητικό αυτό επιβεβαιώνει την φοίτηση του φοιτητή στην σχολή.</p>
                     <Accordion > 
                             <Table className="table table-hover">
                                 <tbody>
-                                      <td>
+                                     
+                                      
+                                      <td style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+                                           <strong style={{marginRight: "10px"}}>Επιλογή:</strong>
                                         <Form.Check
                                           aria-label="select"
-                                          // set the checkbox to checked if the course is already selected (for when the user goes back to the selection)
-                                          
-                                          // onChange={() =>
-                                          //   handleCourseSelection(course)
-                                          // }
+
                                           certificateId = {0}
                                           onChange={handleCheckboxChange(0, "student_status")}
                                           isValid
                                           disabled={selectedCheckbox !== null && selectedCheckbox !== 0}
                                           checked={selectedCheckbox === 0}
                                         />
+                                        
                                       </td>
                                 </tbody>
                               </Table>
@@ -539,10 +539,11 @@ const Certificaterequest = () => {
                 <Accordion.Header>Φορολογικής χρήσης</Accordion.Header>
                 <Accordion.Body>
                 <Accordion > 
-                  <p>To πιστοποιητικό αυτό επιβεβαιώνει την φοίτηση του φοιτητή στην σχολή.</p>
+                  <p><strong>Περιγραφή:</strong> To πιστοποιητικό αυτό λειτουργεί ως βεβαίωση για φορολογική χρήση.</p>
                             <Table className="table table-hover">
                                 <tbody>
-                                      <td>
+                                <td style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+                                           <strong style={{marginRight: "10px"}}>Επιλογή:</strong>
                                         <Form.Check
                                           aria-label="select"
                                           // set the checkbox to checked if the course is already selected (for when the user goes back to the selection)
@@ -571,10 +572,11 @@ const Certificaterequest = () => {
               <Accordion.Item eventKey="2">
                 <Accordion.Header>Αναλυτικής Βαθμολογίας</Accordion.Header>
                 <Accordion.Body> <Accordion > 
-                <p>Το πιστοποιητικό αυτό διαθέτει τους βαθμούς όλων των περασμένων μαθημάτων του φοιτητή. </p>
+                <p><strong>Περιγραφή:</strong> Το πιστοποιητικό αυτό διαθέτει τους βαθμούς όλων των περασμένων μαθημάτων του φοιτητή. </p>
                             <Table className="table table-hover">
                                 <tbody>
-                                      <td>
+                                <td style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+                                           <strong style={{marginRight: "10px"}}>Επιλογή:</strong>
                                         <Form.Check
                                           aria-label="select"
                                           // set the checkbox to checked if the course is already selected (for when the user goes back to the selection)
@@ -601,10 +603,11 @@ const Certificaterequest = () => {
                 <Accordion.Item eventKey="3">
                 <Accordion.Header>Στρατολογικής Χρήσης (Συνοπτικό)</Accordion.Header>
                 <Accordion.Body><Accordion >
-                <p>Το πιστοποιητικό αυτό διατίθεται ως βεβαίωση φοίτησης για στρατολογική χρήση (συνοπτικό).</p> 
+                <p><strong>Περιγραφή:</strong> Το πιστοποιητικό αυτό διατίθεται ως βεβαίωση φοίτησης για στρατολογική χρήση (συνοπτικό).</p> 
                             <Table className="table table-hover">
                                 <tbody>
-                                      <td>
+                                <td style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+                                           <strong style={{marginRight: "10px"}}>Επιλογή:</strong>
                                         <Form.Check
                                           aria-label="select"
                                           // set the checkbox to checked if the course is already selected (for when the user goes back to the selection)
@@ -631,10 +634,11 @@ const Certificaterequest = () => {
                 <Accordion.Item eventKey="4">
                 <Accordion.Header>Στρατολογικής Χρήσης (Αναλυτικό)</Accordion.Header>
                 <Accordion.Body><Accordion > 
-                <p>Το πιστοποιητικό αυτό διατίθεται ως βεβαίωση φοίτησης για στρατολογική χρήση (αναλυτικό).</p>
+                <p><strong>Περιγραφή:</strong> Το πιστοποιητικό αυτό διατίθεται ως βεβαίωση φοίτησης για στρατολογική χρήση (αναλυτικό).</p>
                             <Table className="table table-hover">
                                 <tbody>
-                                      <td>
+                                <td style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+                                           <strong style={{marginRight: "10px"}}>Επιλογή:</strong>
                                         <Form.Check
                                           aria-label="select"
                                           // set the checkbox to checked if the course is already selected (for when the user goes back to the selection)
