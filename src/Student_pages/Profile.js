@@ -52,14 +52,14 @@ const ProfilePage = ({ db }) => {
         {userData && (
           <MDBContainer className="py-5">
             <MDBRow>
-              <MDBCol lg="4">
+              <MDBCol lg="6">
                 <MDBCard className="mb-4">
                   <MDBCardBody className="text-center">
                     <MDBCardImage
                       src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
                       alt="avatar"
                       className="rounded-circle"
-                      style={{ width: '150px' }}
+                      style={{ width: '200px' }}
                       fluid />
                     
                     <div className="d-flex justify-content-center mb-2">
@@ -71,16 +71,70 @@ const ProfilePage = ({ db }) => {
                   </MDBCardBody>
                 </MDBCard>
               </MDBCol>
-              <MDBCol lg="8">
-                <MDBCard className="mb-4">
+              <MDBCol lg="6">
+                <MDBCard className="mb-2">
                   <MDBCardBody>
                     <MDBRow>
                       <MDBCol sm="3">
-                        <MDBCardText>Όνομα</MDBCardText>
+                        <MDBCardText>Όνομα: </MDBCardText>
                       </MDBCol>
-                      <MDBCol sm="9">
+                      <MDBCol sm="9" className="d-flex">
                         <MDBCardText className="text-muted">{userData.firstname}</MDBCardText>
                       </MDBCol>
+                    </MDBRow>
+                  </MDBCardBody>
+                </MDBCard>
+                <MDBCard className="mb-2">
+                  <MDBCardBody>
+                    <MDBRow>
+                      <MDBCol sm="3">
+                        <MDBCardText>Επίθετο: </MDBCardText>
+                      </MDBCol>
+                      <MDBCol sm="9" className="d-flex">
+                        <MDBCardText className="text-muted">{userData.lastname}</MDBCardText>
+                      </MDBCol>
+                    </MDBRow>
+                  </MDBCardBody>
+                </MDBCard>
+                <MDBCard className="mb-2">
+                  <MDBCardBody>
+                    <MDBRow>
+                      <MDBCol sm="3">
+                        <MDBCardText>Ημερομηνία Γέννησης: </MDBCardText>
+                      </MDBCol>
+                      <MDBCol sm="9" className="d-flex">
+                        <MDBCardText className="text-muted">{userData.birthdate}</MDBCardText>
+                      </MDBCol>
+                    </MDBRow>
+                  </MDBCardBody>
+                </MDBCard>
+                <MDBCard className="mb-2">
+                  <MDBCardBody>
+                    <MDBRow>
+                      <MDBCol sm="3">
+                        <MDBCardText>Αριθμός Επικοινωνίας: </MDBCardText>
+                      </MDBCol>
+                      <MDBCol sm="9" className="d-flex">
+                        <MDBCardText className="text-muted">{userData.Codephone}</MDBCardText>
+                        <MDBCardText className="text-muted">{userData.phone}</MDBCardText>
+                      </MDBCol>
+                    </MDBRow>
+                  </MDBCardBody>
+                </MDBCard>
+                <MDBCard className="mb-2">
+                  <MDBCardBody>
+                    <MDBRow>
+                      <MDBCol sm="3">
+                        <MDBCardText>Πόλη: </MDBCardText>
+                        <MDBCardText>Διεύθυνση: </MDBCardText>
+                        <MDBCardText>Ταχυδρομικός Κώδικας: </MDBCardText>
+                      </MDBCol>
+                      <MDBCol sm="9" className="text-start">
+                        <MDBCardText className="text-muted me-2">{userData.city}</MDBCardText>
+                        <MDBCardText className="text-muted">{userData.address}</MDBCardText>
+                        <MDBCardText className="text-muted">{userData.zip}</MDBCardText>
+                      </MDBCol>
+
                     </MDBRow>
                   </MDBCardBody>
                 </MDBCard>
