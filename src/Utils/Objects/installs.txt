@@ -1,0 +1,15 @@
+Για το bootstrap:
+npm install bootstrap
+npm install react-bootstrap
+
+Για τους steppers:
+npm install @mui/material
+npm install @emotion/react @emotion/styled
+
+Για το RegisterForm:
+npm install yup
+npm install formik
+npm install date-fns
+
+Για το Προφίλ:
+npm install mdb-react-ui-kit
