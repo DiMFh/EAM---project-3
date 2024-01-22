@@ -82,8 +82,10 @@ const ProfilePage = ({ db }) => {
         <Breadcrumb.Item href="./">Αρχική</Breadcrumb.Item>
         <Breadcrumb.Item active>Προφίλ</Breadcrumb.Item>
       </Breadcrumb>
+      
         {userData && (
           <MDBContainer className="py-5">
+            <h2>Γειά σου {userData.firstname}!</h2>
             <MDBRow>
               <MDBCol lg="6">
                 <MDBCard className="mb-4">
@@ -112,6 +114,11 @@ const ProfilePage = ({ db }) => {
                       </MDBCol>  
                     </div>
                     
+                  </MDBCardBody>
+                </MDBCard>
+                <MDBCard className="mb-4">
+                  <MDBCardBody className="text-center">
+                    <p className="text-muted mb-1" style={{ textAlign: 'left' }}><strong>Δείτε: </strong> {userData.school}</p>
                   </MDBCardBody>
                 </MDBCard>
               </MDBCol>
@@ -208,8 +215,10 @@ const ProfilePage = ({ db }) => {
                       <MDBCardText className="text-muted">{userData.zip}</MDBCardText>
                     </>
                   )}
-                  {!editMode && <MDBBtn onClick={handleEdit} color="primary" className="btn-rounded" size="md">Επεξεργασία Στοιχείων</MDBBtn>}
-                  {editMode && <MDBBtn onClick={handleSave} color="success" className="btn-rounded" size="md">Αποθήκευση Αλλαγών</MDBBtn>}
+                  <div style={{ marginTop: '40px' }}>
+                    {!editMode && <MDBBtn onClick={handleEdit} color="primary" className="btn-rounded" size="md">Επεξεργασία Στοιχείων</MDBBtn>}
+                    {editMode && <MDBBtn onClick={handleSave} color="success" className="btn-rounded" size="md">Αποθήκευση Αλλαγών</MDBBtn>}
+                  </div>  
                 </MDBCol>
               </MDBRow>
               </MDBCardBody>
