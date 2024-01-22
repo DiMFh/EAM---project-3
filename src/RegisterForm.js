@@ -46,9 +46,11 @@ export default function RegisterForm({ db }) {
     role: yup.string()
       .required('Η επιλογή ρόλου είναι υποχρεωτική')
       .oneOf(['professor', 'student'], 'Επιλέξτε έγκυρο ρόλο: Καθηγητής ή Φοιτητής'),
-    Codephone: yup.string(),
+    Codephone: yup.string().required('Απαιτείται κωδικός χώρας'),
     phone: yup.string()
+      .required('Απαιτείται αριθμός τηλεφώνου')
       .matches(phoneRegExp, 'Μη έγκυρος Ελληνικός αριθμός τηλεφώνου'),
+      
     address: yup.string(),
     city: yup.string(),
     zip: yup.string(),
@@ -292,6 +294,7 @@ export default function RegisterForm({ db }) {
                             name="Codephone"
                             onChange={handleChange}
                             value={values.Codephone}
+                            isInvalid={!!errors.Codephone}
                           >
                             <option value="">Επιλέξτε...</option>
                             <option value="+30">Ελλάδα(+30)</option>
@@ -374,4 +377,5 @@ export default function RegisterForm({ db }) {
         </div>
         )}
     </Formik>
-
+  );
+}
