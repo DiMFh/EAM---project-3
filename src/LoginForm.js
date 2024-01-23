@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { doc, getDoc } from 'firebase/firestore';
 import { useUserRole } from './UserRoleContext';
-import { Container, Form, Button, Row, Col } from 'react-bootstrap';
+import { Form, Button, Row, Col } from 'react-bootstrap';
 
 import './LoginForm.css';
 
@@ -15,6 +15,8 @@ const LoginForm = ({ db }) => {
 
   async function handleLogin(e) {
     e.preventDefault();
+
+    let errorStyle = { borderColor: 'red' };
   
     try {
       const ref = doc(db, "users", email);
@@ -22,6 +24,9 @@ const LoginForm = ({ db }) => {
   
       if (!res.exists()) {
         console.log("No such document in the database");
+        setPassword('');
+        setEmail('');
+        alert("Email not found");
       } else {
         console.log('Email from database:', res.data().email);
         console.log('Password from database:', res.data().password);
@@ -43,7 +48,7 @@ const LoginForm = ({ db }) => {
   
           console.log("Found User:", res.data());
         } else {
-          setEmailStyle({ borderColor: 'red' });
+          setEmailStyle(errorStyle);
           setPassword('');
           console.log("Incorrect email or password");
         }
@@ -57,7 +62,6 @@ const LoginForm = ({ db }) => {
 
   return (
     <div className='mainpage'>
-      <Container>
         <h2>Εθνικόν και Καποδιστριακόν Πανεπιστήμιον Αθηνών</h2>
         <p>Γραμματεία Πληροφορικής και Τηλεπικοινωνιών</p>
         
@@ -75,7 +79,8 @@ const LoginForm = ({ db }) => {
                 type="email" 
                 placeholder="Email" 
                 value={email} 
-                onChange={(e) => setEmail(e.target.value)} 
+                onChange={(e) => setEmail(e.target.value)}
+                style={emailStyle}
               />
             </Col>
           </Form.Group>
@@ -99,7 +104,6 @@ const LoginForm = ({ db }) => {
             <a href='/register'>Δημιουργία νέου χρήστη</a>
           </div>
         </Form>
-      </Container>
     </div>
   );
   
