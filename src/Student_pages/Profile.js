@@ -13,6 +13,7 @@ import {
   MDBCardImage,
   MDBBtn,
 } from 'mdb-react-ui-kit';
+import { NavLink} from "react-router-dom";
 import { Breadcrumb } from 'react-bootstrap';
 import './Profile.css';
 
@@ -118,7 +119,12 @@ const ProfilePage = ({ db }) => {
                 </MDBCard>
                 <MDBCard className="mb-4">
                   <MDBCardBody className="text-center">
-                    <p className="text-muted mb-1" style={{ textAlign: 'left' }}><strong>Δείτε: </strong> {userData.school}</p>
+                    <p className="text-muted mb-1" style={{ textAlign: 'left' }}><strong>Δείτε ακόμα: </strong> {userData.school}</p>
+                    <nav className="nav">
+                      <NavLink to="/student-page/grades" className="nav-link">Βαθμολογίες</NavLink>
+                      <NavLink to="/student-page/declarations" className="nav-link">Δηλώσεις</NavLink>
+                      <NavLink to="/student-page/certificate" className="nav-link">Πιστοποιητικά</NavLink>
+                    </nav>
                   </MDBCardBody>
                 </MDBCard>
               </MDBCol>
