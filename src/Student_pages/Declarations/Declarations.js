@@ -85,16 +85,22 @@ const Declarations = () => {
         <Breadcrumb.Item active>Δηλώσεις</Breadcrumb.Item>
       </Breadcrumb>
       <div className="main">
-        <Container>
-          <Accordion defaultActiveKey="0">
-            <Card>
+        <Container style={{ backgroundColor: "rgba(255, 255, 255, 0.5)" }}>
+          <Accordion
+            defaultActiveKey="0"
+            style={{ backgroundColor: "rgba(255, 255, 255, o)" }}
+          >
+            <Card style={{ backgroundColor: "rgba(255, 255, 255, 0.5)" }}>
               <Card.Header>
                 <CustomToggle eventKey="0" className="new-declaration-button">
                   Νέα Δήλωση
                 </CustomToggle>
               </Card.Header>
             </Card>
-            <Accordion.Item eventKey={"0"}>
+            <Accordion.Item
+              eventKey={"0"}
+              style={{ backgroundColor: "rgba(255, 255, 255, 0.5)" }}
+            >
               <Accordion.Header>Ιστορικό Δηλώσεων</Accordion.Header>
               <Accordion.Body>
                 <Accordion>
@@ -119,27 +125,45 @@ const Declarations = () => {
                                   </td>
                                   <td>{declaration.courses.length}</td>
                                   <td>
-                                    <Button variant="outline-secondary" onClick={() => handleShowCanvas(declaration)}>
+                                    <Button
+                                      variant="outline-secondary"
+                                      onClick={() =>
+                                        handleShowCanvas(declaration)
+                                      }
+                                    >
                                       Προβολή
                                     </Button>
-                                    <Offcanvas show={showCanvas} onHide={handleCloseCanvas} placement="end" backdrop={false}>
+                                    <Offcanvas
+                                      show={showCanvas}
+                                      onHide={handleCloseCanvas}
+                                      placement="end"
+                                      backdrop={false}
+                                    >
                                       <Offcanvas.Header closeButton>
-                                        <Offcanvas.Title>{currentDeclaration.date} {currentDeclaration.time}</Offcanvas.Title>
-                                        </Offcanvas.Header>
-                                          <Offcanvas.Body>
-                                          <Row>
-                                            <Col>
-                                              <h5>Μαθήματα</h5>
-                                              {currentDeclaration && Object.entries(currentDeclaration.courses).map(([key, course]) => {
+                                        <Offcanvas.Title>
+                                          {currentDeclaration.date}{" "}
+                                          {currentDeclaration.time}
+                                        </Offcanvas.Title>
+                                      </Offcanvas.Header>
+                                      <Offcanvas.Body>
+                                        <Row>
+                                          <Col>
+                                            <h5>Μαθήματα</h5>
+                                            {currentDeclaration &&
+                                              Object.entries(
+                                                currentDeclaration.courses
+                                              ).map(([key, course]) => {
                                                 return (
-                                                  <p>{course.name} ({course.semester} Εξ.)</p>
+                                                  <p>
+                                                    {course.name} (
+                                                    {course.semester} Εξ.)
+                                                  </p>
                                                 );
-
                                               })}
-                                            </Col>
-                                          </Row>
-                                          </Offcanvas.Body>
-                                        </Offcanvas>
+                                          </Col>
+                                        </Row>
+                                      </Offcanvas.Body>
+                                    </Offcanvas>
                                   </td>
                                 </tr>
                               ))}

@@ -14,6 +14,25 @@ body {
   -moz-osx-font-smoothing: grayscale; /* similar to the above, but specific to Firefox on macOS */
 }
 
+/* create a pseudo element that will cover the entire page for the background image */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+
+  background-image: url(/src/images/background1.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
+  opacity: 0.6;
+}
+
 #root {
   flex: 1;
 }
