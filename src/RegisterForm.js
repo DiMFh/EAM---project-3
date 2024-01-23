@@ -80,7 +80,7 @@ export default function RegisterForm({ db }) {
       })
     ),
   
-    certificates: yup.array().of(
+    certificate: yup.array().of(
       yup.object().shape({
         dateRequest: yup.date().nullable().default(null),
         name: yup.string(),
@@ -94,13 +94,36 @@ export default function RegisterForm({ db }) {
   
   const saveToDatabase = async (values) => {
     console.log("Values to save:", values); // Εκτύπωση των τιμών που θα αποθηκευτούν
+  
+    let dataToSave = {};
+  
+    if (values.role === 'student') {
+      // Saves for Students
+      dataToSave = { ...values };
+    } else if (values.role === 'professor') {
+      // Saves for Proffessors
+      dataToSave = {
+        firstname: values.firstname,
+        lastname: values.lastname,
+        email: values.email,
+        password: values.password, 
+        confirmPassword: values.confirmPassword,
+        birthdate: values.birthdate,
+        role: values.role,
+        Codephone: values.Codephone,
+        phone: values.phone,
+        city: values.city,
+        zip: values.zip,
+        address: values.address
+      };
+    }
+  
     try {
       const ref_user = doc(db, "users", values.email);
       console.log("Reference to user document:", ref_user); // Εκτύπωση της αναφοράς στο έγγραφο του χρήστη
-      await setDoc(ref_user, values); 
-
+      await setDoc(ref_user, dataToSave); 
+  
       console.log("Data saved successfully"); // Εκτύπωση μηνύματος επιτυχίας
-
       window.location.href = '/login';
       alert("Document written to Database");
     } catch (error) {
