@@ -11,17 +11,20 @@ import {
   MDBCardText,
   MDBCardBody,
   MDBCardImage,
-  MDBBtn,
 } from 'mdb-react-ui-kit';
-import { NavLink} from "react-router-dom";
+import { NavLink,useNavigate} from "react-router-dom";
 import { Breadcrumb } from 'react-bootstrap';
-import './Profile.css';
+// import './Profile.css';
+import { useUserRole } from "../UserRoleContext";
 
 const ProfilePage = ({ db }) => {
   const [userData, setUserData] = useState(null);
   const [editMode, setEditMode] = useState(false);
   const [newData, setNewData] = useState({});
+  const { setUserRole } = useUserRole();
   const userEmail = localStorage.getItem('email');
+
+  const navigate = useNavigate();
 
     useEffect(() => {
         async function fetchUserData() {
@@ -77,8 +80,14 @@ const ProfilePage = ({ db }) => {
       setNewData({ ...newData, [name]: value });
     };
 
+    const handleLogout = () => {
+      localStorage.removeItem("role"); // clear the role from local storage
+      setUserRole("public");
+      navigate("/"); // redirect to the home page
+    };
+
     return (
-      <section style={{ backgroundColor: '#eee' }}>
+      <section>
       <Breadcrumb>
         <Breadcrumb.Item href="./">Αρχική</Breadcrumb.Item>
         <Breadcrumb.Item active>Προφίλ</Breadcrumb.Item>
@@ -222,16 +231,32 @@ const ProfilePage = ({ db }) => {
                     </>
                   )}
                   <div style={{ marginTop: '40px' }}>
-                    {!editMode && <MDBBtn onClick={handleEdit} color="primary" className="btn-rounded" size="md">Επεξεργασία Στοιχείων</MDBBtn>}
-                    {editMode && <MDBBtn onClick={handleSave} color="success" className="btn-rounded" size="md">Αποθήκευση Αλλαγών</MDBBtn>}
-                  </div>  
+                    {!editMode && 
+                    <button onClick={handleEdit} className="btn btn-primary btn-rounded" type="button">
+                        Επεξεργασία Στοιχείων
+                    </button>
+                    }
+
+                    {editMode && 
+                    <button onClick={handleSave} className="btn btn-success btn-rounded" type="button">
+                        Αποθήκευση Αλλαγών
+                    </button>
+                    }
+                  </div>    
                 </MDBCol>
               </MDBRow>
               </MDBCardBody>
             </MDBCard>  
-
+                      
             
-              </MDBCol>   
+              </MDBCol> 
+              <NavLink
+                to="/"
+                className="logout-button"
+                onClick={handleLogout}
+              >
+                Αποσύνδεση
+              </NavLink>  
             </MDBRow>  
           </MDBContainer>
         )}
