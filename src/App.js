@@ -15,6 +15,7 @@ import Sections from "./Sections";
 import NotFoundPage from './NotFoundPage';
 //student pages
 import Studentpage from "./Student_pages/Studentpage";
+import Help from "./Student_pages/Help";
 import Declarations from "./Student_pages/Declarations/Declarations";
 import NewDeclaration from "./Student_pages/Declarations/NewDeclaration";
 import Certificate from "./Student_pages/Certificate_pages/Certificate";
@@ -60,6 +61,7 @@ function App() {
           <Route path="new-declaration" element={<NewDeclaration />} />
           <Route path="certificate-request" element={<Certificaterequest />} />
           <Route path="certificate" element={<Certificate />} />
+          <Route path="help" element={<Help />} />
           <Route path="certificate">
 
             <Route index element={<Certificate />} />
