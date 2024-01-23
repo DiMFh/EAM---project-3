@@ -8,6 +8,7 @@ import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
+import { Container } from 'react-bootstrap';
 import * as formik from 'formik';
 import * as yup from 'yup';
 import { doc, setDoc,  } from "firebase/firestore";
@@ -132,6 +133,7 @@ export default function RegisterForm({ db }) {
   };
 
   return (
+    <Container className="py-3" style={{ marginTop: '40px', borderRadius: '10px' }}>
     <Formik
       validationSchema={schema}
       onSubmit={(values, actions) => {
@@ -400,5 +402,6 @@ export default function RegisterForm({ db }) {
         </div>
         )}
     </Formik>
+    </Container>
   );
 }
