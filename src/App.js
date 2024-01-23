@@ -12,6 +12,7 @@ import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
 import Home from "./Home";
 import Sections from "./Sections";
+import NotFoundPage from './NotFoundPage';
 //student pages
 import Studentpage from "./Student_pages/Studentpage";
 import Declarations from "./Student_pages/Declarations/Declarations";
@@ -79,6 +80,7 @@ function App() {
           <Route path="student-grades-create" element={<StudentGradesCreate />} />
           <Route path="profile" element={<ProfilePage1 db={db} />} />
         </Route>
+        <Route path="*" element={<NotFoundPage />} />
       </Route>
     )
   );
