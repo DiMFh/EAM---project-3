@@ -84,12 +84,9 @@ const Declarations = () => {
         <Breadcrumb.Item href="./">Αρχική</Breadcrumb.Item>
         <Breadcrumb.Item active>Δηλώσεις</Breadcrumb.Item>
       </Breadcrumb>
-      <div className="main">
+      <div className="main-container">
         <Container style={{ backgroundColor: "rgba(255, 255, 255, 0.5)" }}>
-          <Accordion
-            defaultActiveKey="0"
-            style={{ backgroundColor: "rgba(255, 255, 255, o)" }}
-          >
+          <Accordion defaultActiveKey="0">
             <Card style={{ backgroundColor: "rgba(255, 255, 255, 0.5)" }}>
               <Card.Header>
                 <CustomToggle eventKey="0" className="new-declaration-button">
