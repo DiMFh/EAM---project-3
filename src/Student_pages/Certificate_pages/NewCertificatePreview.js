@@ -3,6 +3,9 @@ import "./NewCertificatePreview.css";
 import image from "../../images/warning.png";
 import { useState } from "react";
 import { useEffect } from 'react';
+import { getAuth } from "firebase/auth";
+import { getFirestore, doc, getDoc } from "firebase/firestore";
+import { db } from "../../data/firebase";
 import {
   Container,
   Col,
@@ -22,6 +25,8 @@ const NewCertificatePreview = ({
   const [showModal, setShowModal] = useState(false);
   const handleCloseModal = () => setShowModal(false);
   const handleShowModal = () => setShowModal(true);
+  const [name, setName] = useState(null);
+const [surname, setSurname] = useState(null);
   const certificateNames = {
     "student_status": "Φοιτητικής Ιδιότητας",
     "detailed_grades": "Αναλυτικής βαθμολογίας",
@@ -30,7 +35,22 @@ const NewCertificatePreview = ({
     "tax_use": "Φορολογικής Χρήσης"
   };
   const selectedCertificateId = localStorage.getItem('selectedCertificateId');
-  
+  useEffect(() => {
+    const userEmail = localStorage.getItem("email");
+    if (userEmail) {
+      const userDoc = doc(db, "users", userEmail);
+      getDoc(userDoc).then((docSnap) => {
+        if (docSnap.exists()) {
+          const userData = docSnap.data();
+          // setSavedCertificates(userData.certificates || []);
+          setName(userData.firstname);
+          setSurname(userData.lastname);
+        } else {
+          console.log("No user data found in Firestore");
+        }
+      });
+    }
+  }, []);
 
   return (
     <div className="newdeclaration-preview">
@@ -67,9 +87,50 @@ const NewCertificatePreview = ({
           </tr>
         </tbody>
       </Table>
-        <ListGroup>
-          
-        </ListGroup>
+      <ListGroup>
+  <ListGroup.Item as="li">
+    <Table className="table table-hover">
+      <tbody>
+        <tr>
+          <td style={{ textAlign: "left", width: "15%" }}>
+            <strong>Περίοδος:</strong>
+          </td>
+          <td style={{ textAlign: "left" }}>2023/2024 Χειμερινό</td>
+        </tr>
+        <tr>
+          <td style={{ textAlign: "left", width: "15%" }}>
+            <strong>Ημερομηνία:</strong>
+          </td>
+          <td style={{ textAlign: "left" }}>{new Date().toLocaleDateString()}</td>
+        </tr>
+        <tr>
+          <td style={{ textAlign: "left", width: "15%" }}>
+            <strong>Ισχύς:</strong>
+          </td>
+          <td style={{ textAlign: "left" }}>3 μήνες</td>
+        </tr>
+        <tr>
+          <td style={{ textAlign: "left", width: "15%" }}>
+            <strong>Όνομα:</strong>
+          </td>
+          <td style={{ textAlign: "left" }}>{name}</td>
+        </tr>
+        <tr>
+          <td style={{ textAlign: "left", width: "15%" }}>
+            <strong>Επίθετο:</strong>
+          </td>
+          <td style={{ textAlign: "left" }}>{surname}</td>
+        </tr>
+        <tr>
+          <td style={{ textAlign: "left", width: "15%" }}>
+            <strong>Ιδιότητα:</strong>
+          </td>
+          <td style={{ textAlign: "left" }}>Φοιτητής</td>
+        </tr>
+      </tbody>
+    </Table>
+  </ListGroup.Item>
+</ListGroup>
       </Container>
       <Modal
         show={showModal}
