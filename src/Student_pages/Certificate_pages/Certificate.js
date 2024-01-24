@@ -5,9 +5,9 @@ import { useAccordionButton } from "react-bootstrap";
 import React, { useState, useEffect } from 'react';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from "../../data/firebase";
-import print from './print.png';
-import download from './download.png';
-import preview from './preview.png';
+import print from '../../images/print.png';
+import download from '../../images/download.png';
+import preview from '../../images/preview.png';
 
 
 export default function Certificate({ current }) {
@@ -62,15 +62,15 @@ useEffect(() => {
               </Card.Header>
             </Card>
             <Accordion.Item eventKey="1">
-            <Accordion.Header>Ιστορικό Πιστοπιητικών</Accordion.Header>
+            <Accordion.Header>Ιστορικό Πιστοποιητικών</Accordion.Header>
             <Accordion.Body>
               <Table className="table table-hover">
                 <thead>
                   <tr>
-                    <th>Name</th>
-                    <th>Date</th>
-                    <th>Time</th>
-                    <th>Actions</th>
+                    <th>Πιστοποιητικά</th>
+                    <th>Ημερομηνία Έκδοσης</th>
+                    <th>Ώρα Έκδοσης</th>
+                    <th>Ενέργειες</th>
                   </tr>
                 </thead>
                 <tbody>

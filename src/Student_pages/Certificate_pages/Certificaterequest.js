@@ -233,7 +233,21 @@ const Certificaterequest = () => {
             <Accordion defaultActiveKey="none">
               {/* certificate */}
               <Accordion.Item eventKey="0">
-                <Accordion.Header>Φοιτητικής Ιδιότητας</Accordion.Header>
+              <Accordion.Header>
+              <Form.Check
+              aria-label="select"
+              certificateId={0}
+              onClick={(event) => {
+                event.stopPropagation(); // Stop event propagation
+              }}
+              onChange={handleCheckboxChange(0, "student_status")}
+              isValid
+              disabled={selectedCheckbox !== null && selectedCheckbox !== 0}
+              checked={selectedCheckbox === 0}
+              className="me-2" // Add margin to the right
+            />
+            Φοιτητικής Ιδιότητας
+          </Accordion.Header>
                 <Accordion.Body>
                 <p><strong>Περιγραφή:</strong> Το πιστοποιητικό αυτό επιβεβαιώνει την φοίτηση του φοιτητή στην σχολή.</p>
                     <Accordion > 
@@ -241,19 +255,11 @@ const Certificaterequest = () => {
                                 <tbody>
                                      
                                       
-                                      <td style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
-                                           <strong style={{marginRight: "10px"}}>Επιλογή:</strong>
-                                        <Form.Check
-                                          aria-label="select"
-
-                                          certificateId = {0}
-                                          onChange={handleCheckboxChange(0, "student_status")}
-                                          isValid
-                                          disabled={selectedCheckbox !== null && selectedCheckbox !== 0}
-                                          checked={selectedCheckbox === 0}
-                                        />
+                                      {/* <td style={{display: "flex", justifyContent: "center", alignItems: "center"}}> */}
+                                           {/* <strong style={{marginRight: "10px"}}>Επιλογή:</strong> */}
+                                       
                                         
-                                      </td>
+                                      {/* </td> */}
                                 </tbody>
                               </Table>
                           
@@ -268,28 +274,23 @@ const Certificaterequest = () => {
 
               {/* certificate */}
               <Accordion.Item eventKey="1">
-                <Accordion.Header>Φορολογικής χρήσης</Accordion.Header>
+                <Accordion.Header><Form.Check
+  aria-label="select"
+  onChange={handleCheckboxChange(1, "tax_use")}
+  onClick={(event) => {
+    event.stopPropagation();
+  }}
+  isValid
+  disabled={selectedCheckbox !== null && selectedCheckbox !== 1}
+  checked={selectedCheckbox === 1}
+  className="me-2"
+/>Φορολογικής χρήσης</Accordion.Header>
                 <Accordion.Body>
                 <Accordion > 
                   <p><strong>Περιγραφή:</strong> To πιστοποιητικό αυτό λειτουργεί ως βεβαίωση για φορολογική χρήση.</p>
                             <Table className="table table-hover">
                                 <tbody>
-                                <td style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
-                                           <strong style={{marginRight: "10px"}}>Επιλογή:</strong>
-                                        <Form.Check
-                                          aria-label="select"
-                                          // set the checkbox to checked if the course is already selected (for when the user goes back to the selection)
-                                          
-                                          // onChange={() =>
-                                          //   handleCourseSelection(course)
-                                          // }
-                                          onChange={handleCheckboxChange(1, "tax_use")}
-                                          
-                                          isValid
-                                          disabled={selectedCheckbox !== null && selectedCheckbox !== 1}
-                                          checked={selectedCheckbox === 1}
-                                        />
-                                      </td>
+                               
                                 </tbody>
                               </Table>
                           
@@ -302,57 +303,46 @@ const Certificaterequest = () => {
 
               {/* certificate */}
               <Accordion.Item eventKey="2">
-                <Accordion.Header>Αναλυτικής Βαθμολογίας</Accordion.Header>
+                <Accordion.Header><Form.Check
+  aria-label="select"
+  onChange={handleCheckboxChange(2, "detailed_grades")}
+  onClick={(event) => {
+    event.stopPropagation();
+  }}
+  isValid
+  disabled={selectedCheckbox !== null && selectedCheckbox !== 2}
+  checked={selectedCheckbox === 2}
+  className="me-2"
+/>Αναλυτικής Βαθμολογίας</Accordion.Header>
                 <Accordion.Body> <Accordion > 
                 <p><strong>Περιγραφή:</strong> Το πιστοποιητικό αυτό διαθέτει τους βαθμούς όλων των περασμένων μαθημάτων του φοιτητή. </p>
                             <Table className="table table-hover">
                                 <tbody>
-                                <td style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
-                                           <strong style={{marginRight: "10px"}}>Επιλογή:</strong>
-                                        <Form.Check
-                                          aria-label="select"
-                                          // set the checkbox to checked if the course is already selected (for when the user goes back to the selection)
-                                          
-                                          // onChange={() =>
-                                          //   handleCourseSelection(course)
-                                          // }
-                                          onChange={handleCheckboxChange(2, "detailed_grades")}
-                                          isValid
-                                          disabled={selectedCheckbox !== null && selectedCheckbox !== 2}
-                                          checked={selectedCheckbox === 2}
-                                        />
-                                      </td>
+                                
                                 </tbody>
                               </Table>
-                          
-                        
-                      
                     </Accordion></Accordion.Body>
                 </Accordion.Item>
               {/* certificate */}
 
                 {/* certificate */}
                 <Accordion.Item eventKey="3">
-                <Accordion.Header>Στρατολογικής Χρήσης (Συνοπτικό)</Accordion.Header>
+                <Accordion.Header><Form.Check
+  aria-label="select"
+  onChange={handleCheckboxChange(3, "military_use_brief")}
+  onClick={(event) => {
+    event.stopPropagation();
+  }}
+  isValid
+  disabled={selectedCheckbox !== null && selectedCheckbox !== 3}
+  checked={selectedCheckbox === 3}
+  className="me-2"
+/>Στρατολογικής Χρήσης (Συνοπτικό)</Accordion.Header>
                 <Accordion.Body><Accordion >
                 <p><strong>Περιγραφή:</strong> Το πιστοποιητικό αυτό διατίθεται ως βεβαίωση φοίτησης για στρατολογική χρήση (συνοπτικό).</p> 
                             <Table className="table table-hover">
                                 <tbody>
-                                <td style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
-                                           <strong style={{marginRight: "10px"}}>Επιλογή:</strong>
-                                        <Form.Check
-                                          aria-label="select"
-                                          // set the checkbox to checked if the course is already selected (for when the user goes back to the selection)
-                                          
-                                          // onChange={() =>
-                                          //   handleCourseSelection(course)
-                                          // }
-                                          onChange={handleCheckboxChange(3, "military_use_brief")}
-                                          isValid
-                                          disabled={selectedCheckbox !== null && selectedCheckbox !== 3}
-                                          checked={selectedCheckbox === 3}
-                                        />
-                                      </td>
+                                
                                 </tbody>
                               </Table>
                           
@@ -364,26 +354,22 @@ const Certificaterequest = () => {
 
                 {/* certificate */}
                 <Accordion.Item eventKey="4">
-                <Accordion.Header>Στρατολογικής Χρήσης (Αναλυτικό)</Accordion.Header>
+                <Accordion.Header><Form.Check
+  aria-label="select"
+  onChange={handleCheckboxChange(4, "military_use_detailed")}
+  onClick={(event) => {
+    event.stopPropagation();
+  }}
+  isValid
+  disabled={selectedCheckbox !== null && selectedCheckbox !== 4}
+  checked={selectedCheckbox === 4}
+  className="me-2"
+/>Στρατολογικής Χρήσης (Αναλυτικό)</Accordion.Header>
                 <Accordion.Body><Accordion > 
                 <p><strong>Περιγραφή:</strong> Το πιστοποιητικό αυτό διατίθεται ως βεβαίωση φοίτησης για στρατολογική χρήση (αναλυτικό).</p>
                             <Table className="table table-hover">
                                 <tbody>
-                                <td style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
-                                           <strong style={{marginRight: "10px"}}>Επιλογή:</strong>
-                                        <Form.Check
-                                          aria-label="select"
-                                          // set the checkbox to checked if the course is already selected (for when the user goes back to the selection)
-                                          
-                                          // onChange={() =>
-                                          //   handleCourseSelection(course)
-                                          // }
-                                          onChange={handleCheckboxChange(4, "military_use_detailed")}
-                                          isValid
-                                          disabled={selectedCheckbox !== null && selectedCheckbox !== 4}
-                                          checked={selectedCheckbox === 4}
-                                        />
-                                      </td>
+                                
                                 </tbody>
                               </Table>
                           
