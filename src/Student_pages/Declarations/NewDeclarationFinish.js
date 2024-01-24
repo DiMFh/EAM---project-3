@@ -3,6 +3,7 @@ import "./NewDeclarationFinish.css";
 import { useState, useEffect } from "react";
 import { doc, getDoc, updateDoc, arrayUnion } from "firebase/firestore";
 import { db } from "../../data/firebase";
+import { useNavigate } from "react-router";
 import {
   Container,
   Button,
@@ -13,6 +14,8 @@ import {
 } from "react-bootstrap";
 
 const NewDeclarationFinish = ({ lastStepCompleted, selectedCourses }) => {
+  const navigate = useNavigate();
+
   const [loading, setLoading] = useState(true);
   const [printing, setPrinting] = useState(false);
 
@@ -39,6 +42,7 @@ const NewDeclarationFinish = ({ lastStepCompleted, selectedCourses }) => {
             date: new Date().toLocaleDateString(),
             time: new Date().toLocaleTimeString(),
             courses: selectedCourses,
+            state: "finalized", // "finalized" or "temporary
             period: "2023-2024 Χειμερινό",
           };
           updateDoc(userDoc, {
@@ -81,6 +85,7 @@ const NewDeclarationFinish = ({ lastStepCompleted, selectedCourses }) => {
                 href="declarations"
                 variant="secondary"
                 className="float-end"
+                onClick={() => navigate("../declarations")}
               >
                 Δηλώσεις
               </Button>

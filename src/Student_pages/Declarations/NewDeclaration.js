@@ -38,8 +38,32 @@ const NewDeclaration = () => {
     if (activeStep > 0) setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-  //  ***clear the selected courses from the local storage when the component is mounted for the first time
   useEffect(() => {
+    // if the user has a saved declaration, load it
+    const editingDeclarationId = localStorage.getItem("editingDeclarationId");
+    // remove the editingDeclarationId from the local storage
+    if (editingDeclarationId) {
+      // get the declaration from the database
+      const userEmail = localStorage.getItem("email");
+      if (userEmail) {
+        const userDoc = doc(db, "users", userEmail);
+        getDoc(userDoc).then((docSnap) => {
+          if (docSnap.exists()) {
+            const userData = docSnap.data();
+            const declarationToEdit = userData.declarations.find(
+              (declaration) => declaration.id == editingDeclarationId
+            );
+            if (declarationToEdit) {
+              setselectedCourses(declarationToEdit.courses);
+            } else {
+              console.log("No such declaration!");
+            }
+          }
+        });
+      }
+      localStorage.removeItem("editingDeclarationId");
+    }
+    // clear the selected courses from the local storage when the component is mounted for the first time
     localStorage.removeItem("selectedCourses");
   }, []);
 
@@ -68,8 +92,6 @@ const NewDeclaration = () => {
   // ****group courses by semester after they are fetched from the database
   const [coursesBySemester, setCoursesBySemester] = useState({});
   useEffect(() => {
-    console.log("CoursesDB: ", coursesDB);
-
     if (typeof coursesDB === "object" && coursesDB !== null) {
       const groupedCourses = Object.values(coursesDB).reduce((acc, course) => {
         const semester = course.semester || "Unknown";
