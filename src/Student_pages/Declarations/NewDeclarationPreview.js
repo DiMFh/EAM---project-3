@@ -1,7 +1,11 @@
 /* NewDeclarationPreview.js */
 import "./NewDeclarationPreview.css";
 import image from "../../images/warning.png";
+import successImage from "../../images/success.png";
 import { useState } from "react";
+import { doc, getDoc, updateDoc, arrayUnion } from "firebase/firestore";
+import { db } from "../../data/firebase";
+import { useNavigate } from "react-router";
 import {
   Container,
   Col,
@@ -10,6 +14,7 @@ import {
   Modal,
   ListGroup,
   Table,
+  Spinner,
 } from "react-bootstrap";
 
 const NewDeclarationPreview = ({
@@ -18,17 +23,75 @@ const NewDeclarationPreview = ({
   goToFinish,
   maxCourses,
 }) => {
-  const [showModal, setShowModal] = useState(false);
-  const handleCloseModal = () => setShowModal(false);
-  const handleShowModal = () => setShowModal(true);
+  const navigate = useNavigate();
+
+  // *** Modal for the submit button
+  const [showSubmitModal, setShowSubmitModal] = useState(false);
+  const handleCloseSubmitModal = () => setShowSubmitModal(false);
+  const handleShowSubmitModal = () => setShowSubmitModal(true);
+
+  // *** Modal for the temporary save button
+  const [showTempSaveModal, setShowTempSaveModal] = useState(false);
+  const handleCloseTempSaveModal = () => setShowTempSaveModal(false);
+  const handleShowTempSaveModal = () => setShowTempSaveModal(true);
+
+  // *** Modal after the declaration is saved
+  const [showSaveFinishedModal, setShowSaveFinishedModal] = useState(false);
+  const handleCloseSaveFinishedModal = () => setShowSaveFinishedModal(false);
+  const handleShowSaveFinishedModal = () => setShowSaveFinishedModal(true);
+
+  // *** Actions after the  'temp save' is clicked
+  const [loading, setLoading] = useState(false);
+
+  const handleTempSave = () => {
+    // get the user's email
+    const userEmail = localStorage.getItem("email");
+    if (userEmail) {
+      // get the user's document
+      const userDoc = doc(db, "users", userEmail);
+      // update the user's document
+      getDoc(userDoc).then((docSnap) => {
+        if (docSnap.exists()) {
+          const userData = docSnap.data();
+          const Declaration = {
+            id: userData.declarations ? userData.declarations.length + 1 : 0,
+            date: new Date().toLocaleDateString(),
+            time: new Date().toLocaleTimeString(),
+            courses: selectedCourses,
+            state: "temporary", // "finalized" or "temporary
+            period: "2023-2024 Χειμερινό",
+          };
+          updateDoc(userDoc, {
+            declarations: arrayUnion(Declaration),
+          });
+        } else {
+          console.log("No user data found in Firestore");
+        }
+      });
+    }
+
+    // simulate a delay when the button is clicked
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 1500);
+
+    // show the 'finished' modal
+    handleCloseTempSaveModal();
+    handleShowSaveFinishedModal();
+  };
+
+  const handleGoToHistory = () => {
+    navigate("../declarations");
+  };
 
   return (
     <div className="newdeclaration-preview">
       <Container>
         {/* buttons section */}
-        <Row className="mb-2" md={3}>
+        <Row className="mb-2" md={4}>
           <Col sm={"auto"}></Col>
-          <Col md={7}>
+          <Col md={5} style={{ width: "48%" }}>
             <Button
               variant="outline-dark"
               className="float-end"
@@ -37,8 +100,17 @@ const NewDeclarationPreview = ({
               Επεξεργασία
             </Button>
           </Col>
+          <Col md={3} style={{ width: "18%" }}>
+            <Button
+              variant="secondary"
+              className="float-end"
+              onClick={handleShowTempSaveModal}
+            >
+              Προσωρινή αποθήκευση
+            </Button>
+          </Col>
           <Col md={1}>
-            <Button variant="success" onClick={handleShowModal}>
+            <Button variant="success" onClick={handleShowSubmitModal}>
               Υποβολή
             </Button>
           </Col>
@@ -96,8 +168,8 @@ const NewDeclarationPreview = ({
         </ListGroup>
       </Container>
       <Modal
-        show={showModal}
-        onHide={handleCloseModal}
+        show={showSubmitModal}
+        onHide={handleCloseSubmitModal}
         backdrop="static"
         centered
       >
@@ -127,11 +199,82 @@ const NewDeclarationPreview = ({
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseModal}>
+          <Button variant="secondary" onClick={handleCloseSubmitModal}>
             Πίσω
           </Button>
           <Button variant="success" onClick={goToFinish}>
             Ολοκλήρωση
+          </Button>
+        </Modal.Footer>
+      </Modal>
+      <Modal
+        show={showTempSaveModal}
+        onHide={handleCloseTempSaveModal}
+        backdrop="static"
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Προσωρινή αποθήκευση</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div className="row">
+            <div className="col-md-4">
+              <img
+                src={image}
+                alt="Certificate Example"
+                style={{
+                  width: "60%",
+                  marginLeft: "40px",
+                  marginBlockStart: "10px",
+                }}
+              />
+            </div>
+            <div className="col-md-8">
+              <p>
+                Επιλέγοντας Αποθήκευση, η δήλωση θα αποθηκευτεί στο ιστορικό των
+                δηλώσεών σας, αλλά δεν θα αποσταλεί στην Γραμματεία. Θα μπορείτε
+                να την επεξεργαστείτε ξανά αργότερα, και να την υποβάλετε μέχρι
+                το τέλος της περιόδου δήλωσης.
+              </p>
+            </div>
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="outline-dark" onClick={handleCloseTempSaveModal}>
+            Πίσω
+          </Button>
+          <Button variant="secondary" onClick={handleTempSave}>
+            {loading ? (
+              <Spinner animation="border" role="status" size="sm" />
+            ) : (
+              "Αποθήκευση"
+            )}
+          </Button>
+        </Modal.Footer>
+      </Modal>
+      <Modal
+        show={showSaveFinishedModal}
+        onHide={handleCloseSaveFinishedModal}
+        backdrop="static"
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Αποθηκεύτηκε!</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <img
+              src={successImage}
+              alt="Certificate Example"
+              style={{
+                marginBlockStart: "10px",
+              }}
+            />
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="outline-success" onClick={handleGoToHistory}>
+            Μετάβαση στο ιστορικό
           </Button>
         </Modal.Footer>
       </Modal>
