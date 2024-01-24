@@ -249,7 +249,8 @@ const Certificaterequest = () => {
             Φοιτητικής Ιδιότητας
           </Accordion.Header>
                 <Accordion.Body>
-                <p><strong>Περιγραφή:</strong> Το πιστοποιητικό αυτό επιβεβαιώνει την φοίτηση του φοιτητή στην σχολή.</p>
+                <p> Το πιστοποιητικό αυτό επιβεβαιώνει την φοίτηση του φοιτητή στην σχολή.</p>
+                {/* <p><strong>Περιγραφή:</strong> Το πιστοποιητικό αυτό επιβεβαιώνει την φοίτηση του φοιτητή στην σχολή.</p> */}
                     <Accordion > 
                             <Table className="table table-hover">
                                 <tbody>
@@ -287,7 +288,7 @@ const Certificaterequest = () => {
 />Φορολογικής χρήσης</Accordion.Header>
                 <Accordion.Body>
                 <Accordion > 
-                  <p><strong>Περιγραφή:</strong> To πιστοποιητικό αυτό λειτουργεί ως βεβαίωση για φορολογική χρήση.</p>
+                  <p> To πιστοποιητικό αυτό λειτουργεί ως βεβαίωση για φορολογική χρήση.</p>
                             <Table className="table table-hover">
                                 <tbody>
                                
@@ -315,7 +316,7 @@ const Certificaterequest = () => {
   className="me-2"
 />Αναλυτικής Βαθμολογίας</Accordion.Header>
                 <Accordion.Body> <Accordion > 
-                <p><strong>Περιγραφή:</strong> Το πιστοποιητικό αυτό διαθέτει τους βαθμούς όλων των περασμένων μαθημάτων του φοιτητή. </p>
+                <p> Το πιστοποιητικό αυτό διαθέτει τους βαθμούς όλων των περασμένων μαθημάτων του φοιτητή. </p>
                             <Table className="table table-hover">
                                 <tbody>
                                 
@@ -339,7 +340,7 @@ const Certificaterequest = () => {
   className="me-2"
 />Στρατολογικής Χρήσης (Συνοπτικό)</Accordion.Header>
                 <Accordion.Body><Accordion >
-                <p><strong>Περιγραφή:</strong> Το πιστοποιητικό αυτό διατίθεται ως βεβαίωση φοίτησης για στρατολογική χρήση (συνοπτικό).</p> 
+                <p> Το πιστοποιητικό αυτό διατίθεται ως βεβαίωση φοίτησης για στρατολογική χρήση (συνοπτικό).</p> 
                             <Table className="table table-hover">
                                 <tbody>
                                 
@@ -366,7 +367,7 @@ const Certificaterequest = () => {
   className="me-2"
 />Στρατολογικής Χρήσης (Αναλυτικό)</Accordion.Header>
                 <Accordion.Body><Accordion > 
-                <p><strong>Περιγραφή:</strong> Το πιστοποιητικό αυτό διατίθεται ως βεβαίωση φοίτησης για στρατολογική χρήση (αναλυτικό).</p>
+                <p> Το πιστοποιητικό αυτό διατίθεται ως βεβαίωση φοίτησης για στρατολογική χρήση (αναλυτικό).</p>
                             <Table className="table table-hover">
                                 <tbody>
                                 
