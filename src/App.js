@@ -11,7 +11,7 @@ import "./App.css";
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
 import Home from "./Home";
-import Sections from "./Sections";
+import Subjects from "./Subjects";
 import NotFoundPage from './NotFoundPage';
 //student pages
 import Studentpage from "./Student_pages/Studentpage";
@@ -42,7 +42,7 @@ function App() {
     createRoutesFromElements(
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
-        <Route path="/sections" element={<Sections />} />
+        <Route path="/subjects" element={<Subjects db={db} />} />
         <Route path="/register" element={<RegisterForm db={db} />} />
         <Route path="/login" element={<LoginForm db={db} />} />
         {/* <Route path="/student-page" element={<Studentpage />} /> */}
