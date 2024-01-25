@@ -71,7 +71,7 @@ export default function Header() {
                 isActive ? "active-link" : undefined
               }
             >
-              Σχολές και Τμήματα
+              Μαθήματα
             </NavLink>
             {userRole !== "public" && (
               <>
