@@ -201,6 +201,7 @@ export default function RegisterForm({ db }) {
       {({ handleSubmit, handleChange, values, touched, errors }) => (
         <div style={{ marginTop: '20px', marginRight: '30px', marginLeft: '30px' }}> 
           <h1>Συμπληρώστε την Αίτηση Εγγραφής</h1>
+          <p>Ότι είναι με αστερίσκο (*) είναι υποχρωτικό</p>
           <div style={{
               display: 'flex', // Ενεργοποίηση flexbox
               justifyContent: 'center', // Κεντράρισμα στον οριζόντιο άξονα
@@ -212,7 +213,7 @@ export default function RegisterForm({ db }) {
            <Form noValidate onSubmit={handleSubmit}>
             <Row className="mb-3">
             <Form.Group as={Col} md="3" controlId="validationFormik01">
-                <Form.Label>Email</Form.Label>
+                <Form.Label>Email*</Form.Label>
                 <Form.Control
                   type="email"
                   placeholder="mail@mail.com"
@@ -224,7 +225,7 @@ export default function RegisterForm({ db }) {
                 <Form.Control.Feedback type="invalid">{errors.email}</Form.Control.Feedback>
               </Form.Group>
               <Form.Group as={Col} md="3" controlId="validationFormik02">
-                <Form.Label>Κωδικός</Form.Label>
+                <Form.Label>Κωδικός*</Form.Label>
                 <Form.Control
                   type="password"
                   // placeholder="Password"
@@ -238,7 +239,7 @@ export default function RegisterForm({ db }) {
                 </Form.Control.Feedback>
               </Form.Group>
               <Form.Group as={Col} md="3" controlId="validationFormik03">
-                <Form.Label>Επιβεβαίωση Κωδ.</Form.Label>
+                <Form.Label>Επιβεβαίωση Κωδ.*</Form.Label>
                 <Form.Control
                   type="password"
                   //placeholder="Confirm Password"
@@ -254,7 +255,7 @@ export default function RegisterForm({ db }) {
               </Row>
               <Row className="mb-3">
               <Form.Group as={Col} md="3" controlId="validationFormik04">
-                <Form.Label>Όνομα</Form.Label>
+                <Form.Label>Όνομα*</Form.Label>
                 <Form.Control
                   type="text"
                   name="firstname"
@@ -267,7 +268,7 @@ export default function RegisterForm({ db }) {
                 <Form.Control.Feedback type="invalid">{errors.firstname}</Form.Control.Feedback>
               </Form.Group>
               <Form.Group as={Col} md="3" controlId="validationFormik05">
-                <Form.Label>Επίθετο</Form.Label>
+                <Form.Label>Επίθετο*</Form.Label>
                 <Form.Control
                   type="text"
                   name="lastname"
@@ -280,7 +281,7 @@ export default function RegisterForm({ db }) {
                 <Form.Control.Feedback type="invalid">{errors.lastname}</Form.Control.Feedback>
               </Form.Group>
               <Form.Group as={Col} md="4" controlId="validationFormik06">
-                <Form.Label>Ημερομηνία Γέννησης</Form.Label>
+                <Form.Label>Ημερομηνία Γέννησης*</Form.Label>
                 <Form.Control
                   type="date"
                   name="birthdate"
@@ -295,7 +296,7 @@ export default function RegisterForm({ db }) {
               </Row>
               <Row className="mb-3">
                   <Form.Group as={Col} md="5" controlId="validationFormik07">
-                    <Form.Label>Ρόλος</Form.Label>
+                    <Form.Label>Ρόλος*</Form.Label>
                     <Form.Control
                       as="select"
                       name="role"
@@ -313,7 +314,7 @@ export default function RegisterForm({ db }) {
                     </Form.Control.Feedback>
                   </Form.Group>
                   <Form.Group as={Col} md="7" controlId="validationFormik08">
-                    <Form.Label>Αριθμός Τηλεφώνου</Form.Label>
+                    <Form.Label>Αριθμός Τηλεφώνου*</Form.Label>
                       <Row>
                         <Col md="5">
                           <Form.Control
