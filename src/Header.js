@@ -66,7 +66,7 @@ export default function Header() {
               Προσωπικό
             </NavLink>
             <NavLink
-              to="/sections"
+              to="/subjects"
               className={({ isActive }) =>
                 isActive ? "active-link" : undefined
               }

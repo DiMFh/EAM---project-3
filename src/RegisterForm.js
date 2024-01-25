@@ -83,8 +83,10 @@ export default function RegisterForm({ db }) {
   
     certificate: yup.array().of(
       yup.object().shape({
-        dateRequest: yup.date().nullable().default(null),
+        date: yup.string(),
         name: yup.string(),
+        period: yup.string(),
+        time: yup.string(),
       })
     ),
     // }).test('test-name', 'test message', values => {
@@ -193,7 +195,7 @@ export default function RegisterForm({ db }) {
             time: "7:53:37 μ.μ."
           }
         ],
-      ceritificates: [{dateRequest: '2024-01-19T11:23:26.263Z',name:'Αναλυτικής βαθμολογίας' }],
+      certificates: [{date: '19/1/2024',name:'Στρατολογικής Χρήσης (Συνοπτικό)',period:'2023-2024 Χειμερινό',time: '10:03:40 π.μ.' }],
       }}
     >
       {({ handleSubmit, handleChange, values, touched, errors }) => (
@@ -347,7 +349,7 @@ export default function RegisterForm({ db }) {
 
                 </Row>
                 <Row className="mb-3">
-                  <Form.Group as={Col} md="4" controlId="validationFormik07">
+                  <Form.Group as={Col} md="4" controlId="validationFormik07">+
                     <Form.Label>Πόλη</Form.Label>
                     <Form.Control
                       type="text"
@@ -358,40 +360,39 @@ export default function RegisterForm({ db }) {
                       isInvalid={!!errors.city}
                     />
 
-                <Form.Control.Feedback type="invalid">
-                  {errors.city}
-                </Form.Control.Feedback>
-              </Form.Group>
-              <Form.Group as={Col} md="4" controlId="validationFormik08">
-                <Form.Label>Διεύθυνση</Form.Label>
-                <Form.Control
-                  type="text"
-                  // placeholder="State"
-                  name="address"
-                  value={values.address}
-                  onChange={handleChange}
-                  isInvalid={!!errors.address}
-                />
-                <Form.Control.Feedback type="invalid">
-                  {errors.address}
-                </Form.Control.Feedback>
-              </Form.Group>
-              <Form.Group as={Col} md="4" controlId="validationFormik09">
-                <Form.Label>Ταχυδρομικός Κώδικας</Form.Label>
-                <Form.Control
-                  type="text"
-                  // placeholder="Zip"
-                  name="zip"
-                  value={values.zip}
-                  onChange={handleChange}
-                  isInvalid={!!errors.zip}
-                />
+                    <Form.Control.Feedback type="invalid">
+                      {errors.city}
+                    </Form.Control.Feedback>
+                  </Form.Group>
+                  <Form.Group as={Col} md="4" controlId="validationFormik08">
+                    <Form.Label>Διεύθυνση</Form.Label>
+                    <Form.Control
+                      type="text"
+                      // placeholder="State"
+                      name="address"
+                      value={values.address}
+                      onChange={handleChange}
+                      isInvalid={!!errors.address}
+                    />
+                    <Form.Control.Feedback type="invalid">
+                      {errors.address}
+                    </Form.Control.Feedback>
+                  </Form.Group>
+                  <Form.Group as={Col} md="4" controlId="validationFormik09">
+                    <Form.Label>Ταχυδρομικός Κώδικας</Form.Label>
+                    <Form.Control
+                      type="text"
+                      // placeholder="Zip"
+                      name="zip"
+                      value={values.zip}
+                      onChange={handleChange}
+                      isInvalid={!!errors.zip}
+                    />
 
-                <Form.Control.Feedback type="invalid">
-                  {errors.zip}
-                </Form.Control.Feedback>
-              </Form.Group>
-              
+                    <Form.Control.Feedback type="invalid">
+                      {errors.zip}
+                    </Form.Control.Feedback>
+                  </Form.Group>
             </Row>
             <Row className="mb-3">
 

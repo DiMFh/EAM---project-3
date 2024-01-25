@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { doc, getDoc } from 'firebase/firestore';
 import { useUserRole } from './UserRoleContext';
-import { Form, Button, Row, Col } from 'react-bootstrap';
+import { Form, Button, Row, Col} from 'react-bootstrap';
 
 import './LoginForm.css';
 
@@ -26,7 +26,7 @@ const LoginForm = ({ db }) => {
         console.log("No such document in the database");
         setPassword('');
         setEmail('');
-        alert("Email not found");
+        alert("Email not found!!");
       } else {
         console.log('Email from database:', res.data().email);
         console.log('Password from database:', res.data().password);
@@ -51,6 +51,7 @@ const LoginForm = ({ db }) => {
           setEmailStyle(errorStyle);
           setPassword('');
           console.log("Incorrect email or password");
+          alert("Password in not correct!!");
         }
       }
     } catch (error) {
