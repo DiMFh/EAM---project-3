@@ -54,7 +54,10 @@ const NewDeclarationPreview = ({
         if (docSnap.exists()) {
           const userData = docSnap.data();
           const Declaration = {
-            id: userData.declarations ? userData.declarations.length + 1 : 0,
+            id:
+              new Date().toLocaleDateString() +
+              " " +
+              new Date().toLocaleTimeString(),
             date: new Date().toLocaleDateString(),
             time: new Date().toLocaleTimeString(),
             courses: selectedCourses,

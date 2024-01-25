@@ -1,6 +1,7 @@
 /* Declarations.js */
+import warningimage from "../../images/warning.png";
 import { useState, useEffect } from "react";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../data/firebase";
 import { useNavigate } from "react-router";
 import "./Declarations.css";
@@ -16,20 +17,30 @@ import {
   ButtonGroup,
   Offcanvas,
   Spinner,
+  Modal,
 } from "react-bootstrap";
 import { useAccordionButton } from "react-bootstrap";
+import { set } from "date-fns";
 
 const Declarations = () => {
   const navigate = useNavigate();
   const [savedDeclarations, setSavedDeclarations] = useState([]);
   const [showCanvas, setShowCanvas] = useState(false);
-  const [currentDeclaration, setCurrentDeclaration] = useState(""); // for the offcanvas
+  const [currentDeclaration, setCurrentDeclaration] = useState(""); // for the offcanvas, and the modal
 
   const handleShowCanvas = (declaration) => {
     setCurrentDeclaration(declaration);
     setShowCanvas(true);
   };
   const handleCloseCanvas = () => setShowCanvas(false);
+
+  // *** Modal for the delete button
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const handleCloseDeleteModal = () => setShowDeleteModal(false);
+  const handleShowDeleteModal = (declaration) => {
+    setCurrentDeclaration(declaration);
+    setShowDeleteModal(true);
+  };
 
   useEffect(() => {
     const userEmail = localStorage.getItem("email");
@@ -96,6 +107,30 @@ const Declarations = () => {
     navigate("../new-declaration");
   };
 
+  const handleDelete = (declarationid) => {
+    // get the user's email
+    const userEmail = localStorage.getItem("email");
+    if (userEmail) {
+      // get the user's document
+      const userDoc = doc(db, "users", userEmail);
+      // update the user's document
+      getDoc(userDoc).then((docSnap) => {
+        if (docSnap.exists()) {
+          const userData = docSnap.data();
+          const updatedDeclarations = userData.declarations.filter(
+            (declaration) => declaration.id !== declarationid
+          );
+          updateDoc(userDoc, {
+            declarations: updatedDeclarations,
+          });
+          setSavedDeclarations(updatedDeclarations);
+        } else {
+          console.log("No user data found in Firestore");
+        }
+      });
+    }
+  };
+
   return (
     <>
       <Breadcrumb>
@@ -134,31 +169,33 @@ const Declarations = () => {
                               </tr>
                             </thead>
                             <tbody>
-                              {declarations.map((declaration, idx) => (
-                                <tr key={idx}>
-                                  <td>
-                                    {declaration.date} {declaration.time}
-                                  </td>
-                                  <td>{declaration.courses.length}</td>
-                                  <td>
-                                    {declaration.state === "finalized" ? (
+                              {/* first display the finalized, and then the temporary declarations */}
+                              {declarations
+                                .filter(
+                                  (declaration) =>
+                                    declaration.state === "finalized"
+                                )
+                                .map((declaration, idx) => (
+                                  <tr key={idx}>
+                                    <td>
+                                      {declaration.date} {declaration.time}
+                                    </td>
+                                    <td>{declaration.courses.length}</td>
+                                    <td>
                                       <span className="text-success">
                                         Εγκρίθηκε
                                       </span>
-                                    ) : (
-                                      <span className="text-warning">
-                                        Αποθηκευμένη
-                                      </span>
-                                    )}
-                                  </td>
-                                  <td
-                                    style={{
-                                      display: "flex",
-                                      justifyContent: "right",
-                                    }}
-                                  >
-                                    <ButtonGroup className="mb-2">
-                                      {declaration.state === "finalized" ? (
+                                    </td>
+                                    <td
+                                      style={{
+                                        display: "flex",
+                                        justifyContent: "right",
+                                      }}
+                                    >
+                                      <ButtonGroup className="mb-2">
+                                        <Button variant="outline-primary">
+                                          Λήψη
+                                        </Button>
                                         <Button
                                           variant="outline-success"
                                           onClick={handlePrint}
@@ -173,7 +210,77 @@ const Declarations = () => {
                                             "Εκτύπωση"
                                           )}
                                         </Button>
-                                      ) : (
+                                        <Button
+                                          variant="outline-secondary"
+                                          onClick={() =>
+                                            handleShowCanvas(declaration)
+                                          }
+                                        >
+                                          Προβολή
+                                        </Button>
+                                        <Offcanvas
+                                          show={showCanvas}
+                                          onHide={handleCloseCanvas}
+                                          placement="end"
+                                          backdrop={false}
+                                        >
+                                          <Offcanvas.Header closeButton>
+                                            <Offcanvas.Title>
+                                              {currentDeclaration.date}{" "}
+                                              {currentDeclaration.time}
+                                            </Offcanvas.Title>
+                                          </Offcanvas.Header>
+                                          <Offcanvas.Body>
+                                            <Row>
+                                              <Col>
+                                                <h5>Μαθήματα:</h5>
+                                                {currentDeclaration &&
+                                                  Object.entries(
+                                                    currentDeclaration.courses
+                                                  ).map(([key, course]) => {
+                                                    return (
+                                                      <p>
+                                                        {course.name} (
+                                                        {course.semester} Εξ.)
+                                                      </p>
+                                                    );
+                                                  })}
+
+                                                <h6>Κατάσταση:</h6>
+                                                <h6>
+                                                  Εγκρίθηκε από την Γραμματεία
+                                                </h6>
+                                              </Col>
+                                            </Row>
+                                          </Offcanvas.Body>
+                                        </Offcanvas>
+                                      </ButtonGroup>
+                                    </td>
+                                  </tr>
+                                ))}
+                              {declarations
+                                .filter(
+                                  (declaration) =>
+                                    declaration.state === "temporary"
+                                )
+                                .map((declaration, idx) => (
+                                  <tr key={idx}>
+                                    <td>
+                                      {declaration.date} {declaration.time}
+                                    </td>
+                                    <td>{declaration.courses.length}</td>
+                                    <td>
+                                      <span className="text-warning">
+                                        Αποθηκευμένη
+                                      </span>
+                                    </td>
+                                    <td
+                                      style={{
+                                        display: "flex",
+                                        justifyContent: "right",
+                                      }}
+                                    >
+                                      <ButtonGroup className="mb-2">
                                         <Button
                                           variant="outline-warning"
                                           onClick={() =>
@@ -182,51 +289,128 @@ const Declarations = () => {
                                         >
                                           Επεξεργασία
                                         </Button>
-                                      )}
+                                        <Button
+                                          variant="outline-danger"
+                                          onClick={() =>
+                                            handleShowDeleteModal(declaration)
+                                          }
+                                        >
+                                          Διαγραφή
+                                        </Button>
+                                        <Button
+                                          variant="outline-secondary"
+                                          onClick={() =>
+                                            handleShowCanvas(declaration)
+                                          }
+                                        >
+                                          Προβολή
+                                        </Button>
+                                        <Offcanvas
+                                          show={showCanvas}
+                                          onHide={handleCloseCanvas}
+                                          placement="end"
+                                          backdrop={false}
+                                        >
+                                          <Offcanvas.Header closeButton>
+                                            <Offcanvas.Title>
+                                              {currentDeclaration.date}{" "}
+                                              {currentDeclaration.time}
+                                            </Offcanvas.Title>
+                                          </Offcanvas.Header>
+                                          <Offcanvas.Body>
+                                            <Row>
+                                              <Col>
+                                                <h5>Μαθήματα:</h5>
+                                                {currentDeclaration &&
+                                                  Object.entries(
+                                                    currentDeclaration.courses
+                                                  ).map(([key, course]) => {
+                                                    return (
+                                                      <p>
+                                                        {course.name} (
+                                                        {course.semester} Εξ.)
+                                                      </p>
+                                                    );
+                                                  })}
 
-                                      <Button
-                                        variant="outline-secondary"
-                                        onClick={() =>
-                                          handleShowCanvas(declaration)
-                                        }
-                                      >
-                                        Προβολή
-                                      </Button>
-                                      <Offcanvas
-                                        show={showCanvas}
-                                        onHide={handleCloseCanvas}
-                                        placement="end"
-                                        backdrop={false}
-                                      >
-                                        <Offcanvas.Header closeButton>
-                                          <Offcanvas.Title>
-                                            {currentDeclaration.date}{" "}
-                                            {currentDeclaration.time}
-                                          </Offcanvas.Title>
-                                        </Offcanvas.Header>
-                                        <Offcanvas.Body>
-                                          <Row>
-                                            <Col>
-                                              <h5>Μαθήματα</h5>
-                                              {currentDeclaration &&
-                                                Object.entries(
-                                                  currentDeclaration.courses
-                                                ).map(([key, course]) => {
-                                                  return (
-                                                    <p>
-                                                      {course.name} (
-                                                      {course.semester} Εξ.)
-                                                    </p>
-                                                  );
-                                                })}
-                                            </Col>
-                                          </Row>
-                                        </Offcanvas.Body>
-                                      </Offcanvas>
-                                    </ButtonGroup>
-                                  </td>
-                                </tr>
-                              ))}
+                                                <h6>Κατάσταση:</h6>
+                                                <h6>Προσωρινά αποθηκευμένη</h6>
+                                              </Col>
+                                            </Row>
+                                          </Offcanvas.Body>
+                                        </Offcanvas>
+                                        <Modal
+                                          show={showDeleteModal}
+                                          onHide={handleCloseDeleteModal}
+                                          backdrop="static"
+                                          centered
+                                        >
+                                          <Modal.Header closeButton>
+                                            <Modal.Title>
+                                              Διαγραφή Δήλωσης
+                                            </Modal.Title>
+                                          </Modal.Header>
+                                          <Modal.Body>
+                                            <div className="row">
+                                              <div className="col-md-4">
+                                                <img
+                                                  src={warningimage}
+                                                  alt="Certificate Example"
+                                                  style={{
+                                                    width: "60%",
+                                                    marginLeft: "40px",
+                                                    marginBlockStart: "10px",
+                                                  }}
+                                                />
+                                              </div>
+                                              <div className="col-md-8">
+                                                <h6> Στοιχεία δήλωσης</h6>
+                                                <p>
+                                                  Ημέρα αποθήκευσης:{" "}
+                                                  {currentDeclaration.date}
+                                                </p>
+                                                <p>
+                                                  {" "}
+                                                  Ωρα: {currentDeclaration.time}
+                                                </p>
+                                                <p>
+                                                  {" "}
+                                                  Δηλωμένα μαθήματα:{" "}
+                                                  {
+                                                    currentDeclaration.courses
+                                                      .length
+                                                  }
+                                                </p>
+                                                <p>
+                                                  Η ανωτέρω δήλωση πρόκειται να
+                                                  διαγραφεί οριστικά. Δεν θα
+                                                  μπορείτε να την επαναφέρετε.
+                                                  Συνέχεια;
+                                                </p>
+                                              </div>
+                                            </div>
+                                          </Modal.Body>
+                                          <Modal.Footer>
+                                            <Button
+                                              variant="secondary"
+                                              onClick={handleCloseDeleteModal}
+                                            >
+                                              Πίσω
+                                            </Button>
+                                            <Button
+                                              variant="danger"
+                                              onClick={() =>
+                                                handleDelete(declaration.id)
+                                              }
+                                            >
+                                              Διαγραφή
+                                            </Button>
+                                          </Modal.Footer>
+                                        </Modal>
+                                      </ButtonGroup>
+                                    </td>
+                                  </tr>
+                                ))}
                             </tbody>
                           </Table>
                         </Accordion.Body>

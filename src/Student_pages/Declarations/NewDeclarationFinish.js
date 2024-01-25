@@ -13,7 +13,11 @@ import {
   Spinner,
 } from "react-bootstrap";
 
-const NewDeclarationFinish = ({ lastStepCompleted, selectedCourses }) => {
+const NewDeclarationFinish = ({
+  lastStepCompleted,
+  selectedCourses,
+  savedDeclarationID,
+}) => {
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(true);
@@ -37,16 +41,42 @@ const NewDeclarationFinish = ({ lastStepCompleted, selectedCourses }) => {
       getDoc(userDoc).then((docSnap) => {
         if (docSnap.exists()) {
           const userData = docSnap.data();
-          const newDeclaration = {
-            id: userData.declarations ? userData.declarations.length + 1 : 0,
-            date: new Date().toLocaleDateString(),
-            time: new Date().toLocaleTimeString(),
-            courses: selectedCourses,
-            state: "finalized", // "finalized" or "temporary
-            period: "2023-2024 Χειμερινό",
-          };
+
+          // filter out the finalized declarations
+          let updatedDeclarations = (userData.declarations || []).filter(
+            (declaration) => declaration.state !== "finalized"
+          );
+
+          // check if we have to update an existing declaration
+          if (savedDeclarationID) {
+            updatedDeclarations = updatedDeclarations.map((declaration) =>
+              declaration.id === savedDeclarationID
+                ? {
+                    ...declaration,
+                    courses: selectedCourses,
+                    state: "finalized",
+                  }
+                : declaration
+            );
+          } else {
+            // add a new declaration
+            const newDeclaration = {
+              // make the id, the date and the time
+              id:
+                new Date().toLocaleDateString() +
+                " " +
+                new Date().toLocaleTimeString(),
+              date: new Date().toLocaleDateString(),
+              time: new Date().toLocaleTimeString(),
+              courses: selectedCourses,
+              state: "finalized", // "finalized" or "temporary
+              period: "2023-2024 Χειμερινό",
+            };
+            updatedDeclarations.push(newDeclaration);
+          }
+          // update the user's document
           updateDoc(userDoc, {
-            declarations: arrayUnion(newDeclaration),
+            declarations: updatedDeclarations,
           });
         } else {
           console.log("No user data found in Firestore");

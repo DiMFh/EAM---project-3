@@ -24,6 +24,7 @@ import NewDeclarationFinish from "./NewDeclarationFinish";
 
 const NewDeclaration = () => {
   const [selectedCourses, setselectedCourses] = useState([]); // To update the selected courses
+  const [savedDeclarationID, setSavedDeclarationID] = useState(null); // To store the saved declaration (if any)
   const [showPreview, setShowPreview] = useState(false); // To render the preview component
   const [showFinish, setShowFinish] = useState(false); // To render the last compoment
   const [activeStep, setActiveStep] = useState(0); // For the stepper
@@ -41,7 +42,6 @@ const NewDeclaration = () => {
   useEffect(() => {
     // if the user has a saved declaration, load it
     const editingDeclarationId = localStorage.getItem("editingDeclarationId");
-    // remove the editingDeclarationId from the local storage
     if (editingDeclarationId) {
       // get the declaration from the database
       const userEmail = localStorage.getItem("email");
@@ -51,9 +51,10 @@ const NewDeclaration = () => {
           if (docSnap.exists()) {
             const userData = docSnap.data();
             const declarationToEdit = userData.declarations.find(
-              (declaration) => declaration.id == editingDeclarationId
+              (declaration) => declaration.id === editingDeclarationId
             );
             if (declarationToEdit) {
+              setSavedDeclarationID(editingDeclarationId);
               setselectedCourses(declarationToEdit.courses);
             } else {
               console.log("No such declaration!");
@@ -61,11 +62,16 @@ const NewDeclaration = () => {
           }
         });
       }
+      // remove the editingDeclarationId from the local storage
       localStorage.removeItem("editingDeclarationId");
     }
     // clear the selected courses from the local storage when the component is mounted for the first time
     localStorage.removeItem("selectedCourses");
   }, []);
+
+  useEffect(() => {
+    console.log("The selected courses are: ", selectedCourses);
+  }, [selectedCourses]);
 
   // ****get the courses from the database
   const [coursesDB, setCoursesDB] = useState([]);
@@ -166,6 +172,7 @@ const NewDeclaration = () => {
       });
     }
   }, [isLoading]);
+
   const handleClick = () => {
     // Store the selected courses in the local storage, before going to the preview
     localStorage.setItem("selectedCourses", JSON.stringify(selectedCourses));
@@ -282,30 +289,31 @@ const NewDeclaration = () => {
                                   </tr>
                                 </thead>
                                 <tbody>
-                                  {courses.map((course) => (
-                                    <tr key={course.id} className="table-row">
-                                      <td>
-                                        <Form.Check
-                                          aria-label="select"
-                                          // set the checkbox to checked if the course is already selected (for when the user goes back to the selection)
-                                          checked={selectedCourses.some(
-                                            (selectedCourse) =>
-                                              selectedCourse.id === course.id
-                                          )}
-                                          onChange={() =>
-                                            handleCourseSelection(course)
-                                          }
-                                          isValid
-                                        />
-                                      </td>
-                                      <td className="table-course-name">
-                                        {course.name}
-                                      </td>
-                                      <td>{course.id}</td>
-                                      <td>{course.ects} ECTS</td>
-                                      <td>{course.type}</td>
-                                    </tr>
-                                  ))}
+                                  {selectedCourses &&
+                                    courses.map((course) => (
+                                      <tr key={course.id} className="table-row">
+                                        <td>
+                                          <Form.Check
+                                            aria-label="select"
+                                            // set the checkbox to checked if the course is already selected (for when the user goes back to the selection)
+                                            checked={selectedCourses.some(
+                                              (selectedCourse) =>
+                                                selectedCourse.id === course.id
+                                            )}
+                                            onChange={() =>
+                                              handleCourseSelection(course)
+                                            }
+                                            isValid
+                                          />
+                                        </td>
+                                        <td className="table-course-name">
+                                          {course.name}
+                                        </td>
+                                        <td>{course.id}</td>
+                                        <td>{course.ects} ECTS</td>
+                                        <td>{course.type}</td>
+                                      </tr>
+                                    ))}
                                 </tbody>
                               </Table>
                             </Accordion.Body>
@@ -334,6 +342,7 @@ const NewDeclaration = () => {
         <NewDeclarationFinish
           lastStepCompleted={lastStepCompleted}
           selectedCourses={selectedCourses}
+          savedDeclarationID={savedDeclarationID}
         />
       )}
     </>
