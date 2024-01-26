@@ -189,75 +189,95 @@ const ProfilePage = ({ db }) => {
                 </MDBCard>
                 <MDBCard className="mb-2">
                 <MDBCardBody>
-                  <MDBRow>
-                    <MDBCol sm="3" className="d-flex flex-column justify-content-around">
-                      <MDBCardText>Πόλη: </MDBCardText>
-                      <MDBCardText>Διεύθυνση: </MDBCardText>
-                      <MDBCardText>Ταχυδρομικός Κώδικας: </MDBCardText>
-                    </MDBCol>
-                    <MDBCol sm="9" className="text-start">
-                      {editMode ? (
-                        <>
+                <MDBRow>
+                  {/* Κάρτα για την πόλη */}
+                  <MDBCol sm="4">
+                    <MDBCard>
+                      <MDBCardBody>
+                        <MDBCardText>Πόλη:</MDBCardText>
+                        {editMode ? (
                           <input
                             type="text"
                             name="city"
                             value={newData.city}
                             onChange={handleInputChange}
-                            className="mb-3" // Προσθήκη margin για σωστή ευθυγράμμιση
                           />
+                        ) : (
+                          <MDBCardText className="text-muted">{userData.city}</MDBCardText>
+                        )}
+                      </MDBCardBody>
+                    </MDBCard>
+                  </MDBCol>
+
+                  {/* Κάρτα για τη διεύθυνση */}
+                  <MDBCol sm="4">
+                    <MDBCard>
+                      <MDBCardBody>
+                        <MDBCardText>Διεύθυνση:</MDBCardText>
+                        {editMode ? (
                           <input
                             type="text"
                             name="address"
                             value={newData.address}
                             onChange={handleInputChange}
-                            className="mb-3" // Προσθήκη margin για σωστή ευθυγράμμιση
                           />
+                        ) : (
+                          <MDBCardText className="text-muted">{userData.address}</MDBCardText>
+                        )}
+                      </MDBCardBody>
+                    </MDBCard>
+                  </MDBCol>
+
+                  {/* Κάρτα για τον ταχυδρομικό κώδικα */}
+                  <MDBCol sm="4">
+                    <MDBCard>
+                      <MDBCardBody>
+                        <MDBCardText>Ταχυδρομικός Κώδικας:</MDBCardText>
+                        {editMode ? (
                           <input
                             type="text"
                             name="zip"
                             value={newData.zip}
                             onChange={handleInputChange}
                           />
-                        </>
-                      ) : (
-                        <>
-                          <MDBCardText className="text-muted mb-3">{userData.city}</MDBCardText>
-                          <MDBCardText className="text-muted mb-3">{userData.address}</MDBCardText>
+                        ) : (
                           <MDBCardText className="text-muted">{userData.zip}</MDBCardText>
-                        </>
-                      )}
-                    </MDBCol>
-                    </MDBRow>
-                    <div style={{ marginTop: '40px' }}>
-                      {!editMode ? 
-                        <button onClick={handleEdit} className="btn btn-primary btn-rounded" type="button">
-                          Επεξεργασία Στοιχείων
-                        </button>
-                        :
-                        <button onClick={handleSave} className="btn btn-success btn-rounded" type="button">
-                          Αποθήκευση Αλλαγών
-                        </button>
-                      }
+                        )}
+                      </MDBCardBody>
+                    </MDBCard>
+                  </MDBCol>
+                </MDBRow>
+
+                <div style={{ marginTop: '40px' }}>
+                  {!editMode ? 
+                    <button onClick={handleEdit} className="btn btn-primary btn-rounded" type="button">
+                      Επεξεργασία Στοιχείων
+                    </button>
+                    :
+                    <button onClick={handleSave} className="btn btn-success btn-rounded" type="button">
+                      Αποθήκευση Αλλαγών
+                    </button>
+                  }
                 </div>
               </MDBCardBody>
 
-            </MDBCard>  
-                      
-            
-              </MDBCol> 
-              <NavLink
-                to="/"
-                className="logout-button"
-                onClick={handleLogout}
-              >
-                Αποσύνδεση
-              </NavLink>  
-            </MDBRow>  
-          </MDBContainer>
-        )}
-      </section>
-    );
+                          </MDBCard>  
+                                    
+                          
+                            </MDBCol> 
+                            <NavLink
+                              to="/"
+                              className="logout-button"
+                              onClick={handleLogout}
+                            >
+                              Αποσύνδεση
+                            </NavLink>  
+                          </MDBRow>  
+                        </MDBContainer>
+                      )}
+                    </section>
+                  );
 
-};
+              };
 
 export default ProfilePage;

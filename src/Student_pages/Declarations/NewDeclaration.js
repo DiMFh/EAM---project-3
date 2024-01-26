@@ -100,6 +100,10 @@ const NewDeclaration = () => {
   useEffect(() => {
     if (typeof coursesDB === "object" && coursesDB !== null) {
       const groupedCourses = Object.values(coursesDB).reduce((acc, course) => {
+        if (course.semester === null) {
+          return acc;
+        }
+        
         const semester = course.semester || "Unknown";
         if (!acc[semester]) {
           acc[semester] = [];
