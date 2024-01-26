@@ -219,7 +219,10 @@ const Declarations = () => {
                                           Προβολή
                                         </Button>
                                         <Offcanvas
-                                          show={showCanvas}
+                                          show={
+                                            showCanvas &&
+                                            currentDeclaration === declaration
+                                          }
                                           onHide={handleCloseCanvas}
                                           placement="end"
                                           backdrop={false}
@@ -228,6 +231,10 @@ const Declarations = () => {
                                             <Offcanvas.Title>
                                               {currentDeclaration.date}{" "}
                                               {currentDeclaration.time}
+                                              <p></p>
+                                              <span className="badge bg-success">
+                                                Εγκρίθηκε
+                                              </span>
                                             </Offcanvas.Title>
                                           </Offcanvas.Header>
                                           <Offcanvas.Body>
@@ -306,7 +313,10 @@ const Declarations = () => {
                                           Προβολή
                                         </Button>
                                         <Offcanvas
-                                          show={showCanvas}
+                                          show={
+                                            showCanvas &&
+                                            currentDeclaration === declaration
+                                          }
                                           onHide={handleCloseCanvas}
                                           placement="end"
                                           backdrop={false}
@@ -315,6 +325,10 @@ const Declarations = () => {
                                             <Offcanvas.Title>
                                               {currentDeclaration.date}{" "}
                                               {currentDeclaration.time}
+                                              <p></p>
+                                              <span className="badge bg-warning">
+                                                Πρόχειρο
+                                              </span>
                                             </Offcanvas.Title>
                                           </Offcanvas.Header>
                                           <Offcanvas.Body>

@@ -1,6 +1,6 @@
 /* StudentGrades.js */
 import "./StudentGradesCreate.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Breadcrumb,
   Container,
