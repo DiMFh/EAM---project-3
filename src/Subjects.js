@@ -19,10 +19,15 @@ const Subjects = ({db}) => {
     };
     getsubjects();
   }, [db]);
+
   const getsubjectsBySemester = (semester) => {
     return subjects.filter(subjects => subjects.semester === `${semester}ο`);
   };
 
+
+  const getSubjectsByType = (type) => {
+    return subjects.filter(subject => subject.type === type);
+  };
 
   return (
     <Container >
@@ -164,7 +169,31 @@ const Subjects = ({db}) => {
         <Accordion.Item eventKey="0">
           <Accordion.Header>Ελεύθερα Μαθήματα</Accordion.Header>
           <Accordion.Body>
-            {/* Περιεχόμενο για τα Ελεύθερα Μαθήματα */}
+            
+                <Table className="table table-hover">
+                  <thead>
+                    <tr className="table-head">
+                      <th scope="col">Όνομα</th>
+                      <th scope="col">Καθηγητής</th>
+                      <th scope="col">Περιγραφή</th>
+                      <th scope="col">Κωδικός</th>
+                      <th scope="col">Βαρύτητα</th>
+                      <th scope="col">Τύπος</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {getSubjectsByType("ΕΛΕΥΘΕΡΟ(Ε)").map((subject, index) => (
+                      <tr key={index}>
+                        <td>{subject.name}</td>
+                        <td>{subject.professor}</td>
+                        <td>{subject.description}</td>
+                        <td>{subject.id}</td>
+                        <td>{subject.ects}</td>
+                        <td>{subject.type}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </Table>
           </Accordion.Body>
         </Accordion.Item>
       </Accordion>
