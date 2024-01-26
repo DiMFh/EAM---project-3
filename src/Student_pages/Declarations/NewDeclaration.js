@@ -69,10 +69,6 @@ const NewDeclaration = () => {
     localStorage.removeItem("selectedCourses");
   }, []);
 
-  useEffect(() => {
-    console.log("The selected courses are: ", selectedCourses);
-  }, [selectedCourses]);
-
   // ****get the courses from the database
   const [coursesDB, setCoursesDB] = useState([]);
   useEffect(() => {

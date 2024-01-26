@@ -17,7 +17,7 @@ function StudentGradesFinish({ lastStepCompleted, grades, course }) {
   const [printing, setPrinting] = useState(false);
 
   useEffect(() => {
-    // simulate a dilay when the component is mounted for the first time
+    // simulate a delay when the component is mounted for the first time
     setTimeout(() => {
       setLoading(false);
       lastStepCompleted(); // gia ton spinner
@@ -34,11 +34,15 @@ function StudentGradesFinish({ lastStepCompleted, grades, course }) {
         if (docSnap.exists()) {
           const userData = docSnap.data();
           const newGrades = {
-            id: userData.studentGrades ? userData.studentGrades.length + 1 : 0,
+            id:
+              new Date().toLocaleDateString() +
+              " " +
+              new Date().toLocaleTimeString(),
             date: new Date().toLocaleDateString(),
             time: new Date().toLocaleTimeString(),
             course: course,
             grades: grades,
+            state: "finalized", // "finalized" or "temporary
             period: "2023-2024 Χειμερινό",
           };
           updateDoc(userDoc, {
