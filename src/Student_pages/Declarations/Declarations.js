@@ -252,11 +252,6 @@ const Declarations = () => {
                                                       </p>
                                                     );
                                                   })}
-
-                                                <h6>Κατάσταση:</h6>
-                                                <h6>
-                                                  Εγκρίθηκε από την Γραμματεία
-                                                </h6>
                                               </Col>
                                             </Row>
                                           </Offcanvas.Body>
@@ -278,7 +273,7 @@ const Declarations = () => {
                                     <td>{declaration.courses.length}</td>
                                     <td>
                                       <span className="text-warning">
-                                        Αποθηκευμένη
+                                        Πρόχειρο
                                       </span>
                                     </td>
                                     <td
@@ -346,9 +341,6 @@ const Declarations = () => {
                                                       </p>
                                                     );
                                                   })}
-
-                                                <h6>Κατάσταση:</h6>
-                                                <h6>Προσωρινά αποθηκευμένη</h6>
                                               </Col>
                                             </Row>
                                           </Offcanvas.Body>
@@ -390,10 +382,7 @@ const Declarations = () => {
                                                 <p>
                                                   {" "}
                                                   Δηλωμένα μαθήματα:{" "}
-                                                  {
-                                                    currentDeclaration.courses
-                                                      .length
-                                                  }
+                                                  {declaration.courses.length}
                                                 </p>
                                                 <p>
                                                   Η ανωτέρω δήλωση πρόκειται να
