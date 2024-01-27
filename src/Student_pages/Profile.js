@@ -187,11 +187,11 @@ const ProfilePage = ({ db }) => {
                     </MDBRow>
                   </MDBCardBody>
                 </MDBCard>
-                <MDBCard className="mb-2">
+                <MDBCard className="mb-2" style={{ textAlign: 'left' }}>
                 <MDBCardBody>
                 <MDBRow>
                   {/* Κάρτα για την πόλη */}
-                  <MDBCol sm="4">
+                  <MDBCol sm="12">
                     <MDBCard>
                       <MDBCardBody>
                         <MDBCardText>Πόλη:</MDBCardText>
@@ -210,7 +210,7 @@ const ProfilePage = ({ db }) => {
                   </MDBCol>
 
                   {/* Κάρτα για τη διεύθυνση */}
-                  <MDBCol sm="4">
+                  <MDBCol sm="12">
                     <MDBCard>
                       <MDBCardBody>
                         <MDBCardText>Διεύθυνση:</MDBCardText>
@@ -229,7 +229,7 @@ const ProfilePage = ({ db }) => {
                   </MDBCol>
 
                   {/* Κάρτα για τον ταχυδρομικό κώδικα */}
-                  <MDBCol sm="4">
+                  <MDBCol sm="12">
                     <MDBCard>
                       <MDBCardBody>
                         <MDBCardText>Ταχυδρομικός Κώδικας:</MDBCardText>
@@ -247,7 +247,6 @@ const ProfilePage = ({ db }) => {
                     </MDBCard>
                   </MDBCol>
                 </MDBRow>
-
                 <div style={{ marginTop: '40px' }}>
                   {!editMode ? 
                     <button onClick={handleEdit} className="btn btn-primary btn-rounded" type="button">
@@ -259,25 +258,25 @@ const ProfilePage = ({ db }) => {
                     </button>
                   }
                 </div>
-              </MDBCardBody>
+                </MDBCardBody>
 
-                          </MDBCard>  
-                                    
+                </MDBCard>  
                           
-                            </MDBCol> 
-                            <NavLink
-                              to="/"
-                              className="logout-button"
-                              onClick={handleLogout}
-                            >
-                              Αποσύνδεση
-                            </NavLink>  
-                          </MDBRow>  
-                        </MDBContainer>
-                      )}
-                    </section>
-                  );
+                
+                  </MDBCol> 
+                  <NavLink
+                    to="/"
+                    className="logout-button"
+                    onClick={handleLogout}
+                  >
+                    Αποσύνδεση
+                  </NavLink>  
+                </MDBRow>  
+              </MDBContainer>
+            )}
+          </section>
+        );
 
-              };
+    };
 
 export default ProfilePage;

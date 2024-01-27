@@ -2,12 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { doc, getDoc, collection, getDocs, } from 'firebase/firestore';
 import './Grades.css'; 
 import { Breadcrumb, Container,  Accordion, Table } from "react-bootstrap";
-// import { useAccordionButton } from "react-bootstrap";
-// import { useNavigate } from "react-router";
+
 
 
 const GradesPage = ({ db }) => {
-    // const [coursesDataSemester, setCoursesDataSemester] = useState([]); 
+
     const [coursesData, setCoursesData] = useState([]);
 
     useEffect(() => {
@@ -24,7 +23,7 @@ const GradesPage = ({ db }) => {
                 // console.log(userCourses);
                 const coursesInfo = coursesDocs.docs.flatMap(doc => {
                     const coursesData = doc.data();
-                    return Object.values(coursesData); // ή Object.entries(coursesData) ανάλογα με τη δομή
+                    return Object.values(coursesData);
                 });
                 // console.log(coursesInfo);
                 const mergedCourses = [];
@@ -34,7 +33,7 @@ const GradesPage = ({ db }) => {
                         mergedCourses.push({ ...userCourse, ...courseInfo });
                     } else {
                         console.log(`No matching course found for course ID: ${userCourse.id}`);
-                        // Μπορείτε εδώ να προσθέσετε κάποιο αντικείμενο αναπλήρωσης αν θέλετε
+                        
                     }
                 }
                 // console.log(mergedCourses);
@@ -61,7 +60,8 @@ const GradesPage = ({ db }) => {
                 <Breadcrumb.Item active>Βαθμολογίες</Breadcrumb.Item>
             </Breadcrumb>
             <div className="mainpage">
-                <Container>
+                <Container style={{marginTop: "100px"}}>
+                <h1>Ενημερωθείτε για τις βαθμολογίες σας</h1>
                 <Accordion >
                     <Accordion.Item eventKey="0">
                         <Accordion.Header>Εξάμηνα</Accordion.Header>
