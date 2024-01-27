@@ -20,7 +20,6 @@ import {
   Modal,
 } from "react-bootstrap";
 import { useAccordionButton } from "react-bootstrap";
-import { set } from "date-fns";
 
 const Declarations = () => {
   const navigate = useNavigate();
@@ -138,19 +137,16 @@ const Declarations = () => {
         <Breadcrumb.Item active>Δηλώσεις</Breadcrumb.Item>
       </Breadcrumb>
       <div className="main-container">
-        <Container style={{ backgroundColor: "rgba(255, 255, 255, 0.5)" }}>
+        <Container style={{ backgroundColor: "transparent" }}>
           <Accordion defaultActiveKey="0">
-            <Card style={{ backgroundColor: "rgba(255, 255, 255, 0.5)" }}>
+            <Card>
               <Card.Header>
                 <CustomToggle eventKey="0" className="new-declaration-button">
                   Νέα Δήλωση
                 </CustomToggle>
               </Card.Header>
             </Card>
-            <Accordion.Item
-              eventKey={"0"}
-              style={{ backgroundColor: "rgba(255, 255, 255, 0.5)" }}
-            >
+            <Accordion.Item eventKey={"0"}>
               <Accordion.Header>Ιστορικό Δηλώσεων</Accordion.Header>
               <Accordion.Body>
                 <Accordion>

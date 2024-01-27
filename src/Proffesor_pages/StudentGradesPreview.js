@@ -20,6 +20,7 @@ import {
 function StudentGradesPreview({
   course,
   students,
+  savedGradesID,
   handleBack,
   handleNextStep,
 }) {
@@ -102,6 +103,7 @@ function StudentGradesPreview({
       {goToFinish ? (
         <StudentGradesFinish
           lastStepCompleted={handleNextStep}
+          savedGradesID={savedGradesID}
           grades={students}
           course={course}
         />

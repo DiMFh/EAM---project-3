@@ -99,7 +99,7 @@ const NewDeclaration = () => {
         if (course.semester === null) {
           return acc;
         }
-        
+
         const semester = course.semester || "Unknown";
         if (!acc[semester]) {
           acc[semester] = [];

@@ -2,9 +2,12 @@
 import "./StudentGrades.css";
 import StudentGradesPreview from "./StudentGradesPreview";
 import StudentGradesStepper from "./StudentGradesStepper";
+import image from "../images/warning.png";
 import { students12 } from "../Proffesor_pages/students12";
 import { students14 } from "../Proffesor_pages/students14";
-import { useState } from "react";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../data/firebase";
+import { useState, useEffect } from "react";
 import {
   Container,
   Row,
@@ -17,9 +20,11 @@ import {
   Stack,
   OverlayTrigger,
   Tooltip,
+  Modal,
+  Spinner,
 } from "react-bootstrap";
 
-function StudentGradesNew({ course, handleBacktoStart }) {
+function StudentGradesNew({ course, savedGradesID, handleBacktoStart }) {
   const students = course.students === "12" ? students12 : students14;
 
   const [activeStep, setActiveStep] = useState(0); // For the stepper
@@ -39,6 +44,31 @@ function StudentGradesNew({ course, handleBacktoStart }) {
       [studentId]: newGrade,
     }));
   };
+
+  useEffect(() => {
+    // if there are saved grades, put them in the state
+    if (savedGradesID) {
+      // get the grades from the database
+      const userEmail = localStorage.getItem("email");
+      if (userEmail) {
+        const userDoc = doc(db, "users", userEmail);
+        getDoc(userDoc).then((docSnap) => {
+          const userData = docSnap.data();
+          const gradesToEdit = userData.studentGrades.find(
+            (studentGrade) => studentGrade.id === savedGradesID
+          );
+          // console.log("gradesToEdit", gradesToEdit);
+          if (gradesToEdit) {
+            gradesToEdit.grades.forEach((grade) => {
+              handleGradeChange(grade.id, grade.grade);
+            });
+          } else {
+            console.log("No grades to edit");
+          }
+        });
+      }
+    }
+  }, [savedGradesID]);
 
   // ***keep track of the form validation
   const [validated, setValidated] = useState(false);
@@ -106,6 +136,26 @@ function StudentGradesNew({ course, handleBacktoStart }) {
     prevStep();
   };
 
+  // *** Modal for the 'upload' button
+  const [showUploadModal, setShowUploadModal] = useState(false);
+  const handleCloseUploadModal = () => setShowUploadModal(false);
+  const handleShowUploadModal = () => setShowUploadModal(true);
+
+  const [uploading, setUploading] = useState(false);
+
+  const handleUpload = () => {
+    setUploading(true);
+
+    // simulate a delay when the button is clicked
+    setTimeout(() => {
+      setUploading(false);
+      Object.values(students).forEach((student) => {
+        handleGradeChange(student.id, Math.floor(Math.random() * 10 + 1));
+      });
+      handleCloseUploadModal();
+    }, 1500);
+  };
+
   return (
     <>
       <Breadcrumb>
@@ -122,6 +172,7 @@ function StudentGradesNew({ course, handleBacktoStart }) {
           <StudentGradesPreview
             course={course}
             students={studentsWithGrades}
+            savedGradesID={savedGradesID}
             handleBack={handleBackfromPreview}
             handleNextStep={nextStep}
           />
@@ -201,6 +252,15 @@ function StudentGradesNew({ course, handleBacktoStart }) {
               </ListGroup.Item>
             </ListGroup>
             <Stack direction="horizontal" gap={2}>
+              <div className="p-2">
+                <Button
+                  type="upload"
+                  variant="outline-primary"
+                  onClick={handleShowUploadModal}
+                >
+                  Εισαγωγή από αρχείο
+                </Button>
+              </div>
               <div className="p-2 ms-auto">
                 Ελέγξτε ότι έχετε καταχωρίσει βαθμολογίες για όλους τους
                 φοιτητές:
@@ -286,6 +346,61 @@ function StudentGradesNew({ course, handleBacktoStart }) {
             </Stack>
           </Container>
         )}
+        <Modal
+          show={showUploadModal}
+          onHide={handleCloseUploadModal}
+          size="lg"
+          backdrop="static"
+          centered
+        >
+          <Modal.Header closeButton>
+            <Modal.Title> Μεταφόρτωση αρχείου</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <div className="row">
+              <div className="col-md-4">
+                <img
+                  src={image}
+                  alt="Certificate Example"
+                  style={{
+                    width: "60%",
+                    marginLeft: "40px",
+                    marginBlockStart: "10px",
+                  }}
+                />
+              </div>
+              <div className="col-md-8">
+                <p>
+                  <strong>Προσοχή:</strong> Για να γίνει επιτυχής καταγραφή των
+                  βαθμολογιών θα πρέπει να έχετε συμπληρώσει σωστά την{" "}
+                  <a href="#">φόρμα εισαγωγής</a>. Το μόνο που έχετε να κάνετε
+                  είναι να συμπληρώσετε τον βαθμό δίπλα από το αντίστοιχο όνομα
+                  κάθε φοιτητή που θα βρίσκεται ήδη στη λίστα.{" "}
+                  <strong>Παρακαλούμε </strong>
+                  <strong style={{ textDecoration: "underline", color: "red" }}>
+                    ΜΗ
+                  </strong>{" "}
+                  <strong> μορφοποιείτε τη φόρμα.</strong> Βαθμολογίες που
+                  είχατε εισάγει πριν τη μεταφόρτωση του αρχείου θα
+                  αντικατασταθούν.
+                </p>
+              </div>
+            </div>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleCloseUploadModal}>
+              Πίσω
+            </Button>
+            <Button variant="outline-primary">Λήψη Φόρμας</Button>
+            <Button variant="primary" onClick={handleUpload}>
+              {uploading ? (
+                <Spinner animation="border" role="status" size="sm" />
+              ) : (
+                "Μεταφόρτωση"
+              )}
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </div>
     </>
   );

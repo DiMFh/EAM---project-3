@@ -1,6 +1,8 @@
 /* StudentGrades.js */
 import "./StudentGradesCreate.css";
 import { useState, useEffect } from "react";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../data/firebase";
 import {
   Breadcrumb,
   Container,
@@ -33,6 +35,40 @@ function StudentGrades() {
     setNewGrades(true);
   };
 
+  const [savedGradesID, setSavedGradesID] = useState(null); // the id of the saved grades, to edit them
+  // Check if there is an editingGradesID in the local storage, to edit the grades
+  useEffect(() => {
+    const editingGradesID = localStorage.getItem("editingGradesID");
+    if (editingGradesID) {
+      // get the grades from the database
+
+      const userEmail = localStorage.getItem("email");
+
+      if (userEmail) {
+        const userDoc = doc(db, "users", userEmail);
+        getDoc(userDoc).then((docSnap) => {
+          const userData = docSnap.data();
+          const gradesToEdit = userData.studentGrades.find(
+            (studentGrade) => studentGrade.id === editingGradesID
+          );
+          // console.log("gradesToEdit", gradesToEdit);
+          if (gradesToEdit) {
+            setSavedGradesID(editingGradesID);
+            handleNewGrades(gradesToEdit.course); // the component where the user edits the grades should be rendered
+          } else {
+            console.log("No grades to edit");
+          }
+        });
+      }
+
+      // remove the editingGradesID from the local storage
+      localStorage.removeItem("editingGradesID");
+    }
+  }, []);
+
+  useEffect(() => {
+    console.log("newGrades", newGrades);
+  }, [newGrades]);
   const handleBacktoStart = () => {
     setNewGrades(false);
   };
@@ -47,7 +83,7 @@ function StudentGrades() {
             <Breadcrumb.Item active>Επιλογή Μαθήματος</Breadcrumb.Item>
           </Breadcrumb>
           <div className="main">
-            <Container>
+            <Container style={{ backgroundColor: "transparent" }}>
               <Accordion defaultActiveKey="0" alwaysOpen>
                 <Accordion.Item eventKey={"0"} disabled="true">
                   <Accordion.Header>
@@ -99,6 +135,7 @@ function StudentGrades() {
       ) : (
         <StudentGradesNew
           course={selectedCourse}
+          savedGradesID={savedGradesID}
           handleBacktoStart={handleBacktoStart}
         />
       )}
