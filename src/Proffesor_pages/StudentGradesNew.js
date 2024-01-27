@@ -145,13 +145,13 @@ function StudentGradesNew({ course, savedGradesID, handleBacktoStart }) {
 
   const handleUpload = () => {
     setUploading(true);
-    Object.values(students).forEach((student) => {
-      handleGradeChange(student.id, Math.floor(Math.random() * 10 + 1));
-    });
 
     // simulate a delay when the button is clicked
     setTimeout(() => {
       setUploading(false);
+      Object.values(students).forEach((student) => {
+        handleGradeChange(student.id, Math.floor(Math.random() * 10 + 1));
+      });
       handleCloseUploadModal();
     }, 1500);
   };
@@ -349,6 +349,7 @@ function StudentGradesNew({ course, savedGradesID, handleBacktoStart }) {
         <Modal
           show={showUploadModal}
           onHide={handleCloseUploadModal}
+          size="lg"
           backdrop="static"
           centered
         >

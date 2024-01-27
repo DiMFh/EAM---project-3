@@ -146,7 +146,7 @@ function StudentGrades() {
         <Breadcrumb.Item active>Βαθμολόγια</Breadcrumb.Item>
       </Breadcrumb>
       <div className="main">
-        <Container>
+        <Container style={{ backgroundColor: "transparent" }}>
           <Accordion defaultActiveKey="0">
             <Card>
               <Card.Header>
@@ -158,7 +158,7 @@ function StudentGrades() {
             <Accordion.Item eventKey={"0"}>
               <Accordion.Header>Ιστορικό Βαθμολογιών</Accordion.Header>
               <Accordion.Body>
-                <Accordion>
+                <Accordion defaultActiveKey="0">
                   {Object.entries(gradesByPeriod).map(
                     ([period, grades], index) => (
                       <Accordion.Item eventKey={index.toString()}>
