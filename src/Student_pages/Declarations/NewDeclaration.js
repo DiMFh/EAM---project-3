@@ -69,10 +69,6 @@ const NewDeclaration = () => {
     localStorage.removeItem("selectedCourses");
   }, []);
 
-  useEffect(() => {
-    console.log("The selected courses are: ", selectedCourses);
-  }, [selectedCourses]);
-
   // ****get the courses from the database
   const [coursesDB, setCoursesDB] = useState([]);
   useEffect(() => {
@@ -100,6 +96,10 @@ const NewDeclaration = () => {
   useEffect(() => {
     if (typeof coursesDB === "object" && coursesDB !== null) {
       const groupedCourses = Object.values(coursesDB).reduce((acc, course) => {
+        if (course.semester === null) {
+          return acc;
+        }
+        
         const semester = course.semester || "Unknown";
         if (!acc[semester]) {
           acc[semester] = [];

@@ -21,6 +21,7 @@ import {
 
 function StudentGradesNew({ course, handleBacktoStart }) {
   const students = course.students === "12" ? students12 : students14;
+
   const [activeStep, setActiveStep] = useState(0); // For the stepper
   // ***stepper functionality
   const nextStep = () => {
@@ -29,7 +30,6 @@ function StudentGradesNew({ course, handleBacktoStart }) {
   const prevStep = () => {
     if (activeStep > 0) setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
-
 
   // ***keep track of the grades
   const [grades, setGrades] = useState({});
@@ -104,22 +104,29 @@ function StudentGradesNew({ course, handleBacktoStart }) {
     setValidated(false);
     setAllValid(false);
     prevStep();
-  }
+  };
 
   return (
     <>
       <Breadcrumb>
         <Breadcrumb.Item href="./">Αρχική</Breadcrumb.Item>
         <Breadcrumb.Item href="./student-grades">Βαθμολόγια</Breadcrumb.Item>
-        <Breadcrumb.Item href="./student-grades-new">Επιλογή Μαθήματος</Breadcrumb.Item>
+        <Breadcrumb.Item href="./student-grades-new">
+          Επιλογή Μαθήματος
+        </Breadcrumb.Item>
         <Breadcrumb.Item active>Νέo Βαθμολόγιο</Breadcrumb.Item>
       </Breadcrumb>
       <StudentGradesStepper activeStep={activeStep} />
       <div className="student-grades-main">
         {goPreview ? (
-          <StudentGradesPreview course={course} students={studentsWithGrades} handleBack={handleBackfromPreview} handleNextStep={nextStep} />
+          <StudentGradesPreview
+            course={course}
+            students={studentsWithGrades}
+            handleBack={handleBackfromPreview}
+            handleNextStep={nextStep}
+          />
         ) : (
-          <Container sm={{ mt: 10}}>
+          <Container sm={{ mt: 10 }}>
             {/* buttons section */}
             <Row className="mb-2" md={3}>
               <Col sm={"auto"}></Col>
@@ -133,29 +140,33 @@ function StudentGradesNew({ course, handleBacktoStart }) {
                 </Button>
               </Col>
               <Col md={1}>
-                { allValid ? (
+                {allValid ? (
                   <Button
-                  type="submit"
-                  variant="success"
-                  onClick={handleGoPreview}
-                >
-                  Επόμενο
-                </Button>
+                    type="submit"
+                    variant="success"
+                    onClick={handleGoPreview}
+                  >
+                    Επόμενο
+                  </Button>
                 ) : (
-                  <OverlayTrigger overlay={<Tooltip id="tooltip-disabled">Ελέγξτε τους βαθμούς πριν προχωρήσετε</Tooltip>}>
-                  <span className="d-inline-block">
-                  <Button
-                  variant="success"
-                  disabled={true}
-                  style={{ pointerEvents: 'none'}}
-                >
-                  Επόμενο
-                </Button>
-                  </span>
-                </OverlayTrigger>
+                  <OverlayTrigger
+                    overlay={
+                      <Tooltip id="tooltip-disabled">
+                        Ελέγξτε τους βαθμούς πριν προχωρήσετε
+                      </Tooltip>
+                    }
+                  >
+                    <span className="d-inline-block">
+                      <Button
+                        variant="success"
+                        disabled={true}
+                        style={{ pointerEvents: "none" }}
+                      >
+                        Επόμενο
+                      </Button>
+                    </span>
+                  </OverlayTrigger>
                 )}
-                
-                
               </Col>
               <Col></Col>
             </Row>
