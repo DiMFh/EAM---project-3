@@ -2,7 +2,7 @@ import InfoCard from "./InfoCard";
 import "./InfoCardsContainer.css";
 import { ReactComponent as Icon1 } from "./icons/student-icon.svg";
 import { ReactComponent as Icon2 } from "./icons/professor-icon.svg";
-// import { ReactComponent as Icon3 } from "./icons/certificate-icon.svg";
+
 import { ReactComponent as Icon4 } from "./icons/question-icon.svg";
 
 export default function InfoCards_container() {
@@ -49,22 +49,7 @@ export default function InfoCards_container() {
           },
         ]}
       />
-      {/* <InfoCard
-        Icon={Icon3}
-        title="Πιστοποιητικά"
-        items={[
-          {
-            title: "Αίτηση",
-            description:
-              "Σε λίγα βήματα αιτηθείτε πιστοποιητικά φοιτητικής ιδιότητας, φορολογικής / στρατιωτικής χρήσης κ.α",
-          },
-          {
-            title: "Ιστορικό",
-            description:
-              "Διατηρήστεσε ένα μέρος τα πιστοποιητικά που έχουν εκδοθεί και επανεκτυπώστε τα",
-          },
-        ]}
-      /> */}
+
       <InfoCard
         Icon={Icon4}
         title="Συχνές ερωτήσεις"

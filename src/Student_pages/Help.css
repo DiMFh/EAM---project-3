@@ -1,11 +1,11 @@
 .return {
-    color: purple; /* Set the initial color for the "Επιστροφή" button */
-  }
+  color: purple; /* Set the initial color for the "Επιστροφή" button */
+}
 
-  .help {
-    margin-top: 100px;
-  }
-  
+.help {
+  margin-top: 100px;
+}
 
-
-
+.card {
+  --bs-card-bg: rgba(255, 255, 255, 0.411) !important;
+}

@@ -1,5 +1,3 @@
-//npm install mdb-react-ui-kit
-
 import React, { useState, useEffect } from "react";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import {
@@ -92,7 +90,13 @@ const ProfilePage = ({ db }) => {
         </Breadcrumb>
 
         {userData && (
-          <MDBContainer className="py-5">
+          <MDBContainer
+            style={{
+              borderRadius: "15px",
+              padding: "20px",
+              backgroundColor: "transparent",
+            }}
+          >
             <h2>Γειά σου {userData.firstname}!</h2>
             <MDBRow>
               <MDBCol lg="6">

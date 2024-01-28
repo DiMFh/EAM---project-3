@@ -1,14 +1,8 @@
-//import React, { useState } from 'react';
-//npm install yup
-//npm install formik
-//npm install date-fns
-//gia na doulepsei kante auta ta 3np installs
-
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
-import { Container } from "react-bootstrap";
+import { Breadcrumb, Container } from "react-bootstrap";
 import * as formik from "formik";
 import * as yup from "yup";
 import { doc, setDoc } from "firebase/firestore";
@@ -141,302 +135,364 @@ export default function RegisterForm({ db }) {
   };
 
   return (
-    <Container
-      className="py-3"
-      style={{ marginTop: "40px", borderRadius: "10px" }}
-    >
-      <Formik
-        validationSchema={schema}
-        onSubmit={(values, actions) => {
-          console.log("Form submitted"); // Προσθήκη αυτής της γραμμής
-          console.log("Submitting values:", values);
-          saveToDatabase(values);
-          actions.setSubmitting(false);
-        }}
-        initialValues={{
-          email: "",
-          password: "",
-          confirmPassword: "",
-          firstname: "",
-          lastname: "",
-          birthdate: "",
-          role: "",
-          phone: "",
-          Codephone: "",
-          city: "",
-          address: "",
-          zip: "",
-          courses: [
-            { id: "ΥΣ08", grade: "10" },
-            { id: "Κ16", grade: "10" },
-          ],
-          declarations: [
-            {
+    <>
+      <Breadcrumb>
+        <Breadcrumb.Item href="/">Αρχική</Breadcrumb.Item>
+        <Breadcrumb.Item active>Εγγραφή</Breadcrumb.Item>
+      </Breadcrumb>
+      <div>
+        <h2>Εθνικόν και Καποδιστριακόν Πανεπιστήμιον Αθηνών</h2>
+        <p>Γραμματεία Πληροφορικής και Τηλεπικοινωνιών</p>
+
+        <Container
+          className="py-3"
+          style={{
+            marginTop: "40px",
+            borderRadius: "10px",
+            backgroundColor: "rgb(159 159 159 / 81%)",
+            border: "2px solid var(--generic-info-card-border-color)",
+          }}
+        >
+          <Formik
+            validationSchema={schema}
+            onSubmit={(values, actions) => {
+              console.log("Form submitted"); // Προσθήκη αυτής της γραμμής
+              console.log("Submitting values:", values);
+              saveToDatabase(values);
+              actions.setSubmitting(false);
+            }}
+            initialValues={{
+              email: "",
+              password: "",
+              confirmPassword: "",
+              firstname: "",
+              lastname: "",
+              birthdate: "",
+              role: "",
+              phone: "",
+              Codephone: "",
+              city: "",
+              address: "",
+              zip: "",
               courses: [
+                { id: "ΥΣ08", grade: "10" },
+                { id: "Κ16", grade: "10" },
+              ],
+              declarations: [
                 {
-                  description: "Το καλύτερο μάθημα του κόσμου...",
-                  ects: "6",
-                  id: "ΥΣ08",
-                  name: "Επικοιωνία Ανθρώπου Μηχανής",
-                  professor: "Μαρία Ρούσσου",
-                  semester: "1ο",
-                  type: "Υποχρεωτικό (ΥΜ)",
-                },
-                {
-                  description:
-                    "Να πάρετε το μεταπτυχιακό του τμήματος να μάθετε περισσότερα",
-                  ects: "6",
-                  id: "ΥΣ09",
-                  name: "Διαδραστικά Συστήματα",
-                  professor: "Μαρία Ρούσσου",
-                  semester: "1ο",
-                  type: "Υποχρεωτικό (ΥΜ)",
-                },
-                {
-                  description:
-                    "Εισαγωγή στις έννοιες του Προγραματισμού και την γλώσσα C",
-                  ects: "7",
-                  id: "Κ08",
-                  name: "Εισαγωγή στον Προγραμματισμό",
-                  professor: "Γεώργιος Σταματόπουλος",
-                  semester: "1ο",
-                  type: "Υποχρεωτικό (ΥΜ)",
+                  courses: [
+                    {
+                      description: "Το καλύτερο μάθημα του κόσμου...",
+                      ects: "6",
+                      id: "ΥΣ08",
+                      name: "Επικοιωνία Ανθρώπου Μηχανής",
+                      professor: "Μαρία Ρούσσου",
+                      semester: "1ο",
+                      type: "Υποχρεωτικό (ΥΜ)",
+                    },
+                    {
+                      description:
+                        "Να πάρετε το μεταπτυχιακό του τμήματος να μάθετε περισσότερα",
+                      ects: "6",
+                      id: "ΥΣ09",
+                      name: "Διαδραστικά Συστήματα",
+                      professor: "Μαρία Ρούσσου",
+                      semester: "1ο",
+                      type: "Υποχρεωτικό (ΥΜ)",
+                    },
+                    {
+                      description:
+                        "Εισαγωγή στις έννοιες του Προγραματισμού και την γλώσσα C",
+                      ects: "7",
+                      id: "Κ08",
+                      name: "Εισαγωγή στον Προγραμματισμό",
+                      professor: "Γεώργιος Σταματόπουλος",
+                      semester: "1ο",
+                      type: "Υποχρεωτικό (ΥΜ)",
+                    },
+                  ],
+                  date: "5/1/2023",
+                  id: "5/1/2023" + " " + "7:53:37 PM",
+                  state: "finalized",
+                  period: "2022-2023 Χειμερινό",
+                  time: "7:53:37 PM",
                 },
               ],
-              date: "5/1/2023",
-              id: "5/1/2023" + " " + "7:53:37 PM",
-              state: "finalized",
-              period: "2022-2023 Χειμερινό",
-              time: "7:53:37 PM",
-            },
-          ],
-          certificates: [
-            {
-              date: "19/1/2024",
-              name: "Στρατολογικής Χρήσης (Συνοπτικό)",
-              period: "2023-2024 Χειμερινό",
-              time: "10:03:40 π.μ.",
-            },
-          ],
-        }}
-      >
-        {({ handleSubmit, handleChange, values, touched, errors }) => (
-          <div
-            style={{
-              marginTop: "20px",
-              marginRight: "30px",
-              marginLeft: "30px",
+              certificates: [
+                {
+                  date: "19/1/2024",
+                  name: "Στρατολογικής Χρήσης (Συνοπτικό)",
+                  period: "2023-2024 Χειμερινό",
+                  time: "10:03:40 π.μ.",
+                },
+              ],
             }}
           >
-            <h1>Συμπληρώστε την Αίτηση Εγγραφής</h1>
-            <p>Ότι είναι με αστερίσκο (*) είναι υποχρωτικό</p>
-            <div
-              style={{
-                display: "flex", // Ενεργοποίηση flexbox
-                justifyContent: "center", // Κεντράρισμα στον οριζόντιο άξονα
-                alignItems: "center", // Κεντράρισμα στον κάθετο άξονα, αν χρειάζεται
-                marginTop: "20px",
-                marginRight: "30px",
-                marginLeft: "100px",
-              }}
-            >
-              <Form noValidate onSubmit={handleSubmit}>
-                <Row className="mb-3">
-                  <Form.Group as={Col} md="3" controlId="validationFormik01">
-                    <Form.Label>Email*</Form.Label>
-                    <Form.Control
-                      type="email"
-                      placeholder="mail@mail.com"
-                      name="email"
-                      value={values.email}
-                      onChange={handleChange}
-                      isInvalid={!!errors.email}
-                    />
-                    <Form.Control.Feedback type="invalid">
-                      {errors.email}
-                    </Form.Control.Feedback>
-                  </Form.Group>
-                  <Form.Group as={Col} md="3" controlId="validationFormik02">
-                    <Form.Label>Κωδικός*</Form.Label>
-                    <Form.Control
-                      type="password"
-                      // placeholder="Password"
-                      name="password"
-                      value={values.password}
-                      onChange={handleChange}
-                      isInvalid={!!errors.password}
-                    />
-                    <Form.Control.Feedback type="invalid">
-                      {errors.password}
-                    </Form.Control.Feedback>
-                  </Form.Group>
-                  <Form.Group as={Col} md="3" controlId="validationFormik03">
-                    <Form.Label>Επιβεβαίωση Κωδ.*</Form.Label>
-                    <Form.Control
-                      type="password"
-                      //placeholder="Confirm Password"
-                      name="confirmPassword"
-                      value={values.confirmPassword}
-                      onChange={handleChange}
-                      isInvalid={!!errors.confirmPassword}
-                    />
-                    <Form.Control.Feedback type="invalid">
-                      {errors.password}
-                    </Form.Control.Feedback>
-                  </Form.Group>
-                </Row>
-                <Row className="mb-3">
-                  <Form.Group as={Col} md="3" controlId="validationFormik04">
-                    <Form.Label>Όνομα*</Form.Label>
-                    <Form.Control
-                      type="text"
-                      name="firstname"
-                      // placeholder="Firstname"
-                      value={values.firstname}
-                      onChange={handleChange}
-                      isValid={touched.firstname && !errors.firstname}
-                      isInvalid={!!errors.firstname}
-                    />
-                    <Form.Control.Feedback type="invalid">
-                      {errors.firstname}
-                    </Form.Control.Feedback>
-                  </Form.Group>
-                  <Form.Group as={Col} md="3" controlId="validationFormik05">
-                    <Form.Label>Επίθετο*</Form.Label>
-                    <Form.Control
-                      type="text"
-                      name="lastname"
-                      // placeholder="Lastname"
-                      value={values.lastname}
-                      onChange={handleChange}
-                      isValid={touched.lastname && !errors.lastname}
-                      isInvalid={!!errors.lastname}
-                    />
-                    <Form.Control.Feedback type="invalid">
-                      {errors.lastname}
-                    </Form.Control.Feedback>
-                  </Form.Group>
-                  <Form.Group as={Col} md="4" controlId="validationFormik06">
-                    <Form.Label>Ημερομηνία Γέννησης*</Form.Label>
-                    <Form.Control
-                      type="date"
-                      name="birthdate"
-                      placeholder="Birthdate"
-                      value={values.birthdate}
-                      onChange={handleChange}
-                      isValid={touched.birthdate && !errors.birthdate}
-                      isInvalid={!!errors.birthdate}
-                    />
-                    <Form.Control.Feedback type="invalid">
-                      {errors.birthdate}
-                    </Form.Control.Feedback>
-                  </Form.Group>
-                </Row>
-                <Row className="mb-3">
-                  <Form.Group as={Col} md="5" controlId="validationFormik07">
-                    <Form.Label>Ρόλος*</Form.Label>
-                    <Form.Control
-                      as="select"
-                      name="role"
-                      value={values.role}
-                      onChange={handleChange}
-                      isValid={touched.role && !errors.role}
-                      isInvalid={!!errors.role}
-                    >
-                      <option value="">Επιλέξτε...</option>
-                      <option value="professor">Καθηγητής</option>
-                      <option value="student">Φοιτητής</option>
-                    </Form.Control>
-                    <Form.Control.Feedback type="invalid">
-                      {errors.role}
-                    </Form.Control.Feedback>
-                  </Form.Group>
-                  <Form.Group as={Col} md="7" controlId="validationFormik08">
-                    <Form.Label>Αριθμός Τηλεφώνου*</Form.Label>
-                    <Row>
-                      <Col md="5">
+            {({ handleSubmit, handleChange, values, touched, errors }) => (
+              <div
+                style={{
+                  marginTop: "20px",
+                  marginRight: "30px",
+                  marginLeft: "30px",
+                }}
+              >
+                <h1>Συμπληρώστε την Αίτηση Εγγραφής</h1>
+                <p>Ότι είναι με αστερίσκο (*) είναι υποχρωτικό</p>
+                <div
+                  style={{
+                    display: "flex", // Ενεργοποίηση flexbox
+                    justifyContent: "center", // Κεντράρισμα στον οριζόντιο άξονα
+                    alignItems: "center", // Κεντράρισμα στον κάθετο άξονα, αν χρειάζεται
+                    marginTop: "20px",
+                    marginRight: "30px",
+                    marginLeft: "100px",
+                  }}
+                >
+                  <Form noValidate onSubmit={handleSubmit}>
+                    <Row className="mb-3">
+                      <Form.Group
+                        as={Col}
+                        md="3"
+                        controlId="validationFormik01"
+                      >
+                        <Form.Label>Email*</Form.Label>
                         <Form.Control
-                          as="select"
-                          name="Codephone"
+                          type="email"
+                          placeholder="mail@mail.com"
+                          name="email"
+                          value={values.email}
                           onChange={handleChange}
-                          value={values.Codephone}
-                          isInvalid={!!errors.Codephone}
-                        >
-                          <option value="">Επιλέξτε...</option>
-                          <option value="+30">Ελλάδα(+30)</option>
-                          <option value="+1">ΗΠΑ (+1)</option>
-                          {/* Προσθέστε εδώ άλλους κωδικούς χώρας */}
-                        </Form.Control>
-                      </Col>
-                      <Col md="7">
-                        <Form.Control
-                          type="text"
-                          name="phone"
-                          placeholder="Τηλέφωνο"
-                          value={values.phone}
-                          onChange={handleChange}
-                          // isValid={touched.phone && !errors.phone}
-                          isInvalid={!!errors.phone}
+                          isInvalid={!!errors.email}
                         />
                         <Form.Control.Feedback type="invalid">
-                          {errors.phone}
+                          {errors.email}
                         </Form.Control.Feedback>
-                      </Col>
+                      </Form.Group>
+                      <Form.Group
+                        as={Col}
+                        md="3"
+                        controlId="validationFormik02"
+                      >
+                        <Form.Label>Κωδικός*</Form.Label>
+                        <Form.Control
+                          type="password"
+                          // placeholder="Password"
+                          name="password"
+                          value={values.password}
+                          onChange={handleChange}
+                          isInvalid={!!errors.password}
+                        />
+                        <Form.Control.Feedback type="invalid">
+                          {errors.password}
+                        </Form.Control.Feedback>
+                      </Form.Group>
+                      <Form.Group
+                        as={Col}
+                        md="3"
+                        controlId="validationFormik03"
+                      >
+                        <Form.Label>Επιβεβαίωση Κωδ.*</Form.Label>
+                        <Form.Control
+                          type="password"
+                          //placeholder="Confirm Password"
+                          name="confirmPassword"
+                          value={values.confirmPassword}
+                          onChange={handleChange}
+                          isInvalid={!!errors.confirmPassword}
+                        />
+                        <Form.Control.Feedback type="invalid">
+                          {errors.password}
+                        </Form.Control.Feedback>
+                      </Form.Group>
                     </Row>
-                  </Form.Group>
-                </Row>
-                <Row className="mb-3">
-                  <Form.Group as={Col} md="4" controlId="validationFormik07">
-                    +<Form.Label>Πόλη</Form.Label>
-                    <Form.Control
-                      type="text"
-                      // placeholder="City"
-                      name="city"
-                      value={values.city}
-                      onChange={handleChange}
-                      isInvalid={!!errors.city}
-                    />
-                    <Form.Control.Feedback type="invalid">
-                      {errors.city}
-                    </Form.Control.Feedback>
-                  </Form.Group>
-                  <Form.Group as={Col} md="4" controlId="validationFormik08">
-                    <Form.Label>Διεύθυνση</Form.Label>
-                    <Form.Control
-                      type="text"
-                      // placeholder="State"
-                      name="address"
-                      value={values.address}
-                      onChange={handleChange}
-                      isInvalid={!!errors.address}
-                    />
-                    <Form.Control.Feedback type="invalid">
-                      {errors.address}
-                    </Form.Control.Feedback>
-                  </Form.Group>
-                  <Form.Group as={Col} md="4" controlId="validationFormik09">
-                    <Form.Label>Ταχυδρομικός Κώδικας</Form.Label>
-                    <Form.Control
-                      type="text"
-                      // placeholder="Zip"
-                      name="zip"
-                      value={values.zip}
-                      onChange={handleChange}
-                      isInvalid={!!errors.zip}
-                    />
+                    <Row className="mb-3">
+                      <Form.Group
+                        as={Col}
+                        md="3"
+                        controlId="validationFormik04"
+                      >
+                        <Form.Label>Όνομα*</Form.Label>
+                        <Form.Control
+                          type="text"
+                          name="firstname"
+                          // placeholder="Firstname"
+                          value={values.firstname}
+                          onChange={handleChange}
+                          isValid={touched.firstname && !errors.firstname}
+                          isInvalid={!!errors.firstname}
+                        />
+                        <Form.Control.Feedback type="invalid">
+                          {errors.firstname}
+                        </Form.Control.Feedback>
+                      </Form.Group>
+                      <Form.Group
+                        as={Col}
+                        md="3"
+                        controlId="validationFormik05"
+                      >
+                        <Form.Label>Επίθετο*</Form.Label>
+                        <Form.Control
+                          type="text"
+                          name="lastname"
+                          // placeholder="Lastname"
+                          value={values.lastname}
+                          onChange={handleChange}
+                          isValid={touched.lastname && !errors.lastname}
+                          isInvalid={!!errors.lastname}
+                        />
+                        <Form.Control.Feedback type="invalid">
+                          {errors.lastname}
+                        </Form.Control.Feedback>
+                      </Form.Group>
+                      <Form.Group
+                        as={Col}
+                        md="4"
+                        controlId="validationFormik06"
+                      >
+                        <Form.Label>Ημερομηνία Γέννησης*</Form.Label>
+                        <Form.Control
+                          type="date"
+                          name="birthdate"
+                          placeholder="Birthdate"
+                          value={values.birthdate}
+                          onChange={handleChange}
+                          isValid={touched.birthdate && !errors.birthdate}
+                          isInvalid={!!errors.birthdate}
+                        />
+                        <Form.Control.Feedback type="invalid">
+                          {errors.birthdate}
+                        </Form.Control.Feedback>
+                      </Form.Group>
+                    </Row>
+                    <Row className="mb-3">
+                      <Form.Group
+                        as={Col}
+                        md="5"
+                        controlId="validationFormik07"
+                      >
+                        <Form.Label>Ρόλος*</Form.Label>
+                        <Form.Control
+                          as="select"
+                          name="role"
+                          value={values.role}
+                          onChange={handleChange}
+                          isValid={touched.role && !errors.role}
+                          isInvalid={!!errors.role}
+                        >
+                          <option value="professor">Καθηγητής/τρια</option>
+                          <option value="student">Φοιτητής/τρια</option>
+                          <option value="student" disabled>
+                            Και τα δύο
+                          </option>
+                        </Form.Control>
+                        <Form.Control.Feedback type="invalid">
+                          {errors.role}
+                        </Form.Control.Feedback>
+                      </Form.Group>
+                      <Form.Group
+                        as={Col}
+                        md="7"
+                        controlId="validationFormik08"
+                      >
+                        <Form.Label>Αριθμός Τηλεφώνου*</Form.Label>
+                        <Row>
+                          <Col md="5">
+                            <Form.Control
+                              as="select"
+                              name="Codephone"
+                              onChange={handleChange}
+                              value={values.Codephone}
+                              isInvalid={!!errors.Codephone}
+                            >
+                              <option value="">Επιλέξτε...</option>
+                              <option value="+30">Ελλάδα(+30)</option>
+                              <option value="+1">ΗΠΑ (+1)</option>
+                              {/* Προσθέστε εδώ άλλους κωδικούς χώρας */}
+                            </Form.Control>
+                          </Col>
+                          <Col md="7">
+                            <Form.Control
+                              type="text"
+                              name="phone"
+                              placeholder="Τηλέφωνο"
+                              value={values.phone}
+                              onChange={handleChange}
+                              // isValid={touched.phone && !errors.phone}
+                              isInvalid={!!errors.phone}
+                            />
+                            <Form.Control.Feedback type="invalid">
+                              {errors.phone}
+                            </Form.Control.Feedback>
+                          </Col>
+                        </Row>
+                      </Form.Group>
+                    </Row>
+                    <Row className="mb-3">
+                      <Form.Group
+                        as={Col}
+                        md="4"
+                        controlId="validationFormik07"
+                      >
+                        +<Form.Label>Πόλη</Form.Label>
+                        <Form.Control
+                          type="text"
+                          // placeholder="City"
+                          name="city"
+                          value={values.city}
+                          onChange={handleChange}
+                          isInvalid={!!errors.city}
+                        />
+                        <Form.Control.Feedback type="invalid">
+                          {errors.city}
+                        </Form.Control.Feedback>
+                      </Form.Group>
+                      <Form.Group
+                        as={Col}
+                        md="4"
+                        controlId="validationFormik08"
+                      >
+                        <Form.Label>Διεύθυνση</Form.Label>
+                        <Form.Control
+                          type="text"
+                          // placeholder="State"
+                          name="address"
+                          value={values.address}
+                          onChange={handleChange}
+                          isInvalid={!!errors.address}
+                        />
+                        <Form.Control.Feedback type="invalid">
+                          {errors.address}
+                        </Form.Control.Feedback>
+                      </Form.Group>
+                      <Form.Group
+                        as={Col}
+                        md="4"
+                        controlId="validationFormik09"
+                      >
+                        <Form.Label>Ταχυδρομικός Κώδικας</Form.Label>
+                        <Form.Control
+                          type="text"
+                          // placeholder="Zip"
+                          name="zip"
+                          value={values.zip}
+                          onChange={handleChange}
+                          isInvalid={!!errors.zip}
+                        />
 
-                    <Form.Control.Feedback type="invalid">
-                      {errors.zip}
-                    </Form.Control.Feedback>
-                  </Form.Group>
-                </Row>
-                <Row className="mb-3"></Row>
-                <Button type="submit">Υποβολή Εγγραφής</Button>
-              </Form>
-            </div>
-          </div>
-        )}
-      </Formik>
-    </Container>
+                        <Form.Control.Feedback type="invalid">
+                          {errors.zip}
+                        </Form.Control.Feedback>
+                      </Form.Group>
+                    </Row>
+                    <Row className="mb-3"></Row>
+                    <Button type="submit">Υποβολή Εγγραφής</Button>
+                  </Form>
+                </div>
+              </div>
+            )}
+          </Formik>
+        </Container>
+      </div>
+    </>
   );
 }

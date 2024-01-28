@@ -2,7 +2,7 @@
 import "./NewCertificatePreview.css";
 import image from "../../images/warning.png";
 import { useState } from "react";
-import { useEffect } from 'react';
+import { useEffect } from "react";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../data/firebase";
 import {
@@ -15,24 +15,20 @@ import {
   Table,
 } from "react-bootstrap";
 
-const NewCertificatePreview = ({
-  goBackToSelection,
-  goToFinish
-  
-}) => {
+const NewCertificatePreview = ({ goBackToSelection, goToFinish }) => {
   const [showModal, setShowModal] = useState(false);
   const handleCloseModal = () => setShowModal(false);
   const handleShowModal = () => setShowModal(true);
   const [name, setName] = useState(null);
-const [surname, setSurname] = useState(null);
+  const [surname, setSurname] = useState(null);
   const certificateNames = {
-    "student_status": "Φοιτητικής Ιδιότητας",
-    "detailed_grades": "Αναλυτικής βαθμολογίας",
-    "military_use_brief": "Στρατολογικής Χρήσης (Συνοπτικό)",
-    "military_use_detailed": "Στρατολογικής Χρήσης (Αναλυτικό)",
-    "tax_use": "Φορολογικής Χρήσης"
+    student_status: "Φοιτητικής Ιδιότητας",
+    detailed_grades: "Αναλυτικής βαθμολογίας",
+    military_use_brief: "Στρατολογικής Χρήσης (Συνοπτικό)",
+    military_use_detailed: "Στρατολογικής Χρήσης (Αναλυτικό)",
+    tax_use: "Φορολογικής Χρήσης",
   };
-  const selectedCertificateId = localStorage.getItem('selectedCertificateId');
+  const selectedCertificateId = localStorage.getItem("selectedCertificateId");
   useEffect(() => {
     const userEmail = localStorage.getItem("email");
     if (userEmail) {
@@ -51,7 +47,7 @@ const [surname, setSurname] = useState(null);
 
   return (
     <div className="newcertificate-preview">
-      <Container style={{ borderRadius: '15px', padding: '20px' }}>
+      <Container style={{ borderRadius: "15px", padding: "20px" }}>
         {/* buttons section */}
         <Row className="mb-2" md={3}>
           <Col sm={"auto"}></Col>
@@ -77,57 +73,54 @@ const [surname, setSurname] = useState(null);
           </ListGroup.Item>
         </ListGroup>
         <Table className="table table-hover">
-         <tbody>
-         <tr>
-          
-          <td style={{ textAlign: "left" }}>{certificateNames[selectedCertificateId]}</td>
-          </tr>
-        </tbody>
-      </Table>
-      <ListGroup>
-  <ListGroup.Item as="li">
-    <Table className="table table-hover">
-      <tbody>
-        <tr>
-          <td style={{ textAlign: "left", width: "15%" }}>
-            <strong>Περίοδος:</strong>
-          </td>
-          <td style={{ textAlign: "left" }}>2023/2024 Χειμερινό</td>
-        </tr>
-        <tr>
-          <td style={{ textAlign: "left", width: "15%" }}>
-            <strong>Ημερομηνία:</strong>
-          </td>
-          <td style={{ textAlign: "left" }}>{new Date().toLocaleDateString()}</td>
-        </tr>
-        <tr>
-          <td style={{ textAlign: "left", width: "15%" }}>
-            <strong>Ισχύς:</strong>
-          </td>
-          <td style={{ textAlign: "left" }}>3 μήνες</td>
-        </tr>
-        <tr>
-          <td style={{ textAlign: "left", width: "15%" }}>
-            <strong>Όνομα:</strong>
-          </td>
-          <td style={{ textAlign: "left" }}>{name}</td>
-        </tr>
-        <tr>
-          <td style={{ textAlign: "left", width: "15%" }}>
-            <strong>Επίθετο:</strong>
-          </td>
-          <td style={{ textAlign: "left" }}>{surname}</td>
-        </tr>
-        <tr>
-          <td style={{ textAlign: "left", width: "15%" }}>
-            <strong>Ιδιότητα:</strong>
-          </td>
-          <td style={{ textAlign: "left" }}>Φοιτητής</td>
-        </tr>
-      </tbody>
-    </Table>
-  </ListGroup.Item>
-</ListGroup>
+          <tbody>
+            <tr>
+              <td style={{ textAlign: "left" }}>
+                {certificateNames[selectedCertificateId]}
+              </td>
+            </tr>
+          </tbody>
+        </Table>
+        <ListGroup>
+          <ListGroup.Item as="li">
+            <Table className="table table-hover">
+              <tbody>
+                <tr>
+                  <td style={{ textAlign: "left", width: "15%" }}>
+                    <strong>Περίοδος:</strong>
+                  </td>
+                  <td style={{ textAlign: "left" }}>2023/2024 Χειμερινό</td>
+                </tr>
+                <tr>
+                  <td style={{ textAlign: "left", width: "15%" }}>
+                    <strong>Ημερομηνία:</strong>
+                  </td>
+                  <td style={{ textAlign: "left" }}>
+                    {new Date().toLocaleDateString()}
+                  </td>
+                </tr>
+                <tr>
+                  <td style={{ textAlign: "left", width: "15%" }}>
+                    <strong>Ισχύς:</strong>
+                  </td>
+                  <td style={{ textAlign: "left" }}>3 μήνες</td>
+                </tr>
+                <tr>
+                  <td style={{ textAlign: "left", width: "15%" }}>
+                    <strong>Όνομα:</strong>
+                  </td>
+                  <td style={{ textAlign: "left" }}>{name}</td>
+                </tr>
+                <tr>
+                  <td style={{ textAlign: "left", width: "15%" }}>
+                    <strong>Επίθετο:</strong>
+                  </td>
+                  <td style={{ textAlign: "left" }}>{surname}</td>
+                </tr>
+              </tbody>
+            </Table>
+          </ListGroup.Item>
+        </ListGroup>
       </Container>
       <Modal
         show={showModal}
@@ -154,7 +147,8 @@ const [surname, setSurname] = useState(null);
             <div className="col-md-8">
               <p>
                 Επιλέγοντας Υποβολή, η αίτηση πιστοποιητικού θα αποσταλεί στην
-                Γραμματεία. Εάν πατήσετε Ολοκλήρωση, δεν θα έχετε την δυνατότητα να την ακυρώσετε. 
+                Γραμματεία. Εάν πατήσετε Ολοκλήρωση, δεν θα έχετε την δυνατότητα
+                να την ακυρώσετε.
               </p>
             </div>
           </div>
