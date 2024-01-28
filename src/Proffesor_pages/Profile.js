@@ -186,10 +186,11 @@ const ProfilePage1 = ({ db }) => {
                     </MDBRow>
                   </MDBCardBody>
                 </MDBCard>
-                <MDBCard className="mb-2">
+                <MDBCard className="mb-2" style={{ textAlign: 'left' }}>
                 <MDBCardBody>
                 <MDBRow>
-                  <MDBCol sm="4">
+                  {/* Κάρτα για την πόλη */}
+                  <MDBCol sm="12">
                     <MDBCard>
                       <MDBCardBody>
                         <MDBCardText>Πόλη:</MDBCardText>
@@ -206,7 +207,9 @@ const ProfilePage1 = ({ db }) => {
                       </MDBCardBody>
                     </MDBCard>
                   </MDBCol>
-                  <MDBCol sm="4">
+
+                  {/* Κάρτα για τη διεύθυνση */}
+                  <MDBCol sm="12">
                     <MDBCard>
                       <MDBCardBody>
                         <MDBCardText>Διεύθυνση:</MDBCardText>
@@ -223,7 +226,9 @@ const ProfilePage1 = ({ db }) => {
                       </MDBCardBody>
                     </MDBCard>
                   </MDBCol>
-                  <MDBCol sm="4">
+
+                  {/* Κάρτα για τον ταχυδρομικό κώδικα */}
+                  <MDBCol sm="12">
                     <MDBCard>
                       <MDBCardBody>
                         <MDBCardText>Ταχυδρομικός Κώδικας:</MDBCardText>
@@ -252,9 +257,9 @@ const ProfilePage1 = ({ db }) => {
                     </button>
                   }
                 </div>
-              </MDBCardBody>
+                </MDBCardBody>
 
-            </MDBCard>  
+                </MDBCard>  
         </MDBCol> 
         <NavLink
         to="/"

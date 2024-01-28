@@ -23,7 +23,7 @@ import Certificaterequest from "./Student_pages/Certificate_pages/Certificatereq
 // import Certificatestate from "./Student_pages/Certificate_pages/Certificatestate";
 // import Certificatefinal from "./Student_pages/Certificate_pages/Certificatefinal";
 import ProfilePage from "./Student_pages/Profile";
-import GradesPage from "./Student_pages/Grades";
+import ControlledGrades from "./Student_pages/Grades/Grades";
 //professor pages
 import Professorpage from "./Proffesor_pages/Professorpage";
 import StudentGrades from "./Proffesor_pages/StudentGrades";
@@ -72,7 +72,7 @@ function App() {
             {/* <Route path="certificate-state" element={<Certificatestate />} /> */}
           </Route>
           <Route path="profile" element={<ProfilePage db={db} />} />
-          <Route path="grades" element={<GradesPage db={db} />} />
+          <Route path="grades" element={<ControlledGrades db={db} />} />
         </Route>
 
         {/* <Route path="/professor-page" element={<Professorpage />} /> */}
