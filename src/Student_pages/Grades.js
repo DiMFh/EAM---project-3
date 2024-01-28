@@ -61,7 +61,7 @@ const GradesPage = ({ db }) => {
                 <Breadcrumb.Item active>Βαθμολογίες</Breadcrumb.Item>
             </Breadcrumb>
             <div className="mainpage">
-                <Container>
+                <Container style={{ backgroundColor: "transparent" }}>
                 <Accordion >
                     <Accordion.Item eventKey="0">
                         <Accordion.Header>Εξάμηνα</Accordion.Header>

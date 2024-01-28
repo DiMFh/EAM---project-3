@@ -146,17 +146,17 @@ const ProfilePage = ({ db }) => {
                       <strong>Δείτε ακόμα: </strong> {userData.school}
                     </p>
                     <nav className="nav">
-                      <NavLink to="/student-page/grades" className="nav-link">
+                      <NavLink to="/grades" className="nav-link">
                         Βαθμολογίες
                       </NavLink>
                       <NavLink
-                        to="/student-page/declarations"
+                        to="/declarations"
                         className="nav-link"
                       >
                         Δηλώσεις
                       </NavLink>
                       <NavLink
-                        to="/student-page/certificate"
+                        to="/certificate"
                         className="nav-link"
                       >
                         Πιστοποιητικά

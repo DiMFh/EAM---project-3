@@ -48,11 +48,11 @@ useEffect(() => {
   return (
     <>
       <Breadcrumb>
-        <Breadcrumb.Item href="/student-page">Αρχική</Breadcrumb.Item>
+        <Breadcrumb.Item href="/">Αρχική</Breadcrumb.Item>
         <Breadcrumb.Item active>Πιστοποιητικά</Breadcrumb.Item>
       </Breadcrumb>
        <div className="certificate">
-       <Container>
+       <Container style={{ backgroundColor: "transparent" }}>
           <Accordion>
             <Card>
               <Card.Header>

@@ -14,7 +14,7 @@ import Home from "./Home";
 import Subjects from "./Subjects";
 import NotFoundPage from "./NotFoundPage";
 //student pages
-import Studentpage from "./Student_pages/Studentpage";
+// import Studentpage from "./Student_pages/Studentpage";
 import Help from "./Student_pages/Help";
 import Declarations from "./Student_pages/Declarations/Declarations";
 import NewDeclaration from "./Student_pages/Declarations/NewDeclaration";
@@ -25,11 +25,12 @@ import Certificaterequest from "./Student_pages/Certificate_pages/Certificatereq
 import ProfilePage from "./Student_pages/Profile";
 import GradesPage from "./Student_pages/Grades";
 //professor pages
-import Professorpage from "./Proffesor_pages/Professorpage";
+// import Professorpage from "./Proffesor_pages/Professorpage";
 import StudentGrades from "./Proffesor_pages/StudentGrades";
 import StudentGradesCreate from "./Proffesor_pages/StudentGradesCreate";
 import CoursesControl from "./Proffesor_pages/CoursesControl";
 import ProfilePage1 from "./Proffesor_pages/Profile";
+import ProffesorHelp from "./Proffesor_pages/ProffesorHelp";
 //firebase
 import "./data/firebase";
 import { getFirestore } from "firebase/firestore";
@@ -56,8 +57,8 @@ function App() {
           <Route path="certificate-state" element={<Certificatestate />} />
         </Route> */}
 
-        <Route path="/student-page">
-          <Route index element={<Studentpage />} />
+        {/* <Route path="/student-page"> */}
+          {/* <Route index element={<Studentpage />} /> */}
           <Route path="declarations" element={<Declarations />} />
           <Route path="new-declaration" element={<NewDeclaration />} />
           <Route path="certificate-request" element={<Certificaterequest />} />
@@ -73,19 +74,20 @@ function App() {
           </Route>
           <Route path="profile" element={<ProfilePage db={db} />} />
           <Route path="grades" element={<GradesPage db={db} />} />
-        </Route>
+        {/* </Route> */}
 
         {/* <Route path="/professor-page" element={<Professorpage />} /> */}
-        <Route path="/professor-page">
-          <Route index element={<Professorpage />} />
+        {/* <Route path="/professor-page"> */}
+          {/* <Route index element={<Professorpage />} /> */}
           <Route path="student-grades" element={<StudentGrades />} />
           <Route
             path="student-grades-create"
             element={<StudentGradesCreate />}
           />
+          <Route path="proffesor-help" element={<ProffesorHelp />} />
           <Route path="courses-control" element={<CoursesControl />} />
           <Route path="profile" element={<ProfilePage1 db={db} />} />
-        </Route>
+        {/* </Route> */}
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     )

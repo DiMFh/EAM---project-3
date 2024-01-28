@@ -1,8 +1,4 @@
 import Carousel from 'react-bootstrap/Carousel';
-import Firstbackground from './Firstbackground';
-// import './Homecarousel.css';
-import InfoCardsContainer from "./InfoCardsContainer";
-import { Container } from 'react-bootstrap';
 import InfoCard from "./InfoCard";
 import { ReactComponent as Icon1 } from "./icons/student-icon.svg";
 import { ReactComponent as Icon2 } from "./icons/professor-icon.svg";

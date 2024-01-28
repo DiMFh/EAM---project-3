@@ -17,9 +17,9 @@ export default function Header() {
 
   const handleLogoClick = () => {
     if (userRole === "student") {
-      navigate("/student-page");
+      navigate("/");
     } else if (userRole === "professor") {
-      navigate("/professor-page");
+      navigate("/");
     } else {
       navigate("/");
     }
@@ -72,7 +72,7 @@ export default function Header() {
         {userRole === "student" && (
           <>
             <NavLink
-              to="/student-page/declarations"
+              to="/declarations"
               className={({ isActive }) =>
                 isActive ? "active-link" : undefined
               }
@@ -80,7 +80,7 @@ export default function Header() {
               Δηλώσεις
             </NavLink>
             <NavLink
-              to="/student-page/grades"
+              to="/grades"
               className={({ isActive }) =>
                 isActive ? "active-link" : undefined
               }
@@ -88,7 +88,7 @@ export default function Header() {
               Βαθμολογία
             </NavLink>
             <NavLink
-              to="/student-page/certificate"
+              to="/certificate"
               className={({ isActive }) =>
                 isActive ? "active-link" : undefined
               }
@@ -96,7 +96,7 @@ export default function Header() {
               Πιστοποιητικά
             </NavLink>
             <NavLink
-              to="/student-page/help"
+              to="/help"
               className={({ isActive }) =>
                 isActive ? "active-link" : undefined
               }
@@ -109,7 +109,7 @@ export default function Header() {
           <>
             {/* Example links */}
             <NavLink
-              to="/professor-page/course-management"
+              to="/course-management"
               className={({ isActive }) =>
                 isActive ? "active-link" : undefined
               }
@@ -117,7 +117,7 @@ export default function Header() {
               Διαχείριση Μαθημάτων
             </NavLink>
             <NavLink
-              to="/professor-page/student-grades"
+              to="/student-grades"
               className={({ isActive }) =>
                 isActive ? "active-link" : undefined
               }
@@ -132,8 +132,8 @@ export default function Header() {
         <NavLink
           to={
             userRole === "student"
-              ? "/student-page/profile"
-              : "/professor-page/profile"
+              ? "/profile"
+              : "/profile"
           }
           className={({ isActive }) => (isActive ? "active-link" : undefined)}
         >
