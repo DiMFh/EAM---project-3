@@ -1,6 +1,7 @@
 import "./InfoCard.css";
+import { DropdownButton, Dropdown } from "react-bootstrap";
 
-export default function InfoCard({ Icon, title, items }) {
+export default function InfoCard({ Icon, title, items, button }) {
   return (
     <div className="info-card">
       <Icon className="info-icon" />
@@ -13,6 +14,17 @@ export default function InfoCard({ Icon, title, items }) {
           </li>
         ))}
       </ul>
+      {button && (
+        <DropdownButton
+          drop={"up"}
+          variant="primary"
+          title="Συνδεθείτε"
+          flip={false}
+        >
+          <Dropdown.Item href="/login">Είσοδος</Dropdown.Item>
+          <Dropdown.Item href="/register">Εγγραφή</Dropdown.Item>
+        </DropdownButton>
+      )}
     </div>
   );
 }
