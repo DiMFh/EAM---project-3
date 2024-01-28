@@ -13,7 +13,7 @@ const Subjects = ({db}) => {
       const subjectsList = subjectsSnapshot.docs.map(doc => {
         const data = doc.data();
         return Object.keys(data).map(key => data[key]);
-      }).flat(); // Χρησιμοποιείτε flat για να απλοποιήσετε τον πίνακα
+      }).flat(); 
       setsubjects(subjectsList);
       console.log(subjectsList);
     };
@@ -30,7 +30,7 @@ const Subjects = ({db}) => {
   };
 
   return (
-    <Container >
+    <Container style={{marginTop: "100px"}} >
       <h1>Ενημερωθείτε για τα μαθήματα του Τμήματος Πληροφορικής και Τηλεπικοινωνιών</h1>
       <Accordion defaultActiveKey="0">
         <Accordion.Item eventKey="0">
