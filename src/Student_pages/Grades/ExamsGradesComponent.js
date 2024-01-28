@@ -76,7 +76,7 @@ const ExamsGradesComponent = ({ db }) => {
                         <Card key={semester}>
                         <Card.Header >
                         <Accordion.Item eventKey={index.toString()}>
-                            <Accordion.Header as={Button} variant="link" eventKey={String(index)}>
+                            <Accordion.Header  eventKey={String(index)}>
                               {semester}
                             </Accordion.Header>
                         </Accordion.Item>
@@ -129,7 +129,7 @@ const ExamsGradesComponent = ({ db }) => {
                             <Card key={semester}>
                             <Card.Header>
                                 <Accordion.Item eventKey={index.toString()}>
-                                <Accordion.Header as={Button} variant="link" eventKey={String(index)}>
+                                <Accordion.Header  eventKey={String(index)}>
                                     {semester}
                                 </Accordion.Header>
                                 </Accordion.Item>
@@ -180,7 +180,7 @@ const ExamsGradesComponent = ({ db }) => {
                         <Card key={semester}>
                         <Card.Header>
                             <Accordion.Item eventKey={index.toString()}>
-                            <Accordion.Header as={Button} variant="link" eventKey={String(index)}>
+                            <Accordion.Header  eventKey={String(index)}>
                                 {semester}
                             </Accordion.Header>
                             </Accordion.Item>

@@ -15,8 +15,8 @@ function ControlledGrades({db}) {
                 <Breadcrumb.Item href="./">Αρχική</Breadcrumb.Item>
                 <Breadcrumb.Item active>Βαθμολογίες</Breadcrumb.Item>
             </Breadcrumb>
-            <Container style={{marginTop: "100px", borderRadius: "15px"}} >
-                <h1>Βαθμολογίες</h1>
+                <h1 style = {{marginTop: "100px"}}>Βαθμολογίες</h1>
+            <Container style={{ borderRadius: "15px", padding: '20px' }} >
                 <Tabs
                     id="controlled-tab-example"
                     activeKey={key}
