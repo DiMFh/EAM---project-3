@@ -21,6 +21,11 @@ const NewCertificatePreview = ({ goBackToSelection, goToFinish }) => {
   const handleShowModal = () => setShowModal(true);
   const [name, setName] = useState(null);
   const [surname, setSurname] = useState(null);
+  const [birth, setBirth] = useState(null);
+  const [address, setAddress] = useState(null);
+  const [email, setEmail] = useState(null);
+  const [role, setRole] = useState(null);
+
   const certificateNames = {
     student_status: "Φοιτητικής Ιδιότητας",
     detailed_grades: "Αναλυτικής βαθμολογίας",
@@ -38,6 +43,10 @@ const NewCertificatePreview = ({ goBackToSelection, goToFinish }) => {
           const userData = docSnap.data();
           setName(userData.firstname);
           setSurname(userData.lastname);
+          setBirth(userData.birthdate);
+          setAddress(userData.address);
+          setEmail(userData.email);
+          setRole(userData.role);
         } else {
           console.log("No user data found in Firestore");
         }
@@ -117,6 +126,31 @@ const NewCertificatePreview = ({ goBackToSelection, goToFinish }) => {
                   </td>
                   <td style={{ textAlign: "left" }}>{surname}</td>
                 </tr>
+                <tr>
+                  <td style={{ textAlign: "left", width: "15%" }}>
+                    <strong>Ημερομηνία Γέννησης:</strong>
+                  </td>
+                  <td style={{ textAlign: "left" }}>{birth}</td>
+                </tr>
+                <tr>
+                  <td style={{ textAlign: "left", width: "15%" }}>
+                    <strong>Διεύθυνση:</strong>
+                  </td>
+                  <td style={{ textAlign: "left" }}>{address}</td>
+                </tr>
+                <tr>
+                  <td style={{ textAlign: "left", width: "15%" }}>
+                    <strong>Ηλεκτρονική Διεύθυνση:</strong>
+                  </td>
+                  <td style={{ textAlign: "left" }}>{email}</td>
+                </tr>
+                <tr>
+                  <td style={{ textAlign: "left", width: "15%" }}>
+                    <strong>Ιδιότητα:</strong>
+                  </td>
+                  <td style={{ textAlign: "left" }}>{role}</td>
+                </tr>
+
               </tbody>
             </Table>
           </ListGroup.Item>
