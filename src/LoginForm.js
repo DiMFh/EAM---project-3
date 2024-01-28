@@ -39,9 +39,9 @@ const LoginForm = ({ db }) => {
   
           // Redirect user based on their role
           if (userRole === 'student') {
-            navigate('/student-page');
+            navigate('/');
           } else if (userRole === 'professor') {
-            navigate('/professor-page');
+            navigate('/');
           } else {
             navigate('/'); // Default redirect if role is not recognized
           }

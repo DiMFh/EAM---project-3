@@ -130,8 +130,8 @@ const ProfilePage1 = ({ db }) => {
                   <MDBCardBody className="text-center">
                     <p className="text-muted mb-1" style={{ textAlign: 'left' }}><strong>Δείτε ακόμα: </strong> {userData.school}</p>
                     <nav className="nav">
-                      <NavLink to="/professor-page/course-management" className="nav-link">Διαχείριση Μαθημάτων</NavLink>
-                      <NavLink to="/professor-page/student-grades" className="nav-link">Βαθμολόγια</NavLink>
+                      <NavLink to="/course-management" className="nav-link">Διαχείριση Μαθημάτων</NavLink>
+                      <NavLink to="/student-grades" className="nav-link">Βαθμολόγια</NavLink>
                     </nav>
                   </MDBCardBody>
                 </MDBCard>

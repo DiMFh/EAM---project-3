@@ -2,38 +2,30 @@
 import "./Certificaterequest.css";
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { doc, getDoc } from "firebase/firestore";
-import { db } from "../../data/firebase";
 import {
   Container,
   Row,
   Col,
   Form,
-  FormControl,
   Accordion,
   Table,
   Breadcrumb,
   Button,
   Spinner,
-  Alert,
-  Fade,
 } from "react-bootstrap";
 import DeclarationsStepper from "./CertificateStepper";
 import NewCertificatePreview from "./NewCertificatePreview";
 import NewCertificateFinish from "./NewCertificateFinish";
 
 const Certificaterequest = () => {
-  //////////////arxikopoioyme to selectedcourses me [] kai to setselectedcourses mporei na to allazei//////////////////////////////
-  const [selectedCourses, setselectedCourses] = useState([]); // To update the selected courses 
-  //////////////////////////////////////////////////
-  const [showPreview, setShowPreview] = useState(false); // To render the preview component
-  const [showFinish, setShowFinish] = useState(false); // To render the last compoment
-  const [activeStep, setActiveStep] = useState(0); // For the stepper
-  const maxSelectedCourses = 7; // The maximum number of courses that can be selected
-  const [certificate, setCertificate] = useState(0);
+  const [showPreview, setShowPreview] = useState(false); 
+  const [showFinish, setShowFinish] = useState(false); 
+  const [activeStep, setActiveStep] = useState(0); 
   const location = useLocation();
-  
-  
+  const [selectedCheckbox, setSelectedCheckbox] = useState(null);
+  const [selectedCertificateId, setSelectedCertificateId] = useState(null);
+  // const [navigatedBack, setNavigatedBack] = useState(false);
+
   const navigate = useNavigate();
 
   // ***stepper functionality
@@ -44,53 +36,6 @@ const Certificaterequest = () => {
     if (activeStep > 0) setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-  //  ***clear the selected courses from the local storage when the component is mounted for the first time
-  useEffect(() => {
-    localStorage.removeItem("selectedCourses");
-  }, []);
-
-  // ****get the courses from the database
-  const [coursesDB, setCoursesDB] = useState([]);
-  useEffect(() => {
-    async function getCourses() {
-      try {
-        const allCoursesDocRef = doc(db, "courses", "all_courses");
-        const allCoursesDoc = await getDoc(allCoursesDocRef);
-
-        if (allCoursesDoc.exists()) {
-          // The 'all_courses' document contains all the courses
-          const coursesData = allCoursesDoc.data();
-          setCoursesDB(coursesData);
-        } else {
-          console.log("No such document!");
-        }
-      } catch (error) {
-        console.log("Error getting the course: ", error);
-      }
-    }
-    getCourses();
-  }, []);
-
-  // ****group courses by semester after they are fetched from the database
- 
-
-  // ****handle the course selection
-  function handleCourseSelection(course) {
-    setselectedCourses((prevCourses) => {
-      // Check if the course is already selected
-      if (prevCourses.includes(course)) {
-        // Remove it from the selected
-        return prevCourses.filter(
-          (selectedCourse) => selectedCourse.id !== course.id
-        );
-      } else {
-        // Add it to the selected
-        return [...prevCourses, course];
-      }
-    });
-  }
-
-  
   // ***loading button functionality (and go to preview)
   const [isLoading, setLoading] = useState(false);
   const goToPreview = () => {
@@ -99,13 +44,9 @@ const Certificaterequest = () => {
   };
   const handleBack = () => {
     navigate("../certificate");
-    setNavigatedBack(true);
+    // setNavigatedBack(true);
   };
   const goBackToSelection = () => {
-    const storedCourses = JSON.parse(localStorage.getItem("selectedCourses"));
-    if (storedCourses) {
-      setselectedCourses(storedCourses);
-    }
     setShowPreview(false);
     prevStep();
   };
@@ -114,11 +55,15 @@ const Certificaterequest = () => {
     nextStep();
   };
   const lastStepCompleted = () => {
-    // called by the last component, to complete the stepper
     nextStep();
   };
 
   useEffect(() => {
+    // const goToPreview = () => {
+    //   setShowPreview(true);
+    //   nextStep();
+    // };
+
     function simulateNetworkRequest() {
       return new Promise((resolve) => setTimeout(resolve, 1000));
     }
@@ -126,15 +71,12 @@ const Certificaterequest = () => {
       simulateNetworkRequest().then(() => {
         setLoading(false);
         // go to preview
-        console.log("The selected courses are: ", selectedCourses);
         goToPreview();
       });
     }
-  }, [isLoading]);
+  }, [nextStep,isLoading,setShowPreview,goToPreview]);
 
-  const [selectedCheckbox, setSelectedCheckbox] = useState(null);
-  const [selectedCertificateId, setSelectedCertificateId] = useState(null);
-  const [navigatedBack, setNavigatedBack] = useState(false);
+  
 
   const handleCheckboxChange = (index, id) => () => {
     if (selectedCheckbox === index) {
@@ -152,40 +94,27 @@ const Certificaterequest = () => {
     }
   };
 
-  ////////////////////////////////////////////////////////////////////////////////
   const handleClick = () => {
   localStorage.setItem('selectedCertificateId', selectedCertificateId);
   setLoading(true);
 };
 
-  // 1. `localStorage.setItem("selectedCourses", JSON.stringify(selectedCourses));`: This line stores the `selectedCourses` array in the local storage of the browser. 
-  // Local storage allows you to store data across browser sessions. The `setItem` method is used to store the data, and it takes two arguments: the key to store under (`"selectedCourses"`), and the value to store.
-  //  Since local storage can only store strings, `JSON.stringify(selectedCourses)` is used to convert the `selectedCourses` array into a JSON string.
-
-  // 2. `setLoading(true);`: This line is calling a function `setLoading` with the argument `true`. This is likely a state update function from the `useState` hook in React, and it's used to indicate that some kind of loading process has started. 
-  // The exact effect of this line depends on how the `loading` state is used elsewhere in the component.
-  /////////////////////////////////////////////////////////////////////////////////
-
+  
 
   return (
     <>
-     {/* breadcrumb */}
      <Breadcrumb>
-        <Breadcrumb.Item href="/student-page">Αρχική</Breadcrumb.Item>
-        <Breadcrumb.Item href="/student-page/certificate/">Πιστοποιητικά</Breadcrumb.Item>
+        <Breadcrumb.Item href="/">Αρχική</Breadcrumb.Item>
+        <Breadcrumb.Item href="/certificate/">Πιστοποιητικά</Breadcrumb.Item>
         <Breadcrumb.Item active>Αίτηση Παροχής Πιστοποιητικού</Breadcrumb.Item>
       </Breadcrumb>
-      {/* breadcrumb end */}
 
-      {/* steper */}
       <DeclarationsStepper activeStep={activeStep} />
-      {/* steper end  */}
 
       {!showPreview ? (
         <div className="newdeclarations">
 
-          <Container>
-            {/* Search-Επιστροφή-Επόμενο */}
+          <Container style={{ borderRadius: '15px', padding: '20px' }}>
             <Row className="mb-2 justify-content-between" >
 
             <Col md={2}></Col>
@@ -204,18 +133,14 @@ const Certificaterequest = () => {
                 </Button>
               </Col>
               
-              
-
-               
               <Col md={1}>
-                {/*If the selectedCourses is empty, make the button disabled */}
 
                 <Button
                   variant="success"
                   className="float-end"
                   disabled={
                     isLoading || selectedCheckbox === null
-                    // certificate !== 1
+                    
                   } // if it is loading or there are no selected courses, disable the button
                   onClick={!isLoading ? handleClick : null}
                 >
@@ -391,7 +316,6 @@ const Certificaterequest = () => {
           selectedCourses={selectedCertificateId}
           goBackToSelection={goBackToSelection}
           goToFinish={goToFinish}
-          maxCourses={maxSelectedCourses}
         />
       ) : (
         <NewCertificateFinish

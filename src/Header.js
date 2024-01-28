@@ -20,9 +20,9 @@ export default function Header() {
 
   const handleLogoClick = () => {
     if (userRole === "student") {
-      navigate("/student-page");
+      navigate("/");
     } else if (userRole === "professor") {
-      navigate("/professor-page");
+      navigate("/");
     } else {
       navigate("/");
     }
@@ -89,7 +89,7 @@ export default function Header() {
                     >
                       <NavDropdown.Item>
                         <NavLink
-                          to="/student-page/declarations"
+                          to="/declarations"
                           className={({ isActive }) =>
                             isActive ? "active-link" : undefined
                           }
@@ -99,7 +99,7 @@ export default function Header() {
                       </NavDropdown.Item>
                       <NavDropdown.Item>
                         <NavLink
-                          to="/student-page/grades"
+                          to="/grades"
                           className={({ isActive }) =>
                             isActive ? "active-link" : undefined
                           }
@@ -109,7 +109,7 @@ export default function Header() {
                       </NavDropdown.Item>
                       <NavDropdown.Item>
                         <NavLink
-                          to="/student-page/certificate"
+                          to="/certificate"
                           className={({ isActive }) =>
                             isActive ? "active-link" : undefined
                           }
@@ -119,7 +119,7 @@ export default function Header() {
                       </NavDropdown.Item>
                       <NavDropdown.Item>
                         <NavLink
-                          to="/student-page/help"
+                          to="/help"
                           className={({ isActive }) =>
                             isActive ? "active-link" : undefined
                           }
@@ -144,7 +144,7 @@ export default function Header() {
                     >
                       <NavDropdown.Item>
                         <NavLink
-                          to="/professor-page/courses-control"
+                          to="/courses-control"
                           className={({ isActive }) =>
                             isActive ? "active-link" : undefined
                           }
@@ -154,12 +154,22 @@ export default function Header() {
                       </NavDropdown.Item>
                       <NavDropdown.Item>
                         <NavLink
-                          to="/professor-page/student-grades"
+                          to="/student-grades"
                           className={({ isActive }) =>
                             isActive ? "active-link" : undefined
                           }
                         >
                           Βαθμολόγια
+                        </NavLink>
+                      </NavDropdown.Item>
+                      <NavDropdown.Item>
+                        <NavLink
+                          to="/proffesor-help"
+                          className={({ isActive }) =>
+                            isActive ? "active-link" : undefined
+                          }
+                        >
+                          Βοήθεια
                         </NavLink>
                       </NavDropdown.Item>
                     </NavDropdown>
@@ -210,8 +220,8 @@ export default function Header() {
             <NavLink
               to={
                 userRole === "student"
-                  ? "/student-page/profile"
-                  : "/professor-page/profile"
+                  ? "/profile"
+                  : "/profile"
               }
               className={({ isActive }) =>
                 isActive ? "active-link" : undefined
@@ -231,8 +241,8 @@ export default function Header() {
                       <NavLink
                         to={
                           userRole === "student"
-                            ? "/student-page/profile"
-                            : "/professor-page/profile"
+                            ? "/profile"
+                            : "/profile"
                         }
                         className={({ isActive }) =>
                           isActive ? "active-link" : undefined

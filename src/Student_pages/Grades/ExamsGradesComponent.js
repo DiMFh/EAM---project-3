@@ -71,12 +71,12 @@ const ExamsGradesComponent = ({ db }) => {
                     className="mb-3"
                 >
                     <Tab eventKey="Everything" title="Όλα">
-                    <Accordion defaultActiveKey="0">
+                    <Accordion alwaysOpen>
                     {Object.entries(semestersData).map(([semester, courses], index) => (
                         <Card key={semester}>
                         <Card.Header >
                         <Accordion.Item eventKey={index.toString()}>
-                            <Accordion.Header as={Button} variant="link" eventKey={String(index)}>
+                            <Accordion.Header  eventKey={String(index)}>
                               {semester}
                             </Accordion.Header>
                         </Accordion.Item>
@@ -117,7 +117,7 @@ const ExamsGradesComponent = ({ db }) => {
                     </Accordion>    
                     </Tab>
                     <Tab eventKey="OnlyPass" title="Επιτυχίες">
-                    <Accordion >
+                    <Accordion alwaysOpen>
                         {Object.entries(semestersData).map(([semester, courses], index) => {
                         const passedCourses = courses.filter(course => course.grade >= 5);
 
@@ -129,7 +129,7 @@ const ExamsGradesComponent = ({ db }) => {
                             <Card key={semester}>
                             <Card.Header>
                                 <Accordion.Item eventKey={index.toString()}>
-                                <Accordion.Header as={Button} variant="link" eventKey={String(index)}>
+                                <Accordion.Header  eventKey={String(index)}>
                                     {semester}
                                 </Accordion.Header>
                                 </Accordion.Item>
@@ -165,10 +165,10 @@ const ExamsGradesComponent = ({ db }) => {
                             <button className="btn btn-primary me-2">Εκτύπωση</button>
                             <button  className="btn btn-danger">Εξαγωγή σε PDF</button>
                         </div>
-                    </Accordion>
+                    </Accordion >
                     </Tab>
                     <Tab eventKey="OnlyFail" title="Αποτυχίες">
-                <Accordion >
+                <Accordion alwaysOpen>
                     {Object.entries(semestersData).map(([semester, courses], index) => {
                     const failedCourses = courses.filter(course => course.grade < 5);
                     
@@ -180,7 +180,7 @@ const ExamsGradesComponent = ({ db }) => {
                         <Card key={semester}>
                         <Card.Header>
                             <Accordion.Item eventKey={index.toString()}>
-                            <Accordion.Header as={Button} variant="link" eventKey={String(index)}>
+                            <Accordion.Header  eventKey={String(index)}>
                                 {semester}
                             </Accordion.Header>
                             </Accordion.Item>

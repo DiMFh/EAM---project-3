@@ -5,8 +5,6 @@ import { doc, getDoc, updateDoc, arrayUnion } from "firebase/firestore";
 import { db } from "../../data/firebase";
 import {
   Container,
-  Row,
-  Col,
   Button,
   ButtonGroup,
   DropdownButton,
@@ -18,43 +16,7 @@ const NewCertificateFinish = ({lastStepCompleted, selectedcertificate }) => {
   const [loading, setLoading] = useState(true);
   const [printing, setPrinting] = useState(false);
   console.log('Rendering NewCertificateFinish');
-  // update the user's document in Firestore
-  // useEffect(() => {
-  //   setLoading(true);
-    
-  //   const userEmail = localStorage.getItem("email");
-  //   if (userEmail) {
-  //     const userDoc = doc(db, "users", userEmail);
-  //     getDoc(userDoc).then((docSnap) => {
-  //       if (docSnap.exists()) {
-  //         const certificateNames = {
-  //           "student_status": "Φοιτητικής Ιδιότητας",
-  //           "detailed_grades": "Αναλυτικής βαθμολογίας",
-  //           "military_use_brief": "Στρατολογικής Χρήσης (Συνοπτικό)",
-  //           "military_use_detailed": "Στρατολογικής Χρήσης Αναλυτικό",
-  //           "tax_use": "Φορολογικής Χρήσης"
-  //         };
-  //         const selectedCertificateId = localStorage.getItem('selectedCertificateId');
-  //         const certificateObject = {
-  //           name: certificateNames[selectedCertificateId],
-  //           dateRequested: new Date().toISOString(),
-  //         };
-  //         updateDoc(userDoc, {
-  //           certificates: arrayUnion(certificateObject),
-  //         }).then(() => {
-  //           setLoading(false);
-  //         });
-  //       } else {
-  //         console.log("No user data found in Firestore");
-  //         setLoading(false);
-  //       }
-  //     });
-  //   } else {
-  //     console.log("No user data found in Firestore");
-  //     setLoading(false);
-  //     lastStepCompleted();
-  //   }
-  // }, []);
+
   useEffect(() => {
     // simulate a delay when the component is mounted for the first time
     setTimeout(() => {
@@ -107,7 +69,7 @@ const NewCertificateFinish = ({lastStepCompleted, selectedcertificate }) => {
     }, 1500);
   };
   return (
-    <div className="newdeclaration-finish">
+    <div className="newcertificate-finish">
       <Container fluid>
         {loading ? (
           <>
@@ -118,8 +80,8 @@ const NewCertificateFinish = ({lastStepCompleted, selectedcertificate }) => {
           </>
         ) : (
           <Container fluid>
-            <h2 className="new-declaration-finish-message">
-              Η Δήλωση ολοκληρώθηκε!
+            <h2 className="new-certificate-finish-message">
+              Η Αίτηση υποβλήθηκε!
             </h2>
             <ButtonGroup className="mb-2">
               <Button href="/" variant="secondary" className="float-end">

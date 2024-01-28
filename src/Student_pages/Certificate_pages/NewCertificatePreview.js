@@ -3,8 +3,7 @@ import "./NewCertificatePreview.css";
 import image from "../../images/warning.png";
 import { useState } from "react";
 import { useEffect } from 'react';
-import { getAuth } from "firebase/auth";
-import { getFirestore, doc, getDoc } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../data/firebase";
 import {
   Container,
@@ -17,10 +16,9 @@ import {
 } from "react-bootstrap";
 
 const NewCertificatePreview = ({
-  selectedCourses,
   goBackToSelection,
-  goToFinish,
-  maxCourses,
+  goToFinish
+  
 }) => {
   const [showModal, setShowModal] = useState(false);
   const handleCloseModal = () => setShowModal(false);
@@ -42,7 +40,6 @@ const [surname, setSurname] = useState(null);
       getDoc(userDoc).then((docSnap) => {
         if (docSnap.exists()) {
           const userData = docSnap.data();
-          // setSavedCertificates(userData.certificates || []);
           setName(userData.firstname);
           setSurname(userData.lastname);
         } else {
@@ -53,8 +50,8 @@ const [surname, setSurname] = useState(null);
   }, []);
 
   return (
-    <div className="newdeclaration-preview">
-      <Container>
+    <div className="newcertificate-preview">
+      <Container style={{ borderRadius: '15px', padding: '20px' }}>
         {/* buttons section */}
         <Row className="mb-2" md={3}>
           <Col sm={"auto"}></Col>

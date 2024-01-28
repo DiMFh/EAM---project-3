@@ -27,4 +27,4 @@ export default function InfoCard({ Icon, title, items, button }) {
       )}
     </div>
   );
-}
+} 
