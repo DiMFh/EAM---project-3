@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { doc, getDoc, collection, getDocs } from "firebase/firestore";
-import { Table, Container, Accordion, Card, Button } from "react-bootstrap";
+import { Table, Container, Accordion } from "react-bootstrap";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 
 const ExamsGradesComponent = ({ db }) => {
   const [key, setKey] = useState("Everything");
-  const [coursesData, setCoursesData] = useState([]);
+
   const [semestersData, setSemestersData] = useState({});
 
   useEffect(() => {

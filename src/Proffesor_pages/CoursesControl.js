@@ -48,7 +48,9 @@ function CoursesControl() {
         <Breadcrumb.Item active>Διαχείριση Μαθημάτων</Breadcrumb.Item>
       </Breadcrumb>
       <div className="course-control-main">
-        <Container>
+        <Container
+          style={{ borderRadius: "15px", padding: "20px", marginTop: "100px" }}
+        >
           <ListGroup>
             <ListGroup.Item as="li" variant="primary">
               <strong>Τα μαθήματά σας</strong>
