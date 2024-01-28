@@ -52,7 +52,6 @@ const NewDeclarationPreview = ({
       // update the user's document
       getDoc(userDoc).then((docSnap) => {
         if (docSnap.exists()) {
-          const userData = docSnap.data();
           const Declaration = {
             id:
               new Date().toLocaleDateString() +

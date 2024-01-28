@@ -146,7 +146,9 @@ function StudentGrades() {
         <Breadcrumb.Item active>Βαθμολόγια</Breadcrumb.Item>
       </Breadcrumb>
       <div className="main">
-        <Container style={{ backgroundColor: "transparent" }}>
+        <Container
+          style={{ borderRadius: "15px", padding: "20px", marginTop: "100px" }}
+        >
           <Accordion defaultActiveKey="0">
             <Card>
               <Card.Header>

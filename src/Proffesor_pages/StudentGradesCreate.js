@@ -83,7 +83,13 @@ function StudentGrades() {
             <Breadcrumb.Item active>Επιλογή Μαθήματος</Breadcrumb.Item>
           </Breadcrumb>
           <div className="main">
-            <Container style={{ backgroundColor: "transparent" }}>
+            <Container
+              style={{
+                borderRadius: "15px",
+                padding: "20px",
+                marginTop: "100px",
+              }}
+            >
               <Accordion defaultActiveKey="0" alwaysOpen>
                 <Accordion.Item eventKey={"0"} disabled="true">
                   <Accordion.Header>
