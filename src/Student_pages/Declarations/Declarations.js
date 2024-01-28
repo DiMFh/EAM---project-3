@@ -137,7 +137,7 @@ const Declarations = () => {
         <Breadcrumb.Item active>Δηλώσεις</Breadcrumb.Item>
       </Breadcrumb>
       <div className="main-container">
-        <Container style={{ backgroundColor: "transparent" }}>
+        <Container style={{ borderRadius: "15px", padding: "20px" }}>
           <Accordion defaultActiveKey="0">
             <Card>
               <Card.Header>

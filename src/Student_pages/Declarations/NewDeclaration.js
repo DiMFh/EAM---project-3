@@ -189,7 +189,7 @@ const NewDeclaration = () => {
       <DeclarationsStepper activeStep={activeStep} />
       {!showPreview ? (
         <div className="newdeclarations">
-          <Container>
+          <Container style={{ borderRadius: "15px", padding: "20px" }}>
             {/* Search-Επιστροφή-Επόμενο */}
             <Row className="mb-2" md={3}>
               <Col sm={"auto"}>

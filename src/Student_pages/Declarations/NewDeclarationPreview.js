@@ -90,7 +90,7 @@ const NewDeclarationPreview = ({
 
   return (
     <div className="newdeclaration-preview">
-      <Container>
+      <Container style={{ borderRadius: "15px", padding: "20px" }}>
         {/* buttons section */}
         <Row className="mb-2" md={4}>
           <Col sm={"auto"}></Col>

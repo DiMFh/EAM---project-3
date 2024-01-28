@@ -7,7 +7,7 @@
 
 .App-logo {
   height: 40vmin;
-  pointer-events: none; /* specifies that the logo does not become a target of pointer events (like mouse clicks) */
+  pointer-events: none;
 }
 
 /* a media query that applies styles based on the user's system preferences.

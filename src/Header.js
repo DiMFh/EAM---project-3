@@ -51,20 +51,7 @@ export default function Header() {
             >
               Αρχική
             </NavLink>
-            <NavLink
-              to="/sections"
-              className={({ isActive }) =>
-                isActive ? "active-link" : undefined
-              }
-            ></NavLink>
-            <NavLink
-              to="/staff"
-              className={({ isActive }) =>
-                isActive ? "active-link" : undefined
-              }
-            >
-              Προσωπικό
-            </NavLink>
+
             <NavLink
               to="/subjects"
               className={({ isActive }) =>
@@ -220,8 +207,8 @@ export default function Header() {
             <NavLink
               to={
                 userRole === "student"
-                  ? "/profile"
-                  : "/profile"
+                  ? "/profile-student"
+                  : "/profile-professor"
               }
               className={({ isActive }) =>
                 isActive ? "active-link" : undefined
@@ -241,8 +228,8 @@ export default function Header() {
                       <NavLink
                         to={
                           userRole === "student"
-                            ? "/profile"
-                            : "/profile"
+                            ? "/profile-student"
+                            : "/profile-professor"
                         }
                         className={({ isActive }) =>
                           isActive ? "active-link" : undefined

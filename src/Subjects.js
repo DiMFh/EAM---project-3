@@ -1,19 +1,22 @@
 // Section.js
-import React, { useState, useEffect } from 'react';
-import {  collection, getDocs, } from 'firebase/firestore';
-import {  Container,  Accordion, Table } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { collection, getDocs } from "firebase/firestore";
+import { Container, Accordion, Table } from "react-bootstrap";
+import { Breadcrumb } from "react-bootstrap";
 
-const Subjects = ({db}) => {
+const Subjects = ({ db }) => {
   const [subjects, setsubjects] = useState([]);
 
   useEffect(() => {
     const getsubjects = async () => {
       const subjectsCol = collection(db, "courses");
       const subjectsSnapshot = await getDocs(subjectsCol);
-      const subjectsList = subjectsSnapshot.docs.map(doc => {
-        const data = doc.data();
-        return Object.keys(data).map(key => data[key]);
-      }).flat(); 
+      const subjectsList = subjectsSnapshot.docs
+        .map((doc) => {
+          const data = doc.data();
+          return Object.keys(data).map((key) => data[key]);
+        })
+        .flat();
       setsubjects(subjectsList);
       console.log(subjectsList);
     };
@@ -21,155 +24,160 @@ const Subjects = ({db}) => {
   }, [db]);
 
   const getsubjectsBySemester = (semester) => {
-    return subjects.filter(subjects => subjects.semester === `${semester}ο`);
+    return subjects.filter((subjects) => subjects.semester === `${semester}ο`);
   };
 
-
   const getSubjectsByType = (type) => {
-    return subjects.filter(subject => subject.type === type);
+    return subjects.filter((subject) => subject.type === type);
   };
 
   return (
-    <Container style={{marginTop: "100px"}} >
-      <h1>Ενημερωθείτε για τα μαθήματα του Τμήματος Πληροφορικής και Τηλεπικοινωνιών</h1>
-      <Accordion defaultActiveKey="0">
-        <Accordion.Item eventKey="0">
-          <Accordion.Header>Μαθήματα τμήματος ανά εξάμηνο:</Accordion.Header>
-          <Accordion.Body>
+    <>
+      <Breadcrumb>
+        <Breadcrumb.Item href="./">Αρχική</Breadcrumb.Item>
+        <Breadcrumb.Item active>Μαθήματα</Breadcrumb.Item>
+      </Breadcrumb>
+      <h1 style={{ marginTop: "100px" }}>
+        Ενημερωθείτε για τα μαθήματα του Τμήματος Πληροφορικής και
+        Τηλεπικοινωνιών
+      </h1>
+      <Container style={{ borderRadius: "15px", padding: "20px" }}>
+        <Accordion defaultActiveKey="0">
+          <Accordion.Item eventKey="0">
+            <Accordion.Header>Μαθήματα τμήματος ανά εξάμηνο:</Accordion.Header>
+            <Accordion.Body>
+              <Accordion>
+                <Accordion.Item eventKey="1">
+                  <Accordion.Header>Πρώτο Εξάμηνο</Accordion.Header>
+                  <Accordion.Body>
+                    <Table className="table table-hover">
+                      <thead>
+                        <tr className="table-head">
+                          <th scope="col">Όνομα</th>
+                          <th scope="col">Καθηγητής</th>
+                          <th scope="col">Περιγραφή</th>
+                          <th scope="col">Κωδικός</th>
+                          <th scope="col">Βαρύτητα</th>
+                          <th scope="col">Τύπος</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {getsubjectsBySemester("1").map((subject, index) => (
+                          <tr key={index}>
+                            <td>{subject.name}</td>
+                            <td>{subject.professor}</td>
+                            <td>{subject.description}</td>
+                            <td>{subject.id}</td>
+                            <td>{subject.ects}</td>
+                            <td>{subject.type}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </Table>
+                  </Accordion.Body>
+                </Accordion.Item>
+              </Accordion>
+              <Accordion>
+                <Accordion.Item eventKey="2">
+                  <Accordion.Header>Δεύτερο Εξάμηνο</Accordion.Header>
+                  <Accordion.Body>
+                    <Table className="table table-hover">
+                      <thead>
+                        <tr className="table-head">
+                          <th scope="col">Όνομα</th>
+                          <th scope="col">Καθηγητής</th>
+                          <th scope="col">Περιγραφή</th>
+                          <th scope="col">Κωδικός</th>
+                          <th scope="col">Βαρύτητα</th>
+                          <th scope="col">Τύπος</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {getsubjectsBySemester("2").map((subject, index) => (
+                          <tr key={index}>
+                            <td>{subject.name}</td>
+                            <td>{subject.professor}</td>
+                            <td>{subject.description}</td>
+                            <td>{subject.id}</td>
+                            <td>{subject.ects}</td>
+                            <td>{subject.type}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </Table>
+                  </Accordion.Body>
+                </Accordion.Item>
+              </Accordion>
+              <Accordion>
+                <Accordion.Item eventKey="3">
+                  <Accordion.Header>Τρίτο Εξάμηνο</Accordion.Header>
+                  <Accordion.Body>
+                    <Table className="table table-hover">
+                      <thead>
+                        <tr className="table-head">
+                          <th scope="col">Όνομα</th>
+                          <th scope="col">Καθηγητής</th>
+                          <th scope="col">Περιγραφή</th>
+                          <th scope="col">Κωδικός</th>
+                          <th scope="col">Βαρύτητα</th>
+                          <th scope="col">Τύπος</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {getsubjectsBySemester("3").map((subject, index) => (
+                          <tr key={index}>
+                            <td>{subject.name}</td>
+                            <td>{subject.professor}</td>
+                            <td>{subject.description}</td>
+                            <td>{subject.id}</td>
+                            <td>{subject.ects}</td>
+                            <td>{subject.type}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </Table>
+                  </Accordion.Body>
+                </Accordion.Item>
+              </Accordion>
+              <Accordion>
+                <Accordion.Item eventKey="4">
+                  <Accordion.Header>Τέταρτο Εξάμηνο</Accordion.Header>
+                  <Accordion.Body>
+                    <Table className="table table-hover">
+                      <thead>
+                        <tr className="table-head">
+                          <th scope="col">Όνομα</th>
+                          <th scope="col">Καθηγητής</th>
+                          <th scope="col">Περιγραφή</th>
+                          <th scope="col">Κωδικός</th>
+                          <th scope="col">Βαρύτητα</th>
+                          <th scope="col">Τύπος</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {getsubjectsBySemester("4").map((subject, index) => (
+                          <tr key={index}>
+                            <td>{subject.name}</td>
+                            <td>{subject.professor}</td>
+                            <td>{subject.description}</td>
+                            <td>{subject.id}</td>
+                            <td>{subject.ects}</td>
+                            <td>{subject.type}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </Table>
+                  </Accordion.Body>
+                </Accordion.Item>
+              </Accordion>
+            </Accordion.Body>
+          </Accordion.Item>
+        </Accordion>
+        <div style={{ marginBottom: "20px" }}>
           <Accordion>
-            <Accordion.Item eventKey="1">
-              <Accordion.Header>Πρώτο Εξάμηνο</Accordion.Header>
+            <Accordion.Item eventKey="0">
+              <Accordion.Header>Ελεύθερα Μαθήματα</Accordion.Header>
               <Accordion.Body>
-                <Table className="table table-hover">
-                  <thead>
-                    <tr className="table-head">
-                      <th scope="col">Όνομα</th>
-                      <th scope="col">Καθηγητής</th>
-                      <th scope="col">Περιγραφή</th>
-                      <th scope="col">Κωδικός</th>
-                      <th scope="col">Βαρύτητα</th>
-                      <th scope="col">Τύπος</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {getsubjectsBySemester("1").map((subject, index) => (
-                      <tr key={index}>
-                        <td>{subject.name}</td>
-                        <td>{subject.professor}</td>
-                        <td>{subject.description}</td>
-                        <td>{subject.id}</td>
-                        <td>{subject.ects}</td>
-                        <td>{subject.type}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </Table>
-              </Accordion.Body>
-            </Accordion.Item>
-          </Accordion>
-          <Accordion>
-            <Accordion.Item eventKey="2">
-              <Accordion.Header>Δεύτερο Εξάμηνο</Accordion.Header>
-              <Accordion.Body>
-                <Table className="table table-hover">
-                  <thead>
-                    <tr className="table-head">
-                      <th scope="col">Όνομα</th>
-                      <th scope="col">Καθηγητής</th>
-                      <th scope="col">Περιγραφή</th>
-                      <th scope="col">Κωδικός</th>
-                      <th scope="col">Βαρύτητα</th>
-                      <th scope="col">Τύπος</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {getsubjectsBySemester("2").map((subject, index) => (
-                      <tr key={index}>
-                        <td>{subject.name}</td>
-                        <td>{subject.professor}</td>
-                        <td>{subject.description}</td>
-                        <td>{subject.id}</td>
-                        <td>{subject.ects}</td>
-                        <td>{subject.type}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </Table>
-              </Accordion.Body>
-            </Accordion.Item>
-          </Accordion>
-          <Accordion>
-            <Accordion.Item eventKey="3">
-              <Accordion.Header>Τρίτο Εξάμηνο</Accordion.Header>
-              <Accordion.Body>
-                <Table className="table table-hover">
-                  <thead>
-                    <tr className="table-head">
-                      <th scope="col">Όνομα</th>
-                      <th scope="col">Καθηγητής</th>
-                      <th scope="col">Περιγραφή</th>
-                      <th scope="col">Κωδικός</th>
-                      <th scope="col">Βαρύτητα</th>
-                      <th scope="col">Τύπος</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {getsubjectsBySemester("3").map((subject, index) => (
-                      <tr key={index}>
-                        <td>{subject.name}</td>
-                        <td>{subject.professor}</td>
-                        <td>{subject.description}</td>
-                        <td>{subject.id}</td>
-                        <td>{subject.ects}</td>
-                        <td>{subject.type}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </Table>
-              </Accordion.Body>
-            </Accordion.Item>
-          </Accordion>
-          <Accordion>
-            <Accordion.Item eventKey="4">
-              <Accordion.Header>Τέταρτο Εξάμηνο</Accordion.Header>
-                      <Accordion.Body>
-                        <Table className="table table-hover">
-                          <thead>
-                            <tr className="table-head">
-                              <th scope="col">Όνομα</th>
-                              <th scope="col">Καθηγητής</th>
-                              <th scope="col">Περιγραφή</th>
-                              <th scope="col">Κωδικός</th>
-                              <th scope="col">Βαρύτητα</th>
-                              <th scope="col">Τύπος</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {getsubjectsBySemester("4").map((subject, index) => (
-                              <tr key={index}>
-                                <td>{subject.name}</td>
-                                <td>{subject.professor}</td>
-                                <td>{subject.description}</td>
-                                <td>{subject.id}</td>
-                                <td>{subject.ects}</td>
-                                <td>{subject.type}</td>
-                              </tr>
-                            ))}
-                          </tbody>
-                        </Table>
-                      </Accordion.Body>
-                    </Accordion.Item>
-                  </Accordion>
-
-        </Accordion.Body>
-      </Accordion.Item>
-    </Accordion>
-    <div style={{ marginBottom: '20px' }}>
-      <Accordion>
-        <Accordion.Item eventKey="0">
-          <Accordion.Header>Ελεύθερα Μαθήματα</Accordion.Header>
-          <Accordion.Body>
-            
                 <Table className="table table-hover">
                   <thead>
                     <tr className="table-head">
@@ -194,12 +202,12 @@ const Subjects = ({db}) => {
                     ))}
                   </tbody>
                 </Table>
-          </Accordion.Body>
-        </Accordion.Item>
-      </Accordion>
-    </div>
-    </Container >
-
+              </Accordion.Body>
+            </Accordion.Item>
+          </Accordion>
+        </div>
+      </Container>
+    </>
   );
 };
 
