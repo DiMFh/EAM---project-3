@@ -69,10 +69,6 @@ const NewDeclaration = () => {
     localStorage.removeItem("selectedCourses");
   }, []);
 
-  useEffect(() => {
-    console.log("The selected courses are: ", selectedCourses);
-  }, [selectedCourses]);
-
   // ****get the courses from the database
   const [coursesDB, setCoursesDB] = useState([]);
   useEffect(() => {
@@ -103,7 +99,7 @@ const NewDeclaration = () => {
         if (course.semester === null) {
           return acc;
         }
-        
+
         const semester = course.semester || "Unknown";
         if (!acc[semester]) {
           acc[semester] = [];

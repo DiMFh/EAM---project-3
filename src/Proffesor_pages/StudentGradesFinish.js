@@ -12,12 +12,17 @@ import {
   Spinner,
 } from "react-bootstrap";
 
-function StudentGradesFinish({ lastStepCompleted, grades, course }) {
+function StudentGradesFinish({
+  lastStepCompleted,
+  savedGradesID,
+  grades,
+  course,
+}) {
   const [loading, setLoading] = useState(true);
   const [printing, setPrinting] = useState(false);
 
   useEffect(() => {
-    // simulate a dilay when the component is mounted for the first time
+    // simulate a delay when the component is mounted for the first time
     setTimeout(() => {
       setLoading(false);
       lastStepCompleted(); // gia ton spinner
@@ -33,16 +38,50 @@ function StudentGradesFinish({ lastStepCompleted, grades, course }) {
       getDoc(userDoc).then((docSnap) => {
         if (docSnap.exists()) {
           const userData = docSnap.data();
-          const newGrades = {
-            id: userData.studentGrades ? userData.studentGrades.length + 1 : 0,
-            date: new Date().toLocaleDateString(),
-            time: new Date().toLocaleTimeString(),
-            course: course,
-            grades: grades,
-            period: "2023-2024 Χειμερινό",
-          };
+
+          // find if there are finalized grades for ther same course
+          let finalizedGrades = (userData.studentGrades || []).find(
+            (studentGrade) =>
+              studentGrade.course.id === course.id &&
+              studentGrade.state === "finalized"
+          );
+
+          // filter out the finalized grades
+          let updatedGrades = (userData.studentGrades || []).filter(
+            (studentGrade) => studentGrade !== finalizedGrades
+          );
+          // find if there are finalized grades for the same course and filter them out
+
+          // check if we have to update existing grades
+          if (savedGradesID) {
+            updatedGrades = updatedGrades.map((studentGrade) =>
+              studentGrade.id === savedGradesID
+                ? {
+                    ...studentGrade,
+                    grades: grades,
+                    state: "finalized",
+                  }
+                : studentGrade
+            );
+          } else {
+            // add the new grades to the array
+            const newGrades = {
+              id:
+                new Date().toLocaleDateString() +
+                " " +
+                new Date().toLocaleTimeString(),
+              date: new Date().toLocaleDateString(),
+              time: new Date().toLocaleTimeString(),
+              course: course,
+              grades: grades,
+              state: "finalized", // "finalized" or "temporary
+              period: "2023-2024 Χειμερινό",
+            };
+            updatedGrades.push(newGrades);
+          }
+          // update the user's document
           updateDoc(userDoc, {
-            studentGrades: arrayUnion(newGrades),
+            studentGrades: updatedGrades,
           });
         } else {
           console.log("No user data found in Firestore");

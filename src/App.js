@@ -12,7 +12,7 @@ import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
 import Home from "./Home";
 import Subjects from "./Subjects";
-import NotFoundPage from './NotFoundPage';
+import NotFoundPage from "./NotFoundPage";
 //student pages
 import Studentpage from "./Student_pages/Studentpage";
 import Help from "./Student_pages/Help";
@@ -28,6 +28,7 @@ import ControlledGrades from "./Student_pages/Grades/Grades";
 import Professorpage from "./Proffesor_pages/Professorpage";
 import StudentGrades from "./Proffesor_pages/StudentGrades";
 import StudentGradesCreate from "./Proffesor_pages/StudentGradesCreate";
+import CoursesControl from "./Proffesor_pages/CoursesControl";
 import ProfilePage1 from "./Proffesor_pages/Profile";
 //firebase
 import "./data/firebase";
@@ -63,13 +64,12 @@ function App() {
           <Route path="certificate" element={<Certificate />} />
           <Route path="help" element={<Help />} />
           <Route path="certificate">
-
             <Route index element={<Certificate />} />
             {/* <Route
               path="/student-page/certificate/certificate-request/certificate-final"
               element={<Certificatefinal />}
             /> */}
-          {/* <Route path="certificate-state" element={<Certificatestate />} /> */}
+            {/* <Route path="certificate-state" element={<Certificatestate />} /> */}
           </Route>
           <Route path="profile" element={<ProfilePage db={db} />} />
           <Route path="grades" element={<ControlledGrades db={db} />} />
@@ -79,7 +79,11 @@ function App() {
         <Route path="/professor-page">
           <Route index element={<Professorpage />} />
           <Route path="student-grades" element={<StudentGrades />} />
-          <Route path="student-grades-create" element={<StudentGradesCreate />} />
+          <Route
+            path="student-grades-create"
+            element={<StudentGradesCreate />}
+          />
+          <Route path="courses-control" element={<CoursesControl />} />
           <Route path="profile" element={<ProfilePage1 db={db} />} />
         </Route>
         <Route path="*" element={<NotFoundPage />} />

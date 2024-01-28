@@ -144,7 +144,7 @@ export default function Header() {
                     >
                       <NavDropdown.Item>
                         <NavLink
-                          to="/professor-page/course-management"
+                          to="/professor-page/courses-control"
                           className={({ isActive }) =>
                             isActive ? "active-link" : undefined
                           }

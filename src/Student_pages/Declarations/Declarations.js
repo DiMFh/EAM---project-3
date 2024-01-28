@@ -20,7 +20,6 @@ import {
   Modal,
 } from "react-bootstrap";
 import { useAccordionButton } from "react-bootstrap";
-import { set } from "date-fns";
 
 const Declarations = () => {
   const navigate = useNavigate();
@@ -138,19 +137,16 @@ const Declarations = () => {
         <Breadcrumb.Item active>Δηλώσεις</Breadcrumb.Item>
       </Breadcrumb>
       <div className="main-container">
-        <Container style={{ backgroundColor: "rgba(255, 255, 255, 0.5)" }}>
+        <Container style={{ backgroundColor: "transparent" }}>
           <Accordion defaultActiveKey="0">
-            <Card style={{ backgroundColor: "rgba(255, 255, 255, 0.5)" }}>
+            <Card>
               <Card.Header>
                 <CustomToggle eventKey="0" className="new-declaration-button">
                   Νέα Δήλωση
                 </CustomToggle>
               </Card.Header>
             </Card>
-            <Accordion.Item
-              eventKey={"0"}
-              style={{ backgroundColor: "rgba(255, 255, 255, 0.5)" }}
-            >
+            <Accordion.Item eventKey={"0"}>
               <Accordion.Header>Ιστορικό Δηλώσεων</Accordion.Header>
               <Accordion.Body>
                 <Accordion>
@@ -219,7 +215,10 @@ const Declarations = () => {
                                           Προβολή
                                         </Button>
                                         <Offcanvas
-                                          show={showCanvas}
+                                          show={
+                                            showCanvas &&
+                                            currentDeclaration === declaration
+                                          }
                                           onHide={handleCloseCanvas}
                                           placement="end"
                                           backdrop={false}
@@ -228,6 +227,10 @@ const Declarations = () => {
                                             <Offcanvas.Title>
                                               {currentDeclaration.date}{" "}
                                               {currentDeclaration.time}
+                                              <p></p>
+                                              <span className="badge bg-success">
+                                                Εγκρίθηκε
+                                              </span>
                                             </Offcanvas.Title>
                                           </Offcanvas.Header>
                                           <Offcanvas.Body>
@@ -245,11 +248,6 @@ const Declarations = () => {
                                                       </p>
                                                     );
                                                   })}
-
-                                                <h6>Κατάσταση:</h6>
-                                                <h6>
-                                                  Εγκρίθηκε από την Γραμματεία
-                                                </h6>
                                               </Col>
                                             </Row>
                                           </Offcanvas.Body>
@@ -271,7 +269,7 @@ const Declarations = () => {
                                     <td>{declaration.courses.length}</td>
                                     <td>
                                       <span className="text-warning">
-                                        Αποθηκευμένη
+                                        Πρόχειρο
                                       </span>
                                     </td>
                                     <td
@@ -306,7 +304,10 @@ const Declarations = () => {
                                           Προβολή
                                         </Button>
                                         <Offcanvas
-                                          show={showCanvas}
+                                          show={
+                                            showCanvas &&
+                                            currentDeclaration === declaration
+                                          }
                                           onHide={handleCloseCanvas}
                                           placement="end"
                                           backdrop={false}
@@ -315,6 +316,10 @@ const Declarations = () => {
                                             <Offcanvas.Title>
                                               {currentDeclaration.date}{" "}
                                               {currentDeclaration.time}
+                                              <p></p>
+                                              <span className="badge bg-warning">
+                                                Πρόχειρο
+                                              </span>
                                             </Offcanvas.Title>
                                           </Offcanvas.Header>
                                           <Offcanvas.Body>
@@ -332,9 +337,6 @@ const Declarations = () => {
                                                       </p>
                                                     );
                                                   })}
-
-                                                <h6>Κατάσταση:</h6>
-                                                <h6>Προσωρινά αποθηκευμένη</h6>
                                               </Col>
                                             </Row>
                                           </Offcanvas.Body>
@@ -376,10 +378,7 @@ const Declarations = () => {
                                                 <p>
                                                   {" "}
                                                   Δηλωμένα μαθήματα:{" "}
-                                                  {
-                                                    currentDeclaration.courses
-                                                      .length
-                                                  }
+                                                  {declaration.courses.length}
                                                 </p>
                                                 <p>
                                                   Η ανωτέρω δήλωση πρόκειται να
