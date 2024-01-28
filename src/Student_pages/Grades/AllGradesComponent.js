@@ -92,7 +92,7 @@ const AllGradesComponent = ({ db }) => {
                     <button  className="btn btn-danger">Εξαγωγή σε PDF</button>
                 </div>
                 </Tab>
-                <Tab eventKey="OnlyPass" title="Περασμένα">
+                <Tab eventKey="OnlyPass" title="Επιτυχίες">
                     <Table striped bordered hover>
                         <thead>
                             <tr>

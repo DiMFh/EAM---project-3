@@ -8,6 +8,8 @@ import Tabs from 'react-bootstrap/Tabs';
 const ExamsGradesComponent = ({ db }) => {
     const [key, setKey] = useState('Everything');
     const [coursesData, setCoursesData] = useState([]);
+    const [semestersData, setSemestersData] = useState({});
+
     useEffect(() => {
         const fetchCoursesData = async () => {
             const userEmail = localStorage.getItem('email');
@@ -34,7 +36,6 @@ const ExamsGradesComponent = ({ db }) => {
                         }
                     }
                     console.log(mergedCourses);
-                    // Δημιουργία του expandedCoursesData
                     let expandedCoursesData = mergedCourses.flatMap(course => 
                         course.semesters.map(semester => ({
                             ...course,
@@ -43,12 +44,20 @@ const ExamsGradesComponent = ({ db }) => {
                         }))
                     );
                     expandedCoursesData = expandedCoursesData.sort((a, b) => a.semesterInfo.localeCompare(b.semesterInfo));        
-                    setCoursesData(expandedCoursesData);
                     console.log(expandedCoursesData);
+
+                    let semesters = {};
+                    expandedCoursesData.forEach(course => {
+                        if (!semesters[course.semesterInfo]) {
+                            semesters[course.semesterInfo] = [];
+                        }
+                        semesters[course.semesterInfo].push(course);
+                    });
+                    console.log(semesters);
+                    setSemestersData(semesters);
                 }
             }
         };
-    
         fetchCoursesData();
     }, [db]);
     
@@ -62,53 +71,154 @@ const ExamsGradesComponent = ({ db }) => {
                     className="mb-3"
                 >
                     <Tab eventKey="Everything" title="Όλα">
-                        <Accordion defaultActiveKey="0">
-                            {Object.entries(coursesData
-                                .reduce((acc, course) => {
-                                    // Ομαδοποίηση μαθημάτων ανά εξεταστική περίοδο
-                                    acc[course.semesterInfo] = acc[course.semesterInfo] || [];
-                                    acc[course.semesterInfo].push(course);
-                                    return acc;
-                                }, {}))
-                                .map(([semester, courses], index) => (
-                                    <Card key={index}>
-                                        <Card.Header>
-                                            <Accordion.Toggle as={Button} variant="link" eventKey={`${index}`}>
-                                                {semester}
-                                            </Accordion.Toggle>
-                                        </Card.Header>
-                                        <Accordion.Collapse eventKey={`${index}`}>
-                                            <Card.Body>
-                                                <Table striped bordered hover>
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Όνομα</th>
-                                                            <th>Βαθμός</th>
-                                                            <th>Εξάμηνο</th>
-                                                            <th>ECTS</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        {courses.map((course, idx) => (
-                                                            <tr key={idx}>
-                                                                <td>{course.name}</td>
-                                                                <td>{course.grade}</td>
-                                                                <td>{course.semester}</td>
-                                                                <td>{course.ects}</td>
-                                                            </tr>
-                                                        ))}
-                                                    </tbody>
-                                                </Table>
-                                            </Card.Body>
-                                        </Accordion.Collapse>
-                                    </Card>
-                                ))}
-                        </Accordion>
+                    <Accordion defaultActiveKey="0">
+                    {Object.entries(semestersData).map(([semester, courses], index) => (
+                        <Card key={semester}>
+                        <Card.Header >
+                        <Accordion.Item eventKey={index.toString()}>
+                            <Accordion.Header as={Button} variant="link" eventKey={String(index)}>
+                              {semester}
+                            </Accordion.Header>
+                        </Accordion.Item>
+                        </Card.Header>
+                        <Accordion.Collapse eventKey={String(index)}>
+                            <Card.Body>
+                            <Table striped bordered hover>
+                                <thead>
+                                    <tr>
+                                        <th>Εξεταστική</th>
+                                        <th>Βαθμός</th>
+                                        <th>Όνομα</th>
+                                        <th>Εξάμηνο</th>
+                                        <th>ECTS</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {courses.map(course => (
+                                        <tr key={index}>
+                                            <td style={{ color: course.grade < 5 ? 'red' : 'green' }}>{course.semesterInfo}</td>
+                                            <td style={{ color: course.grade < 5 ? 'red' : 'green' }}>{course.grade}</td>
+                                            <td style={{ color: course.grade < 5 ? 'red' : 'green' }}>{course.name}</td>
+                                            <td style={{ color: course.grade < 5 ? 'red' : 'green' }}>{course.semester}</td>
+                                            <td style={{ color: course.grade < 5 ? 'red' : 'green' }}>{course.ects}</td>
+
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </Table>
+                            </Card.Body>
+                        </Accordion.Collapse>
+                        </Card>
+                    ))}
+                    <div className="mt-3 d-flex justify-content-end">
+                        <button className="btn btn-primary me-2">Εκτύπωση</button>
+                        <button  className="btn btn-danger">Εξαγωγή σε PDF</button>
+                    </div>
+                    </Accordion>    
                     </Tab>
-                    <Tab eventKey="OnlyPass" title="Περασμένα">
+                    <Tab eventKey="OnlyPass" title="Επιτυχίες">
+                    <Accordion >
+                        {Object.entries(semestersData).map(([semester, courses], index) => {
+                        const passedCourses = courses.filter(course => course.grade >= 5);
+
+                        if (passedCourses.length === 0) {
+                            return null;
+                        }
+
+                        return (
+                            <Card key={semester}>
+                            <Card.Header>
+                                <Accordion.Item eventKey={index.toString()}>
+                                <Accordion.Header as={Button} variant="link" eventKey={String(index)}>
+                                    {semester}
+                                </Accordion.Header>
+                                </Accordion.Item>
+                            </Card.Header>
+                            <Accordion.Collapse eventKey={String(index)}>
+                                <Card.Body>
+                                <Table striped bordered hover>
+                                    <thead>
+                                    <tr>
+                                        <th>Βαθμός</th>
+                                        <th>Όνομα</th>
+                                        <th>Εξάμηνο</th>
+                                        <th>ECTS</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {passedCourses.map((course, courseIndex) => (
+                                        <tr key={courseIndex}>
+                                        <td style={{ color: 'green' }}>{course.grade}</td>
+                                        <td style={{ color: 'green' }}>{course.name}</td>
+                                        <td style={{ color: 'green' }}>{course.semester}</td>
+                                        <td style={{ color: 'green' }}>{course.ects}</td>
+                                        </tr>
+                                    ))}
+                                    </tbody>
+                                </Table>
+                                </Card.Body>
+                            </Accordion.Collapse>
+                            </Card>
+                        );
+                        })}
+                        <div className="mt-3 d-flex justify-content-end">
+                            <button className="btn btn-primary me-2">Εκτύπωση</button>
+                            <button  className="btn btn-danger">Εξαγωγή σε PDF</button>
+                        </div>
+                    </Accordion>
                     </Tab>
                     <Tab eventKey="OnlyFail" title="Αποτυχίες">
-                    </Tab>
+                <Accordion >
+                    {Object.entries(semestersData).map(([semester, courses], index) => {
+                    const failedCourses = courses.filter(course => course.grade < 5);
+                    
+                    if (failedCourses.length === 0) {
+                        return null;
+                    }
+
+                    return (
+                        <Card key={semester}>
+                        <Card.Header>
+                            <Accordion.Item eventKey={index.toString()}>
+                            <Accordion.Header as={Button} variant="link" eventKey={String(index)}>
+                                {semester}
+                            </Accordion.Header>
+                            </Accordion.Item>
+                        </Card.Header>
+                        <Accordion.Collapse eventKey={String(index)}>
+                            <Card.Body>
+                            <Table striped bordered hover>
+                                <thead>
+                                <tr>
+                                    <th>Βαθμός</th>
+                                    <th>Όνομα</th>
+                                    <th>Εξάμηνο</th>
+                                    <th>ECTS</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {failedCourses.map((course, courseIndex) => (
+                                    <tr key={courseIndex}>
+                                    <td style={{ color: 'red' }}>{course.grade}</td>
+                                    <td style={{ color: 'red' }}>{course.name}</td>
+                                    <td style={{ color: 'red' }}>{course.semester}</td>
+                                    <td style={{ color: 'red' }}>{course.ects}</td>
+                                    </tr>
+                                ))}
+                                </tbody>
+                            </Table>
+                            </Card.Body>
+                        </Accordion.Collapse>
+                        </Card>
+                    );
+                    })}
+                    <div className="mt-3 d-flex justify-content-end">
+                        <button className="btn btn-primary me-2">Εκτύπωση</button>
+                        <button  className="btn btn-danger">Εξαγωγή σε PDF</button>
+                    </div>
+                </Accordion>
+                </Tab>
+
                 </Tabs>
             </Container>
         );
