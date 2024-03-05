@@ -142,12 +142,34 @@ const ProfilePage = ({ db }) => {
                   </MDBCardBody>
                 </MDBCard>
                 <MDBCard className="mb-4">
+                  <Container
+                    style={{
+                      marginTop: "10px",
+                      backgroundColor: "transparent",
+                    }}
+                  >
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <h4>Η πρόοδός σου στη σχολή:</h4>
+                    </div>
+
+                    <Stack direction="horizontal" gap={2}>
+                      <div className="p-2">Μ.Ο βαθμού: 8.45</div>
+
+                      <div className="p-2 ms-auto">Σύνολο ECTS: 145/240</div>
+                    </Stack>
+                    <ProgressBar animated now={65} label={"65%"} />
+                  </Container>
                   <MDBCardBody className="text-center">
                     <p
                       className="text-muted mb-1"
                       style={{ textAlign: "left" }}
                     >
-                      <strong>Δείτε ακόμα: </strong> {userData.school}
+                      Δες ακόμα: {userData.school}
                     </p>
                     <nav className="nav">
                       <NavLink to="/grades" className="nav-link">
@@ -318,23 +340,6 @@ const ProfilePage = ({ db }) => {
           </MDBContainer>
         )}
       </section>
-      <Container style={{ marginTop: "10px", backgroundColor: "transparent" }}>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-          }}
-        >
-          <h4>Η πρόοδός σου στη σχολή:</h4>
-        </div>
-
-        <Stack direction="horizontal" gap={2}>
-          <div className="p-2">Μ.Ο βαθμού: 8.45</div>
-
-          <div className="p-2 ms-auto">Σύνολο ECTS: 145/240</div>
-        </Stack>
-        <ProgressBar animated now={65} label={"65%"} />
-      </Container>
     </>
   );
 };
