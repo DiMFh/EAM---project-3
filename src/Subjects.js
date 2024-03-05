@@ -38,8 +38,7 @@ const Subjects = ({ db }) => {
         <Breadcrumb.Item active>Μαθήματα</Breadcrumb.Item>
       </Breadcrumb>
       <h1 style={{ marginTop: "100px" }}>
-        Ενημερωθείτε για τα μαθήματα του Τμήματος Πληροφορικής και
-        Τηλεπικοινωνιών
+        Ενημερώθητε για τα αποτελέσματα των εξετάσεων
       </h1>
       <Container style={{ borderRadius: "15px", padding: "20px" }}>
         <Accordion defaultActiveKey="0">
