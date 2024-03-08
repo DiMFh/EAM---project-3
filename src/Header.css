@@ -115,3 +115,7 @@
 .custom-dropdown .disabled {
   color: #999999; /* Light gray font color for disabled dropdown */
 }
+
+.external-link{
+  background-color: #00000000;
+}

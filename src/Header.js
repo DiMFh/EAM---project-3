@@ -239,10 +239,10 @@ export default function Header() {
                       </NavLink>
                     </NavDropdown.Item>
                     <NavDropdown.Item>
-                      <NavLink>My Eclass</NavLink>
+                      <NavLink style={{backgroundColor: "transparent"}} >My Eclass</NavLink>
                     </NavDropdown.Item>
                     <NavDropdown.Item>
-                      <NavLink>My Webmail</NavLink>
+                      <NavLink style={{backgroundColor: "transparent"}} >My Webmail</NavLink>
                     </NavDropdown.Item>
                     <NavDropdown.Divider />
                     <NavDropdown.Item href="#action/3.4">
@@ -250,6 +250,7 @@ export default function Header() {
                         to="/"
                         className="logout-button"
                         onClick={handleLogout}
+                        style={{backgroundColor: "transparent"}}
                       >
                         Αποσύνδεση
                       </NavLink>
