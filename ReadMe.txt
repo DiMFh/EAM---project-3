@@ -4,6 +4,7 @@
 Καμμάς Ζήσης - sdi2000290
 Φωτόπουλος Δημήτριος - sdi2000292
 
+Βαθμός εργασίας 99/100
 
 Link github repository: https://github.com/DiMFh/EAM---project-3.git
 
