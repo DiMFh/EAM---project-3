@@ -1,9 +1,9 @@
 import "./InfoCard.css";
-import { DropdownButton, Dropdown } from "react-bootstrap";
-import { useUserRole } from "./UserRoleContext";
+// import { DropdownButton, Dropdown } from "react-bootstrap";
+// import { useUserRole } from "./UserRoleContext";
 
 export default function InfoCard({ Icon, title, items, button }) {
-  const { userRole, setUserRole } = useUserRole();
+  // const { userRole, setUserRole } = useUserRole();
   return (
     <div className="info-card">
       <Icon className="info-icon" />
@@ -16,17 +16,17 @@ export default function InfoCard({ Icon, title, items, button }) {
           </li>
         ))}
       </ul>
-      {button && userRole === "public" && (
-        <DropdownButton
-          drop={"up"}
-          variant="primary"
-          title="Συνδεθείτε"
-          flip={false}
-        >
-          <Dropdown.Item href="/login">Είσοδος</Dropdown.Item>
-          <Dropdown.Item href="/register">Εγγραφή</Dropdown.Item>
-        </DropdownButton>
-      )}
+      {/* {button && userRole === "public" && (
+        // <DropdownButton
+        //   drop={"up"}
+        //   variant="primary"
+        //   title="Συνδεθείτε"
+        //   flip={false}
+        // >
+        //   <Dropdown.Item href="/login">Είσοδος</Dropdown.Item>
+        //   <Dropdown.Item href="/register">Εγγραφή</Dropdown.Item>
+        // </DropdownButton>
+      )} */}
     </div>
   );
 }
